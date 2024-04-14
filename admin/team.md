@@ -20,9 +20,7 @@
    - Second Year CS Major
 - Po-Cheng Lai
    - Third Year CS Major 
-- George Pong
-   - Third Year CS Major 
-- Slater Mutunga
+- [Slater Mutunga](https://github.com/slatermutunga)
    - Junior Tranfer CS major
 
 ### Our Values
