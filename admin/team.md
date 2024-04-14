@@ -1,5 +1,5 @@
 ## We are team JOVER because it's all over.
-
+### Our team members are:
 - [Advaith Ravishankar](https://github.com/AdvaithRavishankar)
 - Jaewon Han
 - Ned Bitar
