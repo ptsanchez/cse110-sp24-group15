@@ -16,7 +16,7 @@
    -  Third Year Math-CS major
 - [David Koh](https://github.com/minidawie)
    - Third Year CS major
-- Aarav Tiku
+- [Aarav Tiku](https://github.com/aaravtiku)
    - Second Year CS Major
 - Po-Cheng Lai
    - Third Year CS Major 
