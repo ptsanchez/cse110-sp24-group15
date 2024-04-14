@@ -6,7 +6,7 @@
 - [Jim Garrison](https://jimgarr.github.io/Pages/)  
    - Third year CS major also on the Men's Volleyball Team at UCSD. 
 - Patric Sanchez
-- Minyang
+- Mingyang Chen
 - David Koh
 - Aarav Tiku
 - Po-Cheng Lai
