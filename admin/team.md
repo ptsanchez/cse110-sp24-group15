@@ -26,8 +26,8 @@
    - Junior Tranfer CS major
 
 ### Our Values
-- **Punctuality**, we strive to arrive on time for meeting and adhere to deadlines
-- **Respect**, we will respect each other as programers and as people
+- **Punctuality**, we strive to arrive on time for meetings and adhere to deadlines
+- **Respect**, we will respect each other as programmers and as people
 - **Collaboration**, we have strength in numbers
 
-Click here to learn more about our rules!
+Click here to learn more about our [rules](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/rules.md)!
