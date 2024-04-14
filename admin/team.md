@@ -1,6 +1,5 @@
-## We are team JOVER because it's all over.
+# We are team JOVER because it's all over.
 ![Jover](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/branding/logo.png)
-
 
 ### Our team members are:
 - [Advaith Ravishankar](https://github.com/AdvaithRavishankar)
@@ -25,4 +24,10 @@
    - Third Year CS Major 
 - Slater Mutunga
    - Junior Tranfer CS major
- 
+
+### Our Values
+- **Punctuality**, we strive to arrive on time for meeting and adhere to deadlines
+- **Respect**, we will respect each other as programers and as people
+- **Collaboration**, we have strength in numbers
+
+Click here to learn more about our rules!
