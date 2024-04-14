@@ -1,13 +1,15 @@
 ## We are team JOVER because it's all over.
 
-- Advaith Ravishankar
+- [Advaith Ravishankar](https://github.com/AdvaithRavishankar)
 - Jaewon Han
-- Ned
+- Ned Bitar
 - [Jim Garrison](https://jimgarr.github.io/Pages/)  
    - Third year CS major also on the Men's Volleyball Team at UCSD. 
-- Patric
+- Patric Sanchez
 - Minyang
-- David
-- Aarav
-- Po-cheng
+- David Koh
+- Aarav Tiku
+- Po-Cheng Lai
+- George Pong
+- Slater Mutunga
  
