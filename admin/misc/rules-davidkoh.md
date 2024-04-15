@@ -46,3 +46,4 @@ Welcome to Team Jover! To ensure smooth progress and a supportive work environme
 
 By adhering to these guidelines, we can foster a positive and productive environment that benefits both the project and our personal growth as team members. Let's work together to make this project a success!
 
+Signature: David Koh
