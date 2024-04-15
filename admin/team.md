@@ -28,6 +28,6 @@
 - **Respect**: we will respect each other as programmers and as people
 - **Collaboration**: we have strength in numbers
 
-Click here to learn more about our [rules](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/rules.md)!
+Click here to learn more about our [rules](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/misc/rules.md)!
 
 ![Joe](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/branding/inspiration.png)
