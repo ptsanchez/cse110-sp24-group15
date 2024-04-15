@@ -6,10 +6,10 @@
    - Third Year Math-CS and Cog Sci double Major    
 - [Jaewon Han](https://github.com/rabongHan)
    - Second Year CS major
-- Ned Bitar
+- [Ned Bitar](https://github.com/nedbitar)
    -   4th year CSE major 
 - [Jim Garrison](https://jimgarr.github.io/Pages/)  
-   - Third year CS major also on the Men's Volleyball Team at UCSD. 
+   - Third-year CS major also on the Men's Volleyball Team at UCSD. 
 - [Patric Sanchez](https://github.com/ptsanchez)
    - Second Year Math-CS major
 - [Mingyang Chen](https://github.com/cmy0357)
