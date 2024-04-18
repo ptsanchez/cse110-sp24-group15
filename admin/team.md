@@ -3,25 +3,35 @@
 
 ### Our team members are:
 - [Advaith Ravishankar](https://github.com/AdvaithRavishankar)
-   - Third Year Math-CS and Cog Sci double Major    
+   - Third Year Math-CS and Cog Sci double Major
+   - Lead
 - [Jaewon Han](https://github.com/rabongHan)
    - Second Year CS major
+   - Front End Dev
 - [Ned Bitar](https://github.com/nedbitar)
-   -   4th year CSE major 
+   -   4th year CSE major
+   -   Dev
 - [Jim Garrison](https://jimgarr.github.io/Pages/)  
-   - Third-year CS major also on the Men's Volleyball Team at UCSD. 
+   - Third-year CS major also on the Men's Volleyball Team at UCSD.
+   - Dev
 - [Patric Sanchez](https://github.com/ptsanchez)
    - Second Year Math-CS major
+   - Backend Dev
 - [Mingyang Chen](https://github.com/cmy0357)
    -  Third Year Math-CS major
+   -  Front End Dev
 - [David Koh](https://github.com/minidawie)
    - Third Year CS major
+   - Dev
 - [Aarav Tiku](https://github.com/aaravtiku)
    - Second Year CS Major
-- Po-Cheng Lai
-   - Third Year CS Major 
+   - Back End Dev
+- [Po-Cheng Lai](https://github.com/PaulLai1022)
+   - Third Year CS Major
+   - Lead
 - [Slater Mutunga](https://github.com/slatermutunga)
    - Junior Tranfer CS major
+   - Front End Dev
 
 ### Our Values
 - **Punctuality**: we strive to arrive on time for meetings and adhere to deadlines
