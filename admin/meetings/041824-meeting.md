@@ -37,6 +37,7 @@ TODOs:
 - Advaith to add github actions
 
 Notes:
+
 We split the larger teams into subteams: Front End and Backed. We went over developer workflows:
 
 Master branch: our deployed main app
