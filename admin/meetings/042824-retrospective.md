@@ -3,6 +3,8 @@ When: 2 pm Sunday, 04/28/2024
 
 Meeting Video Link: [https://drive.google.com/file/d/1aBO0ram9j1PbDL1SYed1vgxXoCywN2D6/view?usp=sharing](https://drive.google.com/file/d/1aBO0ram9j1PbDL1SYed1vgxXoCywN2D6/view?usp=sharing)
 
+Retrospective Form Results: [https://docs.google.com/spreadsheets/d/1PmlYjuNwIfifcO2S1WdQLYchVRNX-A6GCQyHvfP1HB4/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1PmlYjuNwIfifcO2S1WdQLYchVRNX-A6GCQyHvfP1HB4/edit?usp=sharing)
+
 Attendees:
 - Advaith
 - Minynag
