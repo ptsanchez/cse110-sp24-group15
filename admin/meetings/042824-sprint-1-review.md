@@ -1,4 +1,4 @@
-# Sprint Warmup
+# Sprint 1: Warmup Excercise
 
 Video: [https://drive.google.com/file/d/1aBO0ram9j1PbDL1SYed1vgxXoCywN2D6/view?usp=sharing](https://drive.google.com/file/d/1aBO0ram9j1PbDL1SYed1vgxXoCywN2D6/view?usp=sharing)
 
