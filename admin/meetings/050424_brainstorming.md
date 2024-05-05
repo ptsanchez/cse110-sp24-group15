@@ -12,14 +12,19 @@ Attendees
 Absent
 - Po-cheng
 
+Work Assigned Before The Meeting:
+- Everyone create a miroboard with their own design (spend 1-2 hours on it)
+- Merge ideas of everyone together to get tentative desitj
+
 Agenda
 - Discuss developer journal design
-- Discuss pipeline
+- Discuss project pipeline
 
 TODOs
 - [] Ask TA what technologies are we allowed to use?
 - [] Check miro board with TA
 - [] Advaith, Ned, Po-chang have a separate meeting/google doc discussing extra details/github issues...
+- [] once approved by TA, assigm issues to people
 
 Notes
 - Advaith: Miro board presentation
