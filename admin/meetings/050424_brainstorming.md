@@ -1,3 +1,5 @@
+Video: [https://drive.google.com/file/d/1TjouezC6fu8im49KIQow6kERvwlG9T1R/view?usp=sharing](https://drive.google.com/file/d/1TjouezC6fu8im49KIQow6kERvwlG9T1R/view?usp=sharing)
+
 Attendees
 - Advaith
 - Ned
@@ -41,3 +43,5 @@ Notes
 
 - Jaewon idea: implement chatgpt api so when a question is asked in checklist on the daily page chatgpt will give a response.
 	- also add a comment/chat function
+
+Time spent: 1.5 hours on desgning before the meeting + 30 mins of combining designs for tenative solution
