@@ -1,0 +1,40 @@
+name: js-lint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.12.2
+
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npx eslint . --fix
+
+      - name: Run Prettier
+        run: npx prettier --check .
+        
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          prettier: true
+# Important: Make sure to exclude the .github directory in 
+# your ESLint and Prettier configs as the default GITHUB_TOKEN 
+# cannot be used to update workflow files due to the missing 
+# workflow permission.
