@@ -20,8 +20,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
+      working-directory: ./project
       run: npm install
-    - name: Run tests
+    - name: Tests
+      working-directory: ./project/tests
       run: npm test
-      env:
-        CI: true
