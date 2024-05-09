@@ -24,16 +24,10 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npx eslint . --fix
+        run: npx eslint . --ext .js
 
       - name: Run Prettier
-        run: npx prettier --check .
-        
-      - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
-          prettier: true
+        run: npx prettier --check .  
 # Important: Make sure to exclude the .github directory in 
 # your ESLint and Prettier configs as the default GITHUB_TOKEN 
 # cannot be used to update workflow files due to the missing 
