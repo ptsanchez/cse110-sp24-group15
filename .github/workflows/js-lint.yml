@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - fix-jlint
 
 jobs:
   run-linters:
@@ -17,7 +20,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: [14.x, 16.x, 18.x]
+          node-version: '20.12.2'
+
 
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
