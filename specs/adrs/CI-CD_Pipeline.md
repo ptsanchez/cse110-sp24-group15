@@ -1,7 +1,8 @@
 # CI CD Pipeline and Developer Workflow
 
-- Add linting
-- Add automcatic Tests
+- Add linting wit Prettier
+- Add Automcatic Testing Github Action
+- Add JSDoc as a Github
 
 ### Workflow
 Advaith, Ned, Po-cheng: Plan/Wrrite/Assign Github Issues and assign it to people
