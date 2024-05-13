@@ -13,7 +13,7 @@
     "destination": "./project/docs",  // Output directory for generated documentation.
     "recurse": true,  // Recursively include documentation for all subdirectories.
     "verbose": true,  // Print all log messages to the console.
-    "template": "node_modules/minami"  // Path to the JSDoc template to use.
+    "template": "./node_modules/template-name"  // Path to the JSDoc template to use.
   },
   "templates": {
     "cleverLinks": false,  // Use clever links.
