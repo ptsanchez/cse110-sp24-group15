@@ -9,3 +9,4 @@
 - [ ] Prettier
 
 ## Description
+the Junit and Linting is currently functional on the repository as of 05/12/2024. We plan to have JS Doc and Prettier Working before we start merging our project files by 05/23/24.
