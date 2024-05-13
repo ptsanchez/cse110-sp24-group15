@@ -1,0 +1,38 @@
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4 # Using version 4 of the checkout action
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'  # Specifies Node.js version 14
+          cache: 'npm'  # Caches npm modules to speed up subsequent workflow runs
+      - name: Install Dependencies
+        run: npm install  # Installs the project dependencies defined in package.json using npm
+      - name: Run Lint
+        run: npm run lint  # Runs the linter to check for syntax and style issues
+      - name: Run Unit Tests
+        run: npm test ./__tests__/subtract.test.js # Runs unit tests defined in the project; you can specify a path to run specific tests
+      - name: Generate Documentation
+        run: npm run docs  # Generates documentation from your source code, typically using a tool like JSDoc
+      - name: Deploy Documentation
+        run: |
+          cp -R ./docs/* .
+          git add .
+          if git commit -m "Update documentation"; then
+            git push origin gh-pages
+          else
+            echo "No changes to commit"
+          fi
+        shell: /usr/bin/bash -e {0}
+      - name: Code Quality Check
+        uses: paambaati/codeclimate-action@v2.7.5  # Uses a specific version of the Code Climate GitHub Action
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}  # Set via repository secrets
+        with:
+          coverageCommand: npm run coverage  # Specifies the command to run to collect coverage data
+          debug: true  # Enables debug output for the action
