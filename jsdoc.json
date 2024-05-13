@@ -1,0 +1,25 @@
+{
+  "source": {
+    "include": ["project/javascript"],  // Specifies the directory to include for documentation.
+    "includePattern": ".+\\.(js|jsx)$",  // Regex pattern to include files with .js or .jsx extension.
+    "excludePattern": "(^|\\/|\\\\)_",  // Regex pattern to exclude files starting with an underscore.
+    "exclude": ["node_modules"]  // Directory to exclude from documentation.
+  },
+  "plugins": [
+    "plugins/markdown"  // Uses the markdown plugin to parse markdown in JSDoc comments.
+  ],
+  "opts": {
+    "encoding": "utf8",  // Character encoding to read and output files.
+    "destination": "./project/docs",  // Output directory for generated documentation.
+    "recurse": true,  // Recursively include documentation for all subdirectories.
+    "verbose": true,  // Print all log messages to the console.
+    "template": "./node_modules/template-name"  // Path to the JSDoc template to use.
+  },
+  "templates": {
+    "cleverLinks": false,  // Use clever links.
+    "monospaceLinks": false,  // Use monospace font for links.
+    "default": {
+      "outputSourceFiles": true  // Include source file names in the documentation.
+    }
+  }
+}
