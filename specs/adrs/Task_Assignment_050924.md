@@ -1,25 +1,28 @@
-# Dev Workflow Procedure Brainstorming
+# Task Assignment Brainstorming
 
 ## Context and Problem Statement
 
-We have an assigned team, and we need to come up with a mechanism to maintain and progress with developer workflow, including planning, writing and assigning issues to individuals towards project-completion.
+We have an assigned team, and we need to figure out how we will work on future tasks/actions as a group, and keep in mind people's busy schedules.
 
 ## Considered Options
 
-1. Developers will have access to main and can commit to main directly
-2. Developers will work on a branch of main and make changes to that sub-branch, and team-leads approve the creation of specific sub-branches so as to not overpopulate the workflow with tons of branches and make it less confusing.
-3. Sub team-leads will take the responsibility of planning, writing, and assigning Github Issues
-4. All team members will have the option to plan, write, and assign Github Issues
+1. Developers will be issued only one issue at a time and work in close-knit groups of 1-2 members
+2. Developers will be issued several issues simultaneously and can choose which issues to work on, and will work in larger groups of 3-4 members
+3. Each member will work on a specific file only to avoid merge conflicts. Once a certain action is resolved, team leads will take care of reviews and merging
+4. In case of a situation where a teammate is unable to work due to some unforeseen circumstances, Advaith will take care of reassigning work
 
 ## Decision Outcome
 
-2. Developers work on sub-branches of main - This is just better developer workflow practice in general, and commits to main can potentially introduce bugs or conflicts with other changes being made simultaneously by other team members.
+1. Developers work on one issue only at a time - This is a good idea as developers can focus on a specific issue at a time, and concentrate their energy on it
 
-3. Leads(Advaith, Ned for Back-End, and Po-Cheng for Front-end) are responsible for planning, writing, and assigning Github Issues to developers. It is prefereable to have individuals to manage the development progress w.r.t. front-end/back-end and be involved in developer workflow.
+3. Developers will work on one issue at a time - To avoid confusion and merge conflicts that may arise as a result of multiple file-edits, this is a good idea
 
+4. Work reassignment - Work should be reassigned in case someone has certain commitments and is unable to deliver so that the team as a whole can still progress on work
 
 <!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
-* Good, as this is conventional workflow practice to a large extent.
-* Bad, an area for concern for point **3** is that communication has to be good and effective for it to be successful. Developers and leads should have a strong rapport.
+* Good, as the team is working on multiple issues simultaneously and making it easier to deal with merge conflicts, in any case in which they arise
+* Good, as the team management strategy makes it possible for the reshuffling/redistribution of work in special cases
+* Bad, as the above point may result on an excessive amount of work being concentrated in the hands of fewer people
+* Bad, as working on one file may not be desirable in certain circumstances(for example, when an error in a file is caused by a line/lines of code in another file, and causes delays in overall workflow)
