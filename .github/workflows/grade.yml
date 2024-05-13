@@ -1,0 +1,37 @@
+name: Grader
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js $0
+      uses: actions/setup-node@v1
+      with:
+        node-version: $0
+    - name: npm coverage
+      run: |
+        set -e
+        npm install
+        npm run coverage-to-codacy
+        grade=$(curl -s -X GET https://api.codacy.com/2.0/project \
+          -H 'Accept: application/json' \
+          -H 'project_token: $' | jq -r '.commit.commit.grade')
+        echo $grade
+        if [[ "$grade" == "A" ]]
+          then
+            echo -e "\e[1;42m Grade $grade is ok. Build will continue. \e[0m"
+          else
+            echo -e "\e[1;31m Grade $grade is below the expected and the build will stop. \e[0m"
+            exit 1
+        fi
+      env:
+        CI: true
