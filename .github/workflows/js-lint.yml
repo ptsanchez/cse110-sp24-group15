@@ -22,12 +22,15 @@ jobs:
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: npm ci
-
+      
+      - name: Check ESLint version
+        run: npx eslint --version
+      
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
-
+      
       - name: Run Prettier
-        run: npx prettier --check .  
+        run: npx prettier --check . 
 # Important: Make sure to exclude the .github directory in 
 # your ESLint and Prettier configs as the default GITHUB_TOKEN 
 # cannot be used to update workflow files due to the missing 
