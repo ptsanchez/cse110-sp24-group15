@@ -1,27 +1,34 @@
 name: JSDoc
 
 on:
+  push:
+    branches:
+      - main  
   pull_request:
-    branches: [ main ]
+    branches:
+      - main 
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Build
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: ./project/javascript
-          output_dir: ./project/docs
-          config_file: conf.json
-          template: minami
-          front_page: README.md
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./out
+    - name: Install Dependencies
+      run: npm install  
+
+    - name: Generate JSDoc
+      run: npx jsdoc -c jsdoc.json  # Assumes you have a jsdoc.json configuration file
+
+    - name: Deploy to GitHub Pages  # Optional step to deploy docs to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./project/docs  # Set this to your JSDoc output directory
+
