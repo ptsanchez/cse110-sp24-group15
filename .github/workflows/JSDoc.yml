@@ -1,4 +1,4 @@
-name: JSDoc
+name: JSDoc Documentation
 
 on:
   push:
@@ -6,29 +6,32 @@ on:
       - main  
   pull_request:
     branches:
-      - main 
+      - main  
 
 jobs:
-  build:
+  generate-docs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Setup Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  
+        node-version: '16'  # Specify your Node.js version
 
-    - name: Install Dependencies
-      run: npm install  
+    - name: Install dependencies
+      run: npm install  # Adjust if you use a package manager like yarn
 
     - name: Generate JSDoc
-      run: npx jsdoc -c jsdoc.json  # Assumes you have a jsdoc.json configuration file
+      run: npx jsdoc -c jsdoc.json
 
-    - name: Deploy to GitHub Pages  # Optional step to deploy docs to GitHub Pages
+    - name: Deploy Documentation to GitHub Pages  # Optional deployment step
+      if: github.ref == 'refs/heads/main'  # Runs only on the main branch
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./project/docs  # Set this to your JSDoc output directory
+        publish_dir: ./project/docs  # Ensure this matches the output directory in your jsdoc.json
+
 
