@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: '20.12.2'
 
-
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: npm ci
