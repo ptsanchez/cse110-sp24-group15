@@ -12,7 +12,7 @@ assignees: ''
 #### Description: 
 - Create and design the HTML, CSS and JS for ________
 - Use [miro-board](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/specs/pitch/miro_design_updated.pdf) for the design
-- NOTE: all the project data will be stored in the Sessions storage as a JSON string with the following format:
+- NOTE: all the project data will be stored in the localStorage as a JSON string with the following format:
 
 ```
 { 
