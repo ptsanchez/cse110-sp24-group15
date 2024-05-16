@@ -11,6 +11,7 @@ assignees: ''
 
 #### Description: 
 - Create and design the HTML, CSS and JS for ________
+- Use [miro-board](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/specs/pitch/miro_design_updated.pdf) for the design
 
 #### First step:
 - [ ] Create a directory in 'projects' called ______ 
