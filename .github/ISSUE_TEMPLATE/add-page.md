@@ -17,6 +17,7 @@ assignees: ''
 ```
 { 
 current_project: project_n, 
+current_date: MM/DD/YYYY
 project_data: {
      project_1: {
           projectName: Name, 
@@ -24,13 +25,12 @@ project_data: {
           projectContributors: contributors, 
           projectDescription: Description, 
           active: true/false,
-          logs: {log_1: {data: BLANK, time: HH:MM, day: DD, Month: MM, Year: YYYY}, ...}, 
+          logs: {log_1: {data: BLANK, time: HH:MM, day: DD, Month: MM, Year: YYYY, title: TEXT, contributors: Text}, ...}, 
           BranchLink: link,
           TodoList: {task1: description}
      project_2: ... }
 }
 ```
-
 #### First step:
 - [ ] Create a directory in 'projects' called ______ 
 
