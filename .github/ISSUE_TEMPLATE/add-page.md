@@ -17,10 +17,14 @@ assignees: ''
 - [ ] Create a directory in 'projects' called ______ 
 
 #### TODOs HTML
-- [ ] in 'projects/', create '.html'
+- [ ] from 'projects/template', copy "template.html" to 'projects/'
+- [ ] Rename this file as '.html'
+
 
 #### TODOs CSS
-- [ ] in 'projects/', create '.css'
+- [ ] from 'projects/template', copy "template.css" to 'projects/'
+- [ ] Rename this file as '.css'
+
 
 #### TODOs Javascript
 - [ ] in 'projects/', create '.js'
