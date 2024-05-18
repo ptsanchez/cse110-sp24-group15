@@ -1,0 +1,261 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: white; 
+    color: #333; 
+    line-height: 1.5; 
+    padding: 20px 20px 20px 20px;  /* padding-top: 0 for top menu*/
+
+    min-height: 100%; /* Full viewpoint height */
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    background: #3b4550; /* Main color for website */
+    color: white; 
+    padding: 10px 20px; 
+    text-align: center; 
+}
+
+/* ------------------------------------ Fieldset ------------------------------------ */
+fieldset {
+    border: 2px solid #3b4550; 
+    margin: 20px auto; 
+    padding: 20px; 
+    background: white; 
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+/* --- Name, Email, Feedback --- */
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px; 
+    margin-bottom: 10px; 
+}
+
+/* --- Satisfaction Level --- */
+.radio-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start; /* Flex elements start from left */
+    gap: 15px;
+}
+
+.radio-container label {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.radio-container label img {
+    display: block;
+    height: 4.37rem;
+    background: transparent;
+    transition: filter 0.3s ease; /* Filter: shadow effect, 0.3s: duration, ease: change in slow-fast-slow sequence */
+    transition: transform 0.8s ease; /* transform: scale up, 0.8s: duration, ease: change in slow-fast-slow sequence */
+    overflow: hidden; /* to prevent overflow */
+}
+
+/* Face hovered */
+.radio-container label img:hover {
+    transform: scale(1.3);
+}
+
+/* Red face clicked */
+.radio-container input[type="radio"]:checked + label#face1 img {
+    filter: drop-shadow(0 0 15px #E23442); /* red glowing effect */
+}
+/* Orange face clicked */
+.radio-container input[type="radio"]:checked + label#face2 img {
+    filter: drop-shadow(0 0 15px #F75532); /* orange glowing effect */
+}
+/* Yellow face clicked */
+.radio-container input[type="radio"]:checked + label#face3 img {
+    filter: drop-shadow(0 0 15px #FCB040); /* yellow glowing effect */
+}
+/* Light Green face clicked */
+.radio-container input[type="radio"]:checked + label#face4 img {
+    filter: drop-shadow(0 0 15px #92CA61); /* light green glowing effect */
+}
+/* Green face clicked */
+.radio-container input[type="radio"]:checked + label#face5 img {
+    filter: drop-shadow(0 0 15px #3AB74A); /* green glowing effect */
+}
+
+/* --- Submit Button --- */
+.submitBtn {
+    background: #39e75f; 
+    color: black;
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+}
+
+/* Button hovered */
+.submitBtn:hover {
+    background: #00c04b; 
+}
+
+
+/* --- Cancel Button --- */
+.cancelBtn {
+    background: red; 
+    color: black;
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+}
+
+/* Button hovered */
+.cancelBtn:hover {
+    background: #c30010; 
+}
+
+.feedbackHeader {
+    font-size: 30px;
+}
+
+/* ------------------------------------ Responsive Web ------------------------------------ */
+/* Smartphones */
+@media only screen and (max-width: 730px) {
+    header, footer {
+        padding: 10px 10px; /* 10px 20px -> 10px 10px */
+        border-radius: 10px; /* rectangular border -> rounded border */
+    }
+
+    .top-menu ul li a {
+        font-size: 12px; /* 13px -> 12px */
+    }
+    
+    nav ul li {
+        display: block; /* inline-block -> block */
+        margin-right: 0; /* 20px -> 0 */
+        margin-bottom: 10px; /* X -> 10px */
+    }
+
+    nav ul li a {
+        padding: 0.5rem; /* 0.5rem 1rem -> 0.5rem 0.5rem */
+        width: 70%; /* X -> 70% */
+        margin: 0 auto; /* X -> 0 auto; to make left/right margin equal */
+    }
+
+    fieldset, label, nav ul li a {
+        font-size: 15px;
+    }
+
+    legend {
+        font-size: 25px;
+    }
+
+    fieldset {
+        margin: 10px 0; /* 20px 0 -> 10px 0*/
+        border-radius: 10px; /* rectangular border -> rounded border */
+        padding: 15px; /* 20px -> 15px */
+    }
+
+    .radio-container label img {
+        height: 3rem; /* 4.37rem -> 3rem */
+    }
+    
+    .radio-container label img:hover {
+        transform: scale(1.2); /* 1.3 scale up -> 1.2 scale up */
+    }
+
+    /* glowing effect 15px -> 8px */
+    .radio-container input[type="radio"]:checked + label#face1 img {
+        filter: drop-shadow(0 0 8px #E23442);
+    }
+    .radio-container input[type="radio"]:checked + label#face2 img {
+        filter: drop-shadow(0 0 8px #F75532);
+    }
+    .radio-container input[type="radio"]:checked + label#face3 img {
+        filter: drop-shadow(0 0 8px #FCB040);
+    }
+    .radio-container input[type="radio"]:checked + label#face4 img {
+        filter: drop-shadow(0 0 8px #92CA61);
+    }
+    .radio-container input[type="radio"]:checked + label#face5 img {
+        filter: drop-shadow(0 0 8px #3AB74A);
+    }
+
+    button {
+        border-radius: 5px; /* rectangular border -> rounded border (matched with border radius of nav menu bar */
+    }
+}
+
+/* Tablets */
+@media only screen and (min-width: 731px) and (max-width: 1024px) {
+    header, footer {
+        padding: 15px 15px; /* 10px 20px -> 15px 15px */
+    }
+
+    header h1 {
+        font-size: 40px; /* h1 size -> 40px */
+    }
+
+    nav {
+        margin-top: 25px; /* 20px -> 25px */
+    }
+    
+    nav ul li a {
+        padding: 0.5rem 0.8rem; /* 0.5rem 1rem -> 0.5rem 0.8rem */
+    }
+
+    fieldset legend, label, nav ul li a {
+        font-size: 16px;
+    }
+
+    .radio-container label img {
+        height: 4rem; /* 4.37rem -> 4rem */
+    }
+
+    footer {
+        font-size: 11px; /* 10px -> 11px */
+    }
+}
+/* Laptops, Desktops, Larger Screens 1025 - */
+@media only screen and (min-width: 1025px) {
+    .top-menu ul li a {
+        font-size: 14px; /* 13px -> 14px */
+    }
+
+    header {
+        padding: 20px 20px; /* 10px 20px -> 20px 20px */
+    }
+
+    footer {
+        padding: 15px 20px; /* 10px 20px -> 15px 20px */
+    }
+
+    header h1 {
+        font-size: 60px; /* h1 size -> 60px */
+    }
+    
+    nav {
+        margin-top: 30px; /* 20px -> 30px */
+    }
+
+    fieldset legend, label, nav ul li a {
+        font-size: 18px;
+    }
+    
+    footer {
+        font-size: 13px; /* 10px -> 13px */
+    }
+}
