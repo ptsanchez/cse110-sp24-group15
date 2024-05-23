@@ -1,0 +1,66 @@
+* {
+    margin: 0
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+footer .bottomNav {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: aquamarine;
+}
+
+.successPageText {
+    font-size: 24px;
+    color: #000000;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.continueBtn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px 0;
+    background-color: #4CAF50; 
+    color: black; 
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid black; 
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.continueBtn:hover {
+    background-color: #45a049;
+}
+
+.salmon-box {
+    background-color: salmon;
+    padding: 50px;
+    width: 300px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    border: 2px solid #000000;
+}
+
+.SuccessPageBtn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px 0;
+    background-color: #1cddeb; 
+    color: black; 
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid black; 
+    border-radius: 5px;
+    font-size: 18px;
+}
