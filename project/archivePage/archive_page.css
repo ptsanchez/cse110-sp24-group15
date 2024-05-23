@@ -68,8 +68,9 @@ footer button {
     padding: 6px;
 }
 
-/* Search Bar Hover */
-.ArchivePageHeaderDiv input:hover {
+/* Search Bar Hover And Focus */
+.ArchivePageHeaderDiv input:hover, 
+.ArchivePageHeaderDiv input:focus {
     background: rgb(253, 255, 236);
 }
 
@@ -108,6 +109,7 @@ footer button {
     border-width: 2px;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.3); /* Shadow around project items */
     transition: transform 0.5s ease; /* Smooth transition for scale */
+    border-radius: 15px; /* Rounded corners */
 }
 
 /* Hovering Project List Item */

@@ -110,6 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Append delete button to list item
         projectListItem.appendChild(deleteButton);
 
+        // Add click event listener to trash icon
+        trashIcon.addEventListener('click', function(event) {
+            event.stopPropagation(); // Stop propagation to prevent the click from reaching the parent elements
+            // Call a function to handle the delete action
+            handleDeleteButtonClick(projectKey);
+        });
+
         // Add click event listener to project item
         projectListItem.addEventListener('click', function() {
             handleProjectClick(projectKey);
@@ -137,6 +144,25 @@ document.addEventListener('DOMContentLoaded', function() {
         else {
             console.log('No project data found in localStorage.');
         }
+    }
+
+    // Function to handle clicking on the trash icon
+    function handleDeleteButtonClick(projectKey) {
+        // Ask for confirmation using an alert dialog
+        let confirmation = confirm('Are you sure you want to delete this project?');
+        
+        // Check if the user confirmed the deletion
+        if (confirmation) {
+            // Perform the delete action here
+            deleteProject(projectKey);
+        }
+    }
+
+    // Function to delete the project
+    function deleteProject(projectKey) {
+        // Implement your logic to delete the project here
+        // For example, you can remove the project from the projectData object
+        // and then update the UI accordingly
     }
 
     // Function to handle moving to the previous page
