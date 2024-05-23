@@ -1,4 +1,11 @@
-// add import statements
+// import functions from archive_page.js
+import {
+  populateProhectList,
+  movetoPreviousPage,
+  moveToNextPage, 
+  handleSearch,
+} from '../archivePage/archive_page';
+
 // Describe the test suite
 describe('Project Management System Tests', () => {
   let projectData;
