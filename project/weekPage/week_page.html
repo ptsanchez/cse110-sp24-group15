@@ -15,12 +15,12 @@
     <main>
         <!-- header for week/month view -->
         <div class="week-header-div">
-            <div class="calendar__title">Calendar</div>
+            <div class="week-text" id="calendar__title">Calendar</div>
 
             <!-- Making tabs for week/month view -->
             <div class="week-month-tabs">
-                <button class="toggle" id="week-tab" onclick="switchTab()">Week</button>
-                <button class="toggle" id="month-tab" onclick="switchTab()">Month</button>
+                <button class="week-text" id="week-tab" active onclick="switchWeekly()">Week</button>
+                <button class="week-text" id="month-tab" onclick="switchMonthly()">Month</button>
                 <div class="week__month__line"></div>
 
                 <!-- button to add a new log -->
@@ -30,14 +30,14 @@
             <!-- temporary because I didn't know if the tabs are just supposed to load to a different page
                  or if the tabs switch and the content is displayed from the same page -->
             <!-- if tabs load new page hard code the location of week__month__line to be under Week -->
-            <div class="tabs__content__box">
+            <!-- <div class="tabs__content__box">
                 <div class="tabs__content">
                     dummy content for WEEK view
                 </div>
                 <div class="tabs__content">
                     dummy content for MONTH view
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <!-- calendar for week view -->
