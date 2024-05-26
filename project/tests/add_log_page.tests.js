@@ -1,4 +1,4 @@
-import { validateForm, makeSubmission } from '../yourJavaScriptFile';
+import { validateForm, makeSubmission } from '../addLogPage/add_log_page';
 
 describe('Form Validation', () => {
   test('Form only submits if all text entries are valid', () => {
