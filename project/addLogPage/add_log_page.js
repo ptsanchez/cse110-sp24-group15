@@ -65,7 +65,7 @@ function makeSubmission() {
     proj_data["project_data"][current_project] = projects;
     localStorage.setItem("project_data", JSON.stringify(proj_data));
 
-    // Redirect the user to the day page
+    // Redirect the user to the day page after submission
     window.location.href = "../dayPage/day_page.html";
   }
 }
@@ -77,18 +77,4 @@ function cancelSubmission() {
   window.location.href = "../dayPage/day_page.html"; // Redirect to the day page
 }
 
-/**
- * Sets the default value of the time input to the current time when the page loads.
- */
-window.onload = function () {
-  // Get the current time
-  let now = new Date();
-  let hours = String(now.getHours()).padStart(2, "0"); // Get the hours and pad with leading zero if needed
-  let minutes = String(now.getMinutes()).padStart(2, "0"); // Get the minutes and pad with leading zero if needed
-
-  // Format the current time in HH:MM format
-  let currentTime = `${hours}:${minutes}`;
-
-  // Set the value of the time input to the current time
-  document.getElementById("log-time").value = currentTime;
-};
+module.exports = {validateForm, makeSubmission};

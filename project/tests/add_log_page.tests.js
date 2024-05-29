@@ -1,4 +1,6 @@
-import { validateForm, makeSubmission } from '../addLogPage/add_log_page';
+const { validateForm, makeSubmission } = require('../addLogPage/add_log_page');
+
+global.alert = jest.fn();
 
 describe('Form Validation', () => {
   test('Form only submits if all text entries are valid', () => {
@@ -13,81 +15,92 @@ describe('Form Validation', () => {
   });
 });
 
-describe('Local Storage', () => {
-  // Mock localStorage
-  const localStorageMock = (() => {
-    let store = {};
 
-    return {
-      getItem: key => store[key],
-      setItem: (key, value) => store[key] = value,
-      clear: () => store = {}
+// Mock the alert function
+global.alert = jest.fn();
+
+// Mock the global window object
+global.window = {
+  location: {
+    href: ''
+  }
+};
+
+// Mock the localStorage
+global.localStorage = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn()
+};
+
+// Mock the document.getElementById
+global.document = {
+  getElementById: jest.fn((id) => {
+    const elements = {
+      "log-title": { value: 'Sample Title' },
+      "log-time": { value: '12:00' },
+      "log-contributor": { value: 'John Doe' },
+      "log-description": { value: 'Sample Description' },
     };
-  })();
+    return elements[id];
+  })
+};
 
-  Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-
-  test('Form log submission adds to localStorage', () => {
-    // Mock form data
-    const log_title = 'Test Title';
-    const log_time = '12:00';
-    const log_contributors = 'Tester';
-    const log_description = 'Test Description';
-
-    // Call the makeSubmission function
-    makeSubmission(log_title, log_time, log_contributors, log_description);
-
-    // Retrieve the submitted log entry from localStorage
-    const storedData = JSON.parse(localStorage.getItem('project_data'));
-    const current_project = storedData.current_project;
-    const projects = storedData.project_data[current_project];
-    const logs = projects.logs;
-
-    // Check if the submitted log entry is present in localStorage
-    const submittedLog = logs.find(log => log.title === log_title);
-    expect(submittedLog).toBeDefined();
-    expect(submittedLog.time).toBe(log_time);
-    expect(submittedLog.contributors).toBe(log_contributors);
-    expect(submittedLog.data).toBe(log_description);
+describe('makeSubmission', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
-});
 
-// Dummy logs and check if form adds log submission accurately
-describe('Form Submission', () => {
-  test('Form adds log submission accurately', () => {
-    // Mock localStorage
-    const localStorageMock = (() => {
-      let store = {};
+  test('should validate form and redirect on successful submission', () => {
+    // Mock localStorage data
+    const mockProjectData = {
+      "current_project": "project1",
+      "project_data": {
+        "project1": {
+          "logs": []
+        }
+      },
+      "current_date": "05/29/2024"
+    };
+    localStorage.getItem.mockReturnValue(JSON.stringify(mockProjectData));
 
-      return {
-        getItem: key => store[key],
-        setItem: (key, value) => store[key] = value,
-        clear: () => store = {}
+    makeSubmission();
+
+    // Ensure validateForm is called
+    expect(alert).not.toHaveBeenCalled();
+
+    // Ensure localStorage setItem is called
+    const expectedLog = {
+      data: 'Sample Description',
+      time: '12:00',
+      Month: '05',
+      day: '29',
+      Year: '2024',
+      title: 'Sample Title',
+      contributors: 'John Doe',
+    };
+    mockProjectData.project_data.project1.logs.push(expectedLog);
+    expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(mockProjectData));
+
+    // Ensure redirection happens
+    expect(window.location.href).toBe('../dayPage/day_page.html');
+  });
+
+  test('should alert on invalid form submission', () => {
+    // Mock getElementById for invalid form data
+    document.getElementById = jest.fn((id) => {
+      const elements = {
+        "log-title": { value: '' },
+        "log-time": { value: '' },
+        "log-contributor": { value: '' },
+        "log-description": { value: '' },
       };
-    })();
+      return elements[id];
+    });
 
-    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+    makeSubmission();
 
-    // Mock form data
-    const log_title = 'Dummy Log Title';
-    const log_time = '10:30';
-    const log_contributors = 'John Doe';
-    const log_description = 'This is a dummy log entry.';
-
-    // Call the makeSubmission function
-    makeSubmission(log_title, log_time, log_contributors, log_description);
-
-    // Retrieve the submitted log entry from localStorage
-    const storedData = JSON.parse(localStorage.getItem('project_data'));
-    const current_project = storedData.current_project;
-    const projects = storedData.project_data[current_project];
-    const logs = projects.logs;
-
-    // Check if the submitted log entry is present in localStorage
-    const submittedLog = logs.find(log => log.title === log_title);
-    expect(submittedLog).toBeDefined();
-    expect(submittedLog.time).toBe(log_time);
-    expect(submittedLog.contributors).toBe(log_contributors);
-    expect(submittedLog.data).toBe(log_description);
+    // Ensure alert is called
+    expect(alert).toHaveBeenCalledWith('Please fill in all fields.');
   });
 });
