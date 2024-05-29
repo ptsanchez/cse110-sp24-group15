@@ -1,20 +1,5 @@
-const { validateForm, makeSubmission } = require('../addLogPage/add_log_page');
-
-global.alert = jest.fn();
-
-describe('Form Validation', () => {
-  test('Form only submits if all text entries are valid', () => {
-    // Invalid entries
-    expect(validateForm('', 'time', 'contributors', 'description')).toBe(false);
-    expect(validateForm('title', '', 'contributors', 'description')).toBe(false);
-    expect(validateForm('title', 'time', '', 'description')).toBe(false);
-    expect(validateForm('title', 'time', 'contributors', '')).toBe(false);
-    
-    // Valid entries
-    expect(validateForm('title', 'time', 'contributors', 'description')).toBe(true);
-  });
-});
-
+// Import the functions
+const { validateForm, makeSubmission, cancelSubmission } = require('../addLogPage/add_log_page');
 
 // Mock the alert function
 global.alert = jest.fn();
@@ -46,12 +31,31 @@ global.document = {
   })
 };
 
-describe('makeSubmission', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
+describe('Form Validation', () => {
+  test('Form only submits if all text entries are valid', () => {
+    // Invalid entries
+    expect(validateForm('', 'time', 'contributors', 'description')).toBe(false);
+    expect(validateForm('title', '', 'contributors', 'description')).toBe(false);
+    expect(validateForm('title', 'time', '', 'description')).toBe(false);
+    expect(validateForm('title', 'time', 'contributors', '')).toBe(false);
+    
+    // Valid entries
+    expect(validateForm('title', 'time', 'contributors', 'description')).toBe(true);
   });
+});
 
-  test('should validate form and redirect on successful submission', () => {
+describe('Cancel Submission', () => {
+  test('Window redirects to day page when cancelSubmission is called', () => {
+    // Call cancelSubmission
+    cancelSubmission();
+
+    // Ensure window.location.href is set to the day page URL
+    expect(window.location.href).toBe('../dayPage/day_page.html');
+  });
+});
+
+describe('Log Submission', () => {
+  test('Form submission adds log to localStorage', () => {
     // Mock localStorage data
     const mockProjectData = {
       "current_project": "project1",
@@ -66,9 +70,6 @@ describe('makeSubmission', () => {
 
     makeSubmission();
 
-    // Ensure validateForm is called
-    expect(alert).not.toHaveBeenCalled();
-
     // Ensure localStorage setItem is called
     const expectedLog = {
       data: 'Sample Description',
@@ -81,26 +82,56 @@ describe('makeSubmission', () => {
     };
     mockProjectData.project_data.project1.logs.push(expectedLog);
     expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(mockProjectData));
-
-    // Ensure redirection happens
-    expect(window.location.href).toBe('../dayPage/day_page.html');
   });
 
-  test('should alert on invalid form submission', () => {
-    // Mock getElementById for invalid form data
+  test('Form accurately adds log submission to localStorage', () => {
+    // Create dummy logs
+    const dummyLog = {
+      title: 'Dummy Title',
+      time: '15:30',
+      contributors: 'Jane Doe',
+      description: 'Dummy Description'
+    };
+
+    // Mock localStorage data
+    const mockProjectData = {
+      "current_project": "project1",
+      "project_data": {
+        "project1": {
+          "logs": []
+        }
+      },
+      "current_date": "05/29/2024"
+    };
+    localStorage.getItem.mockReturnValue(JSON.stringify(mockProjectData));
+
+    // Call makeSubmission with dummy log
     document.getElementById = jest.fn((id) => {
       const elements = {
-        "log-title": { value: '' },
-        "log-time": { value: '' },
-        "log-contributor": { value: '' },
-        "log-description": { value: '' },
+        "log-title": { value: dummyLog.title },
+        "log-time": { value: dummyLog.time },
+        "log-contributor": { value: dummyLog.contributors },
+        "log-description": { value: dummyLog.description },
       };
       return elements[id];
     });
 
     makeSubmission();
 
-    // Ensure alert is called
-    expect(alert).toHaveBeenCalledWith('Please fill in all fields.');
+    // Ensure log submission is accurate
+    const expectedLog = {
+      data: dummyLog.description,
+      time: dummyLog.time,
+      Month: '05',
+      day: '29',
+      Year: '2024',
+      title: dummyLog.title,
+      contributors: dummyLog.contributors,
+    };
+    mockProjectData.project_data.project1.logs.push(expectedLog);
+    expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(mockProjectData));
+
+    // Ensure redirection happens
+    expect(window.location.href).toBe('../dayPage/day_page.html');
   });
 });

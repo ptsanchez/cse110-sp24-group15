@@ -77,4 +77,4 @@ function cancelSubmission() {
   window.location.href = "../dayPage/day_page.html"; // Redirect to the day page
 }
 
-module.exports = {validateForm, makeSubmission};
+module.exports = {validateForm, makeSubmission, cancelSubmission};
