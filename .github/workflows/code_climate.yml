@@ -27,11 +27,11 @@ jobs:
 
       - name: Run ESLint
         run: |
-          npx eslint -c code_climate.config.js 'projects/**/*.js' 'projects/**/*.html'
+          npx eslint -c code_climate.config.js 'project/**/*.js' 'project/**/*.html' 'project/**/*.css' 
 
       - name: Run Stylelint
         run: |
-          npx stylelint 'projects/**/*.css'
+          npx stylelint 'project/**/*.css'
 
       - name: Set up Python
         uses: actions/setup-python@v2

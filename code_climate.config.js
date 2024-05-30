@@ -1,7 +1,7 @@
 // code_climate.config.js
 module.exports = [
   {
-    files: ["projects/**/*.js", "projects/**/*.html"],
+    files: ["project/**/*.js", "project/**/*.html", "project/**/*.css"],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: "module",
