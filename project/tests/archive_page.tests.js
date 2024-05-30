@@ -1,6 +1,23 @@
 // Import the functions from your main script
 const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } = require('../archivePage/archive_page');
 
+// Mock localStorage
+let localStorageMock = (() => {
+  let store = {};
+  return {
+    getItem: function(key) {
+      return store[key];
+    },
+    setItem: function(key, value) {
+      store[key] = value.toString();
+    },
+    clear: function() {
+      store = {};
+    }
+  };
+})();
+global.localStorage = localStorageMock;
+
 describe('Populate Project List', () => {
   it('should populate the project list correctly', () => {
     // Mock project data
