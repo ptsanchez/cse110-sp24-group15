@@ -10,21 +10,22 @@ body{
     height: 100vh;
     font-family: Arial, sans-serif;
 }
-footer .bottomNav {
+
+footer .bottom-nav {
     width: 100%;
     position: fixed;
     bottom: 0;
     background-color: aquamarine;
 }
 
-.successPageText {
+.success-page-text{
     font-size: 24px;
-    color: #000000;
+    color: #000;
     text-align: center;
     margin-top: 20px;
 }
 
-.continueBtn {
+.continue-btn {
     display: block;
     width: 200px;
     margin: 20px auto;
@@ -38,7 +39,7 @@ footer .bottomNav {
     font-size: 18px;
 }
 
-.continueBtn:hover {
+.continue-btn:hover {
     background-color: #45a049;
 }
 
@@ -48,10 +49,10 @@ footer .bottomNav {
     width: 300px;
     text-align: center;
     font-family: Arial, sans-serif;
-    border: 2px solid #000000;
+    border: 2px solid #000;
 }
 
-.SuccessPageBtn {
+.success-page-btn {
     display: block;
     width: 200px;
     margin: 20px auto;
