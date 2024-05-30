@@ -1,6 +1,13 @@
 // Import the functions from your main script
 const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } = require('../archivePage/archive_page');
 
+// Mock the global window object
+global.window = {
+  location: {
+    href: ''
+  }
+};
+
 // Mock the document object
 global.document = {
   addEventListener: jest.fn(), // Mock addEventListener method
