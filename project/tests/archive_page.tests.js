@@ -5,7 +5,7 @@ const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } 
 function setLocalStorage(key, value) {
   const mockSetItem = jest.fn();
   const mockGetItem = jest.fn().mockReturnValueOnce(value);
-  localStorage = {
+  window.localStorage = {
     getItem: mockGetItem,
     setItem: mockSetItem,
   };
