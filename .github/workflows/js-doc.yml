@@ -30,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jsdoc
-          path: docs
+          path: docs/jsdoc.txt
