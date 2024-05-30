@@ -33,7 +33,7 @@ function updateProjectData(formObj, localStr) {
     let projectsObj = JSON.parse(localStr);
     const newIndex = Object.keys(projectsObj.project_data).length;
     const newName = `project_${newIndex + 1}`;
-    projectsObj.project_data[newName] = {
+    projectsObj.project_data[String(newName)] = {
         projectName: formObj['project-name'], 
         projectTag: formObj['project-tag'], 
         projectContributors: formObj['project-contributor'], 
