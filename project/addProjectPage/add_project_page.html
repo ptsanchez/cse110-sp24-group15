@@ -12,27 +12,25 @@
 <body>
     <main>
         <form id="add-project-form">
-            <div class="add-project-from-div">
-                <label for="project-name">Project Name:</label>
-                <input type="text" id="project-name" name="project-name" class="project-name" required>
+            <label for="project-name">Project Name:</label>
+            <input type="text" id="project-name" name="project-name" class="project-name" required>
 
-                <label for="project-tag">Tag:</label>
-                <select name="project-tag" id="project-tag" class="project-tag">
-                    <option value="">Choose a tag</option>
-                    <option value="development">Development</option>
-                    <option value="design">Design</option>
-                    <option value="maintenance">Maintenance</option>
-                    <option value="personal">Personal</option>
-                </select>
+            <label for="project-tag">Tag:</label>
+            <select name="project-tag" id="project-tag" class="project-tag" required>
+                <option value="">Choose a tag</option>
+                <option value="development">Development</option>
+                <option value="design">Design</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="personal">Personal</option>
+            </select>
 
-                <label for="project-contributor">Contributors:</label>
-                <input type="text" id="project-contributor" name="project-contributor" class="project-contributor">
+            <label for="project-contributor">Contributors:</label>
+            <input type="text" id="project-contributor" name="project-contributor" class="project-contributor" required>
 
-                <label for="project-description">Description:</label>
-                <textarea id="project-description" name="project-description" class="project-description"></textarea>
+            <label for="project-description">Description:</label>
+            <textarea id="project-description" name="project-description" class="project-description" required></textarea>
 
-                <button type="submit" class="submit-btn">Submit</button>
-            </div>
+            <button type="submit" onsubmit="" class="submit-btn">Submit</button>
         </form>
     </main>
 </body>
