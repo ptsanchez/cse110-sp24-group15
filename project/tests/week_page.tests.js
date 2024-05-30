@@ -8,13 +8,18 @@ global.window = {
     }
 };
 
-// Mocking the DOM elements
-document.body.innerHTML = `
-    <div id="week-display"></div>
-    <button id="prev-week-btn"></button>
-    <button id="next-week-btn"></button>
-    <div class="day-column"></div>
-`;
+// Mock the document.querySelector
+global.document = {
+    querySelector: jest.fn((selector) => {
+      const elements = {
+        "#log-title": { value: 'Sample Title' },
+        "#log-time": { value: '12:00' },
+        "#log-contributor": { value: 'John Doe' },
+        "#log-description": { value: 'Sample Description' },
+      };
+      return elements[selector];
+    })
+};
 
 describe('Click week button', () => {
     test('Window redirects to week page when switchWeekly is called', () => {
