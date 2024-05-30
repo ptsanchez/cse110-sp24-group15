@@ -34,23 +34,23 @@ global.document = {
   })
 };
 
+// Mock localStorage and sessionStorage before each test
+beforeEach(() => {
+  global.localStorage = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    clear: jest.fn()
+  };
+
+  global.sessionStorage = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    clear: jest.fn()
+  };
+});
+
 // Describe the test suite
 describe('Project Management System Tests', () => {
-  // Mock localStorage and sessionStorage
-  beforeAll(() => {
-    global.localStorage = {
-      getItem: jest.fn(),
-      setItem: jest.fn(),
-      clear: jest.fn()
-    };
-
-    global.sessionStorage = {
-      getItem: jest.fn(),
-      setItem: jest.fn(),
-      clear: jest.fn()
-    };
-  });
-
   // Test if all archived projects are correctly loaded
   test('All archived projects are correctly loaded', () => {
     const projectData = {
