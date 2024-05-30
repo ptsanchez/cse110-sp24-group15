@@ -52,14 +52,16 @@ function makeSubmission(event) {
     alert('Thank you for your feedback!');
 
     // Redirect to success page
-    location.assign('../successPage/success_page.html');
+    window.location.href = "../successPage/success_page.html";
 }
 
 /* stylelint-disable */
 function cancelSubmission() {
-    location.assign("../homePage/home_page.html");
+    window.location.href = "../homePage/home_page.html";
 }
 /* stylelint-enable */
+
+
 
 // Export functions for testing in Node.js environment
 if (typeof module !== 'undefined' && module.exports) {
