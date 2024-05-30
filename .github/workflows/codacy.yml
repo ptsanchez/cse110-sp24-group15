@@ -15,3 +15,5 @@ jobs:
 
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
+        with:
+          options: "--directory project/"
