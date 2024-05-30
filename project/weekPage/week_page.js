@@ -6,19 +6,28 @@
 // }
 
 function switchWeekly() {
-    window.location.href = "../weekPage/week_page.html";
+    // window.location.href = "../weekPage/week_page.html";
+
+    // github code analysis said to do this instead of href
+    escape("../weekPage/week_page.html");
 }
 function switchMonthly() {
-    window.location.href = "../monthPage/month_page.html";
+    // window.location.href = "../monthPage/month_page.html";
+
+    // github code analysis said to do this instead of href
+    escape("../monthPage/month_page.html");
 }
 
 // redirect page to add_log_page.html when button is clicked
 function redirectToAddLogPage() {
-    window.location.href = "../addLogPage/add_log_page.html";
+    // window.location.href = "../addLogPage/add_log_page.html";
+
+    // github code analysis said to do this instead of href
+    escape("../addLogPage/add_log_page.html");
 }
 
 
-function calendarScript() {
+// function calendarScript() {
     const weekDisplay = document.getElementById('week-display');
     const prevWeekBtn = document.getElementById('prev-week-btn');
     const nextWeekBtn = document.getElementById('next-week-btn');
@@ -82,6 +91,6 @@ function calendarScript() {
 
     // Initialize calendar
     updateCalendar();
-}
+// }
 
 module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
