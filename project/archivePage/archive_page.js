@@ -34,7 +34,7 @@ function generateSampleProjects() {
     let projectDataJSON = JSON.stringify(projectData);
 
     // Store the project data in localStorage
-    localStorage.setItem('projectData', projectDataJSON);
+    window.localStorage.setItem('projectData', projectDataJSON);
 }
 
 // Call the function to generate sample projects
