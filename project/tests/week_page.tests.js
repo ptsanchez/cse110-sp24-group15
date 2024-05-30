@@ -9,7 +9,8 @@ global.window = {
 };
 
 global.document = {
-    querySelector: jest.fn()
+    querySelector: jest.fn(),
+    trigger: jest.fn()
 };
 
 // Mock the document.querySelector
