@@ -1,0 +1,71 @@
+/* Design for the body */
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 1%;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* All header design elements*/
+header{
+    background-color: #add8e6;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 2%;
+    text-align: center;
+    position: relative;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 3em;
+    font-weight: 600;
+    color: #333333;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #0658b1;
+}
+
+/* All footer Design Elements */
+
+footer {
+    background-color: #add8e6;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 2%;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto;
+}
+
+.feedback-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-button:hover {
+    background-color: #0658b1;
+}
