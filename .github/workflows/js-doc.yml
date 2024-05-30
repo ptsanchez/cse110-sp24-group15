@@ -29,5 +29,5 @@ jobs:
       - name: Upload JSDoc
         uses: actions/upload-artifact@v2
         with:
-          name: jsdoc
-          path: docs
+          name: jsdoc.md
+          path: docs/jsdoc.md
