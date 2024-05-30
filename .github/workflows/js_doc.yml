@@ -1,21 +1,38 @@
 name: Jsdocs
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  tests: 
-    runs-on: ubuntu-latest 
+  tests:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 #
+      - uses: actions/checkout@v4
+      
       - name: Install Dependencies
         run: npm install
+
       - name: Install JSDoc
         run: npm install -g jsdoc
-        
+
       - name: Build JSDoc for Project
         run: jsdoc ./project -d ./docs
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add .
+          git commit -m "Update JSDoc documentation"
+          git push --force-with-lease origin HEAD:update-jsdoc
+          
       - name: Create Pull Request for update JSDoc
         uses: peter-evans/create-pull-request@v3
         with:
