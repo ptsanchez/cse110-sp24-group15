@@ -1,30 +1,8 @@
-// Run the init() function when the page has loaded
-window.addEventListener("DOMContentLoaded", init);
-// Run the init() function when the page has loaded
-function init() {
-    calendarScript();
-}
-// toggles tab from weekly to monthly view
-// function switchTab() {
-//     const tabs = document.querySelectorAll('.toggle');
-//     const all_content = document.querySelectorAll('.tabs__content');
-
-//     tabs.forEach((tab, index) => {
-//         tab.addEventListener('click', (e) => {
-//             // add/remove active tag to week/month
-//             tabs.forEach(tab => { tab.classList.remove('active') });
-//             tab.classList.add('active');
-
-//             // moves the line under active tab
-//             var line = document.querySelector('.week__month__line');
-//             line.style.width = e.target.offsetWidth + "px";
-//             line.style.left = e.target.offsetLeft + "px";
-
-//             // add/remove active tag from the content of the tab
-//             all_content.forEach(content => { content.classList.remove('active') });
-//             all_content[index].classList.add('active');
-//         })
-//     })
+// // Run the init() function when the page has loaded
+// window.addEventListener("DOMContentLoaded", init);
+// // Run the init() function when the page has loaded
+// function init() {
+//     calendarScript();
 // }
 
 function switchWeekly() {
