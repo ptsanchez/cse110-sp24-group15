@@ -10,7 +10,7 @@ global.window = {
 
 global.document = {
     querySelector: jest.fn(),
-    trigger: jest.fn()
+    // trigger: jest.fn()
 };
 
 // Mock the document.querySelector
@@ -57,6 +57,7 @@ describe('Click add log button', () => {
 describe('Click a day', () => {
     test('Window redirects to day page when a day is clicked', () => {
       const day = document.querySelector('.day-column');
+      day.trigger = jest.fn();
       day.trigger('click');
   
       // Ensure window.location.href is set to the day page URL
