@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const projectData = JSON.parse(localStorage.getItem('projectData')) || {};
     const currentProjectKey = projectData.current_project;
+    const pd = 'project_data'
+    const tl = 'TodoList'
+    const bl = 'BranchLink'
 
     const getTextOrDefault = (value, defaultText) => {
         if (typeof value === 'string' && value.trim()) {
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const saveChanges = (element, btn, type) => {
         if (type === 'todo') {
-            projectData['project_data'][currentProjectKey]['TodoList'] = element.innerText;
+            projectData[pd][currentProjectKey][tl] = element.innerText;
         } else if (type === 'branch') {
             let link = element.innerText.trim();
             const hasHttp = link.startsWith('http://');
@@ -47,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!hasHttp && !hasHttps) {
                 link = 'https://' + link;
             }
-            projectData['project_data'][currentProjectKey]['BranchLink'] = link;
+            projectData[pd][currentProjectKey][bl] = link;
             const branchLinkElement = document.querySelector('.project-branch-link');
             branchLinkElement.href = link;
         }
@@ -132,15 +135,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const restoreOriginalText = (element, type) => {
         let text;
         if (type === 'todo') {
-            text = projectData['project_data'][currentProjectKey]['TodoList'];
+            text = projectData[pd][currentProjectKey][tl];
         } else if (type === 'branch') {
-            text = projectData['project_data'][currentProjectKey]['BranchLink'];
+            text = projectData[pd][currentProjectKey][bl];
         }
         element.textContent = text;
     };
 
-    if (currentProjectKey && projectData['project_data'][currentProjectKey]) {
-        const currentProject = projectData['project_data'][currentProjectKey];
+    if (currentProjectKey && projectData[pd][currentProjectKey]) {
+        const currentProject = projectData[pd][currentProjectKey];
 
         document.querySelector('.project-text').textContent = currentProject.projectName || 'PROJECT NAME';
         document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'TODO LIST (Each task with a progress bar and link to a github issue)');
