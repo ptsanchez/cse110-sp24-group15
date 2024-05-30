@@ -78,7 +78,7 @@ function handleSubmission(form) {
 
 if (typeof document !== 'undefined') {
     const form = document.querySelector('form');
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', () => {
         handleSubmission(form);
     });
 }
