@@ -1,28 +1,32 @@
-name: JSDoc
-
+name: Jsdocs
 on:
   push:
     branches:
       - main
 
 jobs:
-  deploy:
+  generate-jsdocs:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: docs/
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Build
-        uses: andstor/jsdoc-action@v1
+      - uses: actions/setup-node@v2
         with:
-          source_dir: ./project
-          output_dir: ./docs
-          config_file: jsdoc.json
-          template: minami
-          front_page: README.md
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./docs
+          node-version: "14"
+      
+      - name: Install and build docs
+        run: |
+          yarn install
+          yarn build_jsdoc
+      
+      - name: Commit changes in jsdoc build folder
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "AdvaithRavishankar@users.noreply.github.com"
+          git add ./build
+          git commit -m "Updating Jsdoc documentation" || echo "No changes to commit"
+          git push
