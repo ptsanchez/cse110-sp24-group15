@@ -12,11 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const sanitizeHTML = (input) => {
-        const doc = new DOMParser().parseFromString(input, 'text/html');
-        return doc.body.textContent || "";
-    };
-
     const toggleEditMode = (element, btn, type) => {
         const isEditing = element.getAttribute('contenteditable') === 'true';
         if (isEditing) {
@@ -69,12 +64,53 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderMarkup = (element) => {
-        let text = sanitizeHTML(element.innerText);
-        text = text.replace(/(\n|^) {3}- \[ \] (.+)/g, '$1<div class="indent"><input type="checkbox" disabled> $2</div>')
-                   .replace(/(\n|^) {3}- \[x\] (.+)/gi, '$1<div class="indent"><input type="checkbox" checked disabled> $2</div>')
-                   .replace(/(\n|^)- \[ \] (.+)/g, '$1<div><input type="checkbox" disabled> $2</div>')
-                   .replace(/(\n|^)- \[x\] (.+)/gi, '$1<div><input type="checkbox" checked disabled> $2</div>');
-        element.innerHTML = text;
+        let text = element.innerText;
+        const tempDiv = document.createElement('div');
+        text.split('\n').forEach(line => {
+            let match;
+            if ((match = line.match(/^ {3}- \[ \] (.+)/))) {
+                const div = document.createElement('div');
+                div.classList.add('indent');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+            } else if ((match = line.match(/^ {3}- \[x\] (.+)/i))) {
+                const div = document.createElement('div');
+                div.classList.add('indent');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = true;
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+            } else if ((match = line.match(/^- \[ \] (.+)/))) {
+                const div = document.createElement('div');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+            } else if ((match = line.match(/^- \[x\] (.+)/i))) {
+                const div = document.createElement('div');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = true;
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+            } else {
+                tempDiv.appendChild(document.createTextNode(line));
+                tempDiv.appendChild(document.createElement('br'));
+            }
+        });
+        element.innerHTML = '';
+        element.appendChild(tempDiv);
     };
 
     const restoreOriginalText = (element, type) => {
@@ -84,18 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (type === 'branch') {
             text = projectData.project_data[currentProjectKey].BranchLink;
         }
-        element.innerText = text;
+        element.textContent = text;
     };
 
     if (currentProjectKey && projectData.project_data[currentProjectKey]) {
         const currentProject = projectData.project_data[currentProjectKey];
 
-        document.querySelector('.project-text').innerText = currentProject.projectName || 'PROJECT NAME';
-        document.querySelector('.project-todo-list').innerText = getTextOrDefault(currentProject.TodoList, 'TODO LIST (Each task with a progress bar and link to a github issue)');
-        document.querySelector('.project-branch-link').innerText = currentProject.BranchLink || 'Link to Branch/Workspace';
+        document.querySelector('.project-text').textContent = currentProject.projectName || 'PROJECT NAME';
+        document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'TODO LIST (Each task with a progress bar and link to a github issue)');
+        document.querySelector('.project-branch-link').textContent = currentProject.BranchLink || 'Link to Branch/Workspace';
         document.querySelector('.project-branch-link').href = currentProject.BranchLink || '#';
         document.querySelector('.project-branch-link').target = '_blank';
-        document.querySelector('.project-detail-div').innerText = currentProject.projectDescription || 'Project Details, Members (add hover feature/description)';
+        document.querySelector('.project-detail-div').textContent = currentProject.projectDescription || 'Project Details, Members (add hover feature/description)';
 
         renderMarkup(document.querySelector('.project-todo-list'));
 
@@ -109,18 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleEditMode(branchLink, document.querySelector('.branch-edit-btn'), 'branch');
         });
     } else {
-        document.querySelector('.project-text').innerText = 'PROJECT NAME';
-        document.querySelector('.project-todo-list').innerText = 'TODO LIST (Each task with a progress bar and link to a github issue)';
-        document.querySelector('.project-branch-link').innerText = 'Link to Branch/Workspace';
+        document.querySelector('.project-text').textContent = 'PROJECT NAME';
+        document.querySelector('.project-todo-list').textContent = 'TODO LIST (Each task with a progress bar and link to a github issue)';
+        document.querySelector('.project-branch-link').textContent = 'Link to Branch/Workspace';
         document.querySelector('.project-branch-link').href = '#';
         document.querySelector('.project-branch-link').target = '_blank';
-        document.querySelector('.project-detail-div').innerText = 'Project Details, Members (add hover feature/description)';
+        document.querySelector('.project-detail-div').textContent = 'Project Details, Members (add hover feature/description)';
     }
 
     const setDefaultText = (selector, defaultText) => {
         const element = document.querySelector(selector);
-        if (!element.innerText.trim() || element.innerText === '[object Object]' || element.innerText === '{}') {
-            element.innerText = defaultText;
+        if (!element.textContent.trim() || element.textContent === '[object Object]' || element.textContent === '{}') {
+            element.textContent = defaultText;
         }
     };
 
