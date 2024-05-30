@@ -55,6 +55,9 @@ function calendarScript() {
             column.dataset.date = weekDates[index].toISOString().split('T')[0];
         });
     }
+    function switchDaily() {
+        window.location.href = "../dayPage/day_page.html";
+    }
     // previous week button
     prevWeekBtn.addEventListener('click', () => {
         currentDate.setDate(currentDate.getDate() - 7);
@@ -72,8 +75,7 @@ function calendarScript() {
             const date = new Date(clicked_date);
             const formattedDate = formatDateToMMDDYYYY(date);
             localStorage.setItem("current_date", formattedDate);
-            // console.log(formattedDate);
-            window.location.href = "../dayPage/day_page.html";
+            switchDaily();
 
             // i may not have to send over local storage
             // just get to the correct day_page
@@ -85,4 +87,4 @@ function calendarScript() {
     updateCalendar();
 }
 
-module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
+module.exports = {switchDaily, switchWeekly, switchMonthly, redirectToAddLogPage};
