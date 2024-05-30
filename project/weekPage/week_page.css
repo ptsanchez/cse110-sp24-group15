@@ -17,8 +17,7 @@ body {
     display: flex;
     justify-content: end;
     align-items: center;
-    border-bottom: 2px solid;
-    border-bottom-color: rgba(229,229,229);
+    border-bottom: 2px solid rgb(229 229 229 / 100%);
     position: relative;
 }
 
@@ -61,8 +60,7 @@ body {
 .week-calendar-div {
     background-color: #60D363;
     border-radius: 8px;
-    box-shadow: 0 0 10px ;
-    color: rgba(0, 0, 0, 10%);
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
     width: 100%;
     max-width: 650px;
     overflow: hidden;

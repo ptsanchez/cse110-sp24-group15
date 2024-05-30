@@ -85,4 +85,4 @@ function calendarScript() {
     updateCalendar();
 }
 
-
+module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
