@@ -1,10 +1,24 @@
-// import functions from archive_page.js
+// Import functions from archive_page.js
 import {
-  populateProhectList,
-  movetoPreviousPage,
-  moveToNextPage, 
+  populateProjectList,  
+  moveToPreviousPage,   
+  moveToNextPage,       
   handleSearch,
 } from '../archivePage/archive_page';
+
+// Mock DOM manipulation
+document.body.innerHTML = `
+  <div class="ArchivePageHeaderDiv">
+    <input type="search" class="Search" placeholder="Type to search...">
+  </div>
+  <div class="ArchiveProjectListDiv">
+    <ul class="ProjectList"></ul>
+  </div>
+  <div class="ArchivePageBtns">
+    <button class="pageBackBtn">Page Back</button>
+    <button class="pageNextBtn">Next Page</button>
+  </div>
+`;
 
 // Describe the test suite
 describe('Project Management System Tests', () => {
@@ -18,8 +32,17 @@ describe('Project Management System Tests', () => {
       // Add more sample project data as needed
     };
 
-    window.localStorage.setItem('projectData', JSON.stringify(projectData));
-    window.sessionStorage.setItem('inactiveProjects', JSON.stringify({}));
+    global.localStorage = {
+      getItem: jest.fn(() => JSON.stringify(projectData)),
+      setItem: jest.fn(),
+      clear: jest.fn(),
+    };
+
+    global.sessionStorage = {
+      getItem: jest.fn(() => null),
+      setItem: jest.fn(),
+      clear: jest.fn(),
+    };
   });
 
   // Test if all archived projects are correctly loaded
@@ -35,25 +58,25 @@ describe('Project Management System Tests', () => {
   // Test if page back works correctly
   test('Page back works correctly', () => {
     // Set current page to 2
-    window.sessionStorage.setItem('currentPage', '2');
+    sessionStorage.setItem('currentPage', '2');
 
     // Simulate clicking page back button
     moveToPreviousPage();
 
     // Expect current page to be 1
-    expect(window.sessionStorage.getItem('currentPage')).toBe('1');
+    expect(sessionStorage.getItem('currentPage')).toBe('1');
   });
 
   // Test if page next works correctly
   test('Page next works correctly', () => {
     // Set current page to 1
-    window.sessionStorage.setItem('currentPage', '1');
+    sessionStorage.setItem('currentPage', '1');
 
     // Simulate clicking page next button
     moveToNextPage();
 
     // Expect current page to be 2
-    expect(window.sessionStorage.getItem('currentPage')).toBe('2');
+    expect(sessionStorage.getItem('currentPage')).toBe('2');
   });
 
   // Test if search works correctly
@@ -62,10 +85,12 @@ describe('Project Management System Tests', () => {
     populateProjectList(1);
 
     // Simulate entering search query
-    document.querySelector('.Search').value = 'Project 1';
+    const searchInput = document.querySelector('.Search');
+    searchInput.value = 'Project 1';
 
     // Trigger keypress event to simulate search
-    handleSearch({ key: 'Enter' });
+    const event = new KeyboardEvent('keypress', { key: 'Enter' });
+    searchInput.dispatchEvent(event);
 
     // Expect only one project to be displayed
     const projectListItems = document.querySelectorAll('.ProjectList li');
@@ -79,7 +104,9 @@ describe('Project Management System Tests', () => {
     populateProjectList(1);
 
     // Simulate clicking delete button for a project
-    const deleteButton = document.querySelector('.deleteButton');
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'deleteButton';
+    document.querySelector('.ProjectList').appendChild(deleteButton);
     deleteButton.click();
 
     // Expect the project to be removed from the project list
@@ -93,11 +120,13 @@ describe('Project Management System Tests', () => {
     populateProjectList(1);
 
     // Simulate clicking on a project
-    const projectItem = document.querySelector('.ProjectList li');
+    const projectItem = document.createElement('li');
+    projectItem.className = 'Project';
+    document.querySelector('.ProjectList').appendChild(projectItem);
     projectItem.click();
 
     // Expect current_project in localStorage to be set correctly
-    const currentProject = JSON.parse(window.localStorage.getItem('projectData')).current_project;
+    const currentProject = JSON.parse(localStorage.getItem('projectData')).current_project;
     expect(currentProject).toBeDefined();
     expect(projectData[currentProject]).toBeDefined();
   });

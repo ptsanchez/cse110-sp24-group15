@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to populate project list on the current page
     function populateProjectList(pageNumber) {
-        let projectList = document.querySelector('.ProjectList');
+        let projectList = document.querySelector('.project-list');
         projectList.innerHTML = ''; // Clear existing projects
 
         // Calculate start and end indices for projects on the current page
@@ -91,14 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function addProjectToList(project, projectKey) {
         // Create list item element
         let projectListItem = document.createElement('li');
-        projectListItem.classList.add('Project');
+        projectListItem.classList.add('project');
 
         // Set project name
         projectListItem.textContent = project.projectName;
 
         // Create delete button
         let deleteButton = document.createElement('button');
-        deleteButton.classList.add('deleteButton');
+        deleteButton.classList.add('delete-button');
 
         // Create span element for trash can icon
         let trashIcon = document.createElement('span');
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Append list item to project list
-        let projectList = document.querySelector('.ProjectList');
+        let projectList = document.querySelector('.project-list');
         projectList.appendChild(projectListItem);
     }
 
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to handle search
     function handleSearch() {
-        let searchQuery = document.querySelector('.Search').value.trim().toLowerCase();
+        let searchQuery = document.querySelector('.search').value.trim().toLowerCase();
 
         // Iterate over project data to find matching project
         for (let projectKey in projectData) {
@@ -220,11 +220,11 @@ document.addEventListener('DOMContentLoaded', function() {
     populateProjectList(currentPage);
 
     // Add event listeners to page navigation buttons
-    document.querySelector('.pageBackBtn').addEventListener('click', moveToPreviousPage);
-    document.querySelector('.pageNextBtn').addEventListener('click', moveToNextPage);
+    document.querySelector('.page-back-btn').addEventListener('click', moveToPreviousPage);
+    document.querySelector('.page-next-btn').addEventListener('click', moveToNextPage);
 
     // Search functionality
-    document.querySelector('.Search').addEventListener('keypress', function(event) {
+    document.querySelector('.search').addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             let query = event.target.value.toLowerCase();
             let projectKeys = Object.keys(projectData);

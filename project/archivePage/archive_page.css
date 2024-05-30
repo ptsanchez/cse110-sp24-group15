@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 html {
@@ -35,113 +35,113 @@ header {
 }
 
 /* Login/Account Button */
-header button {
+header .login-button {
     background: rgb(197, 5, 5);
     margin: 0;
     padding: 3px;
 }
 
 /* Feedback Button */
-footer button {
+footer .feedback-button {
     background: rgb(37, 171, 224);
     margin: 0;
     padding: 3px;
 }
 
 /* Archive Project Header Formatting */
-.ArchivePageHeaderDiv {
+.archive-page-header-div {
     background: white;
     padding: 30px 0;
 }
 
-.ArchivePageHeaderDiv label {
+.archive-page-header-div label {
     font-size: 1.2em;
 }
 
 /* Search Bar Formatting */
-.ArchivePageHeaderDiv input {
-    background: rgb(255, 252, 169);
+.archive-page-header-div .search {
+    background: rgb(255 252 169);
     margin-left: 30px;
     padding: 6px;
 }
 
 /* Search Bar Hover And Focus */
-.ArchivePageHeaderDiv input:hover,
-.ArchivePageHeaderDiv input:focus {
-    background: rgb(253, 255, 236);
+.archive-page-header-div .search:hover,
+.archive-page-header-div .search:focus {
+    background: rgb(253 255 236);
 }
 
 /* Project List Formatting */
-.ArchiveProjectListDiv {
-    background: rgb(255, 255, 255);
+.archive-project-list-div {
+    background: rgb(255 255 255);
     padding: 0;
 }
 
 /* Project List Formatting */
-.ProjectList {
+.project-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.ProjectList li:first-child {
+.project-list li:first-child {
     margin-top: 0;
 }
 
-.ProjectList li:last-child {
+.project-list li:last-child {
     margin-bottom: 20px;
 }
 
 /* Project List Item Formatting */
-.Project {
-    background: rgb(255, 175, 175);
+.project {
+    background: rgb(255 175 175);
     margin: 15px 0;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 2px solid black;
-    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 5px 5px rgb(0 0 0 / 30%);
     transition: transform 0.5s ease;
     border-radius: 15px;
 }
 
 /* Hovering Project List Item */
-.Project:hover {
-    background: rgb(255, 102, 102);
+.project:hover {
+    background: rgb(255 102 102);
     transform: scale(1.02);
 }
 
 /* Trash Project Button */
-.Project button {
-    background: rgb(255, 57, 57);
+.project button {
+    background: rgb(255 57 57);
     margin: 0;
     padding: 3px;
     font-size: 1em;
-    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 3px 3px rgb(0 0 0 / 50%);
     transition: transform 0.5s ease;
 }
 
 /* Hovering Trash Project Button */
-.Project button:hover {
+.project button:hover {
     transform: scale(1.3);
 }
 
 /* Archive Page Buttons */
-.ArchivePageBtns {
-    background: rgb(255, 255, 255);
+.archive-page-btns {
+    background: rgb(255 255 255);
     margin: 40px 0;
     display: flex;
     justify-content: space-between;
 }
 
 /* Back and Next Buttons */
-.ArchivePageBtns button {
-    background: rgb(198, 138, 255);
+.archive-page-btns button {
+    background: rgb(198 138 255);
     padding: 8px;
 }
 
 /* Hovering Page Buttons */
-.ArchivePageBtns button:hover {
-    background: rgb(214, 181, 255);
+.archive-page-btns button:hover {
+    background: rgb(214 181 255);
 }
