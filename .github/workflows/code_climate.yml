@@ -1,4 +1,4 @@
-name: Code Climate
+name: Code Quality Checks
 
 on:
   push:
@@ -9,40 +9,48 @@ on:
       - main
 
 jobs:
-  code-climate:
+  code-quality:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y jq
+          npm install eslint stylelint stylelint-config-standard
 
-      - name: Run Code Climate analysis
+      - name: Run ESLint
+        run: |
+          npx eslint 'projects/**/*.js' 'projects/**/*.html'
+
+      - name: Run Stylelint
+        run: |
+          npx stylelint 'projects/**/*.css'
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install coverage codeclimate-test-reporter
+
+      - name: Run tests with coverage
+        run: |
+          coverage run -m pytest
+
+      - name: Upload coverage to Code Climate
         env:
           CODECLIMATE_REPO_TOKEN: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
         run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-          ./cc-test-reporter analyze --exit-code ${{ steps.tests.outcome }}
-
-      - name: Upload coverage report to Code Climate
-        env:
-          CODECLIMATE_REPO_TOKEN: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
-        run: |
-          ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.json
+          coverage xml
+          ./cc-test-reporter format-coverage -t coverage.py -o coverage/codeclimate.json
           ./cc-test-reporter upload-coverage
-
-      - name: Code Climate Analysis
-        env:
-          CODECLIMATE_REPO_TOKEN: ${{ secrets.CODECLIMATE_REPO_TOKEN }}
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-          find ./projects -type f \( -name "*.css" -o -name "*.js" -o -name "*.html" \) -exec ./cc-test-reporter analyze --engine eslint --path {} \;
-          ./cc-test-reporter after-build --exit-code ${{ steps.tests.outcome }}
