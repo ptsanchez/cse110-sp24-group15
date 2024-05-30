@@ -27,7 +27,7 @@ jobs:
 
       - name: Commit and Push Changes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           git add .
           git commit -m "Update JSDoc documentation"
@@ -36,7 +36,7 @@ jobs:
       - name: Create Pull Request for update JSDoc
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
           branch: update-jsdoc
           title: Update JSDoc documentation
           body: |
