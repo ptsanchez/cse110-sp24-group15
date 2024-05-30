@@ -1,4 +1,4 @@
-// eslint.config.js
+// code_climate.config.js
 module.exports = [
     {
       files: ["projects/**/*.js", "projects/**/*.html"],
@@ -13,5 +13,3 @@ module.exports = [
       },
     },
   ];
-  
-  

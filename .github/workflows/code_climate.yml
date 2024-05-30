@@ -27,7 +27,7 @@ jobs:
 
       - name: Run ESLint
         run: |
-          npx eslint 'projects/**/*.js' 'projects/**/*.html'
+          npx eslint -c code_climate.config.js 'projects/**/*.js' 'projects/**/*.html'
 
       - name: Run Stylelint
         run: |
