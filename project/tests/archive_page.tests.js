@@ -8,6 +8,19 @@ global.window = {
   }
 };
 
+// Mock localStorage and sessionStorage
+global.localStorage = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn()
+};
+
+global.sessionStorage = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn()
+};
+
 // Mock the document object
 global.document = {
   addEventListener: jest.fn(), // Mock addEventListener method
