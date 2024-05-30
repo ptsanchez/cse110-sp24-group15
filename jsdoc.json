@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src"],
+    "include": ["project"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   }
