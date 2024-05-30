@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const sanitizeHTML = (input) => {
+        const doc = new DOMParser().parseFromString(input, 'text/html');
+        return doc.body.textContent || "";
+    };
+
     const toggleEditMode = (element, btn, type) => {
         const isEditing = element.getAttribute('contenteditable') === 'true';
         if (isEditing) {
@@ -64,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderMarkup = (element) => {
-        let text = element.innerText;
+        let text = sanitizeHTML(element.innerText);
         text = text.replace(/(\n|^) {3}- \[ \] (.+)/g, '$1<div class="indent"><input type="checkbox" disabled> $2</div>')
                    .replace(/(\n|^) {3}- \[x\] (.+)/gi, '$1<div class="indent"><input type="checkbox" checked disabled> $2</div>')
                    .replace(/(\n|^)- \[ \] (.+)/g, '$1<div><input type="checkbox" disabled> $2</div>')
