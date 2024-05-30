@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const sanitizeInput = (input) => {
+        const div = document.createElement('div');
+        div.textContent = input;
+        return div.innerHTML;
+    };
+
     const toggleEditMode = (element, btn, type) => {
         const isEditing = element.getAttribute('contenteditable') === 'true';
         if (isEditing) {
@@ -39,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const saveChanges = (element, btn, type) => {
         if (type === 'todo') {
-            projectData.project_data[currentProjectKey].TodoList = element.innerText;
+            const sanitizedTodo = sanitizeInput(element.innerText);
+            projectData.project_data[currentProjectKey].TodoList = sanitizedTodo;
         } else if (type === 'branch') {
             let link = element.innerText.trim();
             const hasHttp = link.startsWith('http://');
@@ -47,9 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!hasHttp && !hasHttps) {
                 link = 'https://' + link;
             }
-            projectData.project_data[currentProjectKey].BranchLink = link;
+            const sanitizedLink = sanitizeInput(link);
+            projectData.project_data[currentProjectKey].BranchLink = sanitizedLink;
             const branchLinkElement = document.querySelector('.project-branch-link');
-            branchLinkElement.href = link;
+            branchLinkElement.href = sanitizedLink;
         }
         localStorage.setItem('projectData', JSON.stringify(projectData));
         const parentElement = element.parentElement;
@@ -82,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkbox.type = 'checkbox';
                 checkbox.disabled = true;
                 div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
+                div.appendChild(document.createTextNode(` ${sanitizeInput(match[1])}`));
                 tempDiv.appendChild(div);
                 return;
             }
@@ -95,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkbox.checked = true;
                 checkbox.disabled = true;
                 div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
+                div.appendChild(document.createTextNode(` ${sanitizeInput(match[1])}`));
                 tempDiv.appendChild(div);
                 return;
             }
@@ -106,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkbox.type = 'checkbox';
                 checkbox.disabled = true;
                 div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
+                div.appendChild(document.createTextNode(` ${sanitizeInput(match[1])}`));
                 tempDiv.appendChild(div);
                 return;
             }
@@ -118,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkbox.checked = true;
                 checkbox.disabled = true;
                 div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
+                div.appendChild(document.createTextNode(` ${sanitizeInput(match[1])}`));
                 tempDiv.appendChild(div);
                 return;
             }
@@ -132,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const restoreOriginalText = (element, type) => {
         let text;
         if (type === 'todo') {
-            text = projectData.project_data[currentProjectKey].TodoList;
+            text = sanitizeInput(projectData.project_data[currentProjectKey].TodoList);
         } else if (type === 'branch') {
-            text = projectData.project_data[currentProjectKey].BranchLink;
+            text = sanitizeInput(projectData.project_data[currentProjectKey].BranchLink);
         }
         element.textContent = text;
     };
