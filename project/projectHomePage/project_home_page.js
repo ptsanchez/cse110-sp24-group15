@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const projectData = JSON.parse(localStorage.getItem('projectData')) || {};
     const currentProjectKey = projectData.current_project;
-    const pd = 'project_data'
-    const tl = 'TodoList'
-    const bl = 'BranchLink'
 
     const getTextOrDefault = (value, defaultText) => {
         if (typeof value === 'string' && value.trim()) {
@@ -36,27 +33,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             element.focus();
         }
-        const isNowEditing = !isEditing;
-        element.parentElement.classList.toggle('editing', isNowEditing);
+        element.parentElement.classList.toggle('editing', !isEditing);
     };
 
     const saveChanges = (element, btn, type) => {
         if (type === 'todo') {
-            projectData[pd][currentProjectKey][tl] = element.innerText;
+            const todoList = element.innerText;
+            projectData.project_data = projectData.project_data || {};
+            projectData.project_data[currentProjectKey] = projectData.project_data[currentProjectKey] || {};
+            projectData.project_data[currentProjectKey].TodoList = todoList;
         } else if (type === 'branch') {
             let link = element.innerText.trim();
-            const hasHttp = link.startsWith('http://');
-            const hasHttps = link.startsWith('https://');
-            if (!hasHttp && !hasHttps) {
+            if (!link.startsWith('http://') && !link.startsWith('https://')) {
                 link = 'https://' + link;
             }
-            projectData[pd][currentProjectKey][bl] = link;
-            const branchLinkElement = document.querySelector('.project-branch-link');
-            branchLinkElement.href = link;
+            projectData.project_data = projectData.project_data || {};
+            projectData.project_data[currentProjectKey] = projectData.project_data[currentProjectKey] || {};
+            projectData.project_data[currentProjectKey].BranchLink = link;
+            document.querySelector('.project-branch-link').href = link;
         }
         localStorage.setItem('projectData', JSON.stringify(projectData));
-        const parentElement = element.parentElement;
-        parentElement.classList.add('saved');
+        element.parentElement.classList.add('saved');
         showSaveConfirmation(btn);
     };
 
@@ -67,8 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = "<i class='bx bx-edit'></i>";
             btn.classList.remove('check');
             btn.classList.add('edit');
-            const parentElement = btn.parentElement;
-            parentElement.classList.remove('saved');
+            btn.parentElement.classList.remove('saved');
         }, 2000);
     };
 
@@ -77,8 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tempDiv = document.createElement('div');
         text.split('\n').forEach(line => {
             let match;
-            match = line.match(/^ {3}- \[ \] (.+)/);
-            if (match) {
+            if (match = line.match(/^ {3}- \[ \] (.+)/)) {
                 const div = document.createElement('div');
                 div.classList.add('indent');
                 const checkbox = document.createElement('input');
@@ -87,10 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(checkbox);
                 div.appendChild(document.createTextNode(` ${match[1]}`));
                 tempDiv.appendChild(div);
-                return;
-            }
-            match = line.match(/^ {3}- \[x\] (.+)/i);
-            if (match) {
+            } else if (match = line.match(/^ {3}- \[x\] (.+)/i)) {
                 const div = document.createElement('div');
                 div.classList.add('indent');
                 const checkbox = document.createElement('input');
@@ -100,10 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(checkbox);
                 div.appendChild(document.createTextNode(` ${match[1]}`));
                 tempDiv.appendChild(div);
-                return;
-            }
-            match = line.match(/^- \[ \] (.+)/);
-            if (match) {
+            } else if (match = line.match(/^- \[ \] (.+)/)) {
                 const div = document.createElement('div');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
@@ -111,10 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(checkbox);
                 div.appendChild(document.createTextNode(` ${match[1]}`));
                 tempDiv.appendChild(div);
-                return;
-            }
-            match = line.match(/^- \[x\] (.+)/i);
-            if (match) {
+            } else if (match = line.match(/^- \[x\] (.+)/i)) {
                 const div = document.createElement('div');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
@@ -123,10 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(checkbox);
                 div.appendChild(document.createTextNode(` ${match[1]}`));
                 tempDiv.appendChild(div);
-                return;
+            } else {
+                tempDiv.appendChild(document.createTextNode(line));
+                tempDiv.appendChild(document.createElement('br'));
             }
-            tempDiv.appendChild(document.createTextNode(line));
-            tempDiv.appendChild(document.createElement('br'));
         });
         element.innerHTML = '';
         element.appendChild(tempDiv);
@@ -135,15 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const restoreOriginalText = (element, type) => {
         let text;
         if (type === 'todo') {
-            text = projectData[pd][currentProjectKey][tl];
+            text = projectData.project_data[currentProjectKey].TodoList;
         } else if (type === 'branch') {
-            text = projectData[pd][currentProjectKey][bl];
+            text = projectData.project_data[currentProjectKey].BranchLink;
         }
         element.textContent = text;
     };
 
-    if (currentProjectKey && projectData[pd][currentProjectKey]) {
-        const currentProject = projectData[pd][currentProjectKey];
+    if (currentProjectKey && projectData.project_data[currentProjectKey]) {
+        const currentProject = projectData.project_data[currentProjectKey];
 
         document.querySelector('.project-text').textContent = currentProject.projectName || 'PROJECT NAME';
         document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'TODO LIST (Each task with a progress bar and link to a github issue)');
@@ -174,9 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setDefaultText = (selector, defaultText) => {
         const element = document.querySelector(selector);
-        const elementText = element.textContent.trim();
-        const isDefaultRequired = !elementText || elementText === '[object Object]' || elementText === '{}';
-        if (isDefaultRequired) {
+        if (!element.textContent.trim() || element.textContent === '[object Object]' || element.textContent === '{}') {
             element.textContent = defaultText;
         }
     };
