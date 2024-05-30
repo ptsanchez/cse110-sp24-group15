@@ -8,39 +8,16 @@ global.window = {
   }
 };
 
-// Mock the document object
+// Mock the document.querySelector
 global.document = {
-  addEventListener: jest.fn(), // Mock addEventListener method
-  querySelectorAll: jest.fn((selector) => {
-    if (selector === '.ProjectList li') {
-      // Mock project list items
-      return [{}, {}]; // Mocking two project list items
-    }
-  }),
   querySelector: jest.fn((selector) => {
-    if (selector === '.Search') {
-      // Mock search input element
-      return {
-        value: '', // Mock initial value
-        addEventListener: jest.fn(), // Mock addEventListener method
-        dispatchEvent: jest.fn() // Mock dispatchEvent method
-      };
-    }
-  }),
-  createElement: jest.fn((tagName) => {
-    if (tagName === 'button') {
-      // Mock delete button
-      return {
-        className: '',
-        click: jest.fn()
-      };
-    } else if (tagName === 'li') {
-      // Mock project item
-      return {
-        className: '',
-        click: jest.fn()
-      };
-    }
+    const elements = {
+      "#log-title": { value: 'Sample Title' },
+      "#log-time": { value: '12:00' },
+      "#log-contributor": { value: 'John Doe' },
+      "#log-description": { value: 'Sample Description' },
+    };
+    return elements[selector];
   })
 };
 
