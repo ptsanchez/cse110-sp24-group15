@@ -8,22 +8,26 @@ body {
     height: 100vh;
     background-color: #f0f0f0;
 }
+
 .main-content {
     width: 300px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(0 0 0 /0.1);
 }
+
 .project-home-page-title-div {
     text-align: center;
     margin-bottom: 20px;
 }
+
 .project-text {
     font-size: 24px;
     font-weight: bold;
 }
+
 .project-todo-list-div,
 .project-link-div {
     background-color: #ff6f91;
@@ -34,6 +38,7 @@ body {
     padding-right: 50px;
     transition: background-color 0.3s ease;
 }
+
 .project-todo-list,
 .project-branch-link {
     color: #fff;
@@ -42,9 +47,11 @@ body {
     overflow-wrap: break-word;
     outline: none;
 }
+
 .project-branch-link {
     text-decoration: none;
 }
+
 .project-detail-div {
     background-color: #ffab76;
     padding: 10px;
@@ -54,10 +61,12 @@ body {
     font-size: 16px;
     color: #fff;
 }
+
 .project-btns-div {
     display: flex;
     justify-content: space-between;
 }
+
 .make-log-btn,
 .all-logs-btn {
     width: 48%;
@@ -69,10 +78,12 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
+
 .make-log-btn:hover,
 .all-logs-btn:hover {
     background-color: #3bb8c5;
 }
+
 .edit-btn {
     position: absolute;
     bottom: 10px;
@@ -88,13 +99,16 @@ body {
     height: 24px;
     width: 24px;
 }
+
 .edit-btn.save {
     color: #ff9f43;
 }
+
 .edit-btn.check {
     color: #00b894;
     animation: pop-up 0.5s ease;
 }
+
 @keyframes pop-up {
     0% {
         transform: scale(1);
@@ -106,20 +120,25 @@ body {
         transform: scale(1);
     }
 }
+
 .project-todo-list-div.editing,
 .project-link-div.editing {
     background-color: #ffe0e6;
 }
+
 .editing .project-todo-list,
 .editing .project-branch-link {
     color: black;
 }
+
 .project-todo-list div {
     margin-left: 0;
 }
+
 .project-todo-list .indent {
     margin-left: 1.5em;
 }
+
 input[type="checkbox"] {
     margin-left: 0;
     margin-right: 5px;
