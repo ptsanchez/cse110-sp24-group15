@@ -1,11 +1,3 @@
-// Import jsdom
-const { JSDOM } = require('jsdom');
-
-// Setup jsdom
-const { window } = new JSDOM();
-global.window = window;
-global.document = window.document;
-
 // Import the functions from your main script
 const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } = require('../archivePage/archive_page');
 
