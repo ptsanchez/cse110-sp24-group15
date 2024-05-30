@@ -14,10 +14,10 @@ form.addEventListener('submit', () => {
             current_date: (new Date()).toLocaleDateString(),
             project_data: {
                 project_1: {
-                    projectName: formObj['projectName'], 
-                    projectTag: formObj['projectTag'], 
-                    projectContributors: formObj['projectContributor'], 
-                    projectDescription: formObj['projectDescription'], 
+                    projectName: formObj['project-name'], 
+                    projectTag: formObj['project-tag'], 
+                    projectContributors: formObj['project-contributor'], 
+                    projectDescription: formObj['project-description'], 
                     active: true,
                     logs: {}, // TODO
                     BranchLink: '', // TODO
@@ -32,10 +32,10 @@ form.addEventListener('submit', () => {
         const newIndex = Object.keys(projectsObj.project_data).length;
         const newName = `project_${newIndex + 1}`;
         projectsObj.project_data[newName] = {
-            projectName: formObj['projectName'], 
-            projectTag: formObj['projectTag'], 
-            projectContributors: formObj['projectContributor'], 
-            projectDescription: formObj['projectDescription'], 
+            projectName: formObj['project-name'], 
+            projectTag: formObj['project-tag'], 
+            projectContributors: formObj['project-contributor'], 
+            projectDescription: formObj['project-description'], 
             active: true,
             logs: {}, // TODO
             BranchLink: '', // TODO
@@ -45,5 +45,3 @@ form.addEventListener('submit', () => {
     localStr = JSON.stringify(projectsObj);
     localStorage.setItem('projects', localStr);
 });
-
-//localStorage.clear();

@@ -10,27 +10,14 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main content area -->
     <main>
-        <form id="addProjectForm">
-            <div class="addProjectFromDiv">
-                <label for="projectName">Project Name:</label>
-                <input type="text" id="projectName" name="projectName" class="projectName" required>
+        <form id="add-project-form">
+            <div class="add-project-from-div">
+                <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name" name="project-name" class="project-name" required>
 
-                <label for="projectTag">Tag:</label>
-                <select name="projectTag" id="projectTag" class="projectTag">
+                <label for="project-tag">Tag:</label>
+                <select name="project-tag" id="project-tag" class="project-tag">
                     <option value="">Choose a tag</option>
                     <option value="development">Development</option>
                     <option value="design">Design</option>
@@ -38,23 +25,16 @@
                     <option value="personal">Personal</option>
                 </select>
 
-                <label for="projectContributor">Contributors:</label>
-                <input type="text" id="projectContributor" name="projectContributor" class="projectContributor">
+                <label for="project-contributor">Contributors:</label>
+                <input type="text" id="project-contributor" name="project-contributor" class="project-contributor">
 
-                <label for="projectDescription">Description:</label>
-                <textarea id="projectDescription" name="projectDescription" class="projectDescription"></textarea>
+                <label for="project-description">Description:</label>
+                <textarea id="project-description" name="project-description" class="project-description"></textarea>
 
-                <button type="submit" class="submitBtn"">Submit</button>
+                <button type="submit" class="submit-btn"">Submit</button>
             </div>
         </form>
     </main>
-
-    <!-- Footer -->
-    <footer>
-        <nav class='bottomNav'>
-            Copyright © 2024 abababba
-        </nav>
-    </footer>
 </body>
 
 </html>
