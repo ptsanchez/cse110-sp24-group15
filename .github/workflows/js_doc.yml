@@ -1,9 +1,9 @@
-name: GitHub pages
+name: JSDoc
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
