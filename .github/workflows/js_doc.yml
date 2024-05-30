@@ -1,45 +1,28 @@
-name: Generate JSDoc
+name: GitHub pages
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
-  build-docs:
-    permissions:
-      contents: write
-      pull-requests: write
-
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
+        uses: actions/checkout@v2
 
       - name: Build
         uses: andstor/jsdoc-action@v1
         with:
           source_dir: ./project
-          recurse: true
           output_dir: ./docs
+          config_file: jsdoc.json
+          template: minami
+          front_page: README.md
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add ./docs
-          git commit -m "Generated JSDocs"
-          git push origin HEAD:jsdocs-update
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          token: ${{ secrets.GH_TOKEN }}
-          commit-message: Generated JSDocs
-          branch: jsdocs-update
-          title: "[AUTO] Generated JSDocs"
-          body: "This PR was automatically created by the GitHub Action to update the JSDocs."
-          labels: docs
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./docs
