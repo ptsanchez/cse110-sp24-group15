@@ -38,17 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const saveChanges = (element, btn, type) => {
         if (type === 'todo') {
-            const todoList = element.innerText;
-            projectData.project_data = projectData.project_data || {};
-            projectData.project_data[currentProjectKey] = projectData.project_data[currentProjectKey] || {};
-            projectData.project_data[currentProjectKey].TodoList = todoList;
+            projectData.project_data[currentProjectKey].TodoList = element.innerText;
         } else if (type === 'branch') {
             let link = element.innerText.trim();
             if (!link.startsWith('http://') && !link.startsWith('https://')) {
                 link = 'https://' + link;
             }
-            projectData.project_data = projectData.project_data || {};
-            projectData.project_data[currentProjectKey] = projectData.project_data[currentProjectKey] || {};
             projectData.project_data[currentProjectKey].BranchLink = link;
             document.querySelector('.project-branch-link').href = link;
         }
