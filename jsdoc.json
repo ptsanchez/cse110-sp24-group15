@@ -1,8 +1,18 @@
 {
+  "tags": {
+    "allowUnknownTags": true
+  },
   "source": {
     "include": ["project"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "./docs",
+    "recurse": true
+  },
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
   }
 }
-
