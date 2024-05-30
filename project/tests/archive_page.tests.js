@@ -1,8 +1,14 @@
 // Import the functions from your main script
 const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } = require('../archivePage/archive_page');
 
-function setLocalStorage() {
-  localStorage.setItem;
+// Function to set localStorage with given key and value
+function setLocalStorage(key, value) {
+  const mockSetItem = jest.fn();
+  const mockGetItem = jest.fn().mockReturnValueOnce(value);
+  localStorage = {
+    getItem: mockGetItem,
+    setItem: mockSetItem,
+  };
 }
 
 describe('Populate Project List', () => {
@@ -14,11 +20,11 @@ describe('Populate Project List', () => {
       // Add more sample project data as needed
     };
 
-    // Mock localStorage
-    const mockGetItem = jest.fn().mockReturnValueOnce(JSON.stringify(projectData));
-    global.localStorage = {
-      getItem: mockGetItem
-    };
+    // Set localStorage with mock project data
+    setLocalStorage('projectData', JSON.stringify(projectData));
+
+    // Mock document methods
+    document.body.innerHTML = '<ul class="ProjectList"></ul>';
 
     // Call the function
     populateProjectList(1);
@@ -32,32 +38,36 @@ describe('Populate Project List', () => {
 describe('Move to Previous Page', () => {
   it('should move to the previous page correctly', () => {
     // Mock sessionStorage
+    const mockSetItem = jest.fn();
     const mockGetItem = jest.fn().mockReturnValueOnce('2');
     global.sessionStorage = {
-      getItem: mockGetItem
+      getItem: mockGetItem,
+      setItem: mockSetItem,
     };
 
     // Call the function
     moveToPreviousPage();
 
     // Expectations
-    expect(sessionStorage.getItem('currentPage')).toBe('1');
+    expect(global.sessionStorage.setItem).toHaveBeenCalledWith('currentPage', '1');
   });
 });
 
 describe('Move to Next Page', () => {
   it('should move to the next page correctly', () => {
     // Mock sessionStorage
+    const mockSetItem = jest.fn();
     const mockGetItem = jest.fn().mockReturnValueOnce('1');
     global.sessionStorage = {
-      getItem: mockGetItem
+      getItem: mockGetItem,
+      setItem: mockSetItem,
     };
 
     // Call the function
     moveToNextPage();
 
     // Expectations
-    expect(sessionStorage.getItem('currentPage')).toBe('2');
+    expect(global.sessionStorage.setItem).toHaveBeenCalledWith('currentPage', '2');
   });
 });
 
@@ -70,14 +80,18 @@ describe('Search Functionality', () => {
       // Add more sample project data as needed
     };
 
-    // Mock localStorage
-    const mockGetItem = jest.fn().mockReturnValueOnce(JSON.stringify(projectData));
-    global.localStorage = {
-      getItem: mockGetItem
-    };
+    // Set localStorage with mock project data
+    setLocalStorage('projectData', JSON.stringify(projectData));
+
+    // Mock document methods
+    document.body.innerHTML = '<ul class="ProjectList"></ul><input class="search" />';
+
+    // Set input value
+    const searchInput = document.querySelector('.search');
+    searchInput.value = 'Project 1';
 
     // Call the function
-    handleSearch('Project 1');
+    handleSearch();
 
     // Expectations
     const projectListItems = document.querySelectorAll('.ProjectList li');
