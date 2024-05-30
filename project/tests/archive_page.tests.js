@@ -1,120 +1,81 @@
 // Import the functions from your main script
 const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } = require('../archivePage/archive_page');
 
-// Mock the global window object
-global.window = {
-  location: {
-    href: ''
-  }
-};
-
-// Mock the document object
-global.document = {
-  addEventListener: jest.fn(), // Mock addEventListener method
-  querySelectorAll: jest.fn((selector) => {
-    if (selector === '.ProjectList li') {
-      // Mock project list items
-      return [{}, {}]; // Mocking two project list items
-    }
-  }),
-  createElement: jest.fn((tagName) => {
-    if (tagName === 'button') {
-      // Mock delete button
-      return {
-        className: '',
-        click: jest.fn()
-      };
-    } else if (tagName === 'li') {
-      // Mock project item
-      return {
-        className: '',
-        click: jest.fn()
-      };
-    }
-  })
-};
-
-// Mock localStorage and sessionStorage before each test
-beforeEach(() => {
-  global.localStorage = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    clear: jest.fn()
-  };
-
-  global.sessionStorage = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    clear: jest.fn()
-  };
-});
-
-// Describe the test suite
-describe('Project Management System Tests', () => {
-  // Test if all archived projects are correctly loaded
-  test('All archived projects are correctly loaded', () => {
+describe('Populate Project List', () => {
+  it('should populate the project list correctly', () => {
+    // Mock project data
     const projectData = {
       project_1: { projectName: 'Project 1', active: true },
       project_2: { projectName: 'Project 2', active: true }
       // Add more sample project data as needed
     };
 
-    global.localStorage.getItem.mockReturnValue(JSON.stringify(projectData));
+    // Mock localStorage
+    const mockGetItem = jest.fn().mockReturnValueOnce(JSON.stringify(projectData));
+    global.localStorage = {
+      getItem: mockGetItem
+    };
 
-    // Populate project list
+    // Call the function
     populateProjectList(1);
 
-    // Expect all archived projects to be present in the project list
+    // Expectations
     const projectListItems = document.querySelectorAll('.ProjectList li');
     expect(projectListItems.length).toBe(Object.keys(projectData).length);
   });
+});
 
-  // Test if page back works correctly
-  test('Page back works correctly', () => {
-    // Set current page to 2
-    sessionStorage.setItem('currentPage', '2');
+describe('Move to Previous Page', () => {
+  it('should move to the previous page correctly', () => {
+    // Mock sessionStorage
+    const mockGetItem = jest.fn().mockReturnValueOnce('2');
+    global.sessionStorage = {
+      getItem: mockGetItem
+    };
 
-    // Simulate clicking page back button
+    // Call the function
     moveToPreviousPage();
 
-    // Expect current page to be 1
+    // Expectations
     expect(sessionStorage.getItem('currentPage')).toBe('1');
   });
+});
 
-  // Test if page next works correctly
-  test('Page next works correctly', () => {
-    // Set current page to 1
-    sessionStorage.setItem('currentPage', '1');
+describe('Move to Next Page', () => {
+  it('should move to the next page correctly', () => {
+    // Mock sessionStorage
+    const mockGetItem = jest.fn().mockReturnValueOnce('1');
+    global.sessionStorage = {
+      getItem: mockGetItem
+    };
 
-    // Simulate clicking page next button
+    // Call the function
     moveToNextPage();
 
-    // Expect current page to be 2
+    // Expectations
     expect(sessionStorage.getItem('currentPage')).toBe('2');
   });
+});
 
-  // Test if search works correctly
-  test('Search works correctly', () => {
+describe('Search Functionality', () => {
+  it('should search for projects correctly', () => {
+    // Mock project data
     const projectData = {
       project_1: { projectName: 'Project 1', active: true },
       project_2: { projectName: 'Project 2', active: true }
       // Add more sample project data as needed
     };
 
-    global.localStorage.getItem.mockReturnValue(JSON.stringify(projectData));
+    // Mock localStorage
+    const mockGetItem = jest.fn().mockReturnValueOnce(JSON.stringify(projectData));
+    global.localStorage = {
+      getItem: mockGetItem
+    };
 
-    // Populate project list
-    populateProjectList(1);
+    // Call the function
+    handleSearch('Project 1');
 
-    // Simulate entering search query
-    const searchInput = document.querySelector('.Search');
-    searchInput.value = 'Project 1';
-
-    // Trigger keypress event to simulate search
-    const event = new KeyboardEvent('keypress', { key: 'Enter' });
-    searchInput.dispatchEvent(event);
-
-    // Expect only one project to be displayed
+    // Expectations
     const projectListItems = document.querySelectorAll('.ProjectList li');
     expect(projectListItems.length).toBe(1);
     expect(projectListItems[0].textContent).toContain('Project 1');
