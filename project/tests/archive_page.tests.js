@@ -1,27 +1,9 @@
-// Import functions from archive_page.js
-const {
-  populateProjectList,  
-  moveToPreviousPage,   
-  moveToNextPage,       
-  handleSearch,
-} = require('../archivePage/archive_page');
+// Import the functions from your main script
+const { populateProjectList, moveToPreviousPage, moveToNextPage, handleSearch } = require('../archivePage/archive_page');
 
-// Mock DOM manipulation
+// Mock the document object
 global.document = {
-  body: {
-    innerHTML: `
-      <div class="ArchivePageHeaderDiv">
-        <input type="search" class="Search" placeholder="Type to search...">
-      </div>
-      <div class="ArchiveProjectListDiv">
-        <ul class="ProjectList"></ul>
-      </div>
-      <div class="ArchivePageBtns">
-        <button class="pageBackBtn">Page Back</button>
-        <button class="pageNextBtn">Next Page</button>
-      </div>
-    `
-  },
+  addEventListener: jest.fn(), // Mock addEventListener method
   querySelectorAll: jest.fn((selector) => {
     if (selector === '.ProjectList li') {
       // Mock project list items
