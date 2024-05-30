@@ -14,8 +14,7 @@ body {
     background: white; 
     color: #333; 
     line-height: 1.5; 
-    padding: 20px;  /* padding-top: 0 for top menu*/
-
+    padding: 20px;  /* padding-top: 0 for top menu */
     min-height: 100%; /* Full viewpoint height */
     display: flex;
     flex-direction: column;
@@ -81,18 +80,22 @@ input[type="text"], input[type="email"], textarea {
 .radio-container input[type="radio"]:checked + label#face1 img {
     filter: drop-shadow(0 0 15px #E23442); /* red glowing effect */
 }
+
 /* Orange face clicked */
 .radio-container input[type="radio"]:checked + label#face2 img {
     filter: drop-shadow(0 0 15px #F75532); /* orange glowing effect */
 }
+
 /* Yellow face clicked */
 .radio-container input[type="radio"]:checked + label#face3 img {
     filter: drop-shadow(0 0 15px #FCB040); /* yellow glowing effect */
 }
+
 /* Light Green face clicked */
 .radio-container input[type="radio"]:checked + label#face4 img {
     filter: drop-shadow(0 0 15px #92CA61); /* light green glowing effect */
 }
+
 /* Green face clicked */
 .radio-container input[type="radio"]:checked + label#face5 img {
     filter: drop-shadow(0 0 15px #3AB74A); /* green glowing effect */
@@ -132,10 +135,11 @@ input[type="text"], input[type="email"], textarea {
 }
 
 /* ------------------------------------ Responsive Web ------------------------------------ */
+
 /* Smartphones */
-@media only screen and (max-width: 730px) {
+@media only screen and (width <= 730px) {
     header, footer {
-        padding: 10px 10px; /* 10px 20px -> 10px 10px */
+        padding: 10px; 
         border-radius: 10px; /* rectangular border -> rounded border */
     }
 
@@ -164,7 +168,7 @@ input[type="text"], input[type="email"], textarea {
     }
 
     fieldset {
-        margin: 10px 0; /* 20px 0 -> 10px 0*/
+        margin: 10px 0; /* 20px 0 -> 10px 0 */
         border-radius: 10px; /* rectangular border -> rounded border */
         padding: 15px; /* 20px -> 15px */
     }
@@ -181,15 +185,19 @@ input[type="text"], input[type="email"], textarea {
     .radio-container input[type="radio"]:checked + label#face1 img {
         filter: drop-shadow(0 0 8px #E23442);
     }
+
     .radio-container input[type="radio"]:checked + label#face2 img {
         filter: drop-shadow(0 0 8px #F75532);
     }
+
     .radio-container input[type="radio"]:checked + label#face3 img {
         filter: drop-shadow(0 0 8px #FCB040);
     }
+
     .radio-container input[type="radio"]:checked + label#face4 img {
         filter: drop-shadow(0 0 8px #92CA61);
     }
+
     .radio-container input[type="radio"]:checked + label#face5 img {
         filter: drop-shadow(0 0 8px #3AB74A);
     }
@@ -200,9 +208,9 @@ input[type="text"], input[type="email"], textarea {
 }
 
 /* Tablets */
-@media only screen and (min-width: 731px) and (max-width: 1024px) {
+@media only screen and (731px <= width <= 1024px) {
     header, footer {
-        padding: 15px 15px; /* 10px 20px -> 15px 15px */
+        padding: 15px; 
     }
 
     header h1 {
@@ -229,14 +237,15 @@ input[type="text"], input[type="email"], textarea {
         font-size: 11px; /* 10px -> 11px */
     }
 }
+
 /* Laptops, Desktops, Larger Screens 1025 - */
-@media only screen and (min-width: 1025px) {
+@media only screen and (width <= 1025px) {
     .top-menu ul li a {
         font-size: 14px; /* 13px -> 14px */
     }
 
     header {
-        padding: 20px 20px; /* 10px 20px -> 20px 20px */
+        padding: 20px; /* 10px 20px -> 20px 20px */
     }
 
     footer {
