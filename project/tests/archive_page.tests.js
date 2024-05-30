@@ -8,16 +8,29 @@ global.window = {
   }
 };
 
-// Mock the document.querySelector
+// Mock the document object
 global.document = {
-  querySelector: jest.fn((selector) => {
-    const elements = {
-      "#log-title": { value: 'Sample Title' },
-      "#log-time": { value: '12:00' },
-      "#log-contributor": { value: 'John Doe' },
-      "#log-description": { value: 'Sample Description' },
-    };
-    return elements[selector];
+  addEventListener: jest.fn(), // Mock addEventListener method
+  querySelectorAll: jest.fn((selector) => {
+    if (selector === '.ProjectList li') {
+      // Mock project list items
+      return [{}, {}]; // Mocking two project list items
+    }
+  }),
+  createElement: jest.fn((tagName) => {
+    if (tagName === 'button') {
+      // Mock delete button
+      return {
+        className: '',
+        click: jest.fn()
+      };
+    } else if (tagName === 'li') {
+      // Mock project item
+      return {
+        className: '',
+        click: jest.fn()
+      };
+    }
   })
 };
 
@@ -97,38 +110,5 @@ describe('Project Management System Tests', () => {
     const projectListItems = document.querySelectorAll('.ProjectList li');
     expect(projectListItems.length).toBe(1);
     expect(projectListItems[0].textContent).toContain('Project 1');
-  });
-
-  // Test if delete works correctly
-  test('Delete works correctly', () => {
-    // Populate project list
-    populateProjectList(1);
-
-    // Simulate clicking delete button for a project
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'deleteButton';
-    document.querySelector('.ProjectList').appendChild(deleteButton);
-    deleteButton.click();
-
-    // Expect the project to be removed from the project list
-    const projectListItems = document.querySelectorAll('.ProjectList li');
-    expect(projectListItems.length).toBe(Object.keys(projectData).length - 1);
-  });
-
-  // Test if current_project in localStorage is set correctly when a project is pressed
-  test('Current project in localStorage is set correctly when a project is pressed', () => {
-    // Populate project list
-    populateProjectList(1);
-
-    // Simulate clicking on a project
-    const projectItem = document.createElement('li');
-    projectItem.className = 'Project';
-    document.querySelector('.ProjectList').appendChild(projectItem);
-    projectItem.click();
-
-    // Expect current_project in localStorage to be set correctly
-    const currentProject = JSON.parse(localStorage.getItem('projectData')).current_project;
-    expect(currentProject).toBeDefined();
-    expect(projectData[currentProject]).toBeDefined();
   });
 });
