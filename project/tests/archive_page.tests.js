@@ -7,18 +7,53 @@ const {
 } = require('../archivePage/archive_page');
 
 // Mock DOM manipulation
-document.body.innerHTML = `
-  <div class="ArchivePageHeaderDiv">
-    <input type="search" class="Search" placeholder="Type to search...">
-  </div>
-  <div class="ArchiveProjectListDiv">
-    <ul class="ProjectList"></ul>
-  </div>
-  <div class="ArchivePageBtns">
-    <button class="pageBackBtn">Page Back</button>
-    <button class="pageNextBtn">Next Page</button>
-  </div>
-`;
+global.document = {
+  body: {
+    innerHTML: `
+      <div class="ArchivePageHeaderDiv">
+        <input type="search" class="Search" placeholder="Type to search...">
+      </div>
+      <div class="ArchiveProjectListDiv">
+        <ul class="ProjectList"></ul>
+      </div>
+      <div class="ArchivePageBtns">
+        <button class="pageBackBtn">Page Back</button>
+        <button class="pageNextBtn">Next Page</button>
+      </div>
+    `
+  },
+  querySelectorAll: jest.fn((selector) => {
+    if (selector === '.ProjectList li') {
+      // Mock project list items
+      return [{}, {}]; // Mocking two project list items
+    }
+  }),
+  querySelector: jest.fn((selector) => {
+    if (selector === '.Search') {
+      // Mock search input element
+      return {
+        value: '', // Mock initial value
+        addEventListener: jest.fn(), // Mock addEventListener method
+        dispatchEvent: jest.fn() // Mock dispatchEvent method
+      };
+    }
+  }),
+  createElement: jest.fn((tagName) => {
+    if (tagName === 'button') {
+      // Mock delete button
+      return {
+        className: '',
+        click: jest.fn()
+      };
+    } else if (tagName === 'li') {
+      // Mock project item
+      return {
+        className: '',
+        click: jest.fn()
+      };
+    }
+  })
+};
 
 // Describe the test suite
 describe('Project Management System Tests', () => {
