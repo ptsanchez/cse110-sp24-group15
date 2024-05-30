@@ -1,10 +1,10 @@
 // Import functions from archive_page.js
-import {
+const {
   populateProjectList,  
   moveToPreviousPage,   
   moveToNextPage,       
   handleSearch,
-} from '../archivePage/archive_page';
+} = require('../archivePage/archive_page');
 
 // Mock DOM manipulation
 document.body.innerHTML = `
