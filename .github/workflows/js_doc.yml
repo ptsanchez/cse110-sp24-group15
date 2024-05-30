@@ -37,6 +37,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.GH_TOKEN }}
           commit-message: Generated JSDocs
           branch: jsdocs-update
           title: "[AUTO] Generated JSDocs"
