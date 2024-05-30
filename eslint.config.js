@@ -1,4 +1,5 @@
-export default [
+// eslint.config.js
+module.exports = [
     {
       files: ["projects/**/*.js", "projects/**/*.html"],
       languageOptions: {
@@ -12,4 +13,5 @@ export default [
       },
     },
   ];
+  
   
