@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             element.focus();
         }
-        element.parentElement.classList.toggle('editing', !isEditing);
+        const isNowEditing = !isEditing;
+        element.parentElement.classList.toggle('editing', isNowEditing);
     };
 
     const saveChanges = (element, btn, type) => {
@@ -41,14 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
             projectData.project_data[currentProjectKey].TodoList = element.innerText;
         } else if (type === 'branch') {
             let link = element.innerText.trim();
-            if (!link.startsWith('http://') && !link.startsWith('https://')) {
+            const hasHttp = link.startsWith('http://');
+            const hasHttps = link.startsWith('https://');
+            if (!hasHttp && !hasHttps) {
                 link = 'https://' + link;
             }
             projectData.project_data[currentProjectKey].BranchLink = link;
-            document.querySelector('.project-branch-link').href = link;
+            const branchLinkElement = document.querySelector('.project-branch-link');
+            branchLinkElement.href = link;
         }
         localStorage.setItem('projectData', JSON.stringify(projectData));
-        element.parentElement.classList.add('saved');
+        const parentElement = element.parentElement;
+        parentElement.classList.add('saved');
         showSaveConfirmation(btn);
     };
 
@@ -59,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = "<i class='bx bx-edit'></i>";
             btn.classList.remove('check');
             btn.classList.add('edit');
-            btn.parentElement.classList.remove('saved');
+            const parentElement = btn.parentElement;
+            parentElement.classList.remove('saved');
         }, 2000);
     };
 
@@ -68,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const tempDiv = document.createElement('div');
         text.split('\n').forEach(line => {
             let match;
-            if ((match = line.match(/^ {3}- \[ \] (.+)/))) {
+            match = line.match(/^ {3}- \[ \] (.+)/);
+            if (match) {
                 const div = document.createElement('div');
                 div.classList.add('indent');
                 const checkbox = document.createElement('input');
@@ -77,37 +84,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(checkbox);
                 div.appendChild(document.createTextNode(` ${match[1]}`));
                 tempDiv.appendChild(div);
-            } else if ((match = line.match(/^ {3}- \[x\] (.+)/i))) {
-                const div = document.createElement('div');
-                div.classList.add('indent');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = true;
-                checkbox.disabled = true;
-                div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
-                tempDiv.appendChild(div);
-            } else if ((match = line.match(/^- \[ \] (.+)/))) {
-                const div = document.createElement('div');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.disabled = true;
-                div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
-                tempDiv.appendChild(div);
-            } else if ((match = line.match(/^- \[x\] (.+)/i))) {
-                const div = document.createElement('div');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = true;
-                checkbox.disabled = true;
-                div.appendChild(checkbox);
-                div.appendChild(document.createTextNode(` ${match[1]}`));
-                tempDiv.appendChild(div);
-            } else {
-                tempDiv.appendChild(document.createTextNode(line));
-                tempDiv.appendChild(document.createElement('br'));
+                return;
             }
+            match = line.match(/^ {3}- \[x\] (.+)/i);
+            if (match) {
+                const div = document.createElement('div');
+                div.classList.add('indent');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = true;
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+                return;
+            }
+            match = line.match(/^- \[ \] (.+)/);
+            if (match) {
+                const div = document.createElement('div');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+                return;
+            }
+            match = line.match(/^- \[x\] (.+)/i);
+            if (match) {
+                const div = document.createElement('div');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = true;
+                checkbox.disabled = true;
+                div.appendChild(checkbox);
+                div.appendChild(document.createTextNode(` ${match[1]}`));
+                tempDiv.appendChild(div);
+                return;
+            }
+            tempDiv.appendChild(document.createTextNode(line));
+            tempDiv.appendChild(document.createElement('br'));
         });
         element.innerHTML = '';
         element.appendChild(tempDiv);
@@ -155,7 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const setDefaultText = (selector, defaultText) => {
         const element = document.querySelector(selector);
-        if (!element.textContent.trim() || element.textContent === '[object Object]' || element.textContent === '{}') {
+        const elementText = element.textContent.trim();
+        const isDefaultRequired = !elementText || elementText === '[object Object]' || elementText === '{}';
+        if (isDefaultRequired) {
             element.textContent = defaultText;
         }
     };
