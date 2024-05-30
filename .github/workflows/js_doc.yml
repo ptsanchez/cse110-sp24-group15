@@ -1,44 +1,19 @@
-name: Jsdocs
+name: JS Doc Action Example # name of the test
 
-on:
-  push:
-    branches:
-      - main
+on: [push] # the Github Action will activate "on" the event that you "push" to the repo
 
-jobs:
-  tests:
-    runs-on: ubuntu-latest
+jobs: # the things being executed
+  tests: # the name of your status check, will become important when you do branch protection
+    runs-on: ubuntu-latest # which device on Github's server that you are running the Actions on
     steps:
-      - uses: actions/checkout@v4
-      
+      - uses: actions/checkout@v4 # using version 4 of Actions
       - name: Install Dependencies
         run: npm install
-
-      - name: Install JSDoc
-        run: npm install -g jsdoc
-
-      - name: Build JSDoc for Project
-        run: jsdoc ./project -d ./docs
-
-      - name: Set up Git
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Commit and Push Changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-        run: |
-          git add .
-          git commit -m "Update JSDoc documentation"
-          git push --force-with-lease origin HEAD:update-jsdoc
-          
-      - name: Create Pull Request for update JSDoc
-        uses: peter-evans/create-pull-request@v3
+      - run: npm install jest
+      - run: npm install jsdoc --save-dev
+      - name: JS Docs Action
+        uses: andstor/jsdoc-action@v1
         with:
-          token: ${{ secrets.PAT }}
-          branch: update-jsdoc
-          title: Update JSDoc documentation
-          body: |
-            This pull request updates the JSDoc documentation.
-          commit-message: Update JSDoc documentation
+          source_dir: project # source directory
+          recurse: true
+          output_dir: docs
