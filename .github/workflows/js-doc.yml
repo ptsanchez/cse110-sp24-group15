@@ -1,0 +1,22 @@
+name: JSDoc Generation
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs: 
+  tests: 
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
+      - run: npm install jest
+      - run: npm install jsdoc --save-dev
+      - name: JS Docs Action
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: project
+          recurse: true
+          output_dir: docs
