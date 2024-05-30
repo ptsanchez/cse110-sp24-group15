@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 html {
@@ -14,7 +14,7 @@ body {
     background: white; 
     color: #333; 
     line-height: 1.5; 
-    padding: 20px 20px 20px 20px;  /* padding-top: 0 for top menu*/
+    padding: 20px;  /* padding-top: 0 for top menu*/
 
     min-height: 100%; /* Full viewpoint height */
     display: flex;
@@ -99,7 +99,7 @@ input[type="text"], input[type="email"], textarea {
 }
 
 /* --- Submit Button --- */
-.submitBtn {
+.submit-btn {
     background: #39e75f; 
     color: black;
     border: none; 
@@ -108,13 +108,13 @@ input[type="text"], input[type="email"], textarea {
 }
 
 /* Button hovered */
-.submitBtn:hover {
+.submit-btn:hover {
     background: #00c04b; 
 }
 
 
 /* --- Cancel Button --- */
-.cancelBtn {
+.cancel-btn {
     background: red; 
     color: black;
     border: none; 
@@ -123,11 +123,11 @@ input[type="text"], input[type="email"], textarea {
 }
 
 /* Button hovered */
-.cancelBtn:hover {
+.cancel-btn:hover {
     background: #c30010; 
 }
 
-.feedbackHeader {
+.feedback-header {
     font-size: 30px;
 }
 

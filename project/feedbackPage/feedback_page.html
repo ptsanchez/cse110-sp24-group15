@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <script src="feedback_page.js"></script>
     <link rel="stylesheet" href="feedback_page.css">
     <!-- Add any additional stylesheets or meta tags here -->
 </head>
 <body>
-
+    <script src="feedback_page.js"></script>
     <!-- Main -->
     <main>
-        <div class="sentimentWidget">
-            <form action="../successPage/success_page.html" methods="POST">
+        <div class="sentiment-widget">
+            <form onsubmit="makeSubmission(event)">
                 <fieldset>
-                    <legend class="feedbackHeader">Give Us Feedback About our Developer Journal</legend>
+                    <legend class="feedback-header">Give Us Feedback About our Developer Journal</legend>
                     <label for ="name">Name:</label>
                     <input type="text" id="name" required>
                     <!-- BR is Creating a Space -->
@@ -59,8 +58,8 @@
                     <br>
                     
                     <div class="feedbackBtns">
-                        <button class="submitBtn" onclick="makeSubmission()">Submit</button>
-                        <button class="cancelBtn" value="ignore" formnovalidate>Cancel</button>
+                        <button class="submit-btn" type="submit">Submit</button>
+                        <button class="cancel-btn" type="button" onclick="cancelSubmission()">Cancel</button>
                     </div>
 
                 </fieldset>

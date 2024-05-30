@@ -16,13 +16,12 @@ function Submission(name, email, feedback, satisfaction) {
     this.date = sDate;
 }
 
-// Global array to store the submissions
-var submissions = [];
-
 /**
  * Function to handle submission.
  */
-function makeSubmission() {
+function makeSubmission(event) {
+    event.preventDefault(); // Prevent form submission
+
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var feedback = document.getElementById("feedback").value;
@@ -40,14 +39,27 @@ function makeSubmission() {
 
     // Create Submission Object
     var submission = new Submission(name, email, feedback, satLevels);
-    
-    // Log the submission object
-    console.log("Submission: ", submission); 
 
-    // Store the submission in the global submissions array
+    // Retrieve existing submissions from localStorage
+    var submissions = JSON.parse(localStorage.getItem('feedback_submissions')) || [];
+
+    // Add the new submission to the array
     submissions.push(submission);
+
+    // Save the updated submissions array back to localStorage
+    localStorage.setItem('feedback_submissions', JSON.stringify(submissions));
+
+    alert('Thank you for your feedback!');
+
+    // Redirect to success page
+    window.location.href = "../successPage/success_page.html";
 }
 
-function canelSubmission() {
-    window.open("../homePage/home_page.html");
+function cancelSubmission() {
+    window.location.href = "../homePage/home_page.html";
+}
+
+// Export functions for testing in Node.js environment
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { makeSubmission };
 }
