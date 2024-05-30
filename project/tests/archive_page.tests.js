@@ -8,19 +8,6 @@ global.window = {
   }
 };
 
-// Mock localStorage and sessionStorage
-global.localStorage = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn()
-};
-
-global.sessionStorage = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn()
-};
-
 // Mock the document object
 global.document = {
   addEventListener: jest.fn(), // Mock addEventListener method
@@ -49,31 +36,31 @@ global.document = {
 
 // Describe the test suite
 describe('Project Management System Tests', () => {
-  let projectData;
-
   // Mock localStorage and sessionStorage
-  beforeEach(() => {
-    projectData = {
-      project_1: { projectName: 'Project 1', active: true },
-      project_2: { projectName: 'Project 2', active: true },
-      // Add more sample project data as needed
-    };
-
+  beforeAll(() => {
     global.localStorage = {
-      getItem: jest.fn(() => JSON.stringify(projectData)),
+      getItem: jest.fn(),
       setItem: jest.fn(),
-      clear: jest.fn(),
+      clear: jest.fn()
     };
 
     global.sessionStorage = {
-      getItem: jest.fn(() => null),
+      getItem: jest.fn(),
       setItem: jest.fn(),
-      clear: jest.fn(),
+      clear: jest.fn()
     };
   });
 
   // Test if all archived projects are correctly loaded
   test('All archived projects are correctly loaded', () => {
+    const projectData = {
+      project_1: { projectName: 'Project 1', active: true },
+      project_2: { projectName: 'Project 2', active: true }
+      // Add more sample project data as needed
+    };
+
+    global.localStorage.getItem.mockReturnValue(JSON.stringify(projectData));
+
     // Populate project list
     populateProjectList(1);
 
@@ -108,6 +95,14 @@ describe('Project Management System Tests', () => {
 
   // Test if search works correctly
   test('Search works correctly', () => {
+    const projectData = {
+      project_1: { projectName: 'Project 1', active: true },
+      project_2: { projectName: 'Project 2', active: true }
+      // Add more sample project data as needed
+    };
+
+    global.localStorage.getItem.mockReturnValue(JSON.stringify(projectData));
+
     // Populate project list
     populateProjectList(1);
 
