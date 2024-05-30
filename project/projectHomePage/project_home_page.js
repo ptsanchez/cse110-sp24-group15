@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let projectData = JSON.parse(localStorage.getItem('projectData'));
-    let currentProjectKey = projectData?.current_project;
+    const projectData = JSON.parse(localStorage.getItem('projectData')) || {};
+    const currentProjectKey = projectData.current_project;
 
     const getTextOrDefault = (value, defaultText) => {
         if (typeof value === 'string' && value.trim()) {
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 link = 'https://' + link;
             }
             projectData.project_data[currentProjectKey].BranchLink = link;
-            // Update href attribute immediately
             document.querySelector('.project-branch-link').href = link;
         }
         localStorage.setItem('projectData', JSON.stringify(projectData));
@@ -84,13 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (currentProjectKey && projectData.project_data[currentProjectKey]) {
-        let currentProject = projectData.project_data[currentProjectKey];
+        const currentProject = projectData.project_data[currentProjectKey];
 
         document.querySelector('.project-text').innerText = currentProject.projectName || 'PROJECT NAME';
         document.querySelector('.project-todo-list').innerText = getTextOrDefault(currentProject.TodoList, 'TODO LIST (Each task with a progress bar and link to a github issue)');
         document.querySelector('.project-branch-link').innerText = currentProject.BranchLink || 'Link to Branch/Workspace';
         document.querySelector('.project-branch-link').href = currentProject.BranchLink || '#';
-        document.querySelector('.project-branch-link').target = '_blank'; // Open link in new tab
+        document.querySelector('.project-branch-link').target = '_blank';
         document.querySelector('.project-detail-div').innerText = currentProject.projectDescription || 'Project Details, Members (add hover feature/description)';
 
         renderMarkup(document.querySelector('.project-todo-list'));
@@ -109,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.project-todo-list').innerText = 'TODO LIST (Each task with a progress bar and link to a github issue)';
         document.querySelector('.project-branch-link').innerText = 'Link to Branch/Workspace';
         document.querySelector('.project-branch-link').href = '#';
-        document.querySelector('.project-branch-link').target = '_blank'; // Open link in new tab
+        document.querySelector('.project-branch-link').target = '_blank';
         document.querySelector('.project-detail-div').innerText = 'Project Details, Members (add hover feature/description)';
     }
 

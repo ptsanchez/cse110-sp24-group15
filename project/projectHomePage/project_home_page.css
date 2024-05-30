@@ -1,5 +1,3 @@
-/* project_home_page.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -45,9 +43,9 @@ body {
 .project-branch-link {
     color: #fff;
     font-size: 16px;
-    white-space: pre-wrap; 
+    white-space: pre-wrap;
     overflow-wrap: break-word;
-    outline: none; 
+    outline: none;
 }
 
 .project-branch-link {
@@ -94,7 +92,7 @@ body {
     background: none;
     font-size: 24px;
     cursor: pointer;
-    color: #fff; 
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,11 +101,11 @@ body {
 }
 
 .edit-btn.save {
-    color: #ff9f43; 
+    color: #ff9f43;
 }
 
 .edit-btn.check {
-    color: #00b894; 
+    color: #00b894;
     animation: pop-up 0.5s ease;
 }
 
@@ -130,17 +128,15 @@ body {
 
 .editing .project-todo-list,
 .editing .project-branch-link {
-    color: black; 
+    color: black;
 }
 
-/* New styles for markup */
 .project-todo-list div {
     margin-left: 0;
 }
 
 .project-todo-list .indent {
-    margin-left: 1.5em; 
-    /* Indent by 3 spaces (0.5em each) */
+    margin-left: 1.5em;
 }
 
 input[type="checkbox"] {
