@@ -92,6 +92,12 @@ footer {
     width: 100%;
 }
 
+footer p {
+    margin-top: 1.25rem;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+}
+
 .feedback-section {
     text-align: center;
     padding: 1.25rem;
@@ -127,11 +133,5 @@ footer {
     background-color: var(--feedback-button-bg-hover);
     box-shadow: 0 4px 6px rgba(0 0 0 / 20%);
     transform: scale(1.05);
-}
-
-footer p {
-    margin-top: 1.25rem;
-    font-size: var(--small-font-size);
-    color: var(--text-color);
 }
 
