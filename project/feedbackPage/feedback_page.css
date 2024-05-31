@@ -147,6 +147,7 @@ input[type="text"], input[type="email"], textarea {
         padding: 0.5rem; /* 0.5rem 1rem -> 0.5rem 0.5rem */
         width: 70%; /* X -> 70% */
         margin: 0 auto; /* X -> 0 auto; to make left/right margin equal */
+        font-size: 18px;
     }
 
     .top-menu ul li a {
@@ -159,9 +160,6 @@ input[type="text"], input[type="email"], textarea {
         margin-bottom: 10px; /* X -> 10px */
     }
 
-    fieldset, label, nav ul li a {
-        font-size: 15px;
-    }
 
     legend {
         font-size: 25px;
@@ -261,7 +259,7 @@ input[type="text"], input[type="email"], textarea {
         margin-top: 30px; /* 20px -> 30px */
     }
 
-    fieldset legend, label, nav ul li a {
+    fieldset legend, label {
         font-size: 18px;
     }
 }
