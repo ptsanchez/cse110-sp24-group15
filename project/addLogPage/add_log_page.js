@@ -32,29 +32,17 @@ function makeSubmission() {
   if (validateForm(log_title, log_time, log_contributors, log_description)) {
     // Parse the project data from localStorage
     let proj_data = JSON.parse(localStorage.getItem("project_data"));
-    let current_project = proj_data?.current_project; // Get the current project identifier
+    const current_project = proj_data["current_project"]; // Get the current project identifier
+    let projects = proj_data["project_data"][String(current_project)]; // Get the current project data
+    let logs = projects["logs"]; // Get the logs array
 
-    if (!proj_data || !current_project) {
-      alert("Project data is missing or corrupted.");
-      return;
+    // If logs is not an array, convert it to an array
+    if (!Array.isArray(logs)) {
+      logs = Object.values(logs);
     }
-
-    let projects = proj_data.project_data?.[current_project]; // Get the current project data
-
-    if (!projects) {
-      alert("Current project data is missing or corrupted.");
-      return;
-    }
-
-    let logs = Array.isArray(projects.logs) ? projects.logs : [];
 
     // Split the current date into an array of [Month, Day, Year]
-    let curr_date = proj_data.current_date?.split("/");
-    
-    if (!Array.isArray(curr_date) || curr_date.length !== 3) {
-      alert("Current date is missing or formatted incorrectly.");
-      return;
-    }
+    let curr_date = proj_data["current_date"].split("/");
 
     // Create a new log entry
     let new_log = {
@@ -71,10 +59,11 @@ function makeSubmission() {
     logs.push(new_log);
 
     // Update the projects object with the new logs array
-    projects.logs = logs;
+    projects["logs"] = logs;
+
 
     // Update the project data in localStorage
-    proj_data.project_data[current_project] = projects;
+    proj_data["project_data"][String(current_project)] = projects;
     localStorage.setItem("project_data", JSON.stringify(proj_data));
 
     // Redirect the user to the day page after submission
@@ -89,4 +78,4 @@ function cancelSubmission() {
   window.location.href = escape("../dayPage/day_page.html"); // Redirect to the day page
 }
 
-module.exports = { validateForm, makeSubmission, cancelSubmission };
+module.exports = {validateForm, makeSubmission, cancelSubmission};
