@@ -40,9 +40,10 @@ window.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.day-column').forEach((column, index) => {
             // column.innerHTML = `<div class="date-display">${formatDate(weekDates[index])}</div>`;
             const dateDiv = document.createElement('div');
-                dateDiv.classList.add('date-display');
-                dateDiv.appendChild(document.createTextNode(formatDate(weekDates[index])));
-                column.appendChild(dateDiv);
+            dateDiv.classList.add('date-display');
+            const date = formatDate(weekDates[index]);
+            dateDiv.appendChild(document.createTextNode(date));
+            column.appendChild(dateDiv);
 
             column.dataset.date = weekDates[index].toISOString().split('T')[0];
         });
