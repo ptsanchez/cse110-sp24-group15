@@ -1,23 +1,19 @@
-/*=============== VARIABLES CSS ===============*/
+/* =============== VARIABLES CSS =============== */
 :root {
-    /*========== Colors ==========*/
-    /* initial button color */
-    --primary-color: #a09c9a;
-    /* button hover, feedback section color */
-    --secondary-color: #7a7269; 
-    /* header color */
-    --theme-color: #d1cfcf; 
+    /* ========== Colors ========== */
+    --primary-color: #a09c9a; /* initial button color */
+    --secondary-color: #7a7269; /* button hover, feedback section color */ 
+    --theme-color: #d1cfcf; /* header color */
     --background-color: #f8f9fa; 
     --text-color: #333;
     --text-light-color: #666;
     --text-lighter-color: #d5d5d5;
     --text-white-color: #fff;
-
     --feedback-button-bg: #28a745;
     --feedback-button-bg-hover: #218838;
 
-    /*========== Font ==========*/
-    --main-font:'Helvetica Neue', Arial, sans-serif;
+    /* ========== Font ========== */
+    --main-font:'Helvetica Neue', arial, sans-serif;
     --header-font-size: 3.5rem;
     --biggest-font-size: 2.75rem;
     --h1-font-size: 2rem;
@@ -42,19 +38,17 @@ body {
     background-color: var(--background-color);
 }
 
-/*========== Header ==========*/
+/* ========== Header ========== */
 header {
+    border-bottom: 2px solid #e0e0e0;
     background-color: var(--theme-color);
+    color: var(--text-color);
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    
-    color: var(--text-color);
-
-    border-bottom: 2px solid #e0e0e0;
 }
 
 .header-title {
@@ -81,12 +75,12 @@ header {
     transform: scale(1.05);
 }
 
-/*========== Footer ==========*/
+/* ========== Footer ========== */
 footer {
-    background-color: var(--theme-color);
     border-top: 2px solid #e0e0e0;
-
-    padding: 0 0 1.25rem 0;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+    padding: 0 0 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
