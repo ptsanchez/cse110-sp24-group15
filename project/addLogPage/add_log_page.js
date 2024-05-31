@@ -61,12 +61,13 @@ function makeSubmission() {
     // Update the projects object with the new logs array
     projects["logs"] = logs;
 
+
     // Update the project data in localStorage
     proj_data["project_data"][current_project] = projects;
     localStorage.setItem("project_data", JSON.stringify(proj_data));
 
     // Redirect the user to the day page after submission
-    window.location.href = "../dayPage/day_page.html";
+    window.location.href = escape("../dayPage/day_page.html");
   }
 }
 
@@ -74,7 +75,7 @@ function makeSubmission() {
  * Handles the cancellation of the form submission by redirecting to the day page.
  */
 function cancelSubmission() {
-  window.location.href = "../dayPage/day_page.html"; // Redirect to the day page
+  window.location.href = escape("../dayPage/day_page.html"); // Redirect to the day page
 }
 
 module.exports = {validateForm, makeSubmission, cancelSubmission};
