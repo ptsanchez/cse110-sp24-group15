@@ -83,4 +83,6 @@ if (typeof document !== 'undefined') {
     });
 }
 
-module.exports = { initializeProjectData, updateProjectData, submissionLogic };
+if (typeof module === 'object' && module.exports) {
+    module.exports = { initializeProjectData, updateProjectData, submissionLogic };
+}
