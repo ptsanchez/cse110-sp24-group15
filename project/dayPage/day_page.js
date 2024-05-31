@@ -6,18 +6,18 @@ function init() {
 }
 
 function switchWeekly() {
-    window.location.href = "/../project/dummyWeekPage/week.html";
+    window.location.href = escape("/../project/dummyWeekPage/week.html");
 }
 
 function switchMonthly() {
-    window.location.href = "/../project/dummyMonthPage/month.html";
+    window.location.href = escape("/../project/dummyMonthPage/month.html");
 }
 
 function redirectToAddLogPage() {
-    window.location.href = "/../project/addPage/addPage.html";
+    window.location.href = escape("/../project/addPage/addPage.html");
 }
 
-let car = 5;
+module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
 
 function calendarScript() {
     const dayDisplay = document.getElementById('day-display');
@@ -46,7 +46,7 @@ function calendarScript() {
     function getDayOfWeek(date) {
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = date.getDay();
-        return daysOfWeek[dayIndex];
+        return daysOfWeek.at(dayIndex);
     }
 
     function updateCalendar() {
