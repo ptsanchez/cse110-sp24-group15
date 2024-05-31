@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="add_project_page.css">
+    <script src="add_project_page.js" type="module"></script>
+    <title>Add Project</title>
+</head>
+
+<body>
+    <main>
+        <!-- TODO: add url to be directed when submit -->
+        <form id="add-project-form">
+            <!-- Input for project name -->
+            <label for="project-name">Project Name:</label>
+            <input type="text" id="project-name" name="project-name" class="project-name" required>
+
+            <!-- Drop down input for project tag -->
+            <label for="project-tag">Tag:</label>
+            <select name="project-tag" id="project-tag" class="project-tag" required>
+                <option value="">Choose a tag</option>
+                <option value="development">Development</option>
+                <option value="design">Design</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="personal">Personal</option>
+            </select>
+
+            <!-- Input for project contributors -->
+            <label for="project-contributor">Contributors:</label>
+            <input type="text" id="project-contributor" name="project-contributor" class="project-contributor" required>
+
+            <!-- Input for project description -->
+            <label for="project-description">Description:</label>
+            <textarea id="project-description" name="project-description" class="project-description" required></textarea>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </main>
+</body>
+
+</html>

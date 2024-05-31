@@ -1,0 +1,46 @@
+* {
+    margin: 0
+}
+
+/* Style for main content */
+main {
+    background-color: ghostwhite;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+/* Simple grid to style the form */
+#add-project-form {
+    display: grid;
+    grid-template-columns: auto 1fr auto 100px;
+    gap: 10px;
+    align-items: center;
+}
+
+#add-project-form label:nth-of-type(2) {
+    grid-column: 3 / 4;
+}
+
+.project-contributor {
+    grid-column: 2 / -1;
+}
+
+#add-project-form label:nth-of-type(4) {
+    grid-column: 1 / -1;
+}
+
+#add-project-form textarea {
+    grid-column: 1 / -1;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.submit-btn {
+    grid-column: 1 / -1;
+    padding: 10px 0;
+    margin-top: 5px;
+    cursor: pointer;
+}
