@@ -21,8 +21,8 @@ module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
 
 function calendarScript() {
     const dayDisplay = document.getElementById('day-display');
-    const prevDayBtn = document.getElementById('prevDayBtn');
-    const nextDayBtn = document.getElementById('nextDayBtn');
+    const prevDayBtn = document.getElementById('prev-day-btn');
+    const nextDayBtn = document.getElementById('next-day-btn');
 
     let currentDate = new Date();
     const selectedDate = localStorage.getItem('current_date');
@@ -46,7 +46,7 @@ function calendarScript() {
     function getDayOfWeek(date) {
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = date.getDay();
-        return daysOfWeek.at(dayIndex);
+        return daysOfWeek[dayIndex]
     }
 
     function updateCalendar() {
