@@ -3,7 +3,7 @@
     "allowUnknownTags": true
   },
   "source": {
-    "include": ["project/homePage", "project/template", "project/successPage", "project/feedbackPage", "project/projecHomePage", "project/addLogPage", "project/addProjectPage", "project/dayPage", "project/weekPage", "project/monthPage", "project/archivePage"],
+    "include": ["project/templates"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
