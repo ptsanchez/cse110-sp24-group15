@@ -1,36 +1,46 @@
 // Run the init() function when the page has loaded
 window.addEventListener("DOMContentLoaded", init);
-// Run the init() function when the page has loaded
+
 function init() {
     calendarScript();
 }
+
 function switchWeekly() {
     window.location.href = "/../project/dummyWeekPage/week.html";
 }
+
 function switchMonthly() {
     window.location.href = "/../project/dummyMonthPage/month.html";
 }
+
 function redirectToAddLogPage() {
-    window.location.href = "/../project/dummyAddPage/add.html";
+    window.location.href = "/../project/addPage/addPage.html";
 }
 
+let car = 5;
 
 function calendarScript() {
     const dayDisplay = document.getElementById('day-display');
-    const prevWeekBtn = document.getElementById('prevDayBtn');
-    const nextWeekBtn = document.getElementById('nextDayBtn');
+    const prevDayBtn = document.getElementById('prevDayBtn');
+    const nextDayBtn = document.getElementById('nextDayBtn');
 
     let currentDate = new Date();
-    const selectedDate = localStorage.getItem("current_date");
-    if (selectedDate) {
-        // Parse the selected date string to a Date object
+    const selectedDate = localStorage.getItem('current_date');
+    if (selectedDate != null) {
         currentDate = new Date(selectedDate);
     }
-    
-    // format for calendar widget
+    localStorage.setItem("current_date", formatDateToMMDDYYYY(currentDate));
+
     function formatDate(date) {
         const options = { month: 'short', day: 'numeric' };
         return date.toLocaleDateString(undefined, options);
+    }
+
+    function formatDateToMMDDYYYY(date) {
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        const yyyy = date.getFullYear();
+        return `${mm}/${dd}/${yyyy}`;
     }
 
     function getDayOfWeek(date) {
@@ -38,23 +48,79 @@ function calendarScript() {
         const dayIndex = date.getDay();
         return daysOfWeek[dayIndex];
     }
-    // updates calendar
+
     function updateCalendar() {
         const thisDate = currentDate;
-        dayDisplay.textContent = `${getDayOfWeek(thisDate)},  ${formatDate(thisDate)}`;
+        dayDisplay.textContent = `${getDayOfWeek(thisDate)}, ${formatDate(thisDate)}`;
+    }
+
+    function updateEvents() {
+        let jsonString = localStorage.getItem('project_data');
+        let logs;
+        if (jsonString) {
+            let jsonObject = JSON.parse(jsonString);
+            logs = jsonObject.logs;
+        } else {
+            logs = [];
+        }
+
+        let currentDateStr = localStorage.getItem('current_date');
+        let currentDate = new Date(currentDateStr);
+        let current_logs = [];
+
+        let month = currentDate.getMonth() + 1; // Months are zero-based
+        let day = currentDate.getDate();
+        let year = currentDate.getFullYear();
+
+        logs.forEach(log => {
+            if (log.Month == month && log.day == day && log.Year == year) {
+                current_logs.push(log);
+            }
+        });
+
+        localStorage.setItem("current_day_data", JSON.stringify(current_logs));
+    }
+
+    function updatePage(){
+        let jsonString = localStorage.getItem('current_day_data');
+        let jsonObject = JSON.parse(jsonString);
+        const dayCalendarTitle = document.getElementById('DayCalendarTitle');
+        const dayCalendarTime = document.getElementById('DayCalendarTime');
+
+        // Clear previous events
+        dayCalendarTitle.innerHTML = "Title";
+        dayCalendarTime.innerHTML = "Time";
+
+        // Display current logs
+        jsonObject.forEach(log => {
+            let titleDiv = document.createElement('div');
+            titleDiv.textContent = log.title;
+            dayCalendarTitle.appendChild(titleDiv);
+
+            let timeDiv = document.createElement('div');
+            timeDiv.textContent = log.time;
+            dayCalendarTime.appendChild(timeDiv);
+        });
     }
 
     prevDayBtn.addEventListener('click', () => {
         currentDate.setDate(currentDate.getDate() - 1);
+        localStorage.setItem("current_date", formatDateToMMDDYYYY(currentDate));
         updateCalendar();
+        updateEvents();
+        updatePage();
     });
 
-    // Event listener for the "Next Week" button
     nextDayBtn.addEventListener('click', () => {
         currentDate.setDate(currentDate.getDate() + 1);
+        localStorage.setItem("current_date", formatDateToMMDDYYYY(currentDate));
         updateCalendar();
+        updateEvents();
+        updatePage();
     });
 
     // Initialize calendar
     updateCalendar();
+    updateEvents(); // Call updateEvents to ensure events are loaded initially
+    updatePage();
 }
