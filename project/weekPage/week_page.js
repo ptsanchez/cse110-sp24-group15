@@ -5,28 +5,6 @@ window.addEventListener("DOMContentLoaded", () => {
 //     calendarScript();
 // }
 
-function switchWeekly() {
-    // window.location.href = "../weekPage/week_page.html";
-
-    // github code analysis said to do this instead of href
-    window.location.href = escape("../weekPage/week_page.html");
-}
-function switchMonthly() {
-    // window.location.href = "../monthPage/month_page.html";
-
-    // github code analysis said to do this instead of href
-    window.location.href = escape("../monthPage/month_page.html");
-}
-
-// redirect page to add_log_page.html when button is clicked
-function redirectToAddLogPage() {
-    // window.location.href = "../addLogPage/add_log_page.html";
-
-    // github code analysis said to do this instead of href
-    window.location.href = escape("../addLogPage/add_log_page.html");
-}
-
-
 // function calendarScript() {
     const weekDisplay = document.getElementById('week-display');
     const prevWeekBtn = document.getElementById('prev-week-btn');
@@ -96,5 +74,26 @@ function redirectToAddLogPage() {
     updateCalendar();
 // }
 });
+
+function switchWeekly() {
+    // window.location.href = "../weekPage/week_page.html";
+
+    // github code analysis said to do this instead of href
+    window.location.href = escape("../weekPage/week_page.html");
+}
+function switchMonthly() {
+    // window.location.href = "../monthPage/month_page.html";
+
+    // github code analysis said to do this instead of href
+    window.location.href = escape("../monthPage/month_page.html");
+}
+
+// redirect page to add_log_page.html when button is clicked
+function redirectToAddLogPage() {
+    // window.location.href = "../addLogPage/add_log_page.html";
+
+    // github code analysis said to do this instead of href
+    window.location.href = escape("../addLogPage/add_log_page.html");
+}
 
 module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
