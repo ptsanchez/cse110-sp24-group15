@@ -143,6 +143,12 @@ input[type="text"], input[type="email"], textarea {
         border-radius: 10px; /* rectangular border -> rounded border */
     }
 
+    nav ul li a {
+        padding: 0.5rem; /* 0.5rem 1rem -> 0.5rem 0.5rem */
+        width: 70%; /* X -> 70% */
+        margin: 0 auto; /* X -> 0 auto; to make left/right margin equal */
+    }
+
     .top-menu ul li a {
         font-size: 12px; /* 13px -> 12px */
     }
@@ -151,12 +157,6 @@ input[type="text"], input[type="email"], textarea {
         display: block; /* inline-block -> block */
         margin-right: 0; /* 20px -> 0 */
         margin-bottom: 10px; /* X -> 10px */
-    }
-
-    nav ul li a {
-        padding: 0.5rem; /* 0.5rem 1rem -> 0.5rem 0.5rem */
-        width: 70%; /* X -> 70% */
-        margin: 0 auto; /* X -> 0 auto; to make left/right margin equal */
     }
 
     fieldset, label, nav ul li a {
@@ -250,6 +250,7 @@ input[type="text"], input[type="email"], textarea {
 
     footer {
         padding: 15px 20px; /* 10px 20px -> 15px 20px */
+        font-size: 13px; /* 10px -> 13px */
     }
 
     header h1 {
@@ -262,9 +263,5 @@ input[type="text"], input[type="email"], textarea {
 
     fieldset legend, label, nav ul li a {
         font-size: 18px;
-    }
-    
-    footer {
-        font-size: 13px; /* 10px -> 13px */
     }
 }

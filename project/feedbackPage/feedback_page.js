@@ -52,7 +52,7 @@ function makeSubmission(event) {
     alert('Thank you for your feedback!');
 
     // Redirect to success page
-    window.location.href = "../successPage/success_page.html";
+    window.location.href = escape("../successPage/success_page.html");
 }
 
 /* stylelint-disable */
