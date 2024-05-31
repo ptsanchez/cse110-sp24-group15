@@ -1,71 +1,137 @@
-/* Design for the body */
+/* =============== VARIABLES CSS =============== */
+:root {
+    /* ========== Colors ========== */
+    --primary-color: #a09c9a; /* initial button color */
+    --secondary-color: #7a7269; /* button hover, feedback section color */ 
+    --theme-color: #d1cfcf; /* header color */
+    --background-color: #f8f9fa; 
+    --text-color: #333;
+    --text-light-color: #666;
+    --text-lighter-color: #d5d5d5;
+    --text-white-color: #fff;
+    --feedback-button-bg: #28a745;
+    --feedback-button-bg-hover: #218838;
+
+    /* ========== Font ========== */
+    --main-font:'Helvetica Neue', arial, sans-serif;
+    --header-font-size: 3.5rem;
+    --biggest-font-size: 2.75rem;
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.75rem;
+    --h3-font-size: 1.5rem;
+    --button-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.8rem;     
+}
+
+* { 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    margin: 1%;
-    padding: 1%;
+    font-family: var(--main-font);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f8f9fa;
+    background-color: var(--background-color);
 }
 
-/* All header design elements */
-header{
-    background-color: #add8e6;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 2%;
+/* ========== Header ========== */
+header {
+    border-bottom: 2px solid #e0e0e0;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    position: relative;
 }
 
 .header-title {
-    margin: 0;
-    font-size: 3em;
-    font-weight: 600;
-    color: #333;
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
 }
 
 .home-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007bff;
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.home-button:hover {
-    background-color: #0658b1;
+.home-button:hover, .home-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
 }
 
-/* All footer Design Elements */
-
+/* ========== Footer ========== */
 footer {
-    background-color: #add8e6;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 2%;
+    border-top: 2px solid #e0e0e0;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+    padding: 0 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    position: relative;
-    border-top: 1px solid #e0e0e0;
     margin-top: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin-top: 1.25rem;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+}
+
+.feedback-section {
+    text-align: center;
+    padding: 1.25rem;
+    background-color: var(--secondary-color); 
+    width: 100%;
+}
+
+.feedback-section h2 {
+    color: var(--text-white-color); 
+    margin-bottom: 0.625rem;
+}
+
+.feedback-section p {
+    color: var(--text-lighter-color);
+    margin-bottom: 1.25rem;  
+    margin-left: auto; 
+    margin-right: auto;
 }
 
 .feedback-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007bff;
+    margin-top: 0.625rem;
+    padding: 0.625rem 1.25rem;
+    font-size: var(--normal-font-size);
+    color: var(--text-white-color);
+    background-color: var(--feedback-button-bg);
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.feedback-button:hover {
-    background-color: #0658b1;
+.feedback-button:hover, .feedback-button:focus {
+    background-color: var(--feedback-button-bg-hover);
+    box-shadow: 0 4px 6px rgba(0 0 0 / 20%);
+    transform: scale(1.05);
 }
+
