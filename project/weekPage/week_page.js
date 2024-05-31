@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", () => {
             dateDiv.appendChild(document.createTextNode(date));
             column.appendChild(dateDiv);
 
-            column.dataset.date = weekDates[index].toISOString().split('T')[0];
+            column.dataset.date = weekDates[Number(index)].toISOString().split('T')[0];
         });
     }
     // previous week button
