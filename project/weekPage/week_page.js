@@ -38,7 +38,12 @@ window.addEventListener("DOMContentLoaded", () => {
         const weekDates = getWeekDates(new Date(currentDate));
         weekDisplay.textContent = `Week of ${formatDate(weekDates[0])} - ${formatDate(weekDates[6])}`;
         document.querySelectorAll('.day-column').forEach((column, index) => {
-            column.innerHTML = `<div class="date-display">${formatDate(weekDates[index])}</div>`;
+            // column.innerHTML = `<div class="date-display">${formatDate(weekDates[index])}</div>`;
+            const dateDiv = document.createElement('div');
+                dateDiv.classList.add('date-display');
+                dateDiv.appendChild(document.createTextNode(formatDate(weekDates[index])));
+                column.appendChild(dateDiv);
+
             column.dataset.date = weekDates[index].toISOString().split('T')[0];
         });
     }
