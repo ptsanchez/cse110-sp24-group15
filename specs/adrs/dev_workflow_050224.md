@@ -18,7 +18,8 @@ We have an assigned team, and we need to come up with a mechanism to maintain an
 3. Leads(Advaith, Ned for Back-End, and Po-Cheng for Front-end) are responsible for planning, writing, and assigning Github Issues to developers. It is prefereable to have individuals to manage the development progress w.r.t. front-end/back-end and be involved in developer workflow.
 
 
-<!-- This is an optional element. Feel free to remove. -->
+<!-- This is an optf
+ional element. Feel free to remove. -->
 ### Consequences
 
 * Good, as this is conventional workflow practice to a large extent.
