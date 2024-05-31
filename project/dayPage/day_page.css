@@ -5,13 +5,13 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: 'Montserrat', sans-serif; /* Fixed unexpected quotes around "Montserrat" */
+    font-family: Montserrat, sans-serif; /* Fixed unexpected quotes around "Montserrat" */
 }
 
 main {
     background-color: white;
     padding: 20px;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1); /* Fixed modern color-function notation and alpha-value-notation */
+    box-shadow: 0 2px 16px rgba(0 0 0 10%); /* Fixed modern color-function notation and alpha-value-notation */
     border-radius: 20px;
     width: 80%;
     max-width: 1000px;
@@ -22,7 +22,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid rgba(229, 229, 229, 1); /* Fixed modern color-function notation */
+    border-bottom: 2px solid rgba(229 229 229 100%); /* Fixed modern color-function notation */
     padding: 20px;
     position: relative;
 }
