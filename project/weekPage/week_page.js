@@ -1,5 +1,5 @@
 // // Run the init() function when the page has loaded
-// window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", () => {
 // // Run the init() function when the page has loaded
 // function init() {
 //     calendarScript();
@@ -9,13 +9,13 @@ function switchWeekly() {
     // window.location.href = "../weekPage/week_page.html";
 
     // github code analysis said to do this instead of href
-    escape("../weekPage/week_page.html");
+    window.location.href = escape("../weekPage/week_page.html");
 }
 function switchMonthly() {
     // window.location.href = "../monthPage/month_page.html";
 
     // github code analysis said to do this instead of href
-    escape("../monthPage/month_page.html");
+    window.location.href = escape("../monthPage/month_page.html");
 }
 
 // redirect page to add_log_page.html when button is clicked
@@ -23,7 +23,7 @@ function redirectToAddLogPage() {
     // window.location.href = "../addLogPage/add_log_page.html";
 
     // github code analysis said to do this instead of href
-    escape("../addLogPage/add_log_page.html");
+    window.location.href = escape("../addLogPage/add_log_page.html");
 }
 
 
@@ -81,7 +81,10 @@ function redirectToAddLogPage() {
             const date = new Date(clicked_date);
             const formattedDate = formatDateToMMDDYYYY(date);
             localStorage.setItem("current_date", formattedDate);
-            window.location.href = "../dayPage/day_page.html";
+            // window.location.href = "../dayPage/day_page.html";
+
+            // github code analysis said to do this instead of href
+            window.location.href = escape("../dayPage/day_page.html");
 
             // i may not have to send over local storage
             // just get to the correct day_page
@@ -92,5 +95,6 @@ function redirectToAddLogPage() {
     // Initialize calendar
     updateCalendar();
 // }
+});
 
 module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
