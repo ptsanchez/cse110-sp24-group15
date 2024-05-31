@@ -1,5 +1,6 @@
 // // Run the init() function when the page has loaded
-window.addEventListener("DOMContentLoaded", () => {
+// window.addEventListener("DOMContentLoaded", () => {
+    if ( typeof window !== "undefined") {
 // // Run the init() function when the page has loaded
 // function init() {
 //     calendarScript();
@@ -79,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // Initialize calendar
     updateCalendar();
 // }
-});
+};
 
 function switchWeekly() {
     // window.location.href = "../weekPage/week_page.html";
