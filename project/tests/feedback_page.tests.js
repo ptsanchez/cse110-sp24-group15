@@ -41,10 +41,10 @@ describe('Submission Handling', () => {
     });
 
     test('Should alert if required fields are missing', () => {
-        // Set empty values to mock invalid form inputs
         document.getElementById.mockImplementation((id) => {
+            // Set empty values to mock invalid form inputs
             const elements = {
-                "name": { value: '' },
+                "name": { value: '' }, 
                 "email": { value: '' },
                 "feedback": { value: '' },
             };
