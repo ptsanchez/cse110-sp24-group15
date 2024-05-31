@@ -41,7 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
             // column.innerHTML = `<div class="date-display">${formatDate(weekDates[index])}</div>`;
             const dateDiv = document.createElement('div');
             dateDiv.classList.add('date-display');
-            const date = formatDate(String(weekDates[index]));
+            const date = formatDate(weekDates[Number(index)]);
             dateDiv.appendChild(document.createTextNode(date));
             column.appendChild(dateDiv);
 
