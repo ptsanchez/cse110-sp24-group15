@@ -18,6 +18,7 @@ body {
     box-shadow: 0 0 10px rgb(0 0 0 / 10%);
 }
 
+/* Project Title */
 .project-home-page-title-div {
     text-align: center;
     margin-bottom: 20px;
@@ -28,6 +29,7 @@ body {
     font-weight: bold;
 }
 
+/* TODO List Content & Branch Link Content */
 .project-todo-list-div,
 .project-link-div {
     background-color: #ff6f91;
@@ -52,6 +54,7 @@ body {
     text-decoration: none;
 }
 
+/* Project Description */
 .project-detail-div {
     background-color: #ffab76;
     padding: 10px;
@@ -62,6 +65,7 @@ body {
     color: #fff;
 }
 
+/* Buttons that navigates other pages */
 .project-btns-div {
     display: flex;
     justify-content: space-between;
@@ -84,6 +88,7 @@ body {
     background-color: #3bb8c5;
 }
 
+/* Edit Button in TODO List and Branch Link */
 .edit-btn {
     position: absolute;
     bottom: 10px;
@@ -100,15 +105,18 @@ body {
     width: 24px;
 }
 
+/* Style for Edit Button when it becomes Save Button */
 .edit-btn.save {
     color: #ff9f43;
 }
 
+/* Style for Edit Button when it becomes Check Button */
 .edit-btn.check {
     color: #00b894;
     animation: pop-up 0.5s ease;
 }
 
+/* Check Button Pop Up Animation */
 @keyframes pop-up {
     0% {
         transform: scale(1);
@@ -123,6 +131,7 @@ body {
     }
 }
 
+/* TODO List Content & Branch Link Content in Edit Mode */
 .project-todo-list-div.editing,
 .project-link-div.editing {
     background-color: #ffe0e6;
@@ -133,6 +142,7 @@ body {
     color: black;
 }
 
+/* Checkbox Markup Language */
 .project-todo-list div {
     margin-left: 0;
 }

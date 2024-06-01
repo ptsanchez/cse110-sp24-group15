@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectData = JSON.parse(localStorage.getItem('projectData')) || {};
     const currentProjectKey = projectData.current_project;
 
+    // Utility function to get text or default value 
     const getTextOrDefault = (value, defaultText) => {
         if (typeof value === 'string' && value.trim()) {
             return value;
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Function to toggle edit mode for todo list and branch link
     const toggleEditMode = (element, btn, type) => {
         const isEditing = element.getAttribute('contenteditable') === 'true';
         if (isEditing) {
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.parentElement.classList.toggle('editing', isNowEditing);
     };
 
+    // Function to save changes to local storage
     const saveChanges = (element, btn, type) => {
         if (type === 'todo') {
             projectData['project_data'][String(currentProjectKey)]['TodoList'] = element.innerText;
@@ -57,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showSaveConfirmation(btn);
     };
 
+    // Function to show save confirmation (check logo)
     const showSaveConfirmation = (btn) => {
         btn.innerHTML = "<i class='bx bx-check-square'></i>";
         btn.classList.add('check');
@@ -69,11 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     };
 
+    // Function to render markup for todo list (checkbox markup)
     const renderMarkup = (element) => {
         let text = element.innerText;
         const tempDiv = document.createElement('div');
         text.split('\n').forEach(line => {
             let match;
+
+            // if the line has three space indentation and - [ ]
             match = line.match(/^ {3}- \[ \] (.+)/);
             if (match) {
                 const div = document.createElement('div');
@@ -86,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 tempDiv.appendChild(div);
                 return;
             }
+
+            // if the line has three space indentation and - [X]
             match = line.match(/^ {3}- \[x\] (.+)/i);
             if (match) {
                 const div = document.createElement('div');
@@ -99,6 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 tempDiv.appendChild(div);
                 return;
             }
+
+            // if the line has only - [ ]
             match = line.match(/^- \[ \] (.+)/);
             if (match) {
                 const div = document.createElement('div');
@@ -110,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 tempDiv.appendChild(div);
                 return;
             }
+
+            // if the line has only - [X]
             match = line.match(/^- \[x\] (.+)/i);
             if (match) {
                 const div = document.createElement('div');
@@ -129,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         element.appendChild(tempDiv);
     };
 
+    // Function to restore the original text for edit mode
+    // To display normal markup text like - [ ] or - [X] not checkbox
     const restoreOriginalText = (element, type) => {
         let text;
         if (type === 'todo') {
@@ -139,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.textContent = text;
     };
 
+    // Load project data from local storage if available
     if (currentProjectKey && projectData['project_data'][String(currentProjectKey)]) {
         const currentProject = projectData['project_data'][String(currentProjectKey)];
 
@@ -151,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderMarkup(document.querySelector('.project-todo-list'));
 
+        // Event listeners for edit buttons
         document.querySelector('.todo-edit-btn').addEventListener('click', () => {
             const todoList = document.querySelector('.project-todo-list');
             toggleEditMode(todoList, document.querySelector('.todo-edit-btn'), 'todo');
@@ -169,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.project-detail-div').textContent = 'Project Details, Members (add hover feature/description)';
     }
 
+    // Function to set default text if necessary
     const setDefaultText = (selector, defaultText) => {
         const element = document.querySelector(selector);
         const elementText = element.textContent.trim();
