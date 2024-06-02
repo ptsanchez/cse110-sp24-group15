@@ -14,6 +14,8 @@
     --text-white-color: #fff;
     --feedback-button-bg: #28a745;
     --feedback-button-bg-hover: #218838;
+    --addlog-submit-button-bg: #04aa6d;
+    --addlog-cancel-button-bg: #ff6961;
 
     /* ========== Font ========== */
     --main-font: 'Montserrat', sans-serif;
@@ -53,6 +55,7 @@ header {
     justify-content: center;
     text-align: center;
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .header-title {
