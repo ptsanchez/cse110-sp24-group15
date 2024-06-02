@@ -1,46 +1,64 @@
-* {
-    margin: 0
+@import url('../templates/template.css');
+
+body {
+  font-family: var(--main-font);
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-/* Style for main content */
 main {
-    background-color: ghostwhite;
-    width: 80%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 30px;
+  background: var(--background-color);
+  padding: 2em;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+  width: 80%;
+  max-width: 1000px;
 }
 
 /* Simple grid to style the form */
 #add-project-form {
-    display: grid;
-    grid-template-columns: auto 1fr auto 100px;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-#add-project-form label:nth-of-type(2) {
-    grid-column: 3 / 4;
+#add-project-form label {
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
-.project-contributor {
-    grid-column: 2 / -1;
-}
-
-#add-project-form label:nth-of-type(4) {
-    grid-column: 1 / -1;
+#add-project-form input, 
+#add-project-form select,
+#add-project-form textarea {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  padding: 0.75em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #add-project-form textarea {
-    grid-column: 1 / -1;
-    min-height: 100px;
-    resize: vertical;
+  min-height: 100px;
+  resize: vertical;
 }
 
 .submit-btn {
-    grid-column: 1 / -1;
-    padding: 10px 0;
-    margin-top: 5px;
-    cursor: pointer;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: var(--addlog-submit-button-bg);
+  color: var(--text-white-color);
+  margin-top: 1em;
+}
+
+.submit-btn:hover {
+  opacity: 0.8;
 }
