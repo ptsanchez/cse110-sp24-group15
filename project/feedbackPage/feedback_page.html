@@ -11,60 +11,71 @@
 <body>
     <script src="feedback_page.js"></script>
     <!-- Main -->
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="#"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
     <main>
         <div class="sentiment-widget">
             <form onsubmit="makeSubmission(event)">
-                <fieldset>
-                    <legend class="feedback-header">Give Us Feedback About our Developer Journal</legend>
-                    <label for ="name">Name:</label>
-                    <input type="text" id="name" required>
-                    <!-- BR is Creating a Space -->
-                    <br> 
+                <div class="feedback-header">Give Us Feedback About our Developer Journal</div>
+                <label for ="name">Name:</label>
+                <input type="text" id="name" required>
+                <!-- BR is Creating a Space -->
+                <br> 
 
-                    <label for ="email">Email:</label>
-                    <input type="email" id="email" required>
-                    <!-- BR is Creating a Space-->
-                    <br>
+                <label for ="email">Email:</label>
+                <input type="email" id="email" required>
+                <!-- BR is Creating a Space-->
+                <br>
 
-                    <label for="feedback">Feedback:</label>
-                    <textarea id="feedback" name="feedback" rows="4" cols="50" maxlength="300" placeholder="Enter your feedback here (up to 300 words)..."></textarea>
-                    <!-- BR is Creating a Space-->
-                    <br>
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" cols="50" maxlength="300" placeholder="Enter your feedback here (up to 300 words)..."></textarea>
+                <!-- BR is Creating a Space-->
+                <br>
 
-                    <label>Satisfaction Level:</label>
-                    <!-- container for radio buttons -->
-                    <div class="radio-container">
-                        <!-- Red face -->
-                        <input type="radio" id="satisfaction1" name="satisfaction" value="1" hidden>
-                        <label for="satisfaction1" id="face1"><img src="../assets/feedbackPage/feedback_face_emoji_1.png" alt="1"></label>
-                            
-                        <!-- Orange face -->
-                        <input type="radio" id="satisfaction2" name="satisfaction" value="2" hidden>
-                        <label for="satisfaction2" id="face2"><img src="../assets/feedbackPage/feedback_face_emoji_2.png" alt="2"></label>
+                <label>Satisfaction Level:</label>
+                <!-- container for radio buttons -->
+                <div class="radio-container">
+                    <!-- Red face -->
+                    <input type="radio" id="satisfaction1" name="satisfaction" value="1" hidden>
+                    <label for="satisfaction1" id="face1"><img src="../assets/feedbackPage/feedback_face_emoji_1.png" alt="1"></label>
+                        
+                    <!-- Orange face -->
+                    <input type="radio" id="satisfaction2" name="satisfaction" value="2" hidden>
+                    <label for="satisfaction2" id="face2"><img src="../assets/feedbackPage/feedback_face_emoji_2.png" alt="2"></label>
 
-                        <!-- Yellow face -->
-                        <input type="radio" id="satisfaction3" name="satisfaction" value="3" hidden>
-                        <label for="satisfaction3" id="face3"><img src="../assets/feedbackPage/feedback_face_emoji_3.png" alt="3"></label>
-                            
-                        <!-- Light green face -->
-                        <input type="radio" id="satisfaction4" name="satisfaction" value="4" hidden>
-                        <label for="satisfaction4" id="face4"><img src="../assets/feedbackPage/feedback_face_emoji_4.png" alt="4"></label>
-                            
-                        <!-- Green face -->
-                        <input type="radio" id="satisfaction5" name="satisfaction" value="5" hidden>
-                        <label for="satisfaction5" id="face5"><img src="../assets/feedbackPage/feedback_face_emoji_5.png" alt="5"></label>
-                    </div>
-                    <!-- BR is Creating a Space-->
-                    <br>
-                    
-                    <div class="feedback-btns">
-                        <button class="submit-btn" type="submit">Submit</button>
-                        <button class="cancel-btn" type="button" onclick="location.href='../homePage/home_page.html'">Cancel</button>
-                    </div>
-
-                </fieldset>
+                    <!-- Yellow face -->
+                    <input type="radio" id="satisfaction3" name="satisfaction" value="3" hidden>
+                    <label for="satisfaction3" id="face3"><img src="../assets/feedbackPage/feedback_face_emoji_3.png" alt="3"></label>
+                        
+                    <!-- Light green face -->
+                    <input type="radio" id="satisfaction4" name="satisfaction" value="4" hidden>
+                    <label for="satisfaction4" id="face4"><img src="../assets/feedbackPage/feedback_face_emoji_4.png" alt="4"></label>
+                        
+                    <!-- Green face -->
+                    <input type="radio" id="satisfaction5" name="satisfaction" value="5" hidden>
+                    <label for="satisfaction5" id="face5"><img src="../assets/feedbackPage/feedback_face_emoji_5.png" alt="5"></label>
+                </div>
+                <!-- BR is Creating a Space-->
+                <br>
+                
+                <div class="feedback-btns">
+                    <button class="submit-btn" type="submit">Submit</button>
+                    <button class="cancel-btn" type="button" onclick="location.href='../homePage/home_page.html'">Cancel</button>
+                </div>
             </form>
         </div>
     </main>
+    <footer>
+        <div class="feedback-section">
+            <h2>Thank You!</h2>
+            <p>Your feedback really helps us improve. Thank you for visiting our feedback page!</p>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
 </body>
 </html>
