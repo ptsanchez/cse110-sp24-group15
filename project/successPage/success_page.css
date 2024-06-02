@@ -5,7 +5,8 @@
     margin: 0
 }
 
-/*Body Text*/
+/* Body Text */
+
 body{
     display: flex;
     flex-direction: column;
@@ -15,7 +16,8 @@ body{
     font-family: Arial, sans-serif;
 }
 
-/*Footer*/
+/* Footer */
+
 footer .bottom-nav {
     width: 100%;
     position: fixed;
@@ -23,7 +25,8 @@ footer .bottom-nav {
     background-color: aquamarine;
 }
 
-/*Text*/
+/* Text */
+
 .success-page-text{
     font-size: 24px;
     color: #000;
@@ -31,7 +34,8 @@ footer .bottom-nav {
     margin-top: 20px;
 }
 
-/*Continue Button*/
+/* Continue Button */
+
 .continue-btn {
     display: block;
     width: 200px;
@@ -46,7 +50,7 @@ footer .bottom-nav {
     font-size: 18px;
 }
 
-/*Hover CSS*/
+/* Hover CSS */
 .continue-btn:hover {
     background-color: #45a049;
 }
