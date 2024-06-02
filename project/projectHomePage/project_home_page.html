@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Home Page</title>
+    <!-- Boxicon -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="project_home_page.css">
+</head> 
+<body>
+    <div class="main-content">
+        <div class="project-home-page-title-div">
+            <!-- Project title will be set here -->
+            <span class="project-text"></span>
+        </div>
+        <div class="project-todo-list-div">
+            <!-- Todo list content will be set and edited here -->
+            <span class="project-todo-list" contenteditable="false"></span>
+            <button class="edit-btn todo-edit-btn"><i class="bx bx-edit"></i></button>
+        </div>
+        <div class="project-link-div">
+            <!-- Branch link content will be set and edited here -->
+            <a href="#" class="project-branch-link" contenteditable="false"></a>
+            <button class="edit-btn branch-edit-btn"><i class="bx bx-edit"></i></button>
+        </div>
+        <div class="project-detail-div">
+            <!-- Project description will be set here -->
+        </div>
+        <div class="project-btns-div">
+            <!-- Buttons to navigate to other pages -->
+            <button class="make-log-btn" onclick="location.href='../addLogPage/add_log_page.html'">Make Log</button>
+            <button class="all-logs-btn" onclick="location.href='../monthlyPage/monthly_page.html'">All Logs</button>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="project_home_page.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.main-content {
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+}
+
+/* Project Title */
+.project-home-page-title-div {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.project-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* TODO List Content & Branch Link Content */
+.project-todo-list-div,
+.project-link-div {
+    background-color: #ff6f91;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative;
+    padding-right: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.project-todo-list,
+.project-branch-link {
+    color: #fff;
+    font-size: 16px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    outline: none;
+}
+
+.project-branch-link {
+    text-decoration: none;
+}
+
+/* Project Description */
+.project-detail-div {
+    background-color: #ffab76;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Buttons that navigates other pages */
+.project-btns-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.make-log-btn,
+.all-logs-btn {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #45d0e1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.make-log-btn:hover,
+.all-logs-btn:hover {
+    background-color: #3bb8c5;
+}
+
+/* Edit Button in TODO List and Branch Link */
+.edit-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+}
+
+/* Style for Edit Button when it becomes Save Button */
+.edit-btn.save {
+    color: #ff9f43;
+}
+
+/* Style for Edit Button when it becomes Check Button */
+.edit-btn.check {
+    color: #00b894;
+    animation: pop-up 0.5s ease;
+}
+
+/* Check Button Pop Up Animation */
+@keyframes pop-up {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* TODO List Content & Branch Link Content in Edit Mode */
+.project-todo-list-div.editing,
+.project-link-div.editing {
+    background-color: #ffe0e6;
+}
+
+.editing .project-todo-list,
+.editing .project-branch-link {
+    color: black;
+}
+
+/* Checkbox Markup Language */
+.project-todo-list div {
+    margin-left: 0;
+}
+
+.project-todo-list .indent {
+    margin-left: 1.5em;
+}
+
+input[type="checkbox"] {
+    margin-left: 0;
+    margin-right: 5px;
+}
