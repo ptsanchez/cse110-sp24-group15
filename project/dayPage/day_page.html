@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="day_page.css">
+</head>
+<body>
+
+    <main>
+        <script src="day_page.js"></script>
+        <div class="day-header-div">
+            <div class="day-text">Calendar</div>
+            <div class="tabs">
+                <button class="toggle" id="week-tab" onclick="switchWeekly()">Week</button>
+                <button class="toggle" id="month-tab" onclick="switchMonthly()">Month</button>
+                <div class="week-month-line"></div>
+                <button class="add-log" id="add-log" onclick="redirectToAddLogPage()">+</button>
+            </div>
+        </div>
+        
+        <div class="day-calendar-div">
+            <div class="day-calendar-title">
+              <span id="day-display">Day</span>
+            </div>
+            <div class="calendar-body">
+                <div class="day-column small-column" id="day-calendar-title">Title</div>
+                <div class="day-column large-column" id="day-calendar-time">Time</div>
+                <div class="day-column small-column" id="day-calendar-progress">Progress</div>
+              </div>
+        </div>
+        
+        <div class="day-btns-div">
+            <button class="prev-day-btn" id="prev-day-btn">Previous Day</button>
+            <button class="next-day-btn" id="next-day-btn">Next Day</button>
+        </div>
+    </main>
+</body>
+</html>
+
