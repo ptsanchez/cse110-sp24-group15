@@ -3,6 +3,7 @@
     /* ========== Colors ========== */
     --primary-color: #a09c9a; /* initial button color */
     --secondary-color: #7a7269; /* button hover, feedback section color */ 
+    --third-color: #7360ff;
     --theme-color: #d1cfcf; /* header color */
     --background-color: #f8f9fa; 
     --text-color: #333;
@@ -13,7 +14,7 @@
     --feedback-button-bg-hover: #218838;
 
     /* ========== Font ========== */
-    --main-font:'Helvetica Neue', arial, sans-serif;
+    --main-font: Montserrat, sans-serif;
     --header-font-size: 3.5rem;
     --biggest-font-size: 2.75rem;
     --h1-font-size: 2rem;
@@ -49,6 +50,7 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 100%;
 }
 
 .header-title {
@@ -59,7 +61,12 @@ header {
     margin-bottom: 1.25rem;
 }
 
-.home-button {
+.header-nav {
+    display: flex;
+    gap: 1rem; /* Adjust the gap between buttons as needed */
+}
+
+.nav-button {
     padding: 0.625rem 1.25rem;
     font-size: var(--button-font-size);
     color: var(--text-white-color);
@@ -70,7 +77,7 @@ header {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.home-button:hover, .home-button:focus {
+.nav-button:hover, .nav-button:focus {
     background-color: var(--secondary-color);
     transform: scale(1.05);
 }
