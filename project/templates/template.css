@@ -74,7 +74,7 @@ header {
     color: var(--text-white-color);
     background-color: var(--primary-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -133,7 +133,7 @@ footer p {
     color: var(--text-white-color);
     background-color: var(--feedback-button-bg);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
