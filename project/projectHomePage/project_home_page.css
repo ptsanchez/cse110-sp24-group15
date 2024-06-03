@@ -1,21 +1,71 @@
+@import url('../templates/template.css');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--main-font);
     margin: 0;
-    padding: 0;
+    background-color: var(--background-color);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.main-content {
-    width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--theme-color);
+    border-bottom: 2px solid #e0e0e0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+main {
     padding: 20px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    width: 80%;
+    max-width: 1000px;
+    margin: 200px auto 60px; /* Increased top margin for more gap between header and main */
+    background-color: var(--background-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the start */
 }
 
 /* Project Title */
@@ -32,7 +82,7 @@ body {
 /* TODO List Content & Branch Link Content */
 .project-todo-list-div,
 .project-link-div {
-    background-color: #ff6f91;
+    background-color: var(--project-home-todo-bg);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
@@ -43,7 +93,7 @@ body {
 
 .project-todo-list,
 .project-branch-link {
-    color: #fff;
+    color: var(--text-white-color);
     font-size: 16px;
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -56,16 +106,16 @@ body {
 
 /* Project Description */
 .project-detail-div {
-    background-color: #ffab76;
+    background-color: var(--project-home-description-bg);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
     text-align: center;
     font-size: 16px;
-    color: #fff;
+    color: var(--text-white-color);
 }
 
-/* Buttons that navigates other pages */
+/* Buttons that navigate to other pages */
 .project-btns-div {
     display: flex;
     justify-content: space-between;
@@ -76,16 +126,17 @@ body {
     width: 48%;
     padding: 10px;
     font-size: 16px;
-    color: #fff;
-    background-color: #45d0e1;
+    color: var(--text-white-color);
+    background-color: var(--project-home-logs-bg);
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: 500;
 }
 
 .make-log-btn:hover,
 .all-logs-btn:hover {
-    background-color: #3bb8c5;
+    background-color: var(--project-home-logs-bg-hover);
 }
 
 /* Edit Button in TODO List and Branch Link */
@@ -97,7 +148,7 @@ body {
     background: none;
     font-size: 24px;
     cursor: pointer;
-    color: #fff;
+    color: var(--text-white-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,12 +158,12 @@ body {
 
 /* Style for Edit Button when it becomes Save Button */
 .edit-btn.save {
-    color: #ff9f43;
+    color: var(--project-home-save-button);
 }
 
 /* Style for Edit Button when it becomes Check Button */
 .edit-btn.check {
-    color: #00b894;
+    color: var(--project-home-check-button);
     animation: pop-up 0.5s ease;
 }
 
@@ -134,12 +185,12 @@ body {
 /* TODO List Content & Branch Link Content in Edit Mode */
 .project-todo-list-div.editing,
 .project-link-div.editing {
-    background-color: #ffe0e6;
+    background-color: var(--project-home-editmode-bg);
 }
 
 .editing .project-todo-list,
 .editing .project-branch-link {
-    color: black;
+    color: var(--text-color);
 }
 
 /* Checkbox Markup Language */
@@ -154,4 +205,62 @@ body {
 input[type="checkbox"] {
     margin-left: 0;
     margin-right: 5px;
+}
+
+/* Footer */
+footer {
+    border-top: 2px solid #e0e0e0;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+    padding: 0 0 3rem; /* Increased padding for more gap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+footer p {
+    margin-top: 1.25rem;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+}
+
+.feedback-section {
+    text-align: center;
+    padding: 1.25rem;
+    background-color: var(--secondary-color); 
+    width: 100%;
+}
+
+.feedback-section h2 {
+    color: var(--text-white-color); 
+    margin-bottom: 0.625rem;
+}
+
+.feedback-section p {
+    color: var(--text-lighter-color);
+    margin-bottom: 1.25rem;  
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.feedback-button {
+    margin-top: 0.625rem;
+    padding: 0.625rem 1.25rem;
+    font-size: var(--normal-font-size);
+    color: var(--text-white-color);
+    background-color: var(--feedback-button-bg);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.feedback-button:hover, .feedback-button:focus {
+    background-color: var(--feedback-button-bg-hover);
+    box-shadow: 0 4px 6px rgba(0 0 0 / 20%);
+    transform: scale(1.05);
 }
