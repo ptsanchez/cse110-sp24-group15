@@ -28,6 +28,9 @@ function makeSubmission() {
   let log_contributors = document.getElementById("log-contributor").value;
   let log_description = document.getElementById("log-description").value;
 
+  // Get the value from the CodeMirror editor
+  let log_code_snippet = window.editor.getValue();
+
   // Validate the form inputs
   if (validateForm(log_title, log_time, log_contributors, log_description)) {
     // Parse the project data from localStorage
@@ -53,6 +56,7 @@ function makeSubmission() {
       Year: curr_date[2],
       title: log_title,
       contributors: log_contributors,
+      codeSnippet: log_code_snippet // Add the code snippet to the log entry
     };
 
     // Add the new log entry to the logs array
@@ -60,7 +64,6 @@ function makeSubmission() {
 
     // Update the projects object with the new logs array
     projects["logs"] = logs;
-
 
     // Update the project data in localStorage
     proj_data["project_data"][String(current_project)] = projects;
