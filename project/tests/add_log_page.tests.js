@@ -31,6 +31,20 @@ global.document = {
   })
 };
 
+// Mock CodeMirror
+global.CodeMirror = {
+  fromTextArea: jest.fn().mockImplementation(() => {
+    return {
+      getValue: jest.fn().mockReturnValue('console.log("Hello, world!");'),
+    };
+  }),
+};
+
+// Initialize window.editor before each test that requires it
+beforeEach(() => {
+  window.editor = CodeMirror.fromTextArea();
+});
+
 describe('Form Validation', () => {
   test('Form only submits if all text entries are valid', () => {
     // Invalid entries
@@ -79,6 +93,7 @@ describe('Log Submission', () => {
       Year: '2024',
       title: 'Sample Title',
       contributors: 'John Doe',
+      codeSnippet: 'console.log("Hello, world!");', // For codeSnippet
     };
     mockProjectData.project_data.project1.logs.push(expectedLog);
     expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(mockProjectData));
@@ -127,6 +142,7 @@ describe('Log Submission', () => {
       Year: '2024',
       title: dummyLog.title,
       contributors: dummyLog.contributors,
+      codeSnippet: 'console.log("Hello, world!");', // For codeSnippet
     };
     mockProjectData.project_data.project1.logs.push(expectedLog);
     expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(mockProjectData));
