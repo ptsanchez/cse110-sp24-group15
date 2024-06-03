@@ -75,8 +75,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
   <!-- Include add_log_page.js -->
   <script src="add_log_page.js"></script>
-  <!-- Include Code_snippet.js for CodeMirror -->
-  <script src="code_snippet.js"></script>
+  <!-- Initialize CodeMirror -->
+  <script>
+    window.onload = function() {
+      window.editor = CodeMirror.fromTextArea(document.getElementById("log-code-snippet"), {
+        lineNumbers: true,
+        mode: "javascript",
+        theme: "dracula",
+        tabSize: 2,
+        lineWrapping: true
+      });
+    }
+  </script>
 </body>
 
 </html>
