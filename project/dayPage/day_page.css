@@ -1,0 +1,146 @@
+body {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Montserrat, sans-serif; /* Fixed unexpected quotes around "Montserrat" */
+}
+
+main {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 16px rgba(0 0 0 10%); /* Fixed modern color-function notation and alpha-value-notation */
+    border-radius: 20px;
+    width: 80%;
+    max-width: 1000px;
+}
+
+/* CSS for week/month tabs */
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(229 229 229 100%); /* Fixed modern color-function notation */
+    padding: 20px;
+    position: relative;
+}
+
+.tabs .toggle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.tabs .toggle.active {
+    color: #7360ff;
+}
+
+.week-month-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: #7360ff;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* CSS for calendar */
+.day-header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.day-calendar-div {
+    margin-top: 20px;
+}
+
+.day-calendar-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.calendar-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.day-column {
+    min-height: 400px;
+    position: relative;
+    background-color: #66e76a;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.day-column .column-header {
+    margin-bottom: auto;
+}
+
+.small-column {
+    flex: 1;
+    max-width: 20%;
+    margin: 0 2.5px;
+}
+
+.large-column {
+    flex: 2;
+    max-width: 60%;
+    margin: 0 2.5px;
+}
+
+.date-display {
+    font-size: 1em;
+    color: black;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* CSS for prev/next day buttons */
+.day-btns-div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.prev-day-btn, .next-day-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    background: none;
+    border: none;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: #c8a2c8;
+}
+
+.add-log {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: #7360ff;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
