@@ -16,7 +16,14 @@
     --feedback-button-bg-hover: #218838;
     --addlog-submit-button-bg: #04aa6d;
     --addlog-cancel-button-bg: #ff6961;
-
+    --project-home-todo-bg: #ff6f91;
+    --project-home-description-bg: #ffab76;
+    --project-home-logs-bg: #45d0e1;
+    --project-home-logs-bg-hover: #3bb8c5;
+    --project-home-save-button: #ff9f43;
+    --project-home-check-button: #00b894;
+    --project-home-editmode-bg: #ffe0e6;
+    
     /* ========== Font ========== */
     --main-font: 'Montserrat', sans-serif;
     --header-font-size: 3.5rem;
