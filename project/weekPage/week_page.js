@@ -1,5 +1,7 @@
 // Run the init() function when the page has loaded
-window.addEventListener("DOMContentLoaded", init);
+if(typeof(window) !== "undefined"){
+    window.addEventListener("DOMContentLoaded", init);
+}
 
 function init() {
     calendarScript();
