@@ -80,6 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
         text.split('\n').forEach(line => {
             let match;
 
+            // if the line starts with '# '
+            match = line.match(/^# (.+)/);
+            if (match) {
+                const boldText = document.createElement('strong');
+                boldText.textContent = match[1];
+                tempDiv.appendChild(boldText);
+                tempDiv.appendChild(document.createElement('br'));
+                return;
+            }
+            
             // if the line has three space indentation and - [ ]
             match = line.match(/^ {3}- \[ \] (.+)/);
             if (match) {
@@ -159,11 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentProject = projectData['project_data'][String(currentProjectKey)];
 
         document.querySelector('.project-text').textContent = currentProject.projectName || 'PROJECT NAME';
-        document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'TODO LIST (Each task with a progress bar and link to a github issue)');
+        document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'TODO LIST');
         document.querySelector('.project-branch-link').textContent = currentProject.BranchLink || 'Link to Branch/Workspace';
         document.querySelector('.project-branch-link').href = currentProject.BranchLink || '#';
         document.querySelector('.project-branch-link').target = '_blank';
-        document.querySelector('.project-detail-div').textContent = currentProject.projectDescription || 'Project Details, Members (add hover feature/description)';
+        document.querySelector('.project-detail-div').textContent = currentProject.projectDescription || 'Project Details, Members';
 
         renderMarkup(document.querySelector('.project-todo-list'));
 
@@ -179,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } else {
         document.querySelector('.project-text').textContent = 'PROJECT NAME';
-        document.querySelector('.project-todo-list').textContent = 'TODO LIST (Each task with a progress bar and link to a github issue)';
+        document.querySelector('.project-todo-list').textContent = 'TODO LIST';
         document.querySelector('.project-branch-link').textContent = 'Link to Branch/Workspace';
         document.querySelector('.project-branch-link').href = '#';
         document.querySelector('.project-branch-link').target = '_blank';
-        document.querySelector('.project-detail-div').textContent = 'Project Details, Members (add hover feature/description)';
+        document.querySelector('.project-detail-div').textContent = 'Project Details, Members';
     }
 
     // Function to set default text if necessary
@@ -197,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     setDefaultText('.project-text', 'PROJECT NAME');
-    setDefaultText('.project-todo-list', 'TODO LIST (Each task with a progress bar and link to a github issue)');
+    setDefaultText('.project-todo-list', 'TODO LIST');
     setDefaultText('.project-branch-link', 'Link to Branch/Workspace');
-    setDefaultText('.project-detail-div', 'Project Details, Members (add hover feature/description)');
+    setDefaultText('.project-detail-div', 'Project Details, Members');
 });

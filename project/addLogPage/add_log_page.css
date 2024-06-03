@@ -1,7 +1,8 @@
-/* Temporary CSS */
+@import url('../templates/template.css');
+
 body {
-  font-family: Montserrat, sans-serif;
-  background-color: #f0f4f8;
+  font-family: var(--main-font);
+  background-color: var(--background-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,12 +11,12 @@ body {
 }
 
 main {
-  background: white;
+  background: var(--background-color);
   padding: 2em;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
-  width: 50%;
-  max-width: 800px;
+  width: 80%;
+  max-width: 1000px;
 }
 
 .add-log-from-div {
@@ -54,13 +55,13 @@ button {
 }
 
 .submit-btn {
-  background-color: #04aa6d;
-  color: white;
+  background-color: var(--addlog-submit-button-bg);
+  color: var(--text-white-color);
 }
 
 .cancel-btn {
-  background-color: #ff6961;
-  color: white;
+  background-color: var(--addlog-cancel-button-bg);
+  color: var(--text-white-color);
 }
 
 button:hover {

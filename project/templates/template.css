@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* =============== VARIABLES CSS =============== */
 :root {
     /* ========== Colors ========== */
     --primary-color: #a09c9a; /* initial button color */
     --secondary-color: #7a7269; /* button hover, feedback section color */ 
+    --third-color: #7360ff;
     --theme-color: #d1cfcf; /* header color */
     --background-color: #f8f9fa; 
     --text-color: #333;
@@ -11,9 +14,18 @@
     --text-white-color: #fff;
     --feedback-button-bg: #28a745;
     --feedback-button-bg-hover: #218838;
-
+    --addlog-submit-button-bg: #04aa6d;
+    --addlog-cancel-button-bg: #ff6961;
+    --project-home-todo-bg: #ff6f91;
+    --project-home-description-bg: #ffab76;
+    --project-home-logs-bg: #45d0e1;
+    --project-home-logs-bg-hover: #3bb8c5;
+    --project-home-save-button: #ff9f43;
+    --project-home-check-button: #00b894;
+    --project-home-editmode-bg: #ffe0e6;
+    
     /* ========== Font ========== */
-    --main-font:'Helvetica Neue', arial, sans-serif;
+    --main-font: 'Montserrat', sans-serif;
     --header-font-size: 3.5rem;
     --biggest-font-size: 2.75rem;
     --h1-font-size: 2rem;
@@ -49,6 +61,8 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
 }
 
 .header-title {
@@ -59,18 +73,23 @@ header {
     margin-bottom: 1.25rem;
 }
 
-.home-button {
+.header-nav {
+    display: flex;
+    gap: 1rem; /* Adjust the gap between buttons as needed */
+}
+
+.nav-button {
     padding: 0.625rem 1.25rem;
     font-size: var(--button-font-size);
     color: var(--text-white-color);
     background-color: var(--primary-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.home-button:hover, .home-button:focus {
+.nav-button:hover, .nav-button:focus {
     background-color: var(--secondary-color);
     transform: scale(1.05);
 }
@@ -124,7 +143,7 @@ footer p {
     color: var(--text-white-color);
     background-color: var(--feedback-button-bg);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
