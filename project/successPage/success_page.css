@@ -9,9 +9,11 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+
 header {
     margin-bottom: auto;
 }
+
 main {
     display: flex;
     flex-direction: column;
