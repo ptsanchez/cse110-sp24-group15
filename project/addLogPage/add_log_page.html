@@ -7,6 +7,10 @@
   <title>Add Log</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="add_log_page.css" />
+  <!-- Include CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+  <!-- Include CodeMirror theme (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css" />
 </head>
 
 <body>
@@ -18,7 +22,6 @@
     </nav>
   </header>
   <main>
-    <script src="add_log_page.js"></script>
     <!-- Container for the form elements -->
     <div class="add-log-from-div">
       <!-- Label and input for the log title -->
@@ -39,6 +42,11 @@
       <!-- Label and input for the log description -->
       <label for="log-description">Description:</label>
       <input type="text" id="log-description" class="log-description" />
+      <br />
+
+      <!-- Label and textarea for the code snippet -->
+      <label for="log-code-snippet">Code Snippet:</label>
+      <textarea id="log-code-snippet" class="log-code-snippet"></textarea>
       <br />
     </div>
 
@@ -61,6 +69,14 @@
     </div>
     <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
   </footer>
+  <!-- Include CodeMirror JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <!-- Include CodeMirror JavaScript mode -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <!-- Include add_log_page.js -->
+  <script src="add_log_page.js"></script>
+  <!-- Include Code_snippet.js for CodeMirror -->
+  <script src="code_snippet.js"></script>
 </body>
 
 </html>
