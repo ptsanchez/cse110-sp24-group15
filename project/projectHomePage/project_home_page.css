@@ -212,7 +212,7 @@ footer {
     border-top: 2px solid #e0e0e0;
     background-color: var(--theme-color);
     color: var(--text-color);
-    padding: 0 0 3rem; /* Increased padding for more gap */
+    padding: 0 0 1.25rem; /* Increased padding for more gap */
     display: flex;
     flex-direction: column;
     align-items: center;
