@@ -226,6 +226,7 @@ describe('Archive Page Tests', () => {
         }
     });
     deleteButtonClick(); // Simulate click event on the first delete button
+    console.log(sessionStorage.getItem('archived_projects'));
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
