@@ -118,12 +118,13 @@ global.document.createElement = jest.fn((tagName) => {
 });
 
 // Import the functions
-const { loadProjects, displayProjects, handlePageChange, handleSearch, setCurrentProject } = require('../archivePage/archive_page');
+const { loadProjects, displayProjects, handlePageChange, handleSearch, deleteProject } = require('../archivePage/archive_page');
 
 describe('Archive Page Tests', () => {
+  let testData;
+
   beforeEach(() => {
-    // Set up localStorage with test data
-    const testData = {
+    testData = {
       current_project: "project_1",
       current_date: "06/03/2024",
       project_data: {
@@ -168,21 +169,54 @@ describe('Archive Page Tests', () => {
   });
 
   test('should load all archived projects correctly', () => {
-    let localStorageData = JSON.parse(localStorage.getItem('project_data'));
-    let projects = localStorageData['project_data'];
-
-    // Convert the projects object to an array
-    let projectArray = Object.values(projects);
-
-    // Check the total number of projects
-    expect(projectArray.length).toBe(3);
-
-    // Filter out the archived projects (active: false)
-    let archivedProjects = projectArray.filter(project => !project.active);
-
-    //console.log(archivedProjects);  // For debugging
-    expect(archivedProjects.length).toBe(2);
+    loadProjects();
+    const projectList = document.querySelector('.project-list');
+    expect(projectList.appendChild).toHaveBeenCalledTimes(2);
   });
 
+  test('page back works correctly', () => {
+    loadProjects();
+    currentPage = 2;
+    handlePageChange(-1);
+    expect(currentPage).toBe(1);
+    expect(sessionStorage.setItem).toHaveBeenCalledWith('current_page', 1);
+  });
 
+  test('page next works correctly', () => {
+    loadProjects();
+    handlePageChange(1);
+    const totalPages = Math.ceil(2 / 5); // Assuming projectsPerPage is 5
+    expect(currentPage).toBe(Math.min(2, totalPages));
+    expect(sessionStorage.setItem).toHaveBeenCalledWith('current_page', currentPage);
+  });
+
+  test('search works correctly', () => {
+    loadProjects();
+    const searchBar = document.getElementById('search-bar');
+    searchBar.value = 'Project One';
+    const event = new KeyboardEvent('keyup', { key: 'Enter' });
+    searchBar.dispatchEvent(event);
+    expect(currentPage).toBe(1);
+  });
+
+  test('delete works correctly', () => {
+    loadProjects();
+    const projectList = document.querySelector('.project-list');
+    const deleteButton = projectList.querySelector('button.delete-btn');
+    deleteButton.click();
+    const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
+    expect(remainingProjects.length).toBe(1);
+    const updatedData = JSON.parse(localStorage.getItem('project_data'));
+    expect(updatedData.project_data.project_1).toBeUndefined();
+  });
+
+  test('when a project is pressed, current_project in localStorage is set correctly', () => {
+    loadProjects();
+    const projectList = document.querySelector('.project-list');
+    const firstProject = projectList.querySelector('.project');
+    firstProject.click();
+    const updatedData = JSON.parse(localStorage.getItem('project_data'));
+    expect(updatedData.current_project).toBe('project_1');
+    expect(window.location.href).toBe(escape("../projects/projectHomePage/project_home_page.html"));
+  });
 });
