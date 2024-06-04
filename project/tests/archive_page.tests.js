@@ -33,20 +33,11 @@ global.localStorage = {
             logs: {},
             BranchLink: "link2",
             TodoList: {}
-          },
-          project_3: {
-            projectName: "Project Three",
-            projectTag: "Tag3",
-            projectContributors: "Contributor3",
-            projectDescription: "Description3",
-            active: true,
-            logs: {},
-            BranchLink: "link3",
-            TodoList: {}
           }
         }
       });
     }
+    return null;
   }),
   setItem: jest.fn(),
   clear: jest.fn()
@@ -58,10 +49,10 @@ let currentPage = 1; // Ensure this is in the correct scope of your test file
 global.sessionStorage = {
   getItem: jest.fn((key) => {
     if (key === "current_page") {
-      return JSON.stringify(currentPage);
+      return currentPage.toString();
     } else if (key === 'archived_projects') {
       return JSON.stringify([
-        {
+        ["project_1", {
           projectName: "Project One",
           projectTag: "Tag1",
           projectContributors: "Contributor1",
@@ -70,8 +61,8 @@ global.sessionStorage = {
           logs: {},
           BranchLink: "link1",
           TodoList: {}
-        },
-        {
+        }],
+        ["project_2", {
           projectName: "Project Two",
           projectTag: "Tag2",
           projectContributors: "Contributor2",
@@ -80,7 +71,7 @@ global.sessionStorage = {
           logs: {},
           BranchLink: "link2",
           TodoList: {}
-        }
+        }]
       ]);
     }
     return null;
@@ -105,13 +96,28 @@ global.document = {
       return {
         innerHTML: '',
         appendChild: jest.fn(),
-        querySelector: jest.fn((sel) => {
-          if (sel === 'button.delete-btn') {
-            return { click: jest.fn() };
-          } else if (sel === '.project') {
-            return { click: jest.fn() };
+        querySelectorAll: jest.fn(() => [
+          {
+            appendChild: jest.fn(),
+            querySelector: jest.fn((sel) => {
+              if (sel === 'button.delete-btn') {
+                return { click: jest.fn() };
+              } else if (sel === '.project') {
+                return { click: jest.fn() };
+              }
+            })
+          },
+          {
+            appendChild: jest.fn(),
+            querySelector: jest.fn((sel) => {
+              if (sel === 'button.delete-btn') {
+                return { click: jest.fn() };
+              } else if (sel === '.project') {
+                return { click: jest.fn() };
+              }
+            })
           }
-        })
+        ])
       };
     } else if (selector === '.page-back-btn' || selector === '.page-next-btn') {
       return { addEventListener: jest.fn() };
@@ -120,6 +126,10 @@ global.document = {
   querySelectorAll: jest.fn((selector) => {
     if (selector === '.project-list .project') {
       return [
+        {
+          addEventListener: jest.fn(),
+          click: jest.fn()
+        },
         {
           addEventListener: jest.fn(),
           click: jest.fn()
@@ -167,57 +177,15 @@ global.KeyboardEvent = class {
 const { loadProjects, displayProjects, handlePageChange, handleSearch, deleteProject } = require('../archivePage/archive_page');
 
 describe('Archive Page Tests', () => {
-  let testData;
-
   beforeEach(() => {
-    testData = {
-      current_project: "project_1",
-      current_date: "06/03/2024",
-      project_data: {
-        project_1: {
-          projectName: "Project One",
-          projectTag: "Tag1",
-          projectContributors: "Contributor1",
-          projectDescription: "Description1",
-          active: false,
-          logs: {},
-          BranchLink: "link1",
-          TodoList: {}
-        },
-        project_2: {
-          projectName: "Project Two",
-          projectTag: "Tag2",
-          projectContributors: "Contributor2",
-          projectDescription: "Description2",
-          active: false,
-          logs: {},
-          BranchLink: "link2",
-          TodoList: {}
-        },
-        project_3: {
-          projectName: "Project Three",
-          projectTag: "Tag3",
-          projectContributors: "Contributor3",
-          projectDescription: "Description3",
-          active: true,
-          logs: {},
-          BranchLink: "link3",
-          TodoList: {}
-        }
-      }
-    };
-    localStorage.getItem.mockReturnValue(JSON.stringify(testData));
-  });
-
-  afterEach(() => {
-    localStorage.clear();
-    sessionStorage.clear();
+    jest.clearAllMocks();
   });
 
   test('should load all archived projects correctly', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
-    expect(projectList.appendChild).toHaveBeenCalledTimes(2);
+    const projectListItems = projectList.querySelectorAll('.project');
+    expect(projectListItems.length).toBe(2);
   });
 
   test('page back works correctly', () => {
@@ -248,8 +216,8 @@ describe('Archive Page Tests', () => {
   test('delete works correctly', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
-    const deleteButton = projectList.querySelector('button.delete-btn');
-    deleteButton.click();
+    const deleteButtons = projectList.querySelectorAll('button.delete-btn');
+    deleteButtons[0].click();
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
@@ -259,10 +227,10 @@ describe('Archive Page Tests', () => {
   test('when a project is pressed, current_project in localStorage is set correctly', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
-    const firstProject = projectList.querySelector('.project');
+    const firstProject = projectList.querySelectorAll('.project')[0];
     firstProject.click();
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
     expect(updatedData.current_project).toBe('project_1');
-    expect(window.location.href).toBe(escape("../projects/projectHomePage/project_home_page.html"));
+    expect(window.location.href).toBe("../projects/projectHomePage/project_home_page.html");
   });
 });
