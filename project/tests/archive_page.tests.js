@@ -226,7 +226,6 @@ describe('Archive Page Tests', () => {
         }
     });
     deleteButtonClick(); // Simulate click event on the first delete button
-    console.log(sessionStorage.getItem('archived_projects'));
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
@@ -234,18 +233,19 @@ describe('Archive Page Tests', () => {
   });
 
   test('when a project is pressed, current_project in localStorage is set correctly', () => {
-      loadProjects();
-      const projectList = document.querySelector('.project-list');
-      const firstProject = projectList.querySelectorAll('.project')[0];
-      const projectClickEvent = jest.fn(); // Mock the project click event handler
-      firstProject.addEventListener = jest.fn((event, callback) => {
-          if (event === 'click') {
-              projectClickEvent.mockImplementation(callback);
-          }
-      });
-      projectClickEvent(); // Simulate click event on the first project
-      const updatedData = JSON.parse(localStorage.getItem('project_data'));
-      expect(updatedData.current_project).toBe('project_1');
-      expect(window.location.href).toBe("../projects/projectHomePage/project_home_page.html");
+    loadProjects();
+    const projectList = document.querySelector('.project-list');
+    const firstProject = projectList.querySelectorAll('.project')[0];
+
+    // Retrieve the actual event listener function attached to the element
+    const projectClickEvent = firstProject.addEventListener.mock.calls[0][1];
+
+    // Simulate the click event by calling the actual event listener function
+    projectClickEvent();
+
+    // Assert the behavior after the click event
+    const updatedData = JSON.parse(localStorage.getItem('project_data'));
+    expect(updatedData.current_project).toBe('project_1');
+    expect(window.location.href).toBe("../projects/projectHomePage/project_home_page.html");
   });
 });
