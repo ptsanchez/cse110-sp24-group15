@@ -228,7 +228,8 @@ describe('Archive Page Tests', () => {
   });
 
   test('page next works correctly', () => {
-    loadProjects();
+    currentPage = 1; // Ensure currentPage is initialized to 1
+    loadProjects(); // Ensure projects are loaded before changing page
     handlePageChange(1);
     const totalPages = Math.ceil(2 / 5); // Assuming projectsPerPage is 5
     expect(currentPage).toBe(Math.min(2, totalPages));
