@@ -50,13 +50,6 @@ global.localStorage = {
   clear: jest.fn()
 };
 
-// Update sessionStorage setItem mock to populate archived_projects correctly
-global.sessionStorage.setItem = jest.fn((key, value) => {
-  if (key === 'archived_projects') {
-    sessionStorage[key] = value;
-  }
-});
-
 let currentPage = 1; // Ensure this is in the correct scope of your test file
 
 // Mock the document methods
