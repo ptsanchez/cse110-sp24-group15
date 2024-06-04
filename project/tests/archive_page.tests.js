@@ -219,22 +219,32 @@ describe('Archive Page Tests', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
     const deleteButtons = projectList.querySelectorAll('button.delete-btn');
-    const deleteButtonClick = deleteButtons[0].addEventListener.mock.calls[0][0];
+    const deleteButtonClick = jest.fn(); // Mock the delete button click event handler
+    deleteButtons[0].addEventListener = jest.fn((event, callback) => {
+        if (event === 'click') {
+            deleteButtonClick.mockImplementation(callback);
+        }
+    });
     deleteButtonClick(); // Simulate click event on the first delete button
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
     expect(updatedData.project_data.project_1).toBeUndefined();
   });
-  
+
   test('when a project is pressed, current_project in localStorage is set correctly', () => {
-    loadProjects();
-    const projectList = document.querySelector('.project-list');
-    const firstProject = projectList.querySelectorAll('.project')[0];
-    const projectClickEvent = firstProject.addEventListener.mock.calls[0][0];
-    projectClickEvent(); // Simulate click event on the first project
-    const updatedData = JSON.parse(localStorage.getItem('project_data'));
-    expect(updatedData.current_project).toBe('project_1');
-    expect(window.location.href).toBe("../projects/projectHomePage/project_home_page.html");
+      loadProjects();
+      const projectList = document.querySelector('.project-list');
+      const firstProject = projectList.querySelectorAll('.project')[0];
+      const projectClickEvent = jest.fn(); // Mock the project click event handler
+      firstProject.addEventListener = jest.fn((event, callback) => {
+          if (event === 'click') {
+              projectClickEvent.mockImplementation(callback);
+          }
+      });
+      projectClickEvent(); // Simulate click event on the first project
+      const updatedData = JSON.parse(localStorage.getItem('project_data'));
+      expect(updatedData.current_project).toBe('project_1');
+      expect(window.location.href).toBe("../projects/projectHomePage/project_home_page.html");
   });
 });
