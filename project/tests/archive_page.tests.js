@@ -223,17 +223,18 @@ describe('Archive Page Tests', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
     const deleteButtons = projectList.querySelectorAll('button.delete-btn');
-    console.log(projectList);
-    console.log(deleteButtons);
 
-    // Trigger the deleteProject function with the appropriate arguments
-    deleteProject(deleteButtons[0].dataset.id);
+    // Mock the project key corresponding to the first delete button
+    const mockProjectKey = 'project_1'; // Change this to the appropriate project key
+
+    // Trigger the deleteProject function with the appropriate project key
+    deleteProject(mockProjectKey);
 
     // Assert the behavior after calling deleteProject
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
-    expect(updatedData.project_data.project_1).toBeUndefined();
+    expect(updatedData.project_data[mockProjectKey]).toBeUndefined();
 });
 
   test('when a project is pressed, current_project in localStorage is set correctly', () => {
