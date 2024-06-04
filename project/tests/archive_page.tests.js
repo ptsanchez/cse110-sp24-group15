@@ -4,6 +4,11 @@ global.window = {
     href: ''
   },
   addEventListener: jest.fn(), // Mock addEventListener on the window object
+  sessionStorage: {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    clear: jest.fn()
+  }
 };
 
 // Mock the localStorage
