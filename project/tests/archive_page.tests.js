@@ -224,10 +224,6 @@ describe('Archive Page Tests', () => {
     const projectList = document.querySelector('.project-list');
     const deleteButtons = projectList.querySelectorAll('button.delete-btn');
 
-    // Mock the deleteProject function
-    const deleteProjectMock = jest.fn();
-    window.deleteProject = deleteProjectMock;
-
     // Trigger the deleteProject function with the appropriate arguments
     deleteProject(deleteButtons[0].dataset.id);
 
