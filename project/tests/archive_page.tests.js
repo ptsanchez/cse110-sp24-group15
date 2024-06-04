@@ -2,7 +2,8 @@
 global.window = {
   location: {
     href: ''
-  }
+  },
+  addEventListener: jest.fn(), // Mock addEventListener on the window object
 };
 
 // Mock the localStorage
