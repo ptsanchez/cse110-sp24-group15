@@ -121,7 +121,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const totalPages = Math.ceil(projects.length / projectsPerPage);
 
         // Update the current page number within the valid range
-        console.log(Math.min(currentPage + direction, totalPages)); //REMOVE
+        console.log(currentPage);
+        console.log(direction);
         currentPage = Math.max(1, Math.min(currentPage + direction, totalPages));
 
         // Store the updated current page in sessionStorage
