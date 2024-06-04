@@ -58,8 +58,32 @@ let currentPage = 1; // Ensure this is in the correct scope of your test file
 global.sessionStorage = {
   getItem: jest.fn((key) => {
     if (key === "current_page") {
-      return currentPage;
+      return JSON.stringify(currentPage);
+    } else if (key === 'archived_projects') {
+      return JSON.stringify([
+        {
+          projectName: "Project One",
+          projectTag: "Tag1",
+          projectContributors: "Contributor1",
+          projectDescription: "Description1",
+          active: false,
+          logs: {},
+          BranchLink: "link1",
+          TodoList: {}
+        },
+        {
+          projectName: "Project Two",
+          projectTag: "Tag2",
+          projectContributors: "Contributor2",
+          projectDescription: "Description2",
+          active: false,
+          logs: {},
+          BranchLink: "link2",
+          TodoList: {}
+        }
+      ]);
     }
+    return null;
   }),
   setItem: jest.fn(),
   clear: jest.fn()
@@ -71,7 +95,8 @@ global.document = {
     if (id === 'search-bar') {
       return {
         addEventListener: jest.fn(), // Mock addEventListener method for search-bar
-        value: ''
+        value: '',
+        dispatchEvent: jest.fn() // Mock dispatchEvent for search-bar
       };
     }
   }),
@@ -94,7 +119,12 @@ global.document = {
   }),
   querySelectorAll: jest.fn((selector) => {
     if (selector === '.project-list .project') {
-      return [];
+      return [
+        {
+          addEventListener: jest.fn(),
+          click: jest.fn()
+        }
+      ];
     }
   }),
   addEventListener: jest.fn((event, callback) => {
