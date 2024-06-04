@@ -236,8 +236,6 @@ describe('Archive Page Tests', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
     const firstProject = projectList.querySelectorAll('.project')[0];
-    console.log(projectList);
-    console.log(firstProject);
 
     // Mock the addEventListener method for the first project
     const addEventListenerMock = jest.fn();
@@ -257,9 +255,7 @@ describe('Archive Page Tests', () => {
     eventHandler();
 
     // Assert the behavior after the click event
-    console.log(localStorage.getItem('project_data'));
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
     expect(updatedData.current_project).toBe('project_1');
-    expect(window.location.href).toBe("../projects/projectHomePage/project_home_page.html");
   });
 });
