@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Append delete button to list item
             listItem.appendChild(deleteButton);
 
-            // Your event handler in the main JS file
+            // Add event listener for project item click
             listItem.addEventListener('click', () => {
                 let projData = JSON.parse(localStorage.getItem("project_data"));
                 projData.current_project = key;
                 localStorage.setItem('project_data', JSON.stringify(projData));
-                window.location.href = escape("../projects/projectHomePage/project_home_page.html");
+                window.location.href = "../projects/projectHomePage/project_home_page.html"; // Removed escape function
             });
 
             // Append the list item to the project list
