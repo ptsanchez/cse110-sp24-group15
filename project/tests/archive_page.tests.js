@@ -216,13 +216,12 @@ describe('Archive Page Tests', () => {
   });
 
   test('delete works correctly', () => {
+    console.log(localStorage);
     // Set up sessionStorage with some dummy data
     const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
     sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
 
     loadProjects();
-    const projectList = document.querySelector('.project-list');
-    const deleteButtons = projectList.querySelectorAll('button.delete-btn');
 
     // Mock the project key corresponding to the first delete button
     const mockProjectKey = 'project_1'; // Change this to the appropriate project key
