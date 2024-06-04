@@ -241,30 +241,26 @@ describe('Archive Page Tests', () => {
     expect(updatedData.project_data.project_1).toBeUndefined();
 });
 
-  test('when a project is pressed, current_project in localStorage is set correctly', () => {
+  test('delete works correctly', () => {
+    // Set up sessionStorage with some dummy data
+    const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
+    sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
+
     loadProjects();
     const projectList = document.querySelector('.project-list');
-    const firstProject = projectList.querySelectorAll('.project')[0];
+    const deleteButtons = projectList.querySelectorAll('button.delete-btn');
 
-    // Mock the addEventListener method for the first project
-    const addEventListenerMock = jest.fn();
+    // Mock the deleteProject function
+    const deleteProjectMock = jest.fn();
+    window.deleteProject = deleteProjectMock;
 
-    // Assign the mock to addEventListener property
-    firstProject.addEventListener = addEventListenerMock;
+    // Trigger the deleteProject function with the appropriate arguments
+    deleteProject(deleteButtons[0].dataset.id);
 
-    // Call the event handler directly
-    const eventHandler = jest.fn();
-    addEventListenerMock.mockImplementation((event, callback) => {
-        if (event === 'click') {
-            eventHandler.mockImplementation(callback);
-        }
-    });
-
-    // Simulate the click event
-    eventHandler();
-
-    // Assert the behavior after the click event
+    // Assert the behavior after calling deleteProject
+    const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
+    expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
-    expect(updatedData.current_project).toBe('project_1');
+    expect(updatedData.project_data.project_1).toBeUndefined();
   });
 });
