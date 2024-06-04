@@ -237,11 +237,13 @@ describe('Archive Page Tests', () => {
     const projectList = document.querySelector('.project-list');
     const firstProject = projectList.querySelectorAll('.project')[0];
 
-    // Retrieve the actual event listener function attached to the element
-    const projectClickEvent = firstProject.addEventListener.mock.calls[0][1];
+    // Mock the addEventListener method for the first project
+    const addEventListenerMock = jest.fn();
+    firstProject.addEventListener = addEventListenerMock;
 
-    // Simulate the click event by calling the actual event listener function
-    projectClickEvent();
+    // Call the event handler directly
+    const eventHandler = addEventListenerMock.mock.calls[0][1];
+    eventHandler();
 
     // Assert the behavior after the click event
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
