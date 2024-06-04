@@ -88,7 +88,7 @@ main {
     position: relative;
     padding-right: 50px;
     transition: background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 10%);
 }
 
 .project-todo-list-div:hover, .project-link-div:hover {
