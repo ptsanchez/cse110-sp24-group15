@@ -119,8 +119,10 @@ global.document = {
           }
         ])
       };
-    } else if (selector === '.page-back-btn' || selector === '.page-next-btn') {
-      return { addEventListener: jest.fn() };
+    } else if (selector === '.page-back-btn') {
+      return { addEventListener: jest.fn((event, callback) => callback()) };
+    } else if (selector === '.page-next-btn') {
+      return { addEventListener: jest.fn((event, callback) => callback()) };
     }
   }),
   querySelectorAll: jest.fn((selector) => {
@@ -190,7 +192,7 @@ describe('Archive Page Tests', () => {
 
   test('page back works correctly', () => {
     currentPage = 2;
-    handlePageChange(-1);
+    currentPage = handlePageChange(currentPage, -1);
     expect(currentPage).toBe(1);
     expect(sessionStorage.setItem).toHaveBeenCalledWith('current_page', 1);
   });
@@ -198,7 +200,7 @@ describe('Archive Page Tests', () => {
   test('page next works correctly', () => {
     currentPage = 1; // Ensure currentPage is initialized to 1
     loadProjects(); // Ensure projects are loaded before changing page
-    handlePageChange(1);
+    currentPage = handlePageChange(currentPage, 1);
     const totalPages = Math.ceil(2 / 5); // Assuming projectsPerPage is 5
     expect(currentPage).toBe(Math.min(2, totalPages));
     expect(sessionStorage.setItem).toHaveBeenCalledWith('current_page', currentPage);

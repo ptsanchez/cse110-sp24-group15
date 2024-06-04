@@ -116,20 +116,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to handle page changes (next and previous)
-    function handlePageChange(direction) {
+    function handlePageChange(currentPage, direction) {
         // Calculate the total number of pages
         const totalPages = Math.ceil(projects.length / projectsPerPage);
 
         // Update the current page number within the valid range
         console.log(currentPage);
         console.log(direction);
-        currentPage = Math.max(1, Math.min(currentPage + direction, totalPages));
+        const updatedCurrentPage = Math.max(1, Math.min(currentPage + direction, totalPages));
 
         // Store the updated current page in sessionStorage
-        sessionStorage.setItem('current_page', currentPage);
+        sessionStorage.setItem('current_page', updatedCurrentPage);
 
         // Redisplay the projects for the new page
         displayProjects();
+        return updatedCurrentPage;
     }
 
     // Function to handle search functionality
@@ -170,10 +171,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event listener for the 'Page Back' button
-    document.querySelector('.page-back-btn').addEventListener('click', () => handlePageChange(-1));
+    document.querySelector('.page-back-btn').addEventListener('click', () => {
+        currentPage = handlePageChange(currentPage, -1);
+    });
 
     // Event listener for the 'Next Page' button
-    document.querySelector('.page-next-btn').addEventListener('click', () => handlePageChange(1));
+    document.querySelector('.page-next-btn').addEventListener('click', () => {
+        currentPage = handlePageChange(currentPage, 1);
+    });
 
     // Event listener for the search bar input
     document.getElementById('search-bar').addEventListener('keyup', handleSearch);
