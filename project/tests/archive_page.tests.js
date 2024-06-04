@@ -239,10 +239,19 @@ describe('Archive Page Tests', () => {
 
     // Mock the addEventListener method for the first project
     const addEventListenerMock = jest.fn();
+
+    // Assign the mock to addEventListener property
     firstProject.addEventListener = addEventListenerMock;
 
     // Call the event handler directly
-    const eventHandler = addEventListenerMock.mock.calls[0][1];
+    const eventHandler = jest.fn();
+    addEventListenerMock.mockImplementation((event, callback) => {
+        if (event === 'click') {
+            eventHandler.mockImplementation(callback);
+        }
+    });
+
+    // Simulate the click event
     eventHandler();
 
     // Assert the behavior after the click event
