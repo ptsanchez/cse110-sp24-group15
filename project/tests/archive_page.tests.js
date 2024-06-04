@@ -219,32 +219,6 @@ describe('Archive Page Tests', () => {
     // Set up sessionStorage with some dummy data
     const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
     sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
-    console.log(sessionStorage);
-
-    loadProjects();
-    const projectList = document.querySelector('.project-list');
-    const deleteButtons = projectList.querySelectorAll('button.delete-btn');
-
-    const deleteButtonClick = jest.fn(); // Mock the delete button click event handler
-    deleteButtons[0].addEventListener = jest.fn((event, callback) => {
-        if (event === 'click') {
-            deleteButtonClick.mockImplementation(callback);
-        }
-    });
-    deleteButtonClick(); // Simulate click event on the first delete button
-
-    // Assert the behavior after the click event
-    console.log(sessionStorage);
-    const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
-    expect(remainingProjects.length).toBe(1);
-    const updatedData = JSON.parse(localStorage.getItem('project_data'));
-    expect(updatedData.project_data.project_1).toBeUndefined();
-});
-
-  test('delete works correctly', () => {
-    // Set up sessionStorage with some dummy data
-    const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
-    sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
 
     loadProjects();
     const projectList = document.querySelector('.project-list');
@@ -262,5 +236,32 @@ describe('Archive Page Tests', () => {
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
     expect(updatedData.project_data.project_1).toBeUndefined();
+});
+
+  test('when a project is pressed, current_project in localStorage is set correctly', () => {
+    loadProjects();
+    const projectList = document.querySelector('.project-list');
+    const firstProject = projectList.querySelectorAll('.project')[0];
+
+    // Mock the addEventListener method for the first project
+    const addEventListenerMock = jest.fn();
+
+    // Assign the mock to addEventListener property
+    firstProject.addEventListener = addEventListenerMock;
+
+    // Call the event handler directly
+    const eventHandler = jest.fn();
+    addEventListenerMock.mockImplementation((event, callback) => {
+        if (event === 'click') {
+            eventHandler.mockImplementation(callback);
+        }
+    });
+
+    // Simulate the click event
+    eventHandler();
+
+    // Assert the behavior after the click event
+    const updatedData = JSON.parse(localStorage.getItem('project_data'));
+    expect(updatedData.current_project).toBe('project_1');
   });
 });
