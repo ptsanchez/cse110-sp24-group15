@@ -80,8 +80,7 @@ main {
 }
 
 /* TODO List Content & Branch Link Content */
-.project-todo-list-div,
-.project-link-div {
+.project-todo-list-div, .project-link-div {
     background-color: var(--project-home-todo-bg);
     padding: 10px;
     margin-bottom: 10px;
@@ -89,15 +88,21 @@ main {
     position: relative;
     padding-right: 50px;
     transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.project-todo-list,
-.project-branch-link {
-    color: var(--text-white-color);
-    font-size: 16px;
+.project-todo-list-div:hover, .project-link-div:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.02);
+}
+
+.project-todo-list, .project-branch-link {
+    color: var(--text-color);
+    font-size: 1em;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     outline: none;
+    font-weight: bold;
 }
 
 .project-branch-link {
@@ -106,13 +111,19 @@ main {
 
 /* Project Description */
 .project-detail-div {
-    background-color: var(--project-home-description-bg);
+    background-color: #bcf5bc;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
     text-align: center;
-    font-size: 16px;
-    color: var(--text-white-color);
+    font-size: 1em;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.project-detail-div:hover {
+    background-color: #a6f2a6;
+    transform: scale(1.02);
 }
 
 /* Buttons that navigate to other pages */
@@ -121,22 +132,22 @@ main {
     justify-content: space-between;
 }
 
-.make-log-btn,
-.all-logs-btn {
-    width: 48%;
-    padding: 10px;
-    font-size: 16px;
-    color: var(--text-white-color);
-    background-color: var(--project-home-logs-bg);
+.make-log-btn, .all-logs-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: 'black';
+    background: none;
     border: none;
-    border-radius: 4px;
+    padding: 13px;
     cursor: pointer;
-    font-weight: 500;
+    border-radius: 20px;
+    background-color: #c5f5f0;
+    width: 20em;
 }
 
-.make-log-btn:hover,
-.all-logs-btn:hover {
-    background-color: var(--project-home-logs-bg-hover);
+.make-log-btn:hover, .all-logs-btn:hover {
+    background-color: #9aeee5;
+    transform: scale(1.05);
 }
 
 /* Edit Button in TODO List and Branch Link */
@@ -148,7 +159,7 @@ main {
     background: none;
     font-size: 24px;
     cursor: pointer;
-    color: var(--text-white-color);
+    color: var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
