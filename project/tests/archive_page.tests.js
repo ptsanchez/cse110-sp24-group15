@@ -223,6 +223,8 @@ describe('Archive Page Tests', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
     const deleteButtons = projectList.querySelectorAll('button.delete-btn');
+    console.log(projectList);
+    console.log(deleteButtons);
 
     // Trigger the deleteProject function with the appropriate arguments
     deleteProject(deleteButtons[0].dataset.id);
