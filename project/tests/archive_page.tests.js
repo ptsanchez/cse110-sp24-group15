@@ -219,6 +219,7 @@ describe('Archive Page Tests', () => {
     // Set up sessionStorage with some dummy data
     const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
     sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
+    console.log(sessionStorage);
 
     loadProjects();
     const projectList = document.querySelector('.project-list');
@@ -233,6 +234,7 @@ describe('Archive Page Tests', () => {
     deleteButtonClick(); // Simulate click event on the first delete button
 
     // Assert the behavior after the click event
+    console.log(sessionStorage);
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
