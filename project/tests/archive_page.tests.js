@@ -50,6 +50,13 @@ global.localStorage = {
   clear: jest.fn()
 };
 
+// Update sessionStorage setItem mock to populate archived_projects correctly
+global.sessionStorage.setItem = jest.fn((key, value) => {
+  if (key === 'archived_projects') {
+    sessionStorage[key] = value;
+  }
+});
+
 let currentPage = 1; // Ensure this is in the correct scope of your test file
 
 // Mock the document methods
@@ -216,11 +223,15 @@ describe('Archive Page Tests', () => {
   });
 
   test('delete works correctly', () => {
-    console.log(localStorage);
     // Set up sessionStorage with some dummy data
     const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
     sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
 
+    // Mock the deleteProject function
+    const deleteProjectMock = jest.fn();
+    window.deleteProject = deleteProjectMock;
+
+    // Call loadProjects function
     loadProjects();
 
     // Mock the project key corresponding to the first delete button
@@ -234,7 +245,7 @@ describe('Archive Page Tests', () => {
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
     expect(updatedData.project_data[mockProjectKey]).toBeUndefined();
-});
+  });
 
   test('when a project is pressed, current_project in localStorage is set correctly', () => {
     loadProjects();
