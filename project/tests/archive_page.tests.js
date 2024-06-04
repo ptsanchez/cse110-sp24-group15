@@ -45,41 +45,6 @@ global.localStorage = {
 
 let currentPage = 1; // Ensure this is in the correct scope of your test file
 
-// Mock the sessionStorage
-global.sessionStorage = {
-  getItem: jest.fn((key) => {
-    if (key === "current_page") {
-      return currentPage.toString();
-    } else if (key === 'archived_projects') {
-      return JSON.stringify([
-        ["project_1", {
-          projectName: "Project One",
-          projectTag: "Tag1",
-          projectContributors: "Contributor1",
-          projectDescription: "Description1",
-          active: false,
-          logs: {},
-          BranchLink: "link1",
-          TodoList: {}
-        }],
-        ["project_2", {
-          projectName: "Project Two",
-          projectTag: "Tag2",
-          projectContributors: "Contributor2",
-          projectDescription: "Description2",
-          active: false,
-          logs: {},
-          BranchLink: "link2",
-          TodoList: {}
-        }]
-      ]);
-    }
-    return null;
-  }),
-  setItem: jest.fn(),
-  clear: jest.fn()
-};
-
 // Mock the document methods
 global.document = {
   getElementById: jest.fn((id) => {
@@ -101,9 +66,23 @@ global.document = {
             appendChild: jest.fn(),
             querySelector: jest.fn((sel) => {
               if (sel === 'button.delete-btn') {
-                return { click: jest.fn() };
+                return {
+                  click: jest.fn(),
+                  addEventListener: jest.fn((event, callback) => {
+                    if (event === 'click') {
+                      callback();
+                    }
+                  })
+                };
               } else if (sel === '.project') {
-                return { click: jest.fn() };
+                return {
+                  click: jest.fn(),
+                  addEventListener: jest.fn((event, callback) => {
+                    if (event === 'click') {
+                      callback();
+                    }
+                  })
+                };
               }
             })
           },
@@ -111,9 +90,23 @@ global.document = {
             appendChild: jest.fn(),
             querySelector: jest.fn((sel) => {
               if (sel === 'button.delete-btn') {
-                return { click: jest.fn() };
+                return {
+                  click: jest.fn(),
+                  addEventListener: jest.fn((event, callback) => {
+                    if (event === 'click') {
+                      callback();
+                    }
+                  })
+                };
               } else if (sel === '.project') {
-                return { click: jest.fn() };
+                return {
+                  click: jest.fn(),
+                  addEventListener: jest.fn((event, callback) => {
+                    if (event === 'click') {
+                      callback();
+                    }
+                  })
+                };
               }
             })
           }
