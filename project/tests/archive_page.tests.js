@@ -219,6 +219,8 @@ describe('Archive Page Tests', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
     const deleteButtons = projectList.querySelectorAll('button.delete-btn');
+    console.log(projectList);
+    console.log(deleteButtons);
     const deleteButtonClick = jest.fn(); // Mock the delete button click event handler
     deleteButtons[0].addEventListener = jest.fn((event, callback) => {
         if (event === 'click') {
@@ -226,6 +228,7 @@ describe('Archive Page Tests', () => {
         }
     });
     deleteButtonClick(); // Simulate click event on the first delete button
+    console.log(sessionStorage.getItem('archived_projects'));
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
     const updatedData = JSON.parse(localStorage.getItem('project_data'));
