@@ -52,13 +52,13 @@ global.localStorage = {
   clear: jest.fn()
 };
 
-let page = 1;
+let currentPage = 1; // Ensure this is in the correct scope of your test file
 
 // Mock the sessionStorage
 global.sessionStorage = {
   getItem: jest.fn((key) => {
     if (key === "current_page") {
-      return page;
+      return currentPage;
     }
   }),
   setItem: jest.fn(),
@@ -79,7 +79,14 @@ global.document = {
     if (selector === '.project-list') {
       return {
         innerHTML: '',
-        appendChild: jest.fn()
+        appendChild: jest.fn(),
+        querySelector: jest.fn((sel) => {
+          if (sel === 'button.delete-btn') {
+            return { click: jest.fn() };
+          } else if (sel === '.project') {
+            return { click: jest.fn() };
+          }
+        })
       };
     } else if (selector === '.page-back-btn' || selector === '.page-next-btn') {
       return { addEventListener: jest.fn() };
@@ -117,6 +124,14 @@ global.document.createElement = jest.fn((tagName) => {
   };
   return element;
 });
+
+// Mock KeyboardEvent if not available
+global.KeyboardEvent = class {
+  constructor(eventType, init) {
+    this.type = eventType;
+    Object.assign(this, init);
+  }
+};
 
 // Import the functions
 const { loadProjects, displayProjects, handlePageChange, handleSearch, deleteProject } = require('../archivePage/archive_page');
@@ -176,7 +191,6 @@ describe('Archive Page Tests', () => {
   });
 
   test('page back works correctly', () => {
-    loadProjects();
     currentPage = 2;
     handlePageChange(-1);
     expect(currentPage).toBe(1);
