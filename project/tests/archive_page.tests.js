@@ -4,39 +4,13 @@ global.window = {
     href: ''
   },
   addEventListener: jest.fn(), // Mock addEventListener on the window object
-  sessionStorage: {
-    getItem: jest.fn((key) => {
-      if (key === 'current_page') {
-        return currentPage.toString();
-      } else if (key === 'archived_projects') {
-        return JSON.stringify([
-          ["project_1", {
-            projectName: "Project One",
-            projectTag: "Tag1",
-            projectContributors: "Contributor1",
-            projectDescription: "Description1",
-            active: false,
-            logs: {},
-            BranchLink: "link1",
-            TodoList: {}
-          }],
-          ["project_2", {
-            projectName: "Project Two",
-            projectTag: "Tag2",
-            projectContributors: "Contributor2",
-            projectDescription: "Description2",
-            active: false,
-            logs: {},
-            BranchLink: "link2",
-            TodoList: {}
-          }]
-        ]);
-      }
-      return null;
-    }),
-    setItem: jest.fn(),
-    clear: jest.fn()
-  }
+};
+
+// Mock the sessionStorage
+global.sessionStorage = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn()
 };
 
 // Mock the localStorage
