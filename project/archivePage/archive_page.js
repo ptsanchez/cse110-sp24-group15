@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Append delete button to list item
             listItem.appendChild(deleteButton);
 
-            // Add event listener for project item click
+            // Your event handler in the main JS file
             listItem.addEventListener('click', () => {
                 let projData = JSON.parse(localStorage.getItem("project_data"));
                 projData.current_project = key;
