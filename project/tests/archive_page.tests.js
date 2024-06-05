@@ -8,7 +8,16 @@ global.window = {
 
 // Mock the sessionStorage
 global.sessionStorage = {
-  getItem: jest.fn(),
+  getItem: jest.fn((key) => {
+    if (key === 'archived_projects') {
+      // Simulate returning an array with only one project
+      return JSON.stringify([
+        { key: 'project_1', projectName: 'Project 1' }
+      ]);
+    }
+    // Return null for other keys
+    return null;
+  }),
   setItem: jest.fn(),
   clear: jest.fn()
 };
