@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function deleteProject(projectKey) {
         // Remove the project from the projects array
         projects = projects.filter(([key, project]) => key !== projectKey && project);
-
+        
         // Update sessionStorage with the modified projects array
         sessionStorage.setItem('archived_projects', JSON.stringify(projects));
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Create a new object without the projectKey property
         const updatedProjectData = {};
         for (const key in projData.project_data) {
-            if (projData.project_data.hasOwnProperty(key) && key !== projectKey) {
+            if (key !== projectKey) {
                 updatedProjectData[key] = projData.project_data[key];
             }
         }
