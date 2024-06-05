@@ -195,6 +195,7 @@ describe('Archive Page Tests', () => {
     currentPage = handlePageChange(currentPage, -1);
     expect(currentPage).toBe(1);
     expect(sessionStorage.setItem).toHaveBeenCalledWith('current_page', 1);
+    console.log(sessionStorage);
   });
 
   test('page next works correctly', () => {
