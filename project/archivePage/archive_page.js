@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Create a new object without the projectKey property
         const updatedProjectData = Object.keys(projData.project_data).reduce((acc, key) => {
-            if (key !== projectKey && projData.project_data.hasOwnProperty(key)) {
+            if (key !== projectKey && Object.hasOwn(projData.project_data, key)) {
                 acc[key] = projData.project_data[key];
             }
             return acc;
