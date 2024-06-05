@@ -96,21 +96,21 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Update sessionStorage with the modified projects array
         sessionStorage.setItem('archived_projects', JSON.stringify(projects));
-    
+
         // Retrieve the project data from localStorage
         let projData = JSON.parse(localStorage.getItem("project_data"));
-    
+
         // Create a new object without the projectKey property
-        const updatedProjectData = Object.keys(projData.project_data).reduce((acc, key) => {
+        const updatedProjectData = {};
+        for (const key in projData.project_data) {
             if (key !== projectKey) {
-                acc[key] = projData.project_data[key];
+                updatedProjectData[key] = projData.project_data[key];
             }
-            return acc;
-        }, {});
-    
+        }
+
         // Update localStorage with the modified project data
         localStorage.setItem('project_data', JSON.stringify({ ...projData, project_data: updatedProjectData }));
-    
+
         // Redisplay the updated list of projects
         displayProjects();
     }
