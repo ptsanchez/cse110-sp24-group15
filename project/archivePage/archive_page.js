@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             projData = JSON.parse(projData);
             
             // Filter projects to include only non-active ones
-            projects = Object.entries(projData.project_data).filter(([_, project]) => !project.active);
+            projects = Object.values(projData.project_data).filter(project => !project.active);
             
             // Store the filtered projects in sessionStorage
             sessionStorage.setItem("archived_projects", JSON.stringify(projects));
