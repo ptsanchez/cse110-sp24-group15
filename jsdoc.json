@@ -3,7 +3,7 @@
     "allowUnknownTags": true
   },
   "source": {
-    "include": ["project/templates", "project/tests"],
+    "include": ["project/addLogPage/", "project/tests", "project/feedbackPage/"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
