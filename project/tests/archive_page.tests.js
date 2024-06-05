@@ -219,6 +219,8 @@ describe('Archive Page Tests', () => {
     loadProjects();
     const projectList = document.querySelector('.project-list');
     const firstProject = projectList.querySelectorAll('.project')[0];
+    console.log(projectList.querySelectorAll('.project'));
+    console.log(firstProject);
     
     // Simulate a click on the delete button
     const deleteButton = firstProject.querySelector('.delete-btn');
