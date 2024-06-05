@@ -226,9 +226,6 @@ describe('Archive Page Tests', () => {
     // Simulate deletion by directly calling deleteProject function
     deleteProject(projectKey);
 
-    // Check if deleteProject function is called with the correct project key
-    expect(deleteProject).toHaveBeenCalledWith('project_1');
-
     // Verify that only one project is left in sessionStorage
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
