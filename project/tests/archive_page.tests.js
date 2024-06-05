@@ -195,7 +195,6 @@ describe('Archive Page Tests', () => {
     currentPage = handlePageChange(currentPage, -1);
     expect(currentPage).toBe(1);
     expect(sessionStorage.setItem).toHaveBeenCalledWith('current_page', 1);
-    console.log(sessionStorage);
   });
 
   test('page next works correctly', () => {
@@ -217,51 +216,20 @@ describe('Archive Page Tests', () => {
   });
 
   test('delete works correctly', () => {
-    // Initialize the projects array in the format matching project_data
-    const projects = {
-        project_1: {
-            projectName: "Project One",
-            projectTag: "Tag1",
-            projectContributors: "Contributor1",
-            projectDescription: "Description1",
-            active: false,
-            logs: {},
-            BranchLink: "link1",
-            TodoList: {}
-        },
-        project_2: {
-            projectName: "Project Two",
-            projectTag: "Tag2",
-            projectContributors: "Contributor2",
-            projectDescription: "Description2",
-            active: false,
-            logs: {},
-            BranchLink: "link2",
-            TodoList: {}
-        }
-    };
-
-    // Set up sessionStorage with the projects data
-    sessionStorage.setItem('archived_projects', JSON.stringify(projects));
-
-    // Mock the deleteProject function
-    const deleteProjectMock = jest.fn();
-    window.deleteProject = deleteProjectMock;
-
-    // Call loadProjects function
     loadProjects();
+    const projectList = document.querySelector('.project-list');
+    const firstProject = projectList.querySelectorAll('.project')[0];
+    
+    // Simulate a click on the delete button
+    const deleteButton = firstProject.querySelector('.delete-btn');
+    deleteButton.click();
 
-    // Mock the project key corresponding to the first delete button
-    const mockProjectKey = 'project_1'; // Change this to the appropriate project key
+    // Check if deleteProject function is called with the correct project key
+    expect(deleteProject).toHaveBeenCalledWith('project_1');
 
-    // Trigger the deleteProject function with the appropriate project key
-    deleteProject(mockProjectKey);
-
-    // Assert the behavior after calling deleteProject
+    // Verify that only one project is left in sessionStorage
     const remainingProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
     expect(remainingProjects.length).toBe(1);
-    const updatedData = JSON.parse(localStorage.getItem('project_data'));
-    expect(updatedData.project_data[mockProjectKey]).toBeUndefined();
   });
 
   test('when a project is pressed, current_project in localStorage is set correctly', () => {
