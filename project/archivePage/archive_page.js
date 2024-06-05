@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Create a new object without the projectKey property
         const updatedProjectData = Object.keys(projData.project_data).reduce((acc, key) => {
-            if (key !== projectKey && Object.hasOwn(projData.project_data, key)) {
+            if (key !== projectKey) {
                 acc[key] = projData.project_data[key];
             }
             return acc;
@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
             let pageNumber = 1;
             let found = false;
             for (let i = 0; i < archivedProjects.length; i++) {
-                const [_, project] = archivedProjects[i];
-                if (project.projectName.toLowerCase().includes(searchQuery)) {
+                const [key, project] = archivedProjects[i];
+                if (project.projectName.toLowerCase().includes(searchQuery) && key) {
                     pageNumber = Math.ceil((i + 1) / projectsPerPage);
                     found = true;
                     break;
