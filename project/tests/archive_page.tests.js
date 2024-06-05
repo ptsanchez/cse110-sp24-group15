@@ -216,9 +216,32 @@ describe('Archive Page Tests', () => {
   });
 
   test('delete works correctly', () => {
-    // Set up sessionStorage with some dummy data
-    const dummyArchivedProjects = [{ id: 1, name: 'Project A' }, { id: 2, name: 'Project B' }];
-    sessionStorage.setItem('archived_projects', JSON.stringify(dummyArchivedProjects));
+    // Initialize the projects array in the format matching project_data
+    const projects = {
+        project_1: {
+            projectName: "Project One",
+            projectTag: "Tag1",
+            projectContributors: "Contributor1",
+            projectDescription: "Description1",
+            active: false,
+            logs: {},
+            BranchLink: "link1",
+            TodoList: {}
+        },
+        project_2: {
+            projectName: "Project Two",
+            projectTag: "Tag2",
+            projectContributors: "Contributor2",
+            projectDescription: "Description2",
+            active: false,
+            logs: {},
+            BranchLink: "link2",
+            TodoList: {}
+        }
+    };
+
+    // Set up sessionStorage with the projects data
+    sessionStorage.setItem('archived_projects', JSON.stringify(projects));
 
     // Mock the deleteProject function
     const deleteProjectMock = jest.fn();
