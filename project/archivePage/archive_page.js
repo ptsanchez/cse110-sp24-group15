@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let projData = JSON.parse(localStorage.getItem("project_data"));
                 projData.current_project = key;
                 localStorage.setItem('project_data', JSON.stringify(projData));
-                window.location.href = "../projects/projectHomePage/project_home_page.html"; // Removed escape function
+                window.location.href = escape("../projects/projectHomePage/project_home_page.html");
             });
 
             // Append the list item to the project list
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to delete a project
     function deleteProject(projectKey) {
         // Remove the project from the projects array
-        projects = projects.filter(([key, _]) => key !== projectKey);
+        projects = projects.filter(([key, project]) => key !== projectKey && project);
         
         // Update sessionStorage with the modified projects array
         sessionStorage.setItem('archived_projects', JSON.stringify(projects));
