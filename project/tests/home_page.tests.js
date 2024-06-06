@@ -1,4 +1,5 @@
 const { JSDOM } = require('jsdom');
+var { renderProjects, archiveProject, deleteProject } = require('../homePage/home_page'); 
 
 // Mock localStorage
 class LocalStorageMock {
@@ -84,8 +85,6 @@ let mockHTMLContents = `<!DOCTYPE html>
 // Mock DOM
 const dom = new JSDOM(mockHTMLContents);
 global.document = dom.window.document;
-
-const { renderProjects, archiveProject, deleteProject } = require('../homePage/home_page.js'); 
 
 describe('Project Management', () => {
     beforeEach(() => {
