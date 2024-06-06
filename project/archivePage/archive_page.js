@@ -142,8 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let pageNumber = 1;
             let found = false;
             for (let i = 0; i < archivedProjects.length; i++) {
-                const [key, project] = archivedProjects[i];
-                if (project.projectName.toLowerCase().includes(searchQuery) && key) {
+                if (archivedProjects[i][1].projectName.toLowerCase().includes(searchQuery) && key) {
                     pageNumber = Math.ceil((i + 1) / projectsPerPage);
                     found = true;
                     break;
