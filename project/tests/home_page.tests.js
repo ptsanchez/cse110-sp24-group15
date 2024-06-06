@@ -1,4 +1,4 @@
-const { renderProjects, archiveProject,  deleteProject} = require('../homePage/home_page'); 
+const { renderProjects, archiveProject, deleteProject } = require('../homePage/home_page'); 
 
 let mockHTMLContent = `<!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,6 @@ let mockHTMLContent = `<!DOCTYPE html>
 </body>
 </html>`;
 
-
 // Mock localStorage
 global.localStorage = {
     getItem: jest.fn(),
@@ -79,7 +78,6 @@ global.document = {
     querySelector: jest.fn(),
     getElementById: jest.fn(),
     addEventListener: jest.fn(),
-    // for renderMarkup function
     createElement: jest.fn((tag) => {
         const element = {
             setAttribute: jest.fn(),
@@ -94,7 +92,6 @@ global.document = {
         }
         return element;
     }),
-    // for renderMarkup function
     createTextNode: jest.fn((text) => {
         return { nodeValue: text };
     })
@@ -109,39 +106,30 @@ var dummyProjectData = {
 
 describe('Tests for Home Page', () => {
     beforeEach(() => {
-        // Clear the local storage every time
         jest.clearAllMocks();
 
-        // Set dummy project data in localStorage
-        localStorage.getItem.mockReturnValue("project-data", JSON.stringify(dummyProjectData));
+        localStorage.getItem.mockReturnValue(JSON.stringify(dummyProjectData));
 
-        // Mock document.body.innerHTML for the tests
         document.body.innerHTML = mockHTMLContent;
-
-        let proj = {textContent: '', innerText: '', appendChild: jest.fn()};
 
         document.querySelector = jest.fn((selector) => {
             const elements = {
-                ".projects": proj,
+                ".projects": { textContent: '', innerText: '', appendChild: jest.fn() },
             };
             return elements[selector];
         });
 
-        // Mock document.addEventListener
         document.addEventListener = jest.fn((event, callback) => {
             callback();
         });
 
-        // Load the script to trigger DOMContentLoaded
         require('../homePage/home_page.js');
     });
 
     test("Render Page", () => {
         renderProjects();
-
-        let project = document.querySelector('.projects')[0];
-
-        console.log(project);
+        // Add assertions to check if the projects are rendered correctly
+        const projectsElement = document.querySelector('.projects');
+        expect(projectsElement.appendChild).toHaveBeenCalled();
     });
-
 });
