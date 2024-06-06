@@ -210,4 +210,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setDefaultText('.project-todo-list', 'TODO LIST');
     setDefaultText('.project-branch-link', 'Link to Branch/Workspace');
     setDefaultText('.project-detail-div', 'Project Details, Members');
+
 });

@@ -103,6 +103,19 @@ main {
     overflow-wrap: break-word;
     outline: none;
     font-weight: bold;
+    padding-bottom: 2%;
+}
+
+.todo-markdown-editor {
+    clear: both;
+    width: 100%;
+    height: 200px;
+    border: none;
+    padding: 20px;
+    font-size: 1em;
+    box-sizing: border-box;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 20px;
 }
 
 .project-branch-link {
