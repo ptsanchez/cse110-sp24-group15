@@ -104,13 +104,6 @@ main {
     transition: all 0.3s ease-in-out;
 }
 
-.week-text {
-    margin-right: auto;
-    font-size: 18px;
-    font-weight: 600;
-    color: #919191;
-}
-
 .week-header-div {
     margin-top: 20px;
     display: flex;
@@ -146,13 +139,13 @@ main {
     margin: 0 2.5px; /* Add margin to separate columns */
     cursor: pointer;
     border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%); 
     transition: transform 0.3s ease;
 } 
 
 .day-column:hover {
     transform: scale(1.05); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 8px 16px rgb(0 0 0 / 20%); 
 }
 
 .day-column:first-child {
