@@ -260,10 +260,6 @@ main {
     margin-left: 0;
 }
 
-.project-todo-list .indent {
-    margin-left: 1.5em;
-}
-
 input[type="checkbox"] {
     margin-left: 0;
     margin-right: 5px;
@@ -276,6 +272,7 @@ strong {
 }
 
 .project-todo-list .indent {
+    margin-left: 1.5em;
     display: flex;
     align-items: center; /* Align items correctly in indent */
 }
