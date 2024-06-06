@@ -28,7 +28,7 @@ class LocalStorageMock {
     }
 }
 
-global.localStorage = new LocalStorageMock();
+let localStorage = new LocalStorageMock();
 
 const dummyProjectData = {
     project_data: {
