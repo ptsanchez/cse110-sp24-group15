@@ -44,9 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Clear the existing project list
         projectList.innerHTML = '';
 
-        // Retrieve the current page number from sessionStorage
-        currentPage = parseInt(sessionStorage.getItem('current_page'), 10);
-
         // Calculate the start and end indices for the current page
         const start = (currentPage - 1) * projectsPerPage;
         const end = start + projectsPerPage;
@@ -105,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create a new object without the projectKey property
         const updatedProjectData = Object.fromEntries(
-            Object.entries(projData.project_data).filter(([key, value]) => key !== projectKey)
+            Object.entries(projData.project_data).filter(([key, value]) => key !== projectKey && value)
         );
 
         // Update localStorage with the modified project data
@@ -116,19 +113,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to handle page changes (next and previous)
-    function handlePageChange(direction) {
+    function handlePageChange(currentPage, direction) {
         // Calculate the total number of pages
         const totalPages = Math.ceil(projects.length / projectsPerPage);
 
         // Update the current page number within the valid range
-        let newPageNumber = currentPage + direction;
-        newPageNumber = Math.max(1, Math.min(newPageNumber, totalPages));
+        const updatedCurrentPage = Math.max(1, Math.min(currentPage + direction, totalPages));
 
         // Store the updated current page in sessionStorage
-        sessionStorage.setItem('current_page', newPageNumber);
+        sessionStorage.setItem('current_page', updatedCurrentPage);
 
         // Redisplay the projects for the new page
         displayProjects();
+        return updatedCurrentPage;
     }
 
     // Function to handle search functionality
@@ -142,18 +139,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const archivedProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
 
             // Find the page number where the first matching project is located
-            const filteredProjects = archivedProjects.filter(([key, project]) => {
-                return project.projectName.toLowerCase().includes(searchQuery) && key;
-            });
+            let pageNumber = 1;
+            let found = false;
+            for (let i = 0; i < archivedProjects.length; i++) {
+                if (archivedProjects[i][1].projectName.toLowerCase().includes(searchQuery)) {
+                    pageNumber = Math.ceil((i + 1) / projectsPerPage);
+                    found = true;
+                    break;
+                }
+            }
 
             // If no matching project was found, show an alert
-            if (filteredProjects.length === 0) {
+            if (!found) {
                 alert('No matching project found.');
                 return;
             }
-
-            // Calculate the page number based on the index of the first matching project
-            const pageNumber = Math.ceil((archivedProjects.indexOf(filteredProjects[0]) + 1) / projectsPerPage);
 
             // Update the current page number in sessionStorage
             currentPage = pageNumber;
@@ -164,17 +164,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Call the loadProjects function when the DOMContentLoaded event is triggered
-    loadProjects();
-
     // Event listener for the 'Page Back' button
     document.querySelector('.page-back-btn').addEventListener('click', () => {
-        handlePageChange(-1);
+        currentPage = handlePageChange(currentPage, -1);
     });
 
     // Event listener for the 'Next Page' button
     document.querySelector('.page-next-btn').addEventListener('click', () => {
-        handlePageChange(1);
+        currentPage = handlePageChange(currentPage, 1);
     });
 
     // Event listener for the search bar input
