@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =============== VARIABLES CSS =============== */
+:root {
+    /* ========== Colors ========== */
+    --primary-color: #a09c9a; /* initial button color */
+    --secondary-color: #7a7269; /* button hover, feedback section color */ 
+    --third-color: #7360ff;
+    --theme-color: #d1cfcf; /* header color */
+    --background-color: #f8f9fa; 
+    --text-color: #333;
+    --text-light-color: #666;
+    --text-lighter-color: #d5d5d5;
+    --text-white-color: #fff;
+    --feedback-button-bg: #28a745;
+    --feedback-button-bg-hover: #218838;
+    --addlog-submit-button-bg: #04aa6d;
+    --addlog-cancel-button-bg: #ff6961;
+    --project-home-todo-bg: #fcfcfc;
+    --project-home-description-bg: #ffab76;
+    --project-home-logs-bg: #45d0e1;
+    --project-home-logs-bg-hover: #3bb8c5;
+    --project-home-save-button: #ff9f43;
+    --project-home-check-button: #00b894;
+    --project-home-editmode-bg: #ffe0e6;
+    
+    /* ========== Font ========== */
+    --main-font: 'Montserrat', sans-serif;
+    --header-font-size: 3.5rem;
+    --biggest-font-size: 2.75rem;
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.75rem;
+    --h3-font-size: 1.5rem;
+    --button-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.8rem;     
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat, sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: white;
+    color: #333;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+main {
+    margin: 0 auto;
+    width: 90%;
+}
+
+/* ========== Header ========== */
+header {
+    border-bottom: 2px solid #e0e0e0;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem; /* Adjust the gap between buttons as needed */
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* ========== Footer ========== */
+footer {
+    border-top: 2px solid #e0e0e0;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+    padding: 0 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: auto;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin-top: 1.25rem;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+}
+
+.feedback-section {
+    text-align: center;
+    padding: 1.25rem;
+    background-color: var(--secondary-color); 
+    width: 100%;
+}
+
+.feedback-section h2 {
+    color: var(--text-white-color); 
+    margin-bottom: 0.625rem;
+}
+
+.feedback-section p {
+    color: var(--text-lighter-color);
+    margin-bottom: 1.25rem;  
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.feedback-button {
+    margin-top: 0.625rem;
+    padding: 0.625rem 1.25rem;
+    font-size: var(--normal-font-size);
+    color: var(--text-white-color);
+    background-color: var(--feedback-button-bg);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.feedback-button:hover, .feedback-button:focus {
+    background-color: var(--feedback-button-bg-hover);
+    box-shadow: 0 4px 6px rgba(0 0 0 / 20%);
+    transform: scale(1.05);
+}
+
+/* Archive Project Header Formatting */
+.archive-page-header-div {
+    background: white;
+    padding: 30px 0;
+}
+
+.archive-page-header-div label {
+    font-size: 1.2em;
+}
+
+/* Search Bar Formatting */
+.archive-page-header-div .search {
+    background: rgba(255 252 169 /100%);
+    margin-left: 30px;
+    padding: 6px;
+}
+
+/* Search Bar Hover And Focus */
+.archive-page-header-div .search:hover,
+.archive-page-header-div .search:focus {
+    background: rgba(253 255 236 /100%);
+}
+
+/* Project List Formatting */
+.archive-project-list-div {
+    background: rgba(255 255 255 /100%);
+    padding: 0;
+}
+
+/* Project List Formatting */
+.project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-list li:first-child {
+    margin-top: 0;
+}
+
+.project-list li:last-child {
+    margin-bottom: 20px;
+}
+
+/* Project List Item Formatting */
+.project {
+    background: rgba(255 175 175 /100%);
+    margin: 15px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid black;
+    box-shadow: 2px 5px 5px rgba(0 0 0 /30%);
+    transition: transform 0.5s ease;
+    border-radius: 15px;
+}
+
+/* Hovering Project List Item */
+.project:hover {
+    background: rgba(255 102 102 /100%);
+    transform: scale(1.02);
+}
+
+/* Trash Project Button */
+.project button {
+    background: rgba(255 57 57 /100%);
+    margin: 0;
+    padding: 3px;
+    font-size: 1em;
+    box-shadow: 2px 3px 3px rgba(0 0 0 /50%);
+    transition: transform 0.5s ease;
+}
+
+/* Back and Next Buttons */
+.archive-page-btns button {
+    background: rgba(198 138 255 /100%);
+    padding: 8px;
+}
+
+/* Hovering Trash Project Button */
+.project button:hover {
+    transform: scale(1.3);
+    background: rgba(214 181 255 /100%);
+}
+
+/* Archive Page Buttons */
+.archive-page-btns {
+    background: rgba(255 255 255 /100%);
+    margin: 40px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Hovering Page Buttons */
+.archive-page-btns button:hover {
+    background: rgba(214 181 255 /100%);
+}
+
