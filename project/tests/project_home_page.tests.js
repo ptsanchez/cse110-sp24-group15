@@ -49,15 +49,23 @@ const mockHTMLContent = `
             <span class="project-text"></span>
         </div>
         <div class="project-todo-list-div">
+            <div class="todo-list-header">
+                <span class="todo-list-title">TODO LIST</span>
+                <hr class="todo-list-divider">
+            </div>
             <span class="project-todo-list" contenteditable="false"></span>
             <button class="edit-btn todo-edit-btn"><i class="bx bx-edit"></i></button>
         </div>
         <div class="project-link-div">
+            <div class="project-link-header">
+                <span class="project-link-title">Link to Branch/Workspace</span>
+                <hr class="project-link-divider">
+            </div>
             <a href="#" class="project-branch-link" contenteditable="false"></a>
             <button class="edit-btn branch-edit-btn"><i class="bx bx-edit"></i></button>
         </div>
         <div class="project-detail-div">
-            <!-- Additional content for project detail here -->
+            
         </div>
         <div class="project-btns-div">
             <button class="make-log-btn" onclick="location.href='../addLogPage/add_log_page.html'">Make Log</button>
@@ -100,12 +108,13 @@ describe('Project Home Page Tests', () => {
 
         // Mock document.querySelector for setting innerHTML and event listeners
         projectTextElement = { textContent: '', innerText: '', appendChild: jest.fn() };
-        todoListElement = { textContent: '', innerText: '', getAttribute: jest.fn().mockReturnValue('false'), setAttribute: jest.fn(), appendChild: jest.fn() };
+        todoListElement = { textContent: '', innerText: '', getAttribute: jest.fn().mockReturnValue('false'), setAttribute: jest.fn(), appendChild: jest.fn(), addEventListener: jest.fn(), dblclick: jest.fn() };
         branchLinkElement = { textContent: '', innerText: '', href: '', getAttribute: jest.fn().mockReturnValue('false'), setAttribute: jest.fn(), appendChild: jest.fn() };
         projectDetailElement = { textContent: '', innerText: '', appendChild: jest.fn() };
         todoEditButton = { addEventListener: jest.fn(), click: jest.fn() };
         branchEditButton = { addEventListener: jest.fn(), click: jest.fn() };
-
+        projectLinkElement = {addEventListener: jest.fn(), dblclick: jest.fn() }
+        
         document.querySelector = jest.fn((selector) => {
             const elements = {
                 ".project-text": projectTextElement,
@@ -113,7 +122,8 @@ describe('Project Home Page Tests', () => {
                 ".project-branch-link": branchLinkElement,
                 ".project-detail-div": projectDetailElement,
                 ".todo-edit-btn": todoEditButton,
-                ".branch-edit-btn": branchEditButton
+                ".branch-edit-btn": branchEditButton,
+                ".project-link-div": projectLinkElement
             };
             return elements[selector];
         });

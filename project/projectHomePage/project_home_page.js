@@ -169,8 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentProject = projectData['project_data'][String(currentProjectKey)];
 
         document.querySelector('.project-text').textContent = currentProject.projectName || 'PROJECT NAME';
-        document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'TODO LIST');
-        document.querySelector('.project-branch-link').textContent = currentProject.BranchLink || 'Link to Branch/Workspace';
+        document.querySelector('.project-todo-list').textContent = getTextOrDefault(currentProject.TodoList, 'Enter your markdown here...\n\n\n');
+        document.querySelector('.project-branch-link').textContent = currentProject.BranchLink || 'Enter your link to branch/workspace here...\n\n\n';
         document.querySelector('.project-branch-link').href = currentProject.BranchLink || '#';
         document.querySelector('.project-branch-link').target = '_blank';
         document.querySelector('.project-detail-div').textContent = currentProject.projectDescription || 'Project Details, Members';
@@ -187,10 +187,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const branchLink = document.querySelector('.project-branch-link');
             toggleEditMode(branchLink, document.querySelector('.branch-edit-btn'), 'branch');
         });
+
+        // Allow double-click to edit TODO list
+        document.querySelector('.project-todo-list').addEventListener('dblclick', () => {
+            const todoList = document.querySelector('.project-todo-list');
+            const editBtn = document.querySelector('.todo-edit-btn');
+            if (todoList.getAttribute('contenteditable') === 'false') {
+                toggleEditMode(todoList, editBtn, 'todo');
+            }
+        });
+
+        // Allow double-click to edit Branch Link
+        document.querySelector('.project-link-div').addEventListener('dblclick', () => {
+            const branchLink = document.querySelector('.project-branch-link');
+            const editBtn = document.querySelector('.branch-edit-btn');
+            if (branchLink.getAttribute('contenteditable') === 'false') {
+                toggleEditMode(branchLink, editBtn, 'branch');
+            }
+        });
     } else {
         document.querySelector('.project-text').textContent = 'PROJECT NAME';
-        document.querySelector('.project-todo-list').textContent = 'TODO LIST';
-        document.querySelector('.project-branch-link').textContent = 'Link to Branch/Workspace';
+        document.querySelector('.project-todo-list').textContent = 'Enter your markdown here...\n\n\n';
+        document.querySelector('.project-branch-link').textContent = 'Enter your link to branch/workspace here...\n\n\n';
         document.querySelector('.project-branch-link').href = '#';
         document.querySelector('.project-branch-link').target = '_blank';
         document.querySelector('.project-detail-div').textContent = 'Project Details, Members';
@@ -207,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     setDefaultText('.project-text', 'PROJECT NAME');
-    setDefaultText('.project-todo-list', 'TODO LIST');
-    setDefaultText('.project-branch-link', 'Link to Branch/Workspace');
+    setDefaultText('.project-todo-list', 'Enter your markdown here...\n\n\n');
+    setDefaultText('.project-branch-link', 'Enter your link to branch/workspace here...\n\n\n');
     setDefaultText('.project-detail-div', 'Project Details, Members');
 });
