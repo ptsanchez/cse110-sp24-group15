@@ -85,11 +85,7 @@ let mockHTMLContents = `<!DOCTYPE html>
 const dom = new JSDOM(mockHTMLContents);
 global.document = dom.window.document;
 
-const {
-    renderProjects,
-    archiveProject,
-    deleteProject
-} = require('../homePage/home_page'); 
+const { renderProjects, archiveProject, deleteProject } = require('../homePage/home_page.js'); 
 
 describe('Project Management', () => {
     beforeEach(() => {
@@ -99,11 +95,9 @@ describe('Project Management', () => {
 
     test('should render active projects', () => {
         const projectData = {
-            project_data: {
                 1: { projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Alice', projectDescription: 'Description 1', active: true },
                 2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: false },
                 3: { projectName: 'Project 3', projectTag: 'Tag3', projectContributors: 'Charlie', projectDescription: 'Description 3', active: true }
-            }
         };
 
         localStorage.setItem('project-data', JSON.stringify(projectData));
