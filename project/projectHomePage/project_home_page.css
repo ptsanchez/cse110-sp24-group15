@@ -91,35 +91,72 @@ main {
     box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
 }
 
+.project-todo-list-div .todo-list-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.todo-list-title {
+    font-size: 1em; /* Same size as Branch Link and Description */
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px; /* Increase gap between title and divider */
+}
+
+.todo-list-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #d3d3d3;
+    margin-top: 5px;
+}
+
 .project-todo-list-div:hover, .project-link-div:hover {
     background-color: #f9f9f9;
     transform: scale(1.02);
 }
 
-.project-todo-list, .project-branch-link {
-    color: var(--text-color);
+.project-todo-list {
+    color: var(--text-light-color);
     font-size: 1em;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     outline: none;
-    font-weight: bold;
     padding-bottom: 2%;
-}
-
-.todo-markdown-editor {
-    clear: both;
-    width: 100%;
-    height: 200px;
-    border: none;
-    padding: 20px;
-    font-size: 1em;
-    box-sizing: border-box;
-    border-top: 1px solid #e0e0e0;
-    margin-top: 20px;
+    font-family: monospace; /* Change to markdown font */
 }
 
 .project-branch-link {
+    color: var(--text-light-color);
+    font-size: 1em;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    outline: none;
+    padding-bottom: 2%;
     text-decoration: none;
+    font-family: monospace; /* Change to markdown font */
+}
+
+.project-link-div .project-link-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.project-link-title {
+    font-size: 1em; /* Same size as Branch Link and Description */
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px; /* Increase gap between title and divider */
+}
+
+.project-link-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #d3d3d3;
+    margin-top: 5px;
 }
 
 /* Project Description */
@@ -230,6 +267,17 @@ main {
 input[type="checkbox"] {
     margin-left: 0;
     margin-right: 5px;
+    vertical-align: middle; /* Align checkbox and text correctly */
+}
+
+strong {
+    display: inline-block;
+    margin-bottom: 4px; /* Less than one new line gap */
+}
+
+.project-todo-list .indent {
+    display: flex;
+    align-items: center; /* Align items correctly in indent */
 }
 
 /* Footer */
