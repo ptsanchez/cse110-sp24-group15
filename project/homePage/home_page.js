@@ -3,7 +3,7 @@ function renderProjects() {
     const projectsList = document.querySelector('.projects');
     projectsList.innerHTML = '';
 
-    console.log(JSON.parse(localStorage.getItem('project-data')))
+    console.log(localStorage.getItem('project-data'));
 
     const projectData = JSON.parse(localStorage.getItem('project-data')).project_data;
     for (const projectId in projectData) {
@@ -15,7 +15,7 @@ function renderProjects() {
             }
         }
     }
-}
+};
 
 // Function to create a project element
 function createProjectElement(project, projectId) {
