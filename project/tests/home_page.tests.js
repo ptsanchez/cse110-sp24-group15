@@ -1,4 +1,4 @@
-const { renderProjects, archiveProject,  deleteProject} = require('../feedbackPage/feedback_page'); 
+const { renderProjects, archiveProject,  deleteProject} = require('../homePage/home_page'); 
 
 // Mock the alert function
 global.alert = jest.fn();
