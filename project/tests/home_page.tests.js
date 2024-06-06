@@ -22,19 +22,19 @@ global.dummyProjectData = {
 };
 
 // Mock the document.getElementById
-global.document = {
-    getElementById: jest.fn((id) => {
-        const elements = {};
-        return elements[id];
-    }),
-    querySelectorAll: jest.fn((selector) => {
-        // Mock the querySelectorAll for radio buttons
-        if (selector === 'input[type="radio"]:checked') {
-            return [];
-        }
-        return [];
-    })
-};
+// global.document = {
+//     getElementById: jest.fn((id) => {
+//         const elements = {};
+//         return elements[id];
+//     }),
+//     querySelectorAll: jest.fn((selector) => {
+//         // Mock the querySelectorAll for radio buttons
+//         if (selector === 'input[type="radio"]:checked') {
+//             return [];
+//         }
+//         return [];
+//     })
+// };
 
 describe('Render Projects', () => {
     beforeEach(() => {
