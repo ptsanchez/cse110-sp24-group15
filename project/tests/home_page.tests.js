@@ -58,9 +58,8 @@ htmlContent = `<!DOCTYPE html>
 
 const { JSDOM } = require('jsdom');
 const dom = new JSDOM(htmlContent, { runScripts: "dangerously", resources: "usable" });
-const { window } = dom;
-const { document } = window;
-
+global.window = dom;
+global.document = window;
 
 // Mock the alert function
 global.alert = jest.fn();
@@ -77,21 +76,6 @@ global.dummyProjectData = {
         2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: false }
     }
 };
-
-// Mock the document.getElementById
-// global.document = {
-//     getElementById: jest.fn((id) => {
-//         const elements = {};
-//         return elements[id];
-//     }),
-//     querySelectorAll: jest.fn((selector) => {
-//         // Mock the querySelectorAll for radio buttons
-//         if (selector === 'input[type="radio"]:checked') {
-//             return [];
-//         }
-//         return [];
-//     })
-// };
 
 describe('Render Projects', () => {
     beforeEach(() => {
