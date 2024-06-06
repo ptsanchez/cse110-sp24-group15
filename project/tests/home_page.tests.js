@@ -1,3 +1,4 @@
+const { JSDOM } = require('jsdom');
 
 // Mock the localStorage
 class LocalStorageMock {
