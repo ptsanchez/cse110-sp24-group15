@@ -5,7 +5,7 @@ function renderProjects() {
 
     console.log(localStorage.getItem('project-data'));
 
-    const projectData = JSON.parse(localStorage.getItem('project-data')).project_data;
+    const projectData = JSON.parse(localStorage.getItem('project-data'));
     for (const projectId in projectData) {
         if (Object.prototype.hasOwnProperty.call(projectData, projectId)) {
             let project = projectData[parseInt(projectId)];
