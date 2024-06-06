@@ -36,47 +36,9 @@ global.document = {
     })
 };
 
-describe('Project Data Initialization', () => {
-    beforeEach(() => {
-        
-    });
-
-    it('should set dummy project data in localStorage if it is not present', () => {
-        const dummyProjectData = { project_data: [] };
-        // Initialize the projects data in localStorage
-        const projectDataString = localStorage.getItem('projectData');
-        if (!projectDataString) {
-            localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
-        }
-
-        expect(localStorage.getItem('projectData')).toEqual(JSON.stringify(dummyProjectData));
-    });
-
-    it('should handle invalid projectData in localStorage', () => {
-        localStorage.setItem('projectData', 'invalid JSON string');
-        console.error = jest.fn();
-
-        try {
-            let projectData = JSON.parse(localStorage.getItem('projectData'));
-            if (projectData && projectData.project_data) {
-                // Use the validated projectData
-            } else {
-                // Handle invalid projectData
-                console.error('Invalid project data in localStorage');
-            }
-        } catch (error) {
-            console.error('Error parsing project data from localStorage:', error);
-        }
-
-        expect(console.error).toHaveBeenCalledWith('Error parsing project data from localStorage:', expect.any(SyntaxError));
-    });
-});
-
 describe('Render Projects', () => {
     beforeEach(() => {
         jest.clearAllMocks();
-        // Mock localStorage to return an empty array when 'feedback_submissions' is requested
-        localStorage.getItem.mockReturnValue(JSON.stringify(dummyProjectData));
     });
 
     it('should render active projects correctly', () => {
@@ -86,6 +48,7 @@ describe('Render Projects', () => {
                 2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: false }
             }
         };
+
         localStorage.getItem.mockReturnValue("project-data", JSON.stringify(dummyProjectData));
 
         renderProjects();

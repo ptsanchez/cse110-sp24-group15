@@ -48,7 +48,7 @@ function renderProjects() {
     const projectsList = document.querySelector('.projects');
     projectsList.innerHTML = '';
 
-    const projectData = JSON.parse(global.localStorage.getItem('projectData')).project_data;
+    const projectData = JSON.parse(global.localStorage.getItem('project-data')).project_data;
     for (const projectId in projectData) {
         if (Object.prototype.hasOwnProperty.call(projectData, projectId)) {
             let project = projectData[parseInt(projectId)];
@@ -103,10 +103,10 @@ function createProjectElement(project, projectId) {
 
     projectElement.appendChild(projectActions);
     projectElement.addEventListener('click', () => {
-        const projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(global.localStorage.getItem('projectData'))));
+        const projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(global.localStorage.getItem('project-data'))));
         projectDataCopy.current_project = projectId;
         projectDataCopy.current_date = new Date().toLocaleDateString();
-        global.localStorage.setItem('projectData', JSON.stringify(projectDataCopy));
+        global.localStorage.setItem('project-data', JSON.stringify(projectDataCopy));
         window.location.href = escape("../projectHomePage/project_home_page.html");
     });
 
@@ -115,17 +115,17 @@ function createProjectElement(project, projectId) {
 
 // Function to archive a project
 function archiveProject(projectId) {
-    let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(global.localStorage.getItem('projectData'))));
+    let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(global.localStorage.getItem('project-data'))));
     projectDataCopy.project_data[parseInt(projectId)].active = false;
-    global.localStorage.setItem('projectData', JSON.stringify(projectDataCopy));
+    global.localStorage.setItem('project-data', JSON.stringify(projectDataCopy));
     renderProjects();
 }
 
 // Function to delete a project
 function deleteProject(projectId) {
-    let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(global.localStorage.getItem('projectData'))));
+    let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(global.localStorage.getItem('project-data'))));
     delete projectDataCopy.project_data[parseInt(projectId)];
-    global.localStorage.setItem('projectData', JSON.stringify(projectDataCopy));
+    global.localStorage.setItem('project-data', JSON.stringify(projectDataCopy));
     renderProjects();
 }
 
