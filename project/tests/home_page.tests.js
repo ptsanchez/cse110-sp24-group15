@@ -1,3 +1,8 @@
+const { JSDOM } = require('jsdom');
+const dom = new JSDOM(htmlContent, { runScripts: "dangerously", resources: "usable" });
+const { window } = dom;
+const { document } = window;
+
 const { renderProjects, archiveProject,  deleteProject} = require('../homePage/home_page'); 
 
 // Mock the alert function
@@ -7,11 +12,6 @@ global.alert = jest.fn();
 global.localStorage = {
     getItem: jest.fn(),
     setItem: jest.fn(),
-};
-
-// Mock the window.location.href
-global.window = {
-    location: { href: '' }
 };
 
 global.dummyProjectData = {
