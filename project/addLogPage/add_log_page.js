@@ -80,5 +80,6 @@ function makeSubmission() {
 function cancelSubmission() {
   window.location.href = escape("../dayPage/day_page.html"); // Redirect to the day page
 }
-
-module.exports = {validateForm, makeSubmission, cancelSubmission};
+if (typeof module === 'object' && module.exports) {
+  module.exports = {validateForm, makeSubmission, cancelSubmission};
+}
