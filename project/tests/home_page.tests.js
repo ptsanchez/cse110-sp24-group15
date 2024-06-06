@@ -23,6 +23,27 @@ class LocalStorageMock {
     }
 }
 
+// Mock the global window object
+global.window = {
+    location: {
+      href: ''
+    }
+};
+
+
+// Mock the document.querySelector
+global.document = {
+    querySelector: jest.fn((selector) => {
+      const elements = {
+        "#log-title": { value: 'Sample Title' },
+        "#log-time": { value: '12:00' },
+        "#log-contributor": { value: 'John Doe' },
+        "#log-description": { value: 'Sample Description' },
+      };
+      return elements[selector];
+    })
+};
+
 global.localStorage = new LocalStorageMock();
 
 // Initialize the projects data in localStorage
