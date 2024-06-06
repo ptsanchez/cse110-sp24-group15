@@ -70,7 +70,7 @@ function calendarScript() {
             // dateDiv.appendChild(document.createTextNode(date));
             column.appendChild(dateDiv);
     
-            const columnDate = weekDates[index].toISOString().split('T')[0];
+            const columnDate = weekDates[Number(index)].toISOString().split('T')[0];
             column.dataset.date = columnDate;
             // column.setAttribute('id', column.getAttribute('id').toUpperCase());
 
