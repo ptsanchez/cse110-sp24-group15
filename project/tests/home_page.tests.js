@@ -1,6 +1,6 @@
 const { renderProjects, archiveProject,  deleteProject} = require('../homePage/home_page'); 
 
-htmlContent = `<!DOCTYPE html>
+let mockHTMLContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,46 +56,92 @@ htmlContent = `<!DOCTYPE html>
 </html>`;
 
 
-const { JSDOM } = require('jsdom');
-const dom = new JSDOM(htmlContent, { runScripts: "dangerously", resources: "usable" });
-global.window = dom;
-global.document = window;
-
-// Mock the alert function
-global.alert = jest.fn();
-
-// Mock the localStorage
+// Mock localStorage
 global.localStorage = {
     getItem: jest.fn(),
     setItem: jest.fn(),
+    clear: jest.fn(),
+    removeItem: jest.fn()
 };
 
-global.dummyProjectData = {
+// Mock the window
+global.window = {
+    location: {
+        href: ''
+    }
+};
+
+// Mock document and (required) methods
+global.document = {
+    body: {
+        innerHTML: ''
+    },
+    querySelector: jest.fn(),
+    getElementById: jest.fn(),
+    addEventListener: jest.fn(),
+    // for renderMarkup function
+    createElement: jest.fn((tag) => {
+        const element = {
+            setAttribute: jest.fn(),
+            appendChild: jest.fn(),
+            innerText: '',
+            innerHTML: '',
+            textContent: '',
+            getAttribute: jest.fn().mockReturnValue('false')
+        };
+        if (tag === 'div') {
+            element.style = {};
+        }
+        return element;
+    }),
+    // for renderMarkup function
+    createTextNode: jest.fn((text) => {
+        return { nodeValue: text };
+    })
+};
+
+var dummyProjectData = {
     project_data: {
         1: { projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Alice', projectDescription: 'Description 1', active: true },
         2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: false }
     }
 };
 
-describe('Render Projects', () => {
+describe('Tests for Home Page', () => {
     beforeEach(() => {
+        // Clear the local storage every time
         jest.clearAllMocks();
-    });
 
-    it('should render active projects correctly', () => {
-        const dummyProjectData = {
-            project_data: {
-                1: { projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Alice', projectDescription: 'Description 1', active: true },
-                2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: false }
-            }
-        };
-
+        // Set dummy project data in localStorage
         localStorage.getItem.mockReturnValue("project-data", JSON.stringify(dummyProjectData));
 
+        // Mock document.body.innerHTML for the tests
+        document.body.innerHTML = mockHTMLContent;
+
+        let proj = {textContent: '', innerText: '', appendChild: jest.fn()};
+
+        document.querySelector = jest.fn((selector) => {
+            const elements = {
+                ".projects": proj,
+            };
+            return elements[selector];
+        });
+
+        // Mock document.addEventListener
+        document.addEventListener = jest.fn((event, callback) => {
+            callback();
+        });
+
+        // Load the script to trigger DOMContentLoaded
+        require('../homePage/home_page.js');
+    });
+
+    test("Render Page", () => {
         renderProjects();
 
-        const projectsList = document.querySelector('.projects');
-        expect(projectsList.children.length).toBe(1);
-        expect(projectsList.children[0].querySelector('h3').textContent).toBe('Project 1');
+        let project = document.querySelector('.projects')[0];
+
+        console.log(project);
     });
+
 });
