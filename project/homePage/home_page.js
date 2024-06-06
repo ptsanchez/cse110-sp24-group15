@@ -3,6 +3,8 @@ function renderProjects() {
     const projectsList = document.querySelector('.projects');
     projectsList.innerHTML = '';
 
+    console.log(JSON.parse(localStorage.getItem('project-data')))
+
     const projectData = JSON.parse(localStorage.getItem('project-data')).project_data;
     for (const projectId in projectData) {
         if (Object.prototype.hasOwnProperty.call(projectData, projectId)) {
