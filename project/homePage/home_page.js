@@ -25,22 +25,23 @@ const dummyProjectData = {
 };
 
 // Initialize the projects data in localStorage
-const projectDataString = localStorage.getItem('projectData');
-if (!projectDataString) {
-    localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
-} else {
-    try {
-        const projectData = JSON.parse(projectDataString);
-        if (projectData && projectData.project_data) {
-            // Use the validated projectData
-        } else {
-            // Handle invalid projectData
-            console.error('Invalid project data in localStorage');
-        }
-    } catch (error) {
-        console.error('Error parsing project data from localStorage:', error);
-    }
-}
+// const projectDataString = localStorage.getItem('projectData');
+
+// if (!projectDataString) {
+//     localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
+// } else {
+//     try {
+//         const projectData = JSON.parse(projectDataString);
+//         if (projectData && projectData.project_data) {
+//             // Use the validated projectData
+//         } else {
+//             // Handle invalid projectData
+//             console.error('Invalid project data in localStorage');
+//         }
+//     } catch (error) {
+//         console.error('Error parsing project data from localStorage:', error);
+//     }
+// }
 
 // Function to render the projects list
 function renderProjects() {
