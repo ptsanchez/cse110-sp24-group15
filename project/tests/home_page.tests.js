@@ -40,6 +40,7 @@ const dummyProjectData = {
 global.window = window;
 
 const projectDataString = global.localStorage.getItem('projectData');
+
 if (!projectDataString) {
     global.localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
 } else {
