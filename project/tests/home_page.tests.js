@@ -5,8 +5,8 @@ const dom = new JSDOM(htmlContent, { runScripts: "dangerously", resources: "usab
 const { window } = dom;
 const { document } = window;
 
-// Mock the localStorage
-class LocalStorageMock {
+// Mock the global.localStorage
+class localStorageMock {
     constructor() {
         this.store = {};
     }
@@ -28,7 +28,7 @@ class LocalStorageMock {
     }
 }
 
-let localStorage = new LocalStorageMock();
+global.localStorage = new localStorageMock();
 
 const dummyProjectData = {
     project_data: {
@@ -39,9 +39,9 @@ const dummyProjectData = {
 
 global.window = window;
 
-const projectDataString = localStorage.getItem('projectData');
+const projectDataString = global.localStorage.getItem('projectData');
 if (!projectDataString) {
-    localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
+    global.localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
 } else {
     try {
         const projectData = JSON.parse(projectDataString);
@@ -49,54 +49,54 @@ if (!projectDataString) {
             // Use the validated projectData
         } else {
             // Handle invalid projectData
-            console.error('Invalid project data in localStorage');
+            console.error('Invalid project data in global.localStorage');
         }
     } catch (error) {
-        console.error('Error parsing project data from localStorage:', error);
+        console.error('Error parsing project data from global.localStorage:', error);
     }
 }
 
 describe('Project Data Initialization', () => {
     beforeEach(() => {
-        localStorage.clear();
+        global.localStorage.clear();
     });
 
-    it('should set dummy project data in localStorage if it is not present', () => {
+    it('should set dummy project data in global.localStorage if it is not present', () => {
         const dummyProjectData = { project_data: [] };
-        // Initialize the projects data in localStorage
-        const projectDataString = localStorage.getItem('projectData');
+        // Initialize the projects data in global.localStorage
+        const projectDataString = global.localStorage.getItem('projectData');
         if (!projectDataString) {
-            localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
+            global.localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
         }
 
-        expect(localStorage.getItem('projectData')).toEqual(JSON.stringify(dummyProjectData));
+        expect(global.localStorage.getItem('projectData')).toEqual(JSON.stringify(dummyProjectData));
     });
 
-    it('should handle invalid projectData in localStorage', () => {
-        localStorage.setItem('projectData', 'invalid JSON string');
+    it('should handle invalid projectData in global.localStorage', () => {
+        global.localStorage.setItem('projectData', 'invalid JSON string');
         console.error = jest.fn();
 
         try {
-            const projectData = JSON.parse(localStorage.getItem('projectData'));
+            const projectData = JSON.parse(global.localStorage.getItem('projectData'));
             if (projectData && projectData.project_data) {
                 // Use the validated projectData
             } else {
                 // Handle invalid projectData
-                console.error('Invalid project data in localStorage');
+                console.error('Invalid project data in global.localStorage');
             }
         } catch (error) {
-            console.error('Error parsing project data from localStorage:', error);
+            console.error('Error parsing project data from global.localStorage:', error);
         }
 
-        expect(console.error).toHaveBeenCalledWith('Error parsing project data from localStorage:', expect.any(SyntaxError));
+        expect(console.error).toHaveBeenCalledWith('Error parsing project data from global.localStorage:', expect.any(SyntaxError));
     });
 });
 
 describe('Render Projects', () => {
     beforeEach(() => {
         document.body.innerHTML = '<ul class="projects"></ul>';
-        localStorage.clear();
-        localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
+        global.localStorage.clear();
+        global.localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
     });
 
     it('should render active projects correctly', () => {
@@ -110,8 +110,8 @@ describe('Render Projects', () => {
 
 describe('Archive Project', () => {
     beforeEach(() => {
-        localStorage.clear();
-        localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
+        global.localStorage.clear();
+        global.localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
         document.body.innerHTML = '<ul class="projects"></ul>';
         renderProjects();
     });
@@ -119,7 +119,7 @@ describe('Archive Project', () => {
     it('should archive the project correctly', () => {
         archiveProject(1);
 
-        const projectDataCopy = JSON.parse(localStorage.getItem('projectData'));
+        const projectDataCopy = JSON.parse(global.localStorage.getItem('projectData'));
         expect(projectDataCopy.project_data[1].active).toBe(false);
 
         const projectsList = document.querySelector('.projects');
@@ -129,8 +129,8 @@ describe('Archive Project', () => {
 
 describe('Delete Project', () => {
     beforeEach(() => {
-        localStorage.clear();
-        localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
+        global.localStorage.clear();
+        global.localStorage.setItem('projectData', JSON.stringify(dummyProjectData));
         document.body.innerHTML = '<ul class="projects"></ul>';
         renderProjects();
     });
@@ -138,7 +138,7 @@ describe('Delete Project', () => {
     it('should delete the project correctly', () => {
         deleteProject(1);
 
-        const projectDataCopy = JSON.parse(localStorage.getItem('projectData'));
+        const projectDataCopy = JSON.parse(global.localStorage.getItem('projectData'));
         expect(projectDataCopy.project_data[1]).toBeUndefined();
 
         const projectsList = document.querySelector('.projects');
