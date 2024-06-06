@@ -1,21 +1,73 @@
 @import url('../templates/template.css');
 
 body {
+    font-family: var(--main-font);
+    margin: 0;
     background-color: var(--background-color);
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: var(--main-font);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--theme-color);
+    border-bottom: 2px solid #e0e0e0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
 }
 
 main {
     padding: 20px;
-    box-shadow: 0 2px 16px rgb(0 0 0 / 10%); /* Fixed modern color-function notation and alpha-value-notation */
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
     border-radius: 20px;
     width: 80%;
     max-width: 1000px;
+    margin: 200px auto 60px; 
+    background-color: var(--background-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
 }
 
 /* CSS for week/month tabs */
@@ -53,7 +105,6 @@ main {
 }
 
 .day-text {
-    margin-left: 20px;
     margin-right: auto;
     font-size: 18px;
     font-weight: 600;

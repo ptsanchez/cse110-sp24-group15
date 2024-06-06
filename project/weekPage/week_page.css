@@ -1,87 +1,131 @@
+@import url('../templates/template.css');
+
 body {
-    background-color: aliceblue;
+    font-family: var(--main-font);
+    margin: 0;
+    background-color: var(--background-color);
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--theme-color);
+    border-bottom: 2px solid #e0e0e0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+main {
+    padding: 20px;
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    width: 80%;
+    max-width: 1000px;
+    margin: 200px auto 60px; 
+    background-color: var(--background-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
 }
 
 /* css for week/month tabs */
-.week-header-div {
-    width: 600px;
-    padding: 30px;
-}
-
 .week-month-tabs {
-    width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
-    border-bottom: 2px solid rgb(229 229 229 / 100%);
+    border-bottom: 2px solid rgb(229 229 229 / 100%); /* Fixed modern color-function notation */
+    padding: 20px;
     position: relative;
 }
 
-.week-text {
+.week-month-tabs .week-text {
     font-size: 18px;
     font-weight: 600;
     color: #919191;
     background: none;
     border: none;
-    padding: 18px;
     cursor: pointer;
+    padding: 10px;
 }
 
-#calendar-title {
-    position: relative;
-    font-size: 30px;
-    font-weight: 600;
-    color: #919191;
-    background: none;
-    border: none;
-    padding: 18px;
-    cursor: pointer;
-    top: 63px;
-    left: 10px;
-    z-index: 1;
-    pointer-events: none;
+.week-month-tabs .week-text.active {
+    color: var(--third-color);
 }
 
 .week-month-line {
     position: absolute;
-    top: 55px;
-    left: 400px;
-    width: 90px;
+    bottom: 0;
+    left: 0;
     height: 5px;
-    background-color: #7360ff;
+    background-color: var(--third-color);
     border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.week-header-div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* css for weekly calendar */
 .week-calendar-div {
-    background-color: #60D363;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
-    width: 100%;
-    max-width: 650px;
-    overflow: hidden;
-    padding: 5px;
+    margin-top: 20px;
 }
 
 .calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #60D363;
-    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .calendar-body {
-    background-color: #60D363;
-    color: #000;
     display: flex;
-    justify-content: space-around;
-    padding: 5px;
+    justify-content: space-between;
 } 
 
 .day-column {
@@ -89,12 +133,20 @@ body {
     border: 1px solid #ddd;
     min-height: 400px;
     position: relative;
-    padding-top: 30px;
+    background-color: var(--theme-color);
+    padding: 20px;
+    box-sizing: border-box;
     margin: 0 2.5px; /* Add margin to separate columns */
     cursor: pointer;
-    box-sizing: border-box;
-    background-color: #66E76A;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%); 
+    transition: transform 0.3s ease;
 } 
+
+.day-column:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgb(0 0 0 / 20%); 
+}
 
 .day-column:first-child {
     margin-left: 0; /* Remove left margin for the first column */
@@ -112,46 +164,68 @@ body {
     top: 10px;
     left: 10px;
     font-weight: bold;
+    text-transform: uppercase;
 } 
 
 .date-display {
     position: absolute;
     top: 30px; 
     left: 10px;
-    font-size: 0.9em;
-    color: black;
+    font-size: .8em;
+    color: var(--text-color);
+    font-weight: bold;
 }
+
+.current-day {
+    background-color: var(--secondary-color); 
+    color: var(--text-white-color);
+    transition: all 0.3s ease; 
+}
+
+.current-day .date-display {
+    color: var(--text-white-color);
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.current-day::before {
+    color: var(--text-white-color);
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
 
 /* css for prev/next week buttons */
 .week-btns {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
+}
+
+.prev-week-btn, .next-week-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+}
+
+.add-log {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-white-color);
+    background-color: var(--third-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 10px;
+    margin-left: 10px;
 }
-
-.prev-week-btn {
-    font-size: 18px;
-    font-weight: 600;
-    color: black;
-    background: none;
-    background-color: #C8A2C8;
-    border: none;
-    padding: 13px;
-    cursor: pointer;
-    border-radius: 20px;
-}
-
-.next-week-btn {
-    font-size: 18px;
-    font-weight: 600;
-    color: black;
-    background: none;
-    background-color: #C8A2C8;
-    border: none;
-    padding: 13px;
-    cursor: pointer;
-    border-radius: 20px;
-}
-    

@@ -28,6 +28,8 @@ function calendarScript() {
     const nextWeekBtn = document.getElementById('next-week-btn');
 
     let currentDate = new Date();
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+
     // gets the dates for the current week being looked at
     function getWeekDates(date) {
         const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1));
@@ -68,7 +70,16 @@ function calendarScript() {
             // dateDiv.appendChild(document.createTextNode(date));
             column.appendChild(dateDiv);
     
-            column.dataset.date = weekDates[Number(index)].toISOString().split('T')[0];
+            const columnDate = weekDates[Number(index)].toISOString().split('T')[0];
+            column.dataset.date = columnDate;
+            // column.setAttribute('id', column.getAttribute('id').toUpperCase());
+
+            // Add or remove 'current-day' class based on the date
+            if (columnDate === today) {
+                column.classList.add('current-day');
+            } else {
+                column.classList.remove('current-day');
+            }
         });
     }
 
