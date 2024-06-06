@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create a new object without the projectKey property
         const updatedProjectData = Object.fromEntries(
-            Object.entries(projData.project_data).filter(([key, value]) => key !== projectKey)
+            Object.entries(projData.project_data).filter(([key, value]) => key !== projectKey && value)
         );
 
         // Update localStorage with the modified project data
