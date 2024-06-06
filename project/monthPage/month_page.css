@@ -1,0 +1,128 @@
+/* ========= General Design ========= */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 2rem;
+    height: 100vh;
+}
+
+/* ========= Calendar Widget Design ========= */
+.month-header-div {
+    margin: auto;
+    width: 1000px;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.calendar {
+    margin: auto;
+    max-width: 1000px;
+    padding: 2rem;
+    background: lightblue;
+    border-radius: 10px;
+}
+
+.calendar ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+
+.calendar ul.days {
+    justify-content: space-around;
+}
+
+.calendar ul.dates {
+    justify-content: space-between;
+}
+
+.dates li {
+    border-radius: 50%; /* Ensure square is rounded */
+}
+
+.calendar ul li {
+    width: calc(100% / 7 - 10px);
+    height: 50px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Add cursor pointer to indicate interactivity */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    position: relative;
+}
+
+/* ========= Calendar Days Design ========= */
+.days {
+    font-weight: 600;
+}
+
+.dates li.today {
+    color: #fff;
+    background: #000;
+    border-radius: 50%;
+}
+
+.dates li.inactive {
+    color: #8E8E8E;
+}
+
+.dates li:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+    color: #000; /* Black text color on hover */
+    border-radius: 50%; /* Same border radius to match the highlight */
+}
+
+.dates li.today:hover {
+    color: #fff;
+    background: #000;
+    border-radius: 50%;
+}
+
+.dates li.inactive:hover {
+    color: #8E8E8E;
+}
+
+/* ========= Calendar Button Design ========= */
+#prev,
+#next {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+#prev::before,
+#next::before {
+    content: "";
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0;
+    border-color: #6f6666;
+}
+
+#next::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#prev::before {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+#prev:hover::before,
+#next:hover::before {
+    border-color: #000;
+}
