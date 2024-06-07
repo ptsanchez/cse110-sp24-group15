@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="home_page.css"> 
+</head>
+<body>
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="sub-header">
+            <h2 class="active-projects-title">Active Projects</h2>
+            <div class="search-container">
+                <input type="text" class="search" placeholder="Search projects..." onkeyup="searchProjects(this.value)">
+            </div>
+        </div>
+        <div class="project-list">
+            <ul class="projects"></ul>
+            <div class="add-project">
+                <a href="../addProjectPage/add_project_page.html" class="add-project-btn">Add New Project</a>
+            </div>
+            <div class="archive">
+                <a href="../archivePage/archive_page.html" class="archive-btn">Archive Page</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+            <a href="../feedBackPage/Feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
+
+
+    <script src="home_page.js"></script>
+
+    <script>
+        // Function to search projects
+        function searchProjects(searchTerm) {
+            const projectElements = document.querySelectorAll('.projects li');
+            projectElements.forEach(projectElement => {
+                const projectName = projectElement.querySelector('h3').textContent.toLowerCase();
+                if (projectName.includes(searchTerm.toLowerCase())) {
+                    projectElement.style.display = 'block';
+                } else {
+                    projectElement.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
