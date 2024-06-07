@@ -99,3 +99,7 @@ function deleteProject(projectId) {
 
 // Render the projects on page load
 renderProjects();
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = {renderProjects, archiveProject, deleteProject};
+}
