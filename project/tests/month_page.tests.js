@@ -4,6 +4,7 @@ const { JSDOM } = require('jsdom');
 const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,21 +12,35 @@ const htmlContent = `
     <title>Month Page</title>
     <link rel="stylesheet" href="month_page.css" class="stylesheet">
 </head>
+
 <body>
-    <div>
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
+    <main>
+        <!-- Calendar Header -->
         <div class="month-header-div">
-            <h1>Calendar</h1>
-            <button class="month-btn" onclick="window.location.href='../monthPage/month_page.html'">Month</button>
-            <button class="week-btn" onclick="window.location.href='../weekPage/week_page.html'">Weekly</button>
-            <button class="log-btn" onclick="window.location.href='../addLogPage/add_log_page.html'">+</button>
+            <div class="calendar-text">Calendar</div>
+            <div class="tabs">
+                <button class="week-btn" onclick="window.location.href='../weekPage/week_page.html'">Week</button>
+                <button class="month-btn" onclick="window.location.href='../monthPage/month_page.html'">Month</button>
+                <div class="week-month-line"></div>
+                <button class="log-btn" onclick="window.location.href='../addLogPage/add_log_page.html'">+</button>
+            </div>    
         </div>
+
+        <!-- Calendar Widget -->
         <div class="month-calendar-div">
-            <section class="calendar">
-                <h3></h3>
-                <nav>
-                    <button id="prev"></button>
-                    <button id="next"></button>
-                </nav>
+            <div class="month-calendar-title">
+                <button id="prev"></button>
+                <span id="month-display"></span>
+                <button id="next"></button>
+            </div>
+            <div class="calendar-body">
                 <ul class="days">
                     <li>Sun</li>
                     <li>Mon</li>
@@ -36,11 +51,19 @@ const htmlContent = `
                     <li>Sat</li>
                 </ul>
                 <ul class="dates"></ul>
-            </section>
+            </div>
         </div>
-    </div>
+    </main>
+    <footer>
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+            <a href="../feedBackPage/Feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
     <script>
-    const header = document.querySelector(".calendar h3");
+    const header = document.querySelector(".month-calendar-title #month-display");
     const dates = document.querySelector(".dates");
     const navs = document.querySelectorAll("#prev, #next");
 
@@ -115,6 +138,7 @@ const htmlContent = `
     renderCalendar();
     </script>
 </body>
+
 </html>
 `;
 
@@ -133,7 +157,7 @@ describe('Calendar Widget', () => {
     });
 
     test('should load the current date correctly', () => {
-        const loadedDate = document.querySelector('.calendar h3').textContent;
+        const loadedDate = document.querySelector('.month-calendar-title #month-display').textContent;
         const expectedDate = `${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
         console.log('Loaded Date:', loadedDate);
@@ -143,13 +167,13 @@ describe('Calendar Widget', () => {
     });
 
     test('should navigate back and forth through the calendar', () => {
-        const initialDate = document.querySelector('.calendar h3').textContent;
+        const initialDate = document.querySelector('.month-calendar-title #month-display').textContent;
 
         console.log('Initial Date:', initialDate);
 
         // Simulate clicking the next button
         nextButton.click();
-        const nextDate = document.querySelector('.calendar h3').textContent;
+        const nextDate = document.querySelector('.month-calendar-title #month-display').textContent;
 
         console.log('Date after clicking next:', nextDate);
 
@@ -157,7 +181,7 @@ describe('Calendar Widget', () => {
 
         // Simulate clicking the prev button
         prevButton.click();
-        const prevDate = document.querySelector('.calendar h3').textContent;
+        const prevDate = document.querySelector('.month-calendar-title #month-display').textContent;
 
         console.log('Date after clicking prev:', prevDate);
 

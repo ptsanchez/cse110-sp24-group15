@@ -80,7 +80,7 @@ main {
     position: relative;
 }
 
-.week-month-tabs .week-text {
+.week-month-tabs .toggle {
     font-size: 18px;
     font-weight: 600;
     color: #919191;
@@ -90,7 +90,7 @@ main {
     padding: 10px;
 }
 
-.week-month-tabs .week-text.active {
+.week-month-tabs .toggle.active {
     color: var(--third-color);
 }
 
@@ -102,6 +102,13 @@ main {
     background-color: var(--third-color);
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
+}
+
+.week-text {
+    margin-right: auto;
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
 }
 
 .week-header-div {
