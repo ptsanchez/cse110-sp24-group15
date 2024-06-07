@@ -115,17 +115,20 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
-    padding: 10px;
+    background-color: #f9f9f9;
+    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px color(#000 / 10%);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0 0 0 / 10%);
     cursor: pointer;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    margin-bottom: 1rem;
+    font-family: Arial, sans-serif;
 }
 
 .projects li:hover {
-    box-shadow: 0 4px 8px color(#000 / 20%);
+    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
+    transform: translateY(-2px);
 }
 
 .projects li button {
@@ -138,6 +141,11 @@ main {
     border-radius: 3px;
 }
 
+.delete-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
+}
+
 .projects li .delete-btn {
     background-color: red;
     padding: 0.4rem;
@@ -146,11 +154,6 @@ main {
 .projects li .delete-btn i {
     color: white;
     font-size: 16px;
-}
-
-.delete-btn:hover {
-    transform: scale(1.04);
-    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
 }
 
 .add-project, .archive {

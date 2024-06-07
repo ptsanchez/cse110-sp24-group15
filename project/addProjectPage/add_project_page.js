@@ -40,7 +40,8 @@ function updateProjectData(formObj, localStr) {
         projectDescription: formObj['project-description'], 
         active: true,
         logs: {}, 
-        BranchLink: '', 
+        BranchLink: '',
+        TodoList: {} 
     }
     return JSON.stringify(projectsObj);
 }
