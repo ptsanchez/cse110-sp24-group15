@@ -86,13 +86,13 @@ main {
     margin-right: 1.5em;
     border: 0.1em solid #ccc;
     border-radius: 1em;
-    box-shadow: 0 2px 4px rgba(0 0 0 / 0.1);
+    box-shadow: 0 2px 4px rgba(0 0 0 / 10%);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .search:focus {
     border-color: #4CAF50;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0 0 0 / 20%);
     outline: none;
 }
 
@@ -145,7 +145,7 @@ main {
     margin-top: 20px;
 }
 
-/* Home Page Buttons Design*/
+/* Home Page Buttons Design */
 
 .add-project-btn {
     background-color: #4CAF50;
@@ -181,7 +181,7 @@ main {
     cursor: pointer;
     text-decoration: none;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0 0 0 / 10%);
     transition: background-color 0.3s, box-shadow 0.3s;
     margin-top: 10px;
     margin-left: 10px; 
@@ -189,7 +189,7 @@ main {
 
 .archive-btn:hover {
     background-color: #45a049;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
     transform: scale(1.05);
 }
 

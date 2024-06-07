@@ -69,18 +69,19 @@ function createProjectElement(project, projectId) {
     return projectElement;
 }
 
-// Function to archive a project
-function archiveProject(projectId) {
-    let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
-    projectDataCopy['project_data'][String(projectId)]['active'] = false;
-    localStorage.setItem('project_data', JSON.stringify(projectDataCopy));
+// Function to delete a project
+function deleteProject(projectId) {
+    let projectData = new Map(JSON.parse(localStorage.getItem('project_data')));
+    projectData.delete(projectId.toString());
+    localStorage.setItem('project_data', JSON.stringify(Array.from(projectData.entries())));
     renderProjects();
 }
+
 
 // Function to delete a project
 function deleteProject(projectId) {
     let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
-    delete projectDataCopy.project_data[parseInt(projectId)];
+    delete projectDataCopy.project_data[String(projectId)];
     localStorage.setItem('project_data', JSON.stringify(projectDataCopy));
     renderProjects();
 }
