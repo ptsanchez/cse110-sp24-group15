@@ -23,7 +23,7 @@ function renderCalendar() {
         const projectData = JSON.parse(localStorage.getItem('project_data')) || {};
         projectData.current_date = dateId;
         localStorage.setItem('project_data', JSON.stringify(projectData));
-        window.location.href = '../dayPage/day_page.html';
+        window.location.href = escape('../dayPage/day_page.html');
     };
 
     // Add dates of previous month
