@@ -3,12 +3,9 @@ function renderProjects() {
     const projectsList = document.querySelector('.projects');
     projectsList.innerHTML = '';
 
-    console.log(localStorage.getItem('project_data'));
-
-    const projectData = JSON.parse(localStorage.getItem('projects'));
+    const projectData = JSON.parse(localStorage.getItem('project_data'));
     let projects = projectData['project_data'];
     for (const projectId in projects) {
-        console.log(projectId);
         if (projects[String(projectId)] !== null) {
             let project = projects[String(projectId)];
             if (project.active) {
