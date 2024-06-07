@@ -2,7 +2,7 @@
 const { JSDOM } = require('jsdom');
 
 // Import functions to be tested
-const { searchProjects, deleteProject, archiveProject, renderProjects } = require('./home_page.js');
+const { searchProjects, deleteProject, archiveProject, renderProjects } = require('../homePage/home_page');
 
 // Define a mock project data to use for testing
 const mockProjectData = {
