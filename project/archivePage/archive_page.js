@@ -64,8 +64,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Create delete button
             let deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
+            // deleteButton.textContent = 'Delete';
             deleteButton.classList.add('delete-btn');
+
+            // Create icon element
+            let icon = document.createElement('i');
+            icon.classList.add('fas', 'fa-trash');
+
+            deleteButton.appendChild(icon);
 
             // Add event listener for delete button
             deleteButton.addEventListener('click', (event) => {
