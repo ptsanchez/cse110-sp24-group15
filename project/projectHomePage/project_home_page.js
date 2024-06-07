@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const projectData = JSON.parse(localStorage.getItem('projectData')) || {};
+    const projectData = JSON.parse(localStorage.getItem('project_data')) || {};
     const currentProjectKey = projectData.current_project;
 
     // Utility function to get text or default value 

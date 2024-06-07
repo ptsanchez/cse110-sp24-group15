@@ -5,7 +5,7 @@
  */
 function initializeProjectData(formObj) {
     let projectsObj = {
-        current_project: '', // TODO 
+        current_project: '',
         current_date: (new Date()).toLocaleDateString(),
         project_data: {
             project_1: {
@@ -14,9 +14,9 @@ function initializeProjectData(formObj) {
                 projectContributors: formObj['project-contributor'], 
                 projectDescription: formObj['project-description'], 
                 active: true,
-                logs: {}, // TODO
-                BranchLink: '', // TODO
-                TodoList: {} // TODO
+                logs: {},
+                BranchLink: '', 
+                TodoList: {}
             }
         }
     };
@@ -39,9 +39,9 @@ function updateProjectData(formObj, localStr) {
         projectContributors: formObj['project-contributor'], 
         projectDescription: formObj['project-description'], 
         active: true,
-        logs: {}, // TODO
-        BranchLink: '', // TODO
-        TodoList: {} // TODO
+        logs: {}, 
+        BranchLink: '',
+        TodoList: {} 
     }
     return JSON.stringify(projectsObj);
 }
@@ -54,13 +54,13 @@ function updateProjectData(formObj, localStr) {
  * @param {function} setItem - Function to set item in storage
  */
 function submissionLogic(formObj, getItem, setItem) {
-    let localStr = getItem('projects'); // TODO: Change key accordingly
+    let localStr = getItem('project_data');
     if (localStr == null) {
         localStr = initializeProjectData(formObj);
     } else {
         localStr = updateProjectData(formObj, localStr);
     }
-    setItem('projects', localStr);
+    setItem('project_data', localStr);
 }
 
 /**

@@ -5,6 +5,7 @@ function renderProjects() {
 
     const projectData = JSON.parse(localStorage.getItem('project_data'));
     let projects = projectData['project_data'];
+    console.log(projects);
     for (const projectId in projects) {
         if (projects[String(projectId)] !== null) {
             let project = projects[String(projectId)];
@@ -48,13 +49,22 @@ function createProjectElement(project, projectId) {
     });
     projectActions.appendChild(archiveButton);
 
+
+    // delete button
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
     deleteButton.classList.add('delete-btn');
+
+    // Create icon element
+    let icon = document.createElement('i');
+    icon.classList.add('fas', 'fa-trash');
+
+    deleteButton.appendChild(icon);
+
     deleteButton.addEventListener('click', (event) => {
         event.stopPropagation();
         deleteProject(projectId);
     });
+
     projectActions.appendChild(deleteButton);
 
     projectElement.appendChild(projectActions);

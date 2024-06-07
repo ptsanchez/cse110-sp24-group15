@@ -116,6 +116,6 @@ describe('Form Submission Handler Logic', () => {
             }
         });
 
-        expect(mockSetItem).toHaveBeenCalledWith('projects', expectedData);
+        expect(mockSetItem).toHaveBeenCalledWith('project_data', expectedData);
     });
 });
