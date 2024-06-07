@@ -19,6 +19,13 @@ function renderCalendar() {
 
     dates.innerHTML = ""; // Clear previous dates
 
+    const setDateAndNavigate = (dateId) => {
+        const projectData = JSON.parse(localStorage.getItem('project_data')) || {};
+        projectData.current_date = dateId;
+        localStorage.setItem('project_data', JSON.stringify(projectData));
+        window.location.href = escape('../dayPage/day_page.html');
+    };
+
     // Add dates of previous month
     for (let i = start; i > 0; i--) {
         const li = document.createElement('li');
@@ -34,6 +41,12 @@ function renderCalendar() {
             li.className = 'today';
         }
         li.textContent = i;
+
+        let dateId = `${month}/${i}/${year}`
+        li.textContent = i;
+        li.setAttribute('date-id', dateId);
+        li.addEventListener('click', () => setDateAndNavigate(dateId));
+
         dates.appendChild(li);
     }
 
