@@ -59,7 +59,7 @@ function createProjectElement(project, projectId) {
 
     projectElement.appendChild(projectActions);
     projectElement.addEventListener('click', () => {
-        const projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('projects'))));
+        const projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
         projectDataCopy.current_project = projectId;
         projectDataCopy.current_date = new Date().toLocaleDateString();
         localStorage.setItem('project_data', JSON.stringify(projectDataCopy));
@@ -72,7 +72,7 @@ function createProjectElement(project, projectId) {
 // Function to archive a project
 function archiveProject(projectId) {
     let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
-    projectDataCopy.project_data[parseInt(projectId)].active = false;
+    projectDataCopy['project_data'][String(projectId)]['active'] = false;
     localStorage.setItem('project_data', JSON.stringify(projectDataCopy));
     renderProjects();
 }
