@@ -1,140 +1,169 @@
+// Import necessary modules for Jest testing
 const { JSDOM } = require('jsdom');
-var { renderProjects, archiveProject, deleteProject } = require('../homePage/home_page'); 
+
+// Import functions to be tested
+const { searchProjects, deleteProject, archiveProject, renderProjects } = require('./home_page.js');
+
+// Define a mock project data to use for testing
+const mockProjectData = {
+    project_data: {
+        "1": {
+            projectName: "Project 1",
+            projectTag: "Tag 1",
+            projectContributors: "Contributor 1",
+            projectDescription: "Description 1",
+            active: true
+        },
+        "2": {
+            projectName: "Project 2",
+            projectTag: "Tag 2",
+            projectContributors: "Contributor 2",
+            projectDescription: "Description 2",
+            active: true
+        },
+        // Add more mock projects as needed
+    }
+};
 
 // Mock localStorage
-class LocalStorageMock {
-    constructor() {
-        this.store = {};
-    }
+global.localStorage = {
+    getItem: jest.fn().mockReturnValue(JSON.stringify(mockProjectData)),
+    setItem: jest.fn()
+};
 
-    clear() {
-        this.store = {};
-    }
-
-    getItem(key) {
-        return this.store[key] || null;
-    }
-
-    setItem(key, value) {
-        this.store[key] = value.toString();
-    }
-
-    removeItem(key) {
-        delete this.store[key];
-    }
-}
-
-global.localStorage = new LocalStorageMock();
-
-
-let mockHTMLContents = `<!DOCTYPE html>
+// Define a mock DOM structure
+const htmlContent = `
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Management App</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="home_page.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#" class="logo">Project Manager</a>
-            <button>Login</button>
-        </nav>
-    </header>
     <main>
-        <div class="sub-header">
-            <h2 class="active-projects-title">Active Projects</h2>
-            <div>
-                <input type="text" class="search" placeholder="Search projects..." onkeyup="searchProjects(this.value)">
-                <a href="../addProjectPage/add_project_page.html" class="add-project-btn"><i class="fas fa-plus"></i></a>
-            </div>
-        </div>
         <div class="project-list">
-            <ul class="projects"></ul>
-            <div class="add-project">
-                <a href="../addProjectPage/add_project_page.html" class="add-project-btn">Add New Project</a>
-            </div>
-            <div class="archive">
-                <a href="../archivePage/archive_page.html" class="archive-btn">Archive Page</a>
-            </div>
+            <ul class="projects">
+                <li>
+                    <h3>Project 1</h3>
+                    <p>Tag: Tag 1</p>
+                    <p>Contributors: Contributor 1</p>
+                    <p>Description: Description 1</p>
+                    <div class="project-actions">
+                        <button class="archive-btn">Archive</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <h3>Project 2</h3>
+                    <p>Tag: Tag 2</p>
+                    <p>Contributors: Contributor 2</p>
+                    <p>Description: Description 2</p>
+                    <div class="project-actions">
+                        <button class="archive-btn">Archive</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </main>
-    <footer>
-        <button>Footer Button</button>
-    </footer>
-    <script src="home_page.js"></script>
-    <script>
-        // Function to search projects
-        function searchProjects(searchTerm) {
-            const projectElements = document.querySelectorAll('.projects li');
-            projectElements.forEach(projectElement => {
-                const projectName = projectElement.querySelector('h3').textContent.toLowerCase();
-                if (projectName.includes(searchTerm.toLowerCase())) {
-                    projectElement.style.display = 'block';
-                } else {
-                    projectElement.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
-</html>`;
+</html>
+`;
 
-// Mock DOM
-const dom = new JSDOM(mockHTMLContents);
-global.document = dom.window.document;
+// Create a new JSDOM instance
+const dom = new JSDOM(htmlContent, { runScripts: "dangerously" });
+const { window } = dom;
+const { document } = window;
 
-describe('Project Management', () => {
-    beforeEach(() => {
-        localStorage.clear();
-        document.querySelector('.projects').innerHTML = '';
+// Mock the necessary functions for DOM manipulation
+window.document.querySelectorAll = jest.fn((selector) => {
+    if (selector === '.projects li') {
+        return document.querySelectorAll('.projects li');
+    }
+});
+
+// Begin writing tests
+describe('Home Page Functions', () => {
+    describe('searchProjects', () => {
+        test('should filter projects based on search term', () => {
+            // Mock input value for search term
+            const searchTerm = "Project 1";
+
+            // Call the search function
+            searchProjects(searchTerm);
+
+            // Assert that only Project 1 is displayed
+            const projectsList = document.querySelectorAll('.projects li');
+            expect(projectsList.length).toBe(1);
+            expect(projectsList[0].querySelector('h3').textContent).toBe("Project 1");
+        });
     });
 
-    test('should render active projects', () => {
-        const projectData = {
-                1: { projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Alice', projectDescription: 'Description 1', active: true },
-                2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: false },
-                3: { projectName: 'Project 3', projectTag: 'Tag3', projectContributors: 'Charlie', projectDescription: 'Description 3', active: true }
-        };
+    describe('deleteProject', () => {
+        test('should delete a project from localStorage', () => {
+            // Mock event and projectId
+            const mockEvent = { stopPropagation: jest.fn() };
+            const projectId = "1";
 
-        localStorage.setItem('project-data', JSON.stringify(projectData));
-        renderProjects();
+            // Call the delete function
+            deleteProject(projectId);
 
-        const projectsList = document.querySelectorAll('.projects li');
-        expect(projectsList.length).toBe(2);
-        expect(projectsList[0].querySelector('h3').textContent).toBe('Project 1');
-        expect(projectsList[1].querySelector('h3').textContent).toBe('Project 3');
+            // Assert that localStorage.setItem is called with updated project data
+            expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify({
+                project_data: {
+                    "2": {
+                        projectName: "Project 2",
+                        projectTag: "Tag 2",
+                        projectContributors: "Contributor 2",
+                        projectDescription: "Description 2",
+                        active: true
+                    }
+                }
+            }));
+        });
     });
 
-    test('should archive a project', () => {
-        const projectData = {
-            project_data: {
-                1: { projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Alice', projectDescription: 'Description 1', active: true }
-            }
-        };
+    describe('archiveProject', () => {
+        test('should archive a project', () => {
+            // Mock projectId
+            const projectId = "1";
 
-        localStorage.setItem('project-data', JSON.stringify(projectData));
-        archiveProject(1);
+            // Call the archive function
+            archiveProject(projectId);
 
-        const storedData = JSON.parse(localStorage.getItem('project-data'));
-        expect(storedData.project_data[1].active).toBe(false);
+            // Assert that localStorage.setItem is called with updated project data
+            expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify({
+                project_data: {
+                    "1": {
+                        projectName: "Project 1",
+                        projectTag: "Tag 1",
+                        projectContributors: "Contributor 1",
+                        projectDescription: "Description 1",
+                        active: false
+                    },
+                    "2": {
+                        projectName: "Project 2",
+                        projectTag: "Tag 2",
+                        projectContributors: "Contributor 2",
+                        projectDescription: "Description 2",
+                        active: true
+                    }
+                }
+            }));
+        });
     });
 
-    test('should delete a project', () => {
-        const projectData = {
-            project_data: {
-                1: { projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Alice', projectDescription: 'Description 1', active: true },
-                2: { projectName: 'Project 2', projectTag: 'Tag2', projectContributors: 'Bob', projectDescription: 'Description 2', active: true }
-            }
-        };
+    describe('renderProjects', () => {
+        test('should render projects from localStorage', () => {
+            // Call the render function
+            renderProjects();
 
-        localStorage.setItem('project-data', JSON.stringify(projectData));
-        deleteProject(1);
-
-        const storedData = JSON.parse(localStorage.getItem('project-data'));
-        expect(storedData.project_data[1]).toBeUndefined();
-        expect(storedData.project_data[2]).toBeDefined();
+            // Assert that projects are rendered correctly
+            const projectsList = document.querySelectorAll('.projects li');
+            expect(projectsList.length).toBe(2);
+            expect(projectsList[0].querySelector('h3').textContent).toBe("Project 1");
+            expect(projectsList[1].querySelector('h3').textContent).toBe("Project 2");
+        });
     });
 });

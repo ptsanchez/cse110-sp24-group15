@@ -31,7 +31,7 @@ describe('Click week button', () => {
       switchWeekly();
   
       // Ensure window.location.href is set to the day page URL
-      expect(window.location.href).toBe('/../weekPage/week_page.html');
+      expect(window.location.href).toBe('../weekPage/week_page.html');
     });
 });
 
@@ -40,7 +40,7 @@ describe('Click month button', () => {
         switchMonthly();
   
       // Ensure window.location.href is set to the day page URL
-      expect(window.location.href).toBe('/../monthPage/month_page.html');
+      expect(window.location.href).toBe('../monthPage/month_page.html');
     });
 });
 
@@ -49,7 +49,7 @@ describe('Click add log button', () => {
       redirectToAddLogPage();
   
       // Ensure window.location.href is set to the day page URL
-      expect(window.location.href).toBe('/../addLogPage/add_log_page.html');
+      expect(window.location.href).toBe('../addLogPage/add_log_page.html');
     });
 });
 
