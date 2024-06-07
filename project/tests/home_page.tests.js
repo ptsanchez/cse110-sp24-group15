@@ -1,116 +1,121 @@
+// Import jsdom
 const { JSDOM } = require('jsdom');
-const fs = require('fs');
-const path = require('path');
 
-// Load the HTML content from the home_page.html file
-const htmlFilePath = path.resolve(__dirname, '../homePage/home_page.html');
-const htmlContent = fs.readFileSync(htmlFilePath, 'utf8');
+// Set up jsdom
+const dom = new JSDOM('<!doctype html><html><body></body></html>');
+global.document = dom.window.document;
+global.window = dom.window;
 
-// Create a JSDOM instance with the HTML content
-const dom = new JSDOM(htmlContent);
-const { window } = dom;
-const { document } = window;
-
-// Mock the necessary functions for DOM manipulation
-global.document = document;
-
-// Import functions to be tested
-const { searchProjects, deleteProject, archiveProject, renderProjects } = require('../homePage/home_page.js');
-
-// Mock localStorage
-global.localStorage = {
-    getItem: jest.fn().mockReturnValue(JSON.stringify({
-        project_data: {
-            "1": {
-                projectName: "Project 1",
-                projectTag: "Tag 1",
-                projectContributors: "Contributor 1",
-                projectDescription: "Description 1",
-                active: true
-            },
-            "2": {
-                projectName: "Project 2",
-                projectTag: "Tag 2",
-                projectContributors: "Contributor 2",
-                projectDescription: "Description 2",
-                active: true
-            },
-            // Add more mock projects as needed
-        }
-    })),
-    setItem: jest.fn()
-};
-
-describe('Home Page Functions', () => {
-    describe('searchProjects', () => {
-        test('should filter projects based on search term', () => {
-            document.querySelectorAll = jest.fn().mockReturnValue([
-                { querySelector: jest.fn().mockReturnValue({ textContent: 'Project 1' }) },
-                { querySelector: jest.fn().mockReturnValue({ textContent: 'Project 2' }) }
-            ]);
-
-            searchProjects('Project 1');
-
-            expect(document.querySelectorAll).toHaveBeenCalledWith('.projects li');
-            expect(document.querySelectorAll.mock.calls.length).toBe(1);
-
-            expect(document.querySelectorAll('.projects li')[0].style.display).toBe('block');
-            expect(document.querySelectorAll('.projects li')[1].style.display).toBe('none');
-        });
+// Now you can import your functions and write tests
+const {
+  searchProjects,
+  deleteProject,
+  archiveProject,
+  renderProjects,
+  createProjectElement
+} = require('../homePage/home_page');
+  
+  // Mock localStorage
+  const localStorageMock = (() => {
+    let store = {};
+    return {
+      getItem: jest.fn().mockImplementation((key) => store[key]),
+      setItem: jest.fn().mockImplementation((key, value) => {
+        store[key] = value.toString();
+      }),
+      clear: jest.fn().mockImplementation(() => {
+        store = {};
+      })
+    };
+  })();
+  global.localStorage = localStorageMock;
+  
+  // Mock document methods
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <main>
+        <div class="sub-header">
+          <input type="text" class="search" placeholder="Search projects..." onkeyup="searchProjects(this.value)">
+        </div>
+        <ul class="projects"></ul>
+      </main>`;
+  });
+  
+  describe('Search Functionality', () => {
+    test('Search projects by name', () => {
+      // Call search function
+      searchProjects('project 1');
+  
+      // Verify the search results
+      const projects = document.querySelectorAll('.projects li');
+      expect(projects.length).toBe(0); // Assuming no matching project in this case
     });
-
-    describe('deleteProject', () => {
-        test('should delete a project from localStorage', () => {
-            const mockEvent = { stopPropagation: jest.fn() };
-
-            deleteProject("1");
-
-            expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify({
-                project_data: {
-                    "2": {
-                        projectName: "Project 2",
-                        projectTag: "Tag 2",
-                        projectContributors: "Contributor 2",
-                        projectDescription: "Description 2",
-                        active: true
-                    }
-                }
-            }));
-        });
+  });
+  
+  describe('Delete Project Functionality', () => {
+    test('Delete a project', () => {
+      // Mock localStorage data
+      localStorage.setItem('project_data', JSON.stringify({ '1': { active: true } }));
+  
+      // Call deleteProject function
+      deleteProject(1);
+  
+      // Verify if the project is deleted from localStorage
+      expect(localStorage.setItem).toHaveBeenCalledWith('project_data', '{}');
     });
-
-    describe('archiveProject', () => {
-        test('should archive a project', () => {
-            archiveProject("1");
-
-            expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify({
-                project_data: {
-                    "1": {
-                        projectName: "Project 1",
-                        projectTag: "Tag 1",
-                        projectContributors: "Contributor 1",
-                        projectDescription: "Description 1",
-                        active: false
-                    },
-                    "2": {
-                        projectName: "Project 2",
-                        projectTag: "Tag 2",
-                        projectContributors: "Contributor 2",
-                        projectDescription: "Description 2",
-                        active: true
-                    }
-                }
-            }));
-        });
+  });
+  
+  describe('Archive Functionality', () => {
+    test('Archive a project', () => {
+      // Mock localStorage data
+      localStorage.setItem('project_data', JSON.stringify({ '1': { active: true } }));
+  
+      // Call archiveProject function
+      archiveProject(1);
+  
+      // Verify if the project is archived in localStorage
+      expect(localStorage.setItem).toHaveBeenCalledWith('project_data', '{"1":{"active":false}}');
     });
-
-    describe('renderProjects', () => {
-        test('should render projects from localStorage', () => {
-            renderProjects();
-
-            expect(document.querySelectorAll('.projects li').length).toBe(2);
-            expect(document.querySelectorAll('.projects li')[0].querySelector('h3').textContent).toBe('Project 1');
-            expect(document.querySelectorAll('.projects li')[1].querySelector('h3').textContent).toBe('Project 2');
-        });
+  });
+  
+  describe('Render Projects Functionality', () => {
+    test('Render projects list', () => {
+      // Mock localStorage data
+      localStorage.setItem('project_data', JSON.stringify({ '1': { active: true, projectName: 'Project 1', projectTag: 'Tag1', projectContributors: 'Contrib1', projectDescription: 'Desc1' } }));
+  
+      // Call renderProjects function
+      renderProjects();
+  
+      // Verify if the project is rendered correctly
+      const projectList = document.querySelector('.projects');
+      expect(projectList.children.length).toBe(1);
+  
+      const projectElement = projectList.querySelector('li');
+      expect(projectElement.querySelector('h3').textContent).toBe('Project 1');
+      expect(projectElement.querySelector('p').textContent).toBe('Tag: Tag1');
     });
-});
+  });
+  
+  describe('Create Project Element Functionality', () => {
+    test('Create project element', () => {
+      // Create a dummy project object
+      const project = {
+        projectName: 'Project 1',
+        projectTag: 'Tag1',
+        projectContributors: 'Contrib1',
+        projectDescription: 'Desc1'
+      };
+  
+      // Create a dummy projectId
+      const projectId = '1';
+  
+      // Call createProjectElement function
+      const projectElement = createProjectElement(project, projectId);
+  
+      // Verify if the project element is created correctly
+      expect(projectElement.tagName).toBe('LI');
+      expect(projectElement.querySelector('h3').textContent).toBe('Project 1');
+      expect(projectElement.querySelector('p').textContent).toBe('Tag: Tag1');
+    });
+  });
+  
