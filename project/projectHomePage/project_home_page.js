@@ -45,16 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
             projectData['project_data'][String(currentProjectKey)]['TodoList'] = element.innerText;
         } else if (type === 'branch') {
             let link = element.innerText.trim();
-            const hasHttp = link.startsWith('http://');
-            const hasHttps = link.startsWith('https://');
-            if (!hasHttp && !hasHttps) {
-                link = 'https://' + link;
+            if (link == 'Enter your link to branch/workspace here...') {
+                projectData['project_data'][String(currentProjectKey)]['BranchLink'] = 'Enter your link to branch/workspace here...\n\n\n';
+            } else {
+                const hasHttp = link.startsWith('http://');
+                const hasHttps = link.startsWith('https://');
+                if (!hasHttp && !hasHttps) {
+                    link = 'https://' + link;
+                }
+                projectData['project_data'][String(currentProjectKey)]['BranchLink'] = link;
             }
-            projectData['project_data'][String(currentProjectKey)]['BranchLink'] = link;
             const branchLinkElement = document.querySelector('.project-branch-link');
             branchLinkElement.href = link;
         }
-        localStorage.setItem('projectData', JSON.stringify(projectData));
+        localStorage.setItem('project_data', JSON.stringify(projectData));
         const parentElement = element.parentElement;
         parentElement.classList.add('saved');
         showSaveConfirmation(btn);
@@ -158,6 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let text;
         if (type === 'todo') {
             text = projectData['project_data'][String(currentProjectKey)]['TodoList'];
+            if (typeof text === 'object' && Object.keys(text).length === 0) {
+                text = 'Enter your markdown here...\n\n\n';
+            }
         } else if (type === 'branch') {
             text = projectData['project_data'][String(currentProjectKey)]['BranchLink'];
         }
@@ -203,6 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const editBtn = document.querySelector('.branch-edit-btn');
             if (branchLink.getAttribute('contenteditable') === 'false') {
                 toggleEditMode(branchLink, editBtn, 'branch');
+            }
+        });
+        
+        const branchLinkElement = document.querySelector('.project-branch-link');
+        branchLinkElement.addEventListener('click', (event) => {
+            if (branchLinkElement.textContent.trim() === 'Enter your link to branch/workspace here...') {
+                event.preventDefault();
             }
         });
     } else {
