@@ -146,6 +146,7 @@ main {
     align-items: center;
     text-align: center;
     font-weight: bold;
+    border-radius: 10px;
 }
 
 .day-column .column-header {
