@@ -109,7 +109,7 @@ describe('Project Home Page Tests', () => {
         // Mock document.querySelector for setting innerHTML and event listeners
         projectTextElement = { textContent: '', innerText: '', appendChild: jest.fn() };
         todoListElement = { textContent: '', innerText: '', getAttribute: jest.fn().mockReturnValue('false'), setAttribute: jest.fn(), appendChild: jest.fn(), addEventListener: jest.fn(), dblclick: jest.fn() };
-        branchLinkElement = { textContent: '', innerText: '', href: '', getAttribute: jest.fn().mockReturnValue('false'), setAttribute: jest.fn(), appendChild: jest.fn() };
+        branchLinkElement = { textContent: '', innerText: '', href: '', getAttribute: jest.fn().mockReturnValue('false'), setAttribute: jest.fn(), appendChild: jest.fn(), addEventListener: jest.fn(), click: jest.fn() };
         projectDetailElement = { textContent: '', innerText: '', appendChild: jest.fn() };
         todoEditButton = { addEventListener: jest.fn(), click: jest.fn() };
         branchEditButton = { addEventListener: jest.fn(), click: jest.fn() };
