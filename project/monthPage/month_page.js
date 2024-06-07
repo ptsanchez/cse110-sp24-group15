@@ -1,4 +1,4 @@
-const header = document.querySelector(".calendar h3");
+const header = document.querySelector(".month-calendar-title #month-display");
 const dates = document.querySelector(".dates");
 const navs = document.querySelectorAll("#prev, #next");
 
