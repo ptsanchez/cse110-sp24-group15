@@ -69,22 +69,33 @@ function createProjectElement(project, projectId) {
     return projectElement;
 }
 
-// Function to delete a project
-function deleteProject(projectId) {
-    let projectData = new Map(JSON.parse(localStorage.getItem('project_data')));
-    projectData.delete(projectId.toString());
-    localStorage.setItem('project_data', JSON.stringify(Array.from(projectData.entries())));
+// Function to archive a project
+function archiveProject(projectId) {
+    let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
+    projectDataCopy['project_data'][String(projectId)]['active'] = false;
+    localStorage.setItem('project_data', JSON.stringify(projectDataCopy));
     renderProjects();
 }
-
 
 // Function to delete a project
 function deleteProject(projectId) {
     let projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
-    delete projectDataCopy.project_data[String(projectId)];
+    let projectData = projectDataCopy.project_data;
+    projectId = String(projectId);
+
+    // Create a new object excluding the key to delete
+    let newProjectData = Object.keys(projectData).reduce((newData, key) => {
+        if (key !== projectId) {
+            newData[key] = projectData[key];
+        }
+        return newData;
+    }, {});
+
+    projectDataCopy.project_data = newProjectData;
     localStorage.setItem('project_data', JSON.stringify(projectDataCopy));
     renderProjects();
 }
+
 
 // Render the projects on page load
 renderProjects();
