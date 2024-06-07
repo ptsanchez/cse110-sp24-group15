@@ -8,16 +8,16 @@ function init() {
 }
 
 function switchWeekly() {
-    window.location.href = escape("/../weekPage/week_page.html");
+    window.location.href = escape("../weekPage/week_page.html");
 }
 
 function switchMonthly() {
-    window.location.href = escape("/../monthPage/month_page.html");
+    window.location.href = escape("../monthPage/month_page.html");
 }
 
 // redirect page to add_log_page.html when button is clicked
 function redirectToAddLogPage() {
-    window.location.href = escape("/../addLogPage/add_log_page.html");
+    window.location.href = escape("../addLogPage/add_log_page.html");
 }
 
 module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
