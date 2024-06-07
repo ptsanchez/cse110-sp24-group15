@@ -53,6 +53,7 @@ header {
     transform: scale(1.05);
 }
 
+
 /* Main */
 main {
     padding: 20px;
@@ -139,6 +140,17 @@ main {
 
 .projects li .delete-btn {
     background-color: red;
+    padding: 0.4rem;
+}
+
+.projects li .delete-btn i {
+    color: white;
+    font-size: 16px;
+}
+
+.delete-btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
 }
 
 .add-project, .archive {
