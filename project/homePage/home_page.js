@@ -86,7 +86,7 @@ function deleteProject(projectId) {
     // Create a new object excluding the key to delete
     let newProjectData = Object.keys(projectData).reduce((newData, key) => {
         if (key !== projectId) {
-            newData[key] = projectData[key];
+            newData[String(key)] = projectData[String(key)];
         }
         return newData;
     }, {});
