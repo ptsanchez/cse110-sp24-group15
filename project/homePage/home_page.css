@@ -212,24 +212,8 @@ footer p {
 
 .project-tag-contributors {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.project-tag-contributors p {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.feedback-section p {
-    color: var(--text-lighter-color);
-    margin-bottom: 1.25rem;  
-    margin-left: auto; 
-    margin-right: auto;
-}
-
-.project-tag-contributors p:last-child {
-    margin-right: 0;
+    align-items: center;
+    gap: 10px;
 }
 
 .project-actions {
