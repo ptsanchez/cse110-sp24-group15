@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let projData = JSON.parse(localStorage.getItem("project_data"));
                 projData.current_project = key;
                 localStorage.setItem('project_data', JSON.stringify(projData));
-                window.location.href = escape("../projects/projectHomePage/project_home_page.html");
+                window.location.href = escape("../projectHomePage/project_home_page.html");
             });
 
             // Append the list item to the project list
