@@ -23,17 +23,20 @@
         <div class="sub-header">
             <h2 class="active-projects-title">Active Projects</h2>
             <div class="search-container">
-                <input type="text" class="search" placeholder="Search projects..." onkeyup="searchProjects(this.value)">
+                <div class="search-wrapper">
+                    <span class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" class="search" placeholder="Search projects..." onkeyup="searchProjects(this.value)">
+                </div>
+                <a href="../addProjectPage/add_project_page.html" class="add-project-btn">
+                    <span class="plus-icon">+</span> New
+                </a>
+                <a href="../archivePage/archive_page.html" class="archive-page-btn">Archive Page</a>
             </div>
         </div>
         <div class="project-list">
             <ul class="projects"></ul>
-            <div class="add-project">
-                <a href="../addProjectPage/add_project_page.html" class="add-project-btn">Add New Project</a>
-            </div>
-            <div class="archive">
-                <a href="../archivePage/archive_page.html" class="archive-btn">Archive Page</a>
-            </div>
         </div>
     </main>
 
@@ -54,7 +57,7 @@
         function searchProjects(searchTerm) {
             const projectElements = document.querySelectorAll('.projects li');
             projectElements.forEach(projectElement => {
-                const projectName = projectElement.querySelector('h3').textContent.toLowerCase();
+                const projectName = projectElement.querySelector('.project-title').textContent.toLowerCase();
                 if (projectName.includes(searchTerm.toLowerCase())) {
                     projectElement.style.display = 'block';
                 } else {

@@ -15,7 +15,7 @@ function renderProjects() {
             }
         }
     }
-};
+}
 
 // Function to create a project element
 function createProjectElement(project, projectId) {
@@ -23,19 +23,26 @@ function createProjectElement(project, projectId) {
 
     const projectTitle = document.createElement('h3');
     projectTitle.textContent = project.projectName;
+    projectTitle.classList.add('project-title');
     projectElement.appendChild(projectTitle);
 
-    const projectTag = document.createElement('p');
-    projectTag.textContent = `Tag: ${project.projectTag}`;
-    projectElement.appendChild(projectTag);
+    const projectDetails = document.createElement('div');
+    projectDetails.classList.add('project-details');
 
-    const projectContributors = document.createElement('p');
-    projectContributors.textContent = `Contributors: ${project.projectContributors}`;
-    projectElement.appendChild(projectContributors);
+    const projectTagContributors = document.createElement('div');
+    projectTagContributors.classList.add('project-tag-contributors');
+
+    const projectTag = document.createElement('p');
+    projectTag.innerHTML = `<span class="label">Tag:</span> ${project.projectTag} | <span class="label">Contributors:</span> ${project.projectContributors}`;
+    projectTagContributors.appendChild(projectTag);
+
+    projectDetails.appendChild(projectTagContributors);
 
     const projectDescription = document.createElement('p');
-    projectDescription.textContent = `Description: ${project.projectDescription}`;
-    projectElement.appendChild(projectDescription);
+    projectDescription.innerHTML = `<span class="label">Description:</span> ${project.projectDescription}`;
+    projectDetails.appendChild(projectDescription);
+
+    projectElement.appendChild(projectDetails);
 
     const projectActions = document.createElement('div');
     projectActions.classList.add('project-actions');
@@ -49,15 +56,11 @@ function createProjectElement(project, projectId) {
     });
     projectActions.appendChild(archiveButton);
 
-
-    // delete button
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-btn');
 
-    // Create icon element
-    let icon = document.createElement('i');
+    const icon = document.createElement('i');
     icon.classList.add('fas', 'fa-trash');
-
     deleteButton.appendChild(icon);
 
     deleteButton.addEventListener('click', (event) => {
@@ -66,8 +69,8 @@ function createProjectElement(project, projectId) {
     });
 
     projectActions.appendChild(deleteButton);
-
     projectElement.appendChild(projectActions);
+
     projectElement.addEventListener('click', () => {
         const projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
         projectDataCopy.current_project = projectId;

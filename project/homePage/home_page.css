@@ -53,7 +53,6 @@ header {
     transform: scale(1.05);
 }
 
-
 /* Main */
 main {
     padding: 20px;
@@ -81,14 +80,34 @@ main {
     font-weight: bold;
 }
 
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    color: #ccc;
+}
+
 .search {
-    padding: 5%;
-    font-size: 1rem;
-    margin-right: 1.5em;
-    border: 0.1em solid #ccc;
-    border-radius: 1em;
+    padding: 10px 10px 10px 30px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0 0 0 / 10%);
     transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    height: 40px;
 }
 
 .search:focus {
@@ -97,8 +116,37 @@ main {
     outline: none;
 }
 
-/* Project Design */
+.add-project-btn, .archive-page-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2ea44f;
+    color: white;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 6px;
+    text-decoration: none;
+    height: 40px;
+}
 
+.add-project-btn:hover, .archive-page-btn:hover {
+    background-color: #2c974b;
+    border-color: rgba(27, 31, 35, 0.15);
+}
+
+.plus-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* Project Design */
 .project-list {
     display: flex;
     flex-direction: column;
@@ -113,8 +161,8 @@ main {
 
 .projects li {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     background-color: #f9f9f9;
     padding: 15px;
     border: 1px solid #ddd;
@@ -123,7 +171,7 @@ main {
     cursor: pointer;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     margin-bottom: 1rem;
-    font-family: Arial, sans-serif;
+    position: relative;
 }
 
 .projects li:hover {
@@ -131,81 +179,81 @@ main {
     transform: translateY(-2px);
 }
 
-.projects li button {
+.project-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    width: calc(100% - 50px);
+}
+
+.project-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: monospace;
+}
+
+.project-details p {
+    margin: 0.5em 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-details .label {
+    font-weight: bold;
+}
+
+.project-tag-contributors {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.project-tag-contributors p {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.project-tag-contributors p:last-child {
+    margin-right: 0;
+}
+
+.project-actions {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.archive-btn, .delete-btn {
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
-    border-radius: 3px;
+    font-size: 0.9em;
 }
 
-.delete-btn:hover {
-    transform: scale(1.04);
-    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
-}
-
-.projects li .delete-btn {
-    background-color: red;
-    padding: 0.4rem;
-}
-
-.projects li .delete-btn i {
+.delete-btn {
+    background-color: rgb(254 53 53);
     color: white;
-    font-size: 16px;
+    border: none;
+}
+
+.delete-btn:hover,
+.archive-btn:hover {
+    opacity: 0.8;
+}
+
+.project-hidden {
+    display: none;
 }
 
 .add-project, .archive {
     margin-top: 20px;
-}
-
-/* Home Page Buttons Design */
-
-.add-project-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0 0 0 / 10%);
-    transition: background-color 0.3s, box-shadow 0.3s;
-    margin-left: 10px; 
-    flex-shrink: 0;
-}
-
-.add-project-btn:hover {
-    background-color: #45a049;
-    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
-    transform: scale(1.01);
-}
-
-.archive-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0 0 0 / 10%);
-    transition: background-color 0.3s, box-shadow 0.3s;
-    margin-top: 10px;
-    margin-left: 10px; 
-}
-
-.archive-btn:hover {
-    background-color: #45a049;
-    box-shadow: 0 4px 8px rgba(0 0 0 / 20%);
-    transform: scale(1.05);
 }
 
 /* Footer */
