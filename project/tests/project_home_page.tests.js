@@ -65,11 +65,15 @@ const mockHTMLContent = `
             <button class="edit-btn branch-edit-btn"><i class="bx bx-edit"></i></button>
         </div>
         <div class="project-detail-div">
-            
+            <div class="project-detail-header">
+                <span class="project-detail-title">Project Description</span>
+                <hr class="project-detail-divider">
+            </div>
+            <span class="project-detail-content"></span>
         </div>
         <div class="project-btns-div">
             <button class="make-log-btn" onclick="location.href='../addLogPage/add_log_page.html'">Make Log</button>
-            <button class="all-logs-btn" onclick="location.href='../monthlyPage/monthly_page.html'">All Logs</button>
+            <button class="all-logs-btn" onclick="location.href='../monthPage/month_page.html'">All Logs</button>
         </div>
     </div>
 `;
@@ -120,7 +124,7 @@ describe('Project Home Page Tests', () => {
                 ".project-text": projectTextElement,
                 ".project-todo-list": todoListElement,
                 ".project-branch-link": branchLinkElement,
-                ".project-detail-div": projectDetailElement,
+                ".project-detail-content": projectDetailElement,
                 ".todo-edit-btn": todoEditButton,
                 ".branch-edit-btn": branchEditButton,
                 ".project-link-div": projectLinkElement
@@ -169,9 +173,9 @@ describe('Project Home Page Tests', () => {
 
         // Simulate clicking the save button
         saveChanges.mockImplementation(() => {
-            const projectData = JSON.parse(localStorage.getItem('projectData'));
+            const projectData = JSON.parse(localStorage.getItem('project_data'));
             projectData.project_data['project_1'].TodoList = todoListElement.innerText;
-            localStorage.setItem('projectData', JSON.stringify(projectData));
+            localStorage.setItem('project_data', JSON.stringify(projectData));
         });
 
         todoEditButton.click();
@@ -193,7 +197,7 @@ describe('Project Home Page Tests', () => {
                 }
             }
         };
-        expect(localStorage.setItem).toHaveBeenCalledWith('projectData', JSON.stringify(updatedProjectData));
+        expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(updatedProjectData));
     });
 
     test('Editing branch link works', () => {
@@ -233,9 +237,9 @@ describe('Project Home Page Tests', () => {
             if (!link.startsWith('http://') && !link.startsWith('https://')) {
                 link = 'https://' + link;
             }
-            const projectData = JSON.parse(localStorage.getItem('projectData'));
+            const projectData = JSON.parse(localStorage.getItem('project_data'));
             projectData.project_data['project_1'].BranchLink = link;
-            localStorage.setItem('projectData', JSON.stringify(projectData));
+            localStorage.setItem('project_data', JSON.stringify(projectData));
             branchLinkElement.href = link;
         });
 
@@ -258,7 +262,7 @@ describe('Project Home Page Tests', () => {
                 }
             }
         };
-        expect(localStorage.setItem).toHaveBeenCalledWith('projectData', JSON.stringify(updatedProjectData));
+        expect(localStorage.setItem).toHaveBeenCalledWith('project_data', JSON.stringify(updatedProjectData));
     });
 
     test('Project details load data correctly', () => {

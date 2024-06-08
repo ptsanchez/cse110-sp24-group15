@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.project-branch-link').textContent = currentProject.BranchLink || 'Enter your link to branch/workspace here...\n\n\n';
         document.querySelector('.project-branch-link').href = currentProject.BranchLink || '#';
         document.querySelector('.project-branch-link').target = '_blank';
-        document.querySelector('.project-detail-div').textContent = currentProject.projectDescription || 'Project Details, Members';
+        document.querySelector('.project-detail-content').textContent = currentProject.projectDescription || 'Project Details, Members';
 
         renderMarkup(document.querySelector('.project-todo-list'));
 
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.project-branch-link').textContent = 'Enter your link to branch/workspace here...\n\n\n';
         document.querySelector('.project-branch-link').href = '#';
         document.querySelector('.project-branch-link').target = '_blank';
-        document.querySelector('.project-detail-div').textContent = 'Project Details, Members';
+        document.querySelector('.project-detail-content').textContent = 'Project Details, Members';
     }
 
     // Function to set default text if necessary
@@ -241,5 +241,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setDefaultText('.project-text', 'PROJECT NAME');
     setDefaultText('.project-todo-list', 'Enter your markdown here...\n\n\n');
     setDefaultText('.project-branch-link', 'Enter your link to branch/workspace here...\n\n\n');
-    setDefaultText('.project-detail-div', 'Project Details, Members');
+    setDefaultText('.project-detail-content', 'Project Details, Members');
 });

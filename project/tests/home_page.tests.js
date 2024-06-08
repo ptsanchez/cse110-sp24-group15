@@ -3,6 +3,7 @@ global.document = {
     querySelector: jest.fn(),
     querySelectorAll: jest.fn(),
     createElement: jest.fn(),
+    createTextNode: jest.fn((text) => ({ nodeValue: text })),
     addEventListener: jest.fn()
   };
   

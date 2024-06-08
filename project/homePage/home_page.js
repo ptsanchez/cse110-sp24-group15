@@ -15,7 +15,7 @@ function renderProjects() {
             }
         }
     }
-};
+}
 
 // Function to create a project element
 function createProjectElement(project, projectId) {
@@ -23,19 +23,46 @@ function createProjectElement(project, projectId) {
 
     const projectTitle = document.createElement('h3');
     projectTitle.textContent = project.projectName;
+    projectTitle.classList.add('project-title');
     projectElement.appendChild(projectTitle);
 
+    const projectDetails = document.createElement('div');
+    projectDetails.classList.add('project-details');
+
+    const projectTagContributors = document.createElement('div');
+    projectTagContributors.classList.add('project-tag-contributors');
+
     const projectTag = document.createElement('p');
-    projectTag.textContent = `Tag: ${project.projectTag}`;
-    projectElement.appendChild(projectTag);
+    const tagLabel = document.createElement('span');
+    tagLabel.classList.add('label');
+    tagLabel.textContent = 'Tag:';
+    projectTag.appendChild(tagLabel);
+    projectTag.appendChild(document.createTextNode(` ${project.projectTag}`));
+
+    const separator = document.createTextNode(' | ');
 
     const projectContributors = document.createElement('p');
-    projectContributors.textContent = `Contributors: ${project.projectContributors}`;
-    projectElement.appendChild(projectContributors);
+    const contributorsLabel = document.createElement('span');
+    contributorsLabel.classList.add('label');
+    contributorsLabel.textContent = 'Contributors:';
+    projectContributors.appendChild(contributorsLabel);
+    projectContributors.appendChild(document.createTextNode(` ${project.projectContributors}`));
+
+    projectTagContributors.appendChild(projectTag);
+    projectTagContributors.appendChild(separator);
+    projectTagContributors.appendChild(projectContributors);
+
+    projectDetails.appendChild(projectTagContributors);
 
     const projectDescription = document.createElement('p');
-    projectDescription.textContent = `Description: ${project.projectDescription}`;
-    projectElement.appendChild(projectDescription);
+    const descriptionLabel = document.createElement('span');
+    descriptionLabel.classList.add('label');
+    descriptionLabel.textContent = 'Description:';
+    projectDescription.appendChild(descriptionLabel);
+    projectDescription.appendChild(document.createTextNode(` ${project.projectDescription}`));
+    projectDetails.appendChild(projectDescription);
+
+    projectElement.appendChild(projectDetails);
 
     const projectActions = document.createElement('div');
     projectActions.classList.add('project-actions');
@@ -49,15 +76,11 @@ function createProjectElement(project, projectId) {
     });
     projectActions.appendChild(archiveButton);
 
-
-    // delete button
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-btn');
 
-    // Create icon element
-    let icon = document.createElement('i');
+    const icon = document.createElement('i');
     icon.classList.add('fas', 'fa-trash');
-
     deleteButton.appendChild(icon);
 
     deleteButton.addEventListener('click', (event) => {
@@ -66,8 +89,8 @@ function createProjectElement(project, projectId) {
     });
 
     projectActions.appendChild(deleteButton);
-
     projectElement.appendChild(projectActions);
+
     projectElement.addEventListener('click', () => {
         const projectDataCopy = JSON.parse(JSON.stringify(JSON.parse(localStorage.getItem('project_data'))));
         projectDataCopy.current_project = projectId;
