@@ -33,13 +33,13 @@ function createProjectElement(project, projectId) {
     projectTagContributors.classList.add('project-tag-contributors');
 
     const projectTag = document.createElement('p');
-    projectTag.innerHTML = `<span class="label">Tag:</span> ${project.projectTag} | <span class="label">Contributors:</span> ${project.projectContributors}`;
+    projectTag.innerHTML = `<span class="label">Tag:</span> ${sanitizeHTML(project.projectTag)} | <span class="label">Contributors:</span> ${sanitizeHTML(project.projectContributors)}`;
     projectTagContributors.appendChild(projectTag);
 
     projectDetails.appendChild(projectTagContributors);
 
     const projectDescription = document.createElement('p');
-    projectDescription.innerHTML = `<span class="label">Description:</span> ${project.projectDescription}`;
+    projectDescription.innerHTML = `<span class="label">Description:</span> ${sanitizeHTML(project.projectDescription)}`;
     projectDetails.appendChild(projectDescription);
 
     projectElement.appendChild(projectDetails);
@@ -80,6 +80,13 @@ function createProjectElement(project, projectId) {
     });
 
     return projectElement;
+}
+
+// Function to sanitize HTML input
+function sanitizeHTML(input) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(input, 'text/html');
+    return doc.body.textContent || "";
 }
 
 // Function to archive a project
