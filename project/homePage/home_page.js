@@ -33,13 +33,33 @@ function createProjectElement(project, projectId) {
     projectTagContributors.classList.add('project-tag-contributors');
 
     const projectTag = document.createElement('p');
-    projectTag.innerHTML = `<span class="label">Tag:</span> ${sanitizeHTML(project.projectTag)} | <span class="label">Contributors:</span> ${sanitizeHTML(project.projectContributors)}`;
+    const tagLabel = document.createElement('span');
+    tagLabel.classList.add('label');
+    tagLabel.textContent = 'Tag:';
+    projectTag.appendChild(tagLabel);
+    projectTag.appendChild(document.createTextNode(` ${project.projectTag}`));
+
+    const separator = document.createTextNode(' | ');
+
+    const projectContributors = document.createElement('p');
+    const contributorsLabel = document.createElement('span');
+    contributorsLabel.classList.add('label');
+    contributorsLabel.textContent = 'Contributors:';
+    projectContributors.appendChild(contributorsLabel);
+    projectContributors.appendChild(document.createTextNode(` ${project.projectContributors}`));
+
     projectTagContributors.appendChild(projectTag);
+    projectTagContributors.appendChild(separator);
+    projectTagContributors.appendChild(projectContributors);
 
     projectDetails.appendChild(projectTagContributors);
 
     const projectDescription = document.createElement('p');
-    projectDescription.innerHTML = `<span class="label">Description:</span> ${sanitizeHTML(project.projectDescription)}`;
+    const descriptionLabel = document.createElement('span');
+    descriptionLabel.classList.add('label');
+    descriptionLabel.textContent = 'Description:';
+    projectDescription.appendChild(descriptionLabel);
+    projectDescription.appendChild(document.createTextNode(` ${project.projectDescription}`));
     projectDetails.appendChild(projectDescription);
 
     projectElement.appendChild(projectDetails);
@@ -80,13 +100,6 @@ function createProjectElement(project, projectId) {
     });
 
     return projectElement;
-}
-
-// Function to sanitize HTML input
-function sanitizeHTML(input) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(input, 'text/html');
-    return doc.body.textContent || "";
 }
 
 // Function to archive a project
