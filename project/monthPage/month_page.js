@@ -20,9 +20,17 @@ function renderCalendar() {
     dates.innerHTML = ""; // Clear previous dates
 
     const setDateAndNavigate = (dateId) => {
+        let [month, day, year] = dateId.split('/').map(Number);
+        let date = new Date(year, month - 1, day);
+        date.setMonth(date.getMonth() + 1);
+        const updatedMonth = (date.getMonth() + 1).toString().padStart(2, '0');
+        const updatedDay = date.getDate().toString().padStart(2, '0');
+        const updatedYear = date.getFullYear();
+        const updatedDateId = `${updatedMonth}/${updatedDay}/${updatedYear}`;
         const projectData = JSON.parse(localStorage.getItem('project_data')) || {};
-        projectData.current_date = dateId;
+        projectData.current_date = updatedDateId;
         localStorage.setItem('project_data', JSON.stringify(projectData));
+        localStorage.setItem('current_date', updatedDateId);
         window.location.href = escape('../dayPage/day_page.html');
     };
 

@@ -155,13 +155,13 @@ main {
 
 .small-column {
     flex: 1;
-    max-width: 20%;
+    max-width: 30%;
     margin: 0 2.5px;
 }
 
 .large-column {
     flex: 2;
-    max-width: 60%;
+    max-width: 40%;
     margin: 0 2.5px;
 }
 
@@ -206,4 +206,10 @@ main {
     justify-content: center;
     align-items: center;
     margin-left: 10px;
+}
+
+#day-calendar-title, #day-calendar-time, #day-calendar-progress {
+    font-size: 20px; /* Increased font size */
+    color: var(--text-color);
+    font-weight: 600;
 }
