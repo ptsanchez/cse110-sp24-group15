@@ -21,6 +21,7 @@ function validateForm(log_title, log_time, log_contributors, log_description) {
 /**
  * Handles the submission of the form by creating a new log entry and saving it to localStorage.
  */
+
 function makeSubmission() {
   // Get the values from the form inputs
   let log_title = document.getElementById("log-title").value;
@@ -44,8 +45,7 @@ function makeSubmission() {
       logs = Object.values(logs);
     }
 
-    // Split the current date into an array of [Month, Day, Year]
-    let curr_date = proj_data["current_date"].split("/");
+  let curr_date = proj_data["current_date"].split("/");
 
     // Create a new log entry
     let new_log = {
