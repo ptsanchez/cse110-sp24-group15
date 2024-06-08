@@ -158,23 +158,51 @@ main {
     border-top: 1px solid #d3d3d3;
     margin-top: 5px;
 }
-
 /* Project Description */
 .project-detail-div {
     background-color: #bcf5bc;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
-    text-align: center;
-    font-size: 1em;
-    color: var(--text-color);
-    font-weight: bold;
+    position: relative;
+    transition: background-color 0.3s ease;
     box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+}
+
+.project-detail-div .project-detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.project-detail-title {
+    font-size: 1em; /* Same size as Branch Link and Description */
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px; /* Increase gap between title and divider */
+}
+
+.project-detail-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #d3d3d3;
+    margin-top: 5px;
 }
 
 .project-detail-div:hover {
     background-color: #a6f2a6;
     transform: scale(1.02);
+}
+
+.project-detail-content {
+    color: var(--text-light-color);
+    font-size: 1em;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    outline: none;
+    padding-bottom: 2%;
+    font-family: monospace; /* Change to markdown font */
 }
 
 /* Buttons that navigate to other pages */
