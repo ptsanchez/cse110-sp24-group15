@@ -76,7 +76,7 @@ function calendarScript() {
         let year = currentDate.getFullYear();
 
         logs.forEach(log => {
-            if (log.Month == month && log.day == day && log.Year == year) {
+            if (parseInt(log.Month) == month && parseInt(log.day) == day && parseInt(log.Year) == year) {
                 current_logs.push(log);
             }
         });
