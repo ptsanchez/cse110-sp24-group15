@@ -32,7 +32,6 @@ function calendarScript() {
     if (selectedDate != null) {
         currentDate = new Date(selectedDate);
     }
-    let proj_data = JSON.parse(localStorage.getItem("project_data"));
     localStorage.setItem("current_date", formatDateToMMDDYYYY(currentDate));
 
     function formatDate(date) {
