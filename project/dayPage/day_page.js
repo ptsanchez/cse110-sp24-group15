@@ -62,7 +62,7 @@ function calendarScript() {
 
     function updateCalendar() {
         const thisDate = currentDate;
-        dayDisplay.textContent = `${getDayOfWeek(thisDate)}, ${formatDate(thisDate)}`;
+        dayDisplay.textContent = `${formatDate(thisDate)}`;
     }
 
     function updateEvents() {
@@ -130,7 +130,7 @@ function calendarScript() {
 
                 let codeDiv = document.createElement('div');
                 codeDiv.classList.add("code-snippet");
-                
+
 
                 // Initialize CodeMirror on the created div
                 CodeMirror(codeDiv, {
