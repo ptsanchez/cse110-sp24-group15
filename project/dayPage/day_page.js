@@ -57,7 +57,7 @@ function calendarScript() {
     function getDayOfWeek(date) {
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = date.getDay();
-        return daysOfWeek[parseInt(dayIndex)];
+        return daysOfWeek[parseInt(dayIndex, 100)];
     }
 
     function updateCalendar() {
@@ -70,8 +70,8 @@ function calendarScript() {
         let logs = [];
         if (jsonString) {
             let jsonObject = JSON.parse(jsonString);
-            const currentProject = jsonObject.current_project;
-            logs = jsonObject.project_data[currentProject].logs || [];
+            let currentProject = jsonObject.current_project;
+            logs = jsonObject.project_data[String(currentProject)].logs || [];
         }
 
         let currentDateStr = localStorage.getItem('current_date');
