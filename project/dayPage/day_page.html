@@ -6,6 +6,10 @@
     <title>Day Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="day_page.css">
+    <!-- Include CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+    <!-- Include CodeMirror theme (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css" />
 </head>
 <body>
     <header>
@@ -17,6 +21,7 @@
     </header>
     <main>
         <script src="day_page.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5.61.1/lib/codemirror.js"></script>
         <div class="day-header-div">
             <div class="day-text">Calendar</div>
             <div class="tabs">
@@ -32,9 +37,16 @@
               <span id="day-display">Day</span>
             </div>
             <div class="calendar-body">
+                <div class="day-column small-column" id="day-calendar-time">Time</div>
                 <div class="day-column small-column" id="day-calendar-title">Title</div>
-                <div class="day-column large-column" id="day-calendar-time">Time</div>
+                <div class="day-column large-column" id="day-calendar-description">Description</div>
                 <div class="day-column small-column" id="day-calendar-progress">Progress</div>
+                <div class="day-column large-column" id="day-calendar-snippet">Code Snippet</div>
+                    <!-- <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                      
+                    <input type="range" min="0" max="100" value="50" id="progressInput"> -->
               </div>
         </div>
         
@@ -53,4 +65,3 @@
     </footer>
 </body>
 </html>
-
