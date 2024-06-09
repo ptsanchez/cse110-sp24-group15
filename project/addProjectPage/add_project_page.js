@@ -78,8 +78,21 @@ function handleSubmission(form) {
 
 if (typeof document !== 'undefined') {
     const form = document.querySelector('form');
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', (event) => {
+        // Prevent default form submission behavior
+        event.preventDefault();
+
+        // Check if the form is valid
+        if (!form.checkValidity()) {
+            form.reportValidity(); // Show validation errors
+            return;
+        }
+
+        // Handle form submission and storage
         handleSubmission(form);
+
+        // Redirect to home page after successful submission
+        window.location.href = escape('../homePage/home_page.html');
     });
 }
 
