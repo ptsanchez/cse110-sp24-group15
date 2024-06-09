@@ -231,7 +231,7 @@ main {
     word-wrap: break-word;
     text-align: center;     
     overflow-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255 255 255 / 40%);
     border-radius: 10px;
 }
 
@@ -242,10 +242,9 @@ main {
     padding: 10px;
     margin: 5px 0;
     box-sizing: border-box;
-    /* display: block;  */
     word-wrap: break-word; 
     overflow-wrap: break-word;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255 255 255 / 40%);
     border-radius: 10px;
 }
 
