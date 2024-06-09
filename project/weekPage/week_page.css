@@ -61,7 +61,6 @@ main {
     box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
     border-radius: 20px;
     width: 80%;
-    max-width: 1000px;
     margin: 200px auto 60px; 
     background-color: var(--background-color);
     flex-grow: 1;
@@ -235,4 +234,28 @@ main {
     justify-content: center;
     align-items: center;
     margin-left: 10px;
+}
+
+/* logging display */
+.space-buffer {
+    height: 2.5rem;
+}
+
+.log-title {
+    flex: 1;
+    border: 1px solid #ddd;
+    position: relative;
+    background-color: #d3d3d3;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 2.5px; /* Add margin to separate columns */
+    cursor: pointer;
+    border-radius: 1rem; 
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 40%); 
+    transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+    color: black;
 }

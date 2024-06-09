@@ -20,8 +20,6 @@ function redirectToAddLogPage() {
     window.location.href = escape("../addLogPage/add_log_page.html");
 }
 
-module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
-
 function calendarScript() {
     const dayDisplay = document.getElementById('day-display');
     const prevDayBtn = document.getElementById('prev-day-btn');
@@ -62,7 +60,7 @@ function calendarScript() {
 
     function updateCalendar() {
         const thisDate = currentDate;
-        dayDisplay.textContent = `${getDayOfWeek(thisDate)}, ${formatDate(thisDate)}`;
+        dayDisplay.textContent = `${formatDate(thisDate)}`;
     }
 
     function updateEvents() {
@@ -130,7 +128,7 @@ function calendarScript() {
 
                 let codeDiv = document.createElement('div');
                 codeDiv.classList.add("code-snippet");
-                
+
 
                 // Initialize CodeMirror on the created div
                 CodeMirror(codeDiv, {
@@ -220,4 +218,8 @@ function calendarScript() {
     updateCalendar();
     updateEvents(); // Call updateEvents to ensure events are loaded initially
     updatePage();
+}
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};;
 }

@@ -53,10 +53,43 @@ function calendarScript() {
         return `${mm}/${dd}/${yyyy}`;
     }
 
+    function updateEvents() {
+        let jsonString = localStorage.getItem('project_data');
+        let logs = []
+
+        if (jsonString) {
+            let jsonObject = JSON.parse(jsonString);
+            let currentProject = jsonObject.current_project;
+            logs = jsonObject.project_data[String(currentProject)].logs || [];
+        }
+
+        let current_logs = {};
+
+        logs.forEach(log => {
+            let date = `${log.Year}-${log.Month}-${log.day}`;
+
+            if (!( date in current_logs)){
+                current_logs[String(date)] = [];
+            }
+
+            current_logs[String(date)].push(log)
+        });
+
+        localStorage.setItem("all_logs", JSON.stringify(current_logs));
+    }
+
+
     function updateCalendar() {
         const weekDates = getWeekDates(new Date(currentDate));
         weekDisplay.textContent = `Week of ${formatDate(weekDates[0])} - ${formatDate(weekDates[6])}`;
+
+        let jsonString = localStorage.getItem('all_logs');
+        let jsonObject = JSON.parse(jsonString);
+
+
+
         document.querySelectorAll('.day-column').forEach((column, index) => {
+            column.innerHTML = '';
             // Remove existing date displays to avoid overlap
             const existingDateDiv = column.querySelector('.date-display');
             if (existingDateDiv) {
@@ -80,6 +113,30 @@ function calendarScript() {
             } else {
                 column.classList.remove('current-day');
             }
+
+            const monthMapping = {
+                'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+                'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+            };
+
+            let dateBreakdown = String(weekDates[Number(index)]).split(' ');
+            let dateString = `${dateBreakdown[3]}-${monthMapping[String(dateBreakdown[1])]}-${dateBreakdown[2]}`;
+            let logs = jsonObject[String(dateString)] || [];
+
+            logs.sort((a, b) => a.time.localeCompare(b.time));
+
+            let titleDiv = document.createElement('div');
+            titleDiv.classList.add("space-buffer");
+            column.appendChild(titleDiv);
+            
+            logs.forEach((log) => {
+                let titleDiv = document.createElement('div');
+                titleDiv.textContent = log.title;
+                titleDiv.classList.add("log-title");
+
+                column.appendChild(titleDiv);
+            });
+
         });
     }
 
@@ -108,5 +165,6 @@ function calendarScript() {
     });
 
     // Initialize calendar
+    updateEvents()
     updateCalendar();
 }
