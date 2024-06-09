@@ -63,10 +63,7 @@ function calendarScript() {
 
         let current_logs = {};
 
-        for(let i = 0; i < logs.length; i ++){
-            
-            log = logs [i];
-
+        for(let log of logs){
             let date = `${log.Year}-${log.Month}-${log.day}`;
 
             if (!( date in current_logs)){
@@ -130,13 +127,13 @@ function calendarScript() {
             titleDiv.classList.add("space-buffer");
             column.appendChild(titleDiv);
             
-            logs.forEach((log) => {
+            for(let log of logs){
                 let titleDiv = document.createElement('div');
                 titleDiv.textContent = log.title;
                 titleDiv.classList.add("log-title");
 
                 column.appendChild(titleDiv);
-            });
+            };
 
         });
     }
