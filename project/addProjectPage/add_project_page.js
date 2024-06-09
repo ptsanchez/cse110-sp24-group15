@@ -92,7 +92,7 @@ if (typeof document !== 'undefined') {
         handleSubmission(form);
 
         // Redirect to home page after successful submission
-        window.location.href = '../homePage/home_page.html';
+        window.location.href = escape('../homePage/home_page.html');
     });
 }
 
