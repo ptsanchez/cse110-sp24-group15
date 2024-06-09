@@ -8,10 +8,13 @@ describe('Developer Journal Flow', () => {
     let page;
 
     beforeAll(async () => {
-        browser = await puppeteer.launch();
+        browser = await puppeteer.launch({
+            headless: false,
+            slowMo: 20
+        });
         page = await browser.newPage();
 
-        // set the screen resolution to 1728x1127
+        // set the screen resolution to 1728x1117
         await page.setViewport({ width: 1728, height: 1117 });
 
         // go to our github page for developer journal (deployed)
@@ -19,14 +22,30 @@ describe('Developer Journal Flow', () => {
     });
 
     afterAll(async () => {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     });
-    
+
+    // Helper function to delete text
+    const clearText = async (element, length) => {
+        for (let i = 0; i < length; i++) {
+            await element.press('Backspace');
+        }
+    };
+
+    // Helper function to add delay
+    function delay(time) {
+        return new Promise(function(resolve) { 
+            setTimeout(resolve, time);
+        });
+    }
+
     // Test 1 
     it('Create 4 projects', async () => {
         // create 4 projects; each has name of "project n", contributor of "contributor n", and description of "description n"
         for (let i = 1; i <= 4; i++) {
-            await page.click('.add-project-btn'); 
+            await page.click('.add-project-btn');
             await page.waitForSelector('#add-project-form');
 
             await page.type('#project-name', `Project ${i}`);
@@ -35,7 +54,7 @@ describe('Developer Journal Flow', () => {
             await page.type('#project-description', `Description for Project ${i}`);
 
             await page.click('.submit-btn');
-
+            await delay(500); // Add delay for stability
         }
 
         // Check the number of projects after creation
@@ -53,14 +72,17 @@ describe('Developer Journal Flow', () => {
     it('Archive 2 projects and check archive page', async () => {
         // Archive Project 1 and Project 2
         for (let i = 1; i <= 2; i++) {
+            await page.waitForSelector(`.projects li:nth-child(1)`);
             const project = await page.$(`.projects li:nth-child(1)`);
             const archiveButton = await project.$('.archive-btn');
             await archiveButton.click();
+            await delay(500); // Add delay for stability
         }
-      
+
         // Navigate to the archive page
         await page.click('.archive-page-btn');
-    
+        await page.waitForSelector('.project-list li'); // Wait for the projects to appear
+
         // Check the number of archived projects on the archive page
         const archivedProjects = await page.$$eval('.project-list li', items => items.length);
         expect(archivedProjects).toBe(2);
@@ -70,23 +92,23 @@ describe('Developer Journal Flow', () => {
     it('Check if search works on archive page', async () => {
         // Type into the search bar
         await page.type('#search-bar', 'Project 1');
-    
+        await delay(500); // Add delay for stability
+
         // Check the number of visible projects
         const visibleProjects1 = await page.$$eval('.project-list li', items => items.length);
         expect(visibleProjects1).toBe(1);
-    
+
         // Check that the visible project has the correct name
         const projectName1 = await page.$eval('.project-list li span', el => el.textContent);
         expect(projectName1).toBe('Project 1');
 
         // Delete the text in search bar
         await page.click('#search-bar');
-        for (let i = 0; i <= 8; i++) {
-            await page.keyboard.press('Backspace'); 
-        }
+        await clearText(page.keyboard, 9);
 
         // Type into the search bar and check for Project 2
         await page.type('#search-bar', 'Project 2');
+        await delay(500); // Add delay for stability
 
         // Check the number of visible projects for Project 2
         const visibleProjects2 = await page.$$eval('.project-list li', items => items.length);
@@ -97,13 +119,15 @@ describe('Developer Journal Flow', () => {
         expect(projectName2).toBe('Project 2');
     });
 
-    // Test 3
+    // Test 4
     it('Check if search works on home page', async () => {
         // Navigate back to the home page (first nav button is home page button)
-        await page.click('nav .nav-button:first-of-type'); 
+        await page.click('nav .nav-button:first-of-type');
+        await page.waitForSelector('.projects li'); // Wait for the projects to appear
 
         // Type into the search bar and check for Project 3
         await page.type('.search', 'Project 3');
+        await delay(500); // Add delay for stability
 
         // Check the number of visible projects for Project 3
         const visibleProjects3 = await page.$$eval('.projects li', items => items.filter(item => item.style.display !== 'none').length);
@@ -115,26 +139,23 @@ describe('Developer Journal Flow', () => {
 
         // Clear the search bar for next test
         await page.click('.search');
-        for (let i = 0; i <= 8; i++) {
-            await page.keyboard.press('Backspace'); 
-        }
+        await clearText(page.keyboard, 9);
     });
 
-    // Test 4
+    // Test 5
     it('Edit TODO list and branch link of a project', async () => {
         // Click on the project to navigate to the project home page
-        await page.click('.projects li:nth-child(1)'); // Click on the first project
+        await page.click('.projects li:nth-child(1)');
+        await page.waitForSelector('.project-todo-list'); // Wait for the project details to appear
 
         // Edit the TODO list
         const todoEditButton = await page.$('.todo-edit-btn');
         await todoEditButton.click();
         const todoList = await page.$('.project-todo-list');
         await todoList.click({ clickCount: 3 });
-        
-        // Delete the default text in todolist 
-        for (let i = 0; i <= 28; i++) {
-            await page.keyboard.press('Backspace'); 
-        }
+
+        // Delete the default text in todolist
+        await clearText(page.keyboard, 29);
 
         // Type new text in todolist
         await page.type('.project-todo-list', 'New TODO item');
@@ -149,9 +170,7 @@ describe('Developer Journal Flow', () => {
         await branchLink.click({ clickCount: 3 });
 
         // Delete the default text in branchlink
-        for (let i = 0; i <= 44; i++) {
-            await page.keyboard.press('Backspace'); 
-        }
+        await clearText(page.keyboard, 45);
 
         // Type new text in branch link
         await page.type('.project-branch-link', 'https://newbranchlink.com');
@@ -167,10 +186,10 @@ describe('Developer Journal Flow', () => {
         expect(savedBranchLink).toBe('https://newbranchlink.com');
     });
 
-    // Test 5
+    // Test 6
     it('TODO list and branch link is loaded correctly after revisiting site; save is maintained', async () => {
         await page.reload();
-        
+
         // Verify the changes after reloading the page
         let savedTodoList = await page.$eval('.project-todo-list', el => el.textContent.trim());
         expect(savedTodoList).toBe('New TODO item');
@@ -180,10 +199,11 @@ describe('Developer Journal Flow', () => {
 
         // Navigate back to the home page and come back to project page
         await page.click('nav .nav-button:first-of-type');
-        await page.reload();
+        await page.waitForSelector('.projects li'); // Wait for the projects to appear
         await page.click('.projects li:nth-child(1)');
+        await page.waitForSelector('.project-todo-list'); // Wait for the project details to appear
 
-        // Verify the changes 
+        // Verify the changes
         savedTodoList = await page.$eval('.project-todo-list', el => el.textContent.trim());
         expect(savedTodoList).toBe('New TODO item');
 
