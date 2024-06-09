@@ -14,7 +14,7 @@ function initializeProjectData(formObj) {
                 projectContributors: formObj['project-contributor'], 
                 projectDescription: formObj['project-description'], 
                 active: true,
-                logs: {},
+                logs: [],
                 BranchLink: '', 
                 TodoList: {}
             }
@@ -39,7 +39,7 @@ function updateProjectData(formObj, localStr) {
         projectContributors: formObj['project-contributor'], 
         projectDescription: formObj['project-description'], 
         active: true,
-        logs: {}, 
+        logs: [], 
         BranchLink: '',
         TodoList: {} 
     }
