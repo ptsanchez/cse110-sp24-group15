@@ -20,8 +20,6 @@ function redirectToAddLogPage() {
     window.location.href = escape("../addLogPage/add_log_page.html");
 }
 
-module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
-
 function calendarScript() {
     const weekDisplay = document.getElementById('week-display');
     const prevWeekBtn = document.getElementById('prev-week-btn');
@@ -30,9 +28,11 @@ function calendarScript() {
     let currentDate = new Date();
     const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
+
     // gets the dates for the current week being looked at
     function getWeekDates(date) {
-        const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1));
+        const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay() - 6));
+
         const dates = [];
         for (let i = 0; i < 7; i++) {
             dates.push(new Date(startOfWeek));
@@ -63,17 +63,28 @@ function calendarScript() {
             logs = jsonObject.project_data[String(currentProject)].logs || [];
         }
 
+        console.log(logs)
+
         let current_logs = {};
 
-        logs.forEach(log => {
-            let date = `${log.Year}-${log.Month}-${log.day}`;
+        for(let log of logs){
+            let day = `${parseInt(log.day)}`;
+            let month = `${parseInt(log.Month)}`;
+            if (parseInt(log.day, 32) < 10){
+                day = '0' + day;
+            }
+            if (parseInt(log.Month, 13) < 10){
+                month = '0' + month;
+            }
+
+            let date = `${log.Year}-${month}-${day}`;
 
             if (!( date in current_logs)){
                 current_logs[String(date)] = [];
             }
 
             current_logs[String(date)].push(log)
-        });
+        };
 
         localStorage.setItem("all_logs", JSON.stringify(current_logs));
     }
@@ -129,13 +140,13 @@ function calendarScript() {
             titleDiv.classList.add("space-buffer");
             column.appendChild(titleDiv);
             
-            logs.forEach((log) => {
+            for(let log of logs){
                 let titleDiv = document.createElement('div');
                 titleDiv.textContent = log.title;
                 titleDiv.classList.add("log-title");
 
                 column.appendChild(titleDiv);
-            });
+            };
 
         });
     }
@@ -156,9 +167,8 @@ function calendarScript() {
     document.querySelectorAll('.day-column').forEach(column => {
         column.addEventListener('click', (event) => {
             const clicked_date = event.currentTarget.dataset.date;
-            const date = new Date(clicked_date);
-            date.setDate(date.getDate()); 
-            const formattedDate = formatDateToMMDDYYYY(date);
+            let date_split = clicked_date.split("-");
+            let formattedDate = `${date_split[1]}/${date_split[2]}/${date_split[0]}`
             localStorage.setItem("current_date", formattedDate);
             window.location.href = escape("../dayPage/day_page.html");
         });
@@ -167,4 +177,8 @@ function calendarScript() {
     // Initialize calendar
     updateEvents()
     updateCalendar();
+}
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
 }
