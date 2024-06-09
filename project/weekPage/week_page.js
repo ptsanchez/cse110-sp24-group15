@@ -164,8 +164,11 @@ function calendarScript() {
         column.addEventListener('click', (event) => {
             const clicked_date = event.currentTarget.dataset.date;
             const date = new Date(clicked_date);
-            date.setDate(date.getDate()); 
-            const formattedDate = formatDateToMMDDYYYY(date);
+            console.log(clicked_date)
+
+            let date_split = clicked_date.split("-");
+
+            let formattedDate = `${date_split[1]}/${date_split[2]}/${date_split[0]}`
             localStorage.setItem("current_date", formattedDate);
             window.location.href = escape("../dayPage/day_page.html");
         });
