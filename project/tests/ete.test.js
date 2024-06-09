@@ -9,7 +9,8 @@ describe('Developer Journal Flow', () => {
 
     beforeAll(async () => {
         browser = await puppeteer.launch({
-            headless: false,
+            headless: true, // headless mode for Github action 
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
             slowMo: 20
         });
         page = await browser.newPage();
@@ -36,7 +37,7 @@ describe('Developer Journal Flow', () => {
 
     // Helper function to add delay
     function delay(time) {
-        return new Promise(function(resolve) { 
+        return new Promise(function(resolve) {
             setTimeout(resolve, time);
         });
     }
