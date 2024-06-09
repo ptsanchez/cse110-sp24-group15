@@ -8,10 +8,7 @@ describe('Developer Journal Flow', () => {
     let page;
 
     beforeAll(async () => {
-        browser = await puppeteer.launch({
-            headless: false,
-            slowMo: 20
-          });
+        browser = await puppeteer.launch();
         page = await browser.newPage();
 
         // set the screen resolution to 1728x1127
