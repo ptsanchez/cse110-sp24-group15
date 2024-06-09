@@ -20,7 +20,7 @@ describe('Initialize JSON string to be set in local storage', () => {
                     projectContributors: 'Test person 1',
                     projectDescription: 'Test description 1',
                     active: true,
-                    logs: {},
+                    logs: [],
                     BranchLink: '',
                     TodoList: {}
                 }
@@ -48,7 +48,7 @@ describe('Update JSON string to be set in local storage', () => {
                     projectContributors: 'Test person 1',
                     projectDescription: 'Test description 1',
                     active: true,
-                    logs: {},
+                    logs: [],
                     BranchLink: '',
                     TodoList: {}
                 }
@@ -65,7 +65,7 @@ describe('Update JSON string to be set in local storage', () => {
                     projectContributors: 'Test person 1',
                     projectDescription: 'Test description 1',
                     active: true,
-                    logs: {},
+                    logs: [],
                     BranchLink: '',
                     TodoList: {}
                 },
@@ -75,7 +75,7 @@ describe('Update JSON string to be set in local storage', () => {
                     projectContributors: 'Test person 2',
                     projectDescription: 'Test description 2',
                     active: true,
-                    logs: {},
+                    logs: [],
                     BranchLink: '',
                     TodoList: {}
                 }
@@ -109,7 +109,7 @@ describe('Form Submission Handler Logic', () => {
                     projectContributors: 'Test person 3',
                     projectDescription: 'Test description 3',
                     active: true,
-                    logs: {},
+                    logs: [],
                     BranchLink: '',
                     TodoList: {}
                 }
