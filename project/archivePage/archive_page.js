@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to display projects on the page
-    function displayProjects() {
+    function displayProjects(filteredProjects = projects) {
         // Get the project list container
         const projectList = document.querySelector('.project-list');
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const end = start + projectsPerPage;
 
         // Get the projects for the current page
-        const paginatedProjects = projects.slice(start, end);
+        const paginatedProjects = filteredProjects.slice(start, end);
 
         // Iterate over each project and create a list item for it
         paginatedProjects.forEach(([key, project]) => {
@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Create delete button
             let deleteButton = document.createElement('button');
-            // deleteButton.textContent = 'Delete';
             deleteButton.classList.add('delete-btn');
 
             // Create icon element
@@ -136,38 +135,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to handle search functionality
     function handleSearch(event) {
-        // Check if the Enter key was pressed (keyCode 13) or (key 'Enter')
-        if (event.key === 'Enter' || event.keyCode === 13) {
-            // Get the search query from the search bar
-            const searchQuery = event.target.value.toLowerCase();
+        const searchQuery = event.target.value.toLowerCase();
+        const filteredProjects = projects.filter(([, project]) =>
+            project.projectName.toLowerCase().includes(searchQuery)
+        );
 
-            // Retrieve the projects from sessionStorage
-            const archivedProjects = JSON.parse(sessionStorage.getItem('archived_projects'));
-
-            // Find the page number where the first matching project is located
-            let pageNumber = 1;
-            let found = false;
-            for (let i = 0; i < archivedProjects.length; i++) {
-                if (archivedProjects[parseInt(i, 10)][parseInt(1, 10)].projectName.toLowerCase().includes(searchQuery)) {
-                    pageNumber = Math.ceil((i + 1) / projectsPerPage);
-                    found = true;
-                    break;
-                }
-            }
-
-            // If no matching project was found, show an alert
-            if (!found) {
-                alert('No matching project found.');
-                return;
-            }
-
-            // Update the current page number in sessionStorage
-            currentPage = pageNumber;
-            sessionStorage.setItem('current_page', currentPage);
-
-            // Redisplay the filtered projects
-            displayProjects();
-        }
+        // Redisplay the filtered projects
+        displayProjects(filteredProjects);
     }
 
     // Event listener for the 'Page Back' button
@@ -181,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Event listener for the search bar input
-    document.getElementById('search-bar').addEventListener('keyup', handleSearch);
+    document.getElementById('search-bar').addEventListener('input', handleSearch);
 
     // Add an event listener for the 'load' event to call loadProjects when the page is reloaded
     window.addEventListener('load', loadProjects);
