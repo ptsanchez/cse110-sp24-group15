@@ -55,7 +55,7 @@ function calendarScript() {
     function getDayOfWeek(date) {
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = date.getDay();
-        return daysOfWeek[parseInt(dayIndex, 100)];
+        return daysOfWeek[parseInt(dayIndex, 10)];
     }
 
     function updateCalendar() {

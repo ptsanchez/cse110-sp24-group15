@@ -68,14 +68,18 @@ function calendarScript() {
         let current_logs = {};
 
         for(let log of logs){
-            let day = `${parseInt(log.day, 32)}`;
-            let month = `${parseInt(log.Month, 13)}`;
-            if (parseInt(log.day, 32) < 10){
+            let day = `${parseInt(log.day, 10)}`;
+            let month = `${parseInt(log.Month, 10)}`
+
+            console.log(day)
+            if (parseInt(log.day, 10) < 10){
                 day = '0' + day;
             }
-            if (parseInt(log.Month, 13) < 10){
+            if (parseInt(log.Month, 10) < 10){
                 month = '0' + month;
             }
+
+            console.log(day)
 
             let date = `${log.Year}-${month}-${day}`;
 
