@@ -245,12 +245,6 @@ main {
     word-wrap: break-word; 
     overflow-wrap: break-word;
     background-color: rgba(255 255 255 / 40%);
-    border-radius: 10px;
-}
-
-.CodeMirror {
     text-align: left; 
-    height: auto; 
-    border: 1px solid #ddd;
-    line-height: normal;
+    border-radius: 10px;
 }

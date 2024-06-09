@@ -57,7 +57,7 @@ function calendarScript() {
     function getDayOfWeek(date) {
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = date.getDay();
-        return daysOfWeek[dayIndex];
+        return daysOfWeek[parseInt(dayIndex)];
     }
 
     function updateCalendar() {
@@ -83,7 +83,7 @@ function calendarScript() {
         let year = currentDate.getFullYear();
 
         logs.forEach(log => {
-            if (parseInt(log.Month) == month && parseInt(log.day) == day && parseInt(log.Year) == year) {
+            if (log.Month == month && log.day == day && log.Year == year) {
                 current_logs.push(log);
             }
         });
@@ -132,7 +132,7 @@ function calendarScript() {
                 codeDiv.classList.add("code-snippet");
 
                 // Initialize CodeMirror on the created div
-                let editor = CodeMirror(codeDiv, {
+                CodeMirror(codeDiv, {
                     value: log.codeSnippet || 'No code provided', // Ensure you have a default or check for existence
                     mode: "javascript", // Or any other syntax mode you need
                     lineNumbers: false,
