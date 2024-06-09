@@ -231,7 +231,7 @@ main {
     word-wrap: break-word;
     text-align: center;     
     overflow-wrap: break-word;
-    background-color: rgba(255 255 255 / 40%);
+    background-color: white;
     border-radius: 10px;
 }
 
