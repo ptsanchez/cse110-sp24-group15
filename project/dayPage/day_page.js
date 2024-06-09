@@ -97,10 +97,12 @@ function calendarScript() {
         const dayCalendarTitle = document.getElementById('day-calendar-title');
         const dayCalendarTime = document.getElementById('day-calendar-time');
         const dayCalendarProgress = document.getElementById('day-calendar-progress');
+        const dayCalendarDescription = document.getElementById('day-calendar-description');
 
         // Clear existing content
         dayCalendarTitle.innerHTML = "Title";
         dayCalendarTime.innerHTML = "Time";
+        dayCalendarDescription.innerHTML = "Description";
         dayCalendarProgress.innerHTML = "Progress";
 
         let currDate = localStorage.getItem('current_date');
@@ -112,11 +114,39 @@ function calendarScript() {
             jsonObject.forEach((log, index) => {
                 let titleDiv = document.createElement('div');
                 titleDiv.textContent = log.title;
-                dayCalendarTitle.appendChild(titleDiv);
+                titleDiv.classList.add("title");
+                
 
                 let timeDiv = document.createElement('div');
                 timeDiv.textContent = log.time;
+                timeDiv.classList.add("time");
+                
+
+                let descriptionDiv = document.createElement('div');
+                descriptionDiv.textContent = log.data;
+                descriptionDiv.classList.add("description");
+
+                console.log(descriptionDiv.style)
+                console.log(titleDiv.style.height)
+
+                if (descriptionDiv.style.height > titleDiv.style.height){
+                    let new_height = descriptionDiv.style.height;
+
+                    titleDiv.style.height = new_height;
+                    timeDiv.style.height = new_height;
+                } else {
+                    let new_height = titleDiv.style.height;
+
+                    descriptionDiv.style.height = new_height;
+                    timeDiv.style.height = new_height;
+                }
+
+
+                dayCalendarTitle.appendChild(titleDiv);
                 dayCalendarTime.appendChild(timeDiv);
+                dayCalendarDescription.appendChild(descriptionDiv);
+
+
 
                 let progressContainer = document.createElement('div');
                 progressContainer.classList.add('progress-container');

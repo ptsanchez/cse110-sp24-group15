@@ -211,11 +211,25 @@ main {
 .progress {
     height: 100%;
     background-color: #4caf50;
-    transition: width 0.3s ease;
-  }
+    transition: width 0.3s ease;    
+}
 
-#day-calendar-title, #day-calendar-time, #day-calendar-progress {
+#day-calendar-title, #day-calendar-time, #day-calendar-progress, #day-calendar-description {
     font-size: 20px; /* Increased font size */
     color: var(--text-color);
     font-weight: 600;
+}
+
+/* Record Presentation */
+.title, .time , .description { 
+    width: 100%; 
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0 0 0 / 30%);
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: rgba(209 207 207 / 40%);
+    border-radius: 10px;
 }
