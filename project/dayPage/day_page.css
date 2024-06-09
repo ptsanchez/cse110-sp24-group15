@@ -60,8 +60,7 @@ main {
     padding: 20px;
     box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
     border-radius: 20px;
-    width: 80%;
-    max-width: 1000px;
+    width: 90%;
     margin: 200px auto 60px; 
     background-color: var(--background-color);
     flex-grow: 1;
@@ -221,15 +220,38 @@ main {
 }
 
 /* Record Presentation */
-.title, .time , .description { 
+.title, .time , .description, .progress-bar-container { 
     width: 100%; 
     border: 1px solid #ccc;
-    box-shadow: 2px 2px 5px rgba(0 0 0 / 30%);
+    box-shadow: 2px 2px 5px rgba(0 0 0 / 40%);
     padding: 10px;
     margin: 5px 0;
     box-sizing: border-box;
-    text-align: center;
+    align-items: center;
     word-wrap: break-word;
-    background-color: rgba(209 207 207 / 40%);
+    text-align: center;     
+    overflow-wrap: break-word;
+    background-color: rgba(255, 255, 255, 0.4);
     border-radius: 10px;
+}
+
+.code-snippet { 
+    width: 100%; 
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0 0 0 / 40%);
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    /* display: block;  */
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+.CodeMirror {
+    text-align: left; 
+    height: auto; 
+    border: 1px solid #ddd;
+    line-height: normal;
 }

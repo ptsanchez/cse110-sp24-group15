@@ -98,17 +98,21 @@ function calendarScript() {
         const dayCalendarTime = document.getElementById('day-calendar-time');
         const dayCalendarProgress = document.getElementById('day-calendar-progress');
         const dayCalendarDescription = document.getElementById('day-calendar-description');
+        const dayCalendarSnippet = document.getElementById('day-calendar-snippet');
 
         // Clear existing content
         dayCalendarTitle.innerHTML = "Title";
         dayCalendarTime.innerHTML = "Time";
         dayCalendarDescription.innerHTML = "Description";
         dayCalendarProgress.innerHTML = "Progress";
+        dayCalendarSnippet.innerHTML = "Code Snippet";
 
         let currDate = localStorage.getItem('current_date');
         let projectDataString = localStorage.getItem('project_data');
         let projectData = JSON.parse(projectDataString);
         let currentProject = projectData.current_project;
+
+        jsonObject.sort((a, b) => a.time.localeCompare(b.time));
 
         if (jsonObject && jsonObject.length > 0) {
             jsonObject.forEach((log, index) => {
@@ -116,40 +120,41 @@ function calendarScript() {
                 titleDiv.textContent = log.title;
                 titleDiv.classList.add("title");
                 
-
                 let timeDiv = document.createElement('div');
                 timeDiv.textContent = log.time;
                 timeDiv.classList.add("time");
                 
-
                 let descriptionDiv = document.createElement('div');
                 descriptionDiv.textContent = log.data;
                 descriptionDiv.classList.add("description");
 
-                console.log(descriptionDiv.style)
-                console.log(titleDiv.style.height)
+                let codeDiv = document.createElement('div');
+                codeDiv.classList.add("code-snippet");
 
-                if (descriptionDiv.style.height > titleDiv.style.height){
-                    let new_height = descriptionDiv.style.height;
-
-                    titleDiv.style.height = new_height;
-                    timeDiv.style.height = new_height;
-                } else {
-                    let new_height = titleDiv.style.height;
-
-                    descriptionDiv.style.height = new_height;
-                    timeDiv.style.height = new_height;
-                }
+                // Initialize CodeMirror on the created div
+                let editor = CodeMirror(codeDiv, {
+                    value: log.codeSnippet || 'No code provided', // Ensure you have a default or check for existence
+                    mode: "javascript", // Or any other syntax mode you need
+                    lineNumbers: false,
+                    theme: "default",
+                    readOnly: true, // or false if you want it editable
+                    viewportMargin: 5
+                });
 
 
                 dayCalendarTitle.appendChild(titleDiv);
                 dayCalendarTime.appendChild(timeDiv);
                 dayCalendarDescription.appendChild(descriptionDiv);
-
+                dayCalendarSnippet.appendChild(codeDiv)
 
 
                 let progressContainer = document.createElement('div');
                 progressContainer.classList.add('progress-container');
+
+                // Progress bar container
+                let BarContainer = document.createElement('div');
+                BarContainer.classList.add('progress-bar-container');
+                
 
                 let progressBarContainer = document.createElement('div');
                 progressBarContainer.classList.add('progress-bar');
@@ -180,7 +185,17 @@ function calendarScript() {
                 progressBarContainer.appendChild(progressBar);
                 progressContainer.appendChild(progressBarContainer);
                 progressContainer.appendChild(inputRange);
-                dayCalendarProgress.appendChild(progressContainer);
+                BarContainer.appendChild(progressContainer);
+                dayCalendarProgress.appendChild(BarContainer);
+
+                window.requestAnimationFrame(() => {
+                    let maxHeight = Math.max(titleDiv.clientHeight, timeDiv.clientHeight, descriptionDiv.clientHeight, codeDiv.clientHeight);
+                    titleDiv.style.height = `${maxHeight}px`;
+                    timeDiv.style.height = `${maxHeight}px`;
+                    descriptionDiv.style.height = `${maxHeight}px`;
+                    BarContainer.style.height = `${maxHeight}px`;
+                    codeDiv.style.height = `${maxHeight}px`;
+                });
             });
         }
     }
