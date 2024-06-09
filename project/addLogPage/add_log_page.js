@@ -70,6 +70,7 @@ function makeSubmission() {
     localStorage.setItem("project_data", JSON.stringify(proj_data));
 
     // Redirect the user to the day page after submission
+    localStorage.setItem("current_date", curr_date)
     window.location.href = escape("../dayPage/day_page.html");
   }
 }

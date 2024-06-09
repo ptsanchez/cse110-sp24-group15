@@ -46,6 +46,14 @@ function calendarScript() {
         return `${mm}/${dd}/${yyyy}`;
     }
 
+    function getProgressValue(projectName, index, currDate) {
+        return localStorage.getItem(`progress-value-${projectName}-${index}-${currDate}`);
+    }
+
+    function updateProgressValue(projectName, index, value, currDate) {
+        localStorage.setItem(`progress-value-${projectName}-${index}-${currDate}`, value);
+    }
+
     function getDayOfWeek(date) {
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const dayIndex = date.getDay();
@@ -65,7 +73,6 @@ function calendarScript() {
             const currentProject = jsonObject.current_project;
             logs = jsonObject.project_data[currentProject].logs || [];
         }
-        //logs is updated correctly
 
         let currentDateStr = localStorage.getItem('current_date');
         let currentDate = new Date(currentDateStr);
@@ -89,19 +96,63 @@ function calendarScript() {
         let jsonObject = JSON.parse(jsonString);
         const dayCalendarTitle = document.getElementById('day-calendar-title');
         const dayCalendarTime = document.getElementById('day-calendar-time');
+        const dayCalendarProgress = document.getElementById('day-calendar-progress');
 
+        // Clear existing content
         dayCalendarTitle.innerHTML = "Title";
         dayCalendarTime.innerHTML = "Time";
+        dayCalendarProgress.innerHTML = "Progress";
 
-        jsonObject.forEach(log => {
-            let titleDiv = document.createElement('div');
-            titleDiv.textContent = log.title;
-            dayCalendarTitle.appendChild(titleDiv);
+        let currDate = localStorage.getItem('current_date');
+        let projectDataString = localStorage.getItem('project_data');
+        let projectData = JSON.parse(projectDataString);
+        let currentProject = projectData.current_project;
 
-            let timeDiv = document.createElement('div');
-            timeDiv.textContent = log.time;
-            dayCalendarTime.appendChild(timeDiv);
-        });
+        if (jsonObject && jsonObject.length > 0) {
+            jsonObject.forEach((log, index) => {
+                let titleDiv = document.createElement('div');
+                titleDiv.textContent = log.title;
+                dayCalendarTitle.appendChild(titleDiv);
+
+                let timeDiv = document.createElement('div');
+                timeDiv.textContent = log.time;
+                dayCalendarTime.appendChild(timeDiv);
+
+                let progressContainer = document.createElement('div');
+                progressContainer.classList.add('progress-container');
+
+                let progressBarContainer = document.createElement('div');
+                progressBarContainer.classList.add('progress-bar');
+
+                let progressBar = document.createElement('div');
+                progressBar.classList.add('progress');
+                progressBar.id = `progress-bar-${currentProject}-${index}-${currDate}`;
+
+                let inputRange = document.createElement('input');
+                inputRange.type = 'range';
+                inputRange.min = '0';
+                inputRange.max = '100';
+                inputRange.value = '50';
+                inputRange.id = `progress-input-${currentProject}-${index}-${currDate}`;
+                inputRange.addEventListener('input', function () {
+                    let progressBarId = `progress-bar-${currentProject}-${index}-${currDate}`;
+                    let progressBar = document.getElementById(progressBarId);
+                    if (progressBar) {
+                        progressBar.style.width = `${this.value}%`;
+                        updateProgressValue(currentProject, index, this.value, currDate);
+                    }
+                });
+
+                let progressValue = getProgressValue(currentProject, index, currDate) || '50';
+                inputRange.value = progressValue;
+                progressBar.style.width = `${progressValue}%`;
+
+                progressBarContainer.appendChild(progressBar);
+                progressContainer.appendChild(progressBarContainer);
+                progressContainer.appendChild(inputRange);
+                dayCalendarProgress.appendChild(progressContainer);
+            });
+        }
     }
 
     prevDayBtn.addEventListener('click', () => {
