@@ -55,6 +55,7 @@ function calendarScript() {
 
     function updateEvents() {
         let jsonString = localStorage.getItem('project_data');
+        let logs = []
 
         if (jsonString) {
             let jsonObject = JSON.parse(jsonString);
@@ -68,10 +69,10 @@ function calendarScript() {
             let date = `${log.Year}-${log.Month}-${log.day}`;
 
             if (!( date in current_logs)){
-                current_logs[date] = [];
+                current_logs[String(date)] = [];
             }
 
-            current_logs[date].push(log)
+            current_logs[String(date)].push(log)
         });
 
         localStorage.setItem("all_logs", JSON.stringify(current_logs));
