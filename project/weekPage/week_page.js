@@ -64,7 +64,16 @@ function calendarScript() {
         let current_logs = {};
 
         for(let log of logs){
-            let date = `${log.Year}-${log.Month}-${log.day}`;
+            let day = `${parseInt(log.day)}`;
+            let month = `${parseInt(log.Month)}`;
+            if (parseInt(log.day) < 10){
+                day = '0' + day;
+            }
+            if (parseInt(log.Month) < 10){
+                month = '0' + month;
+            }
+
+            let date = `${log.Year}-${month}-${day}`;
 
             if (!( date in current_logs)){
                 current_logs[String(date)] = [];
