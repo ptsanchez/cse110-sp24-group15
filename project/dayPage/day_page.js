@@ -130,6 +130,7 @@ function calendarScript() {
 
                 let codeDiv = document.createElement('div');
                 codeDiv.classList.add("code-snippet");
+                
 
                 // Initialize CodeMirror on the created div
                 CodeMirror(codeDiv, {
