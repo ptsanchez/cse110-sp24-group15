@@ -213,7 +213,7 @@ main {
     transition: width 0.3s ease;    
 }
 
-#day-calendar-title, #day-calendar-time, #day-calendar-progress, #day-calendar-description {
+#day-calendar-title, #day-calendar-time, #day-calendar-progress, #day-calendar-description, #day-calendar-snippet {
     font-size: 20px; /* Increased font size */
     color: var(--text-color);
     font-weight: 600;

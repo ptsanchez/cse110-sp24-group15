@@ -100,7 +100,7 @@ function calendarScript() {
         column.addEventListener('click', (event) => {
             const clicked_date = event.currentTarget.dataset.date;
             const date = new Date(clicked_date);
-            date.setDate(date.getDate() + 1); 
+            date.setDate(date.getDate()); 
             const formattedDate = formatDateToMMDDYYYY(date);
             localStorage.setItem("current_date", formattedDate);
             window.location.href = escape("../dayPage/day_page.html");

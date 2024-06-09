@@ -138,7 +138,6 @@ function calendarScript() {
                     lineNumbers: false,
                     theme: "default",
                     readOnly: true, // or false if you want it editable
-                    viewportMargin: 5
                 });
 
 
