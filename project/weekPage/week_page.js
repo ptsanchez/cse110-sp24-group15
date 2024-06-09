@@ -20,8 +20,6 @@ function redirectToAddLogPage() {
     window.location.href = escape("../addLogPage/add_log_page.html");
 }
 
-module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
-
 function calendarScript() {
     const weekDisplay = document.getElementById('week-display');
     const prevWeekBtn = document.getElementById('prev-week-btn');
@@ -65,7 +63,10 @@ function calendarScript() {
 
         let current_logs = {};
 
-        logs.forEach(log => {
+        for(let i = 0; i < logs.length; i ++){
+            
+            log = logs [i];
+
             let date = `${log.Year}-${log.Month}-${log.day}`;
 
             if (!( date in current_logs)){
@@ -73,7 +74,7 @@ function calendarScript() {
             }
 
             current_logs[String(date)].push(log)
-        });
+        };
 
         localStorage.setItem("all_logs", JSON.stringify(current_logs));
     }
@@ -168,3 +169,8 @@ function calendarScript() {
     updateEvents()
     updateCalendar();
 }
+
+if (typeof module === 'object' && module.exports) {
+    module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
+}
+
