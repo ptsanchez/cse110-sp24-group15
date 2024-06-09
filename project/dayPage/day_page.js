@@ -131,13 +131,20 @@ function calendarScript() {
 
 
                 // Initialize CodeMirror on the created div
-                CodeMirror(codeDiv, {
-                    value: log.codeSnippet || 'No code provided', // Ensure you have a default or check for existence
+                let codeEditor = CodeMirror(codeDiv, {
+                    value: log.codeSnippet, // Ensure you have a default or check for existence
                     mode: "javascript", // Or any other syntax mode you need
                     lineNumbers: false,
                     theme: "default",
-                    readOnly: true, // or false if you want it editable
+                    readOnly: false, // or false if you want it editable
                 });
+
+                codeEditor.setValue(log.codeSnippet);
+
+                // Refresh the CodeMirror editor after a slight delay
+                setTimeout(() => {
+                    codeEditor.refresh();
+                }, 1);
 
 
                 dayCalendarTitle.appendChild(titleDiv);
