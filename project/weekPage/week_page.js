@@ -64,12 +64,12 @@ function calendarScript() {
         let current_logs = {};
 
         for(let log of logs){
-            let day = `${parseInt(log.day)}`;
-            let month = `${parseInt(log.Month)}`;
-            if (parseInt(log.day) < 10){
+            let day = `${parseInt(log.day, 32)}`;
+            let month = `${parseInt(log.Month, 13)}`;
+            if (parseInt(log.day, 32) < 10){
                 day = '0' + day;
             }
-            if (parseInt(log.Month) < 10){
+            if (parseInt(log.Month, 13) < 10){
                 month = '0' + month;
             }
 
