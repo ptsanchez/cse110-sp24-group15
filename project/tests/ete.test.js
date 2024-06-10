@@ -43,8 +43,13 @@ describe('Developer Journal Flow', () => {
     }
 
     function getTodayDate() {
-        const today = new Date().toLocaleDateString(`en-CA`);
-        return today;
+        function getTodayDate() {
+            const today = new Date();
+            const yyyy = today.getUTCFullYear();
+            const mm = String(today.getUTCMonth() + 1).padStart(2, '0');
+            const dd = String(today.getUTCDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
     }
 
     // Test 1 
