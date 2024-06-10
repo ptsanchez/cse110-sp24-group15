@@ -220,7 +220,7 @@ describe('Developer Journal Flow', () => {
 
         // Click current day in calendar in month page
         await page.waitForSelector('.month-calendar-title');
-        const currentDay = new Date();
+        const currentDay = new Date().getDate();
         await page.waitForSelector('.dates li')
         await page.evaluate((currentDay) => {
             const dates = document.querySelectorAll('.dates li');
@@ -383,7 +383,7 @@ describe('Developer Journal Flow', () => {
         
         // Click current day in calendar in month page
         await page.waitForSelector('.month-calendar-title');
-        const currentDay = new Date();
+        const currentDay = new Date().getDate();
         await page.waitForSelector('.dates li')
         await page.evaluate((currentDay) => {
             const dates = document.querySelectorAll('.dates li');
