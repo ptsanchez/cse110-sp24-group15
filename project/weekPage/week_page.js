@@ -173,7 +173,7 @@ function calendarScript() {
             let date_split = clicked_date.split("-");
             let formattedDate = `${date_split[1]}/${date_split[2]}/${date_split[0]}`
             localStorage.setItem("current_date", formattedDate);
-            // window.location.href = escape("../dayPage/day_page.html");
+            window.location.href = escape("../dayPage/day_page.html");
         });
     });
 
