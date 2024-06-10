@@ -9,7 +9,7 @@ describe('Developer Journal Flow', () => {
 
     beforeAll(async () => {
         browser = await puppeteer.launch({
-            headless: false, // headless mode for Github action 
+            headless: true, // headless mode for Github action 
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
             slowMo: 10
         });
