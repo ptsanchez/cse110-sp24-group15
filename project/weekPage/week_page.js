@@ -26,7 +26,7 @@ function calendarScript() {
     const nextWeekBtn = document.getElementById('next-week-btn');
 
     let currentDate = new Date();
-    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    const today = new Date().toLocaleDateString(`en-CA`); // Get today's date in YYYY-MM-DD format
 
 
     // gets the dates for the current week being looked at
@@ -176,7 +176,7 @@ function calendarScript() {
             let month = parseInt(date_split[1], 10) - 1;
             let day = parseInt(date_split[2], 10);
             let date = new Date(year, month, day);
-            date.setDate(date.getDate() - 1);
+            date.setDate(date.getDate());
             let formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}/${date.getFullYear()}`;
             localStorage.setItem("current_date", formattedDate);
             window.location.href = escape("../dayPage/day_page.html");
