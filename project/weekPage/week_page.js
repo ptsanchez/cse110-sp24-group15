@@ -170,9 +170,9 @@ function calendarScript() {
         column.addEventListener('click', (event) => {
             const clicked_date = event.currentTarget.dataset.date;
             let date_split = clicked_date.split("-");
-            let year = parseInt(date_split[0]);
-            let month = parseInt(date_split[1]) - 1;
-            let day = parseInt(date_split[2]);
+            let year = parseInt(date_split[0], 10);
+            let month = parseInt(date_split[1], 10) - 1;
+            let day = parseInt(date_split[2], 10);
             let date = new Date(year, month, day);
             date.setDate(date.getDate() - 1);
             let formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}/${date.getFullYear()}`;
