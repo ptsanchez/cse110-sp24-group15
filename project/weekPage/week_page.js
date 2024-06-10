@@ -63,7 +63,6 @@ function calendarScript() {
             logs = jsonObject.project_data[String(currentProject)].logs || [];
         }
 
-        console.log(logs)
 
         let current_logs = {};
 
@@ -116,7 +115,16 @@ function calendarScript() {
             // dateDiv.appendChild(document.createTextNode(date));
             column.appendChild(dateDiv);
     
-            const columnDate = weekDates[Number(index)].toISOString().split('T')[0];
+            // const columnDate = weekDates[Number(index)].toISOString().split('T')[0];
+
+            const monthMapping = {
+                'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+                'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+            };
+
+            let dateBreakdown = String(weekDates[Number(index)]).split(' ');
+            let columnDate = `${dateBreakdown[3]}-${monthMapping[String(dateBreakdown[1])]}-${dateBreakdown[2]}`;
+
             column.dataset.date = columnDate;
             // column.setAttribute('id', column.getAttribute('id').toUpperCase());
 
@@ -127,14 +135,8 @@ function calendarScript() {
                 column.classList.remove('current-day');
             }
 
-            const monthMapping = {
-                'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
-                'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
-            };
-
-            let dateBreakdown = String(weekDates[Number(index)]).split(' ');
-            let dateString = `${dateBreakdown[3]}-${monthMapping[String(dateBreakdown[1])]}-${dateBreakdown[2]}`;
-            let logs = jsonObject[String(dateString)] || [];
+            
+            let logs = jsonObject[String(columnDate)] || [];
 
             logs.sort((a, b) => a.time.localeCompare(b.time));
 

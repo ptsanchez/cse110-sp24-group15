@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: addProjectPage/add_project_page.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: addProjectPage/add_project_page.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Create a template JSON string with new project data
+ * @param {object} formObj - Form data object with data of new project
+ * @returns {string} A JSON string ready to be stored in local storage
+ */
+function initializeProjectData(formObj) {
+    let projectsObj = {
+        current_project: '',
+        current_date: (new Date()).toLocaleDateString(),
+        project_data: {
+            project_1: {
+                projectName: formObj['project-name'], 
+                projectTag: formObj['project-tag'], 
+                projectContributors: formObj['project-contributor'], 
+                projectDescription: formObj['project-description'], 
+                active: true,
+                logs: [],
+                BranchLink: '', 
+                TodoList: {}
+            }
+        }
+    };
+    return JSON.stringify(projectsObj);
+}
+
+/**
+ * Update JSON string to include new project data
+ * @param {object} formObj - Form data object with data of new project
+ * @param {string} localStr - The JSON string obtained from local storage
+ * @returns {string} A JSON string ready to be stored in local storage
+ */
+function updateProjectData(formObj, localStr) {
+    let projectsObj = JSON.parse(localStr);
+    const newIndex = Object.keys(projectsObj.project_data).length;
+    const newName = `project_${newIndex + 1}`;
+    projectsObj.project_data[String(newName)] = {
+        projectName: formObj['project-name'], 
+        projectTag: formObj['project-tag'], 
+        projectContributors: formObj['project-contributor'], 
+        projectDescription: formObj['project-description'], 
+        active: true,
+        logs: [], 
+        BranchLink: '',
+        TodoList: {} 
+    }
+    return JSON.stringify(projectsObj);
+}
+
+/**
+ * Check if local storage is empty and decide whether to initialize or update
+ * local storage
+ * @param {object} formObj - Form data object with data of new project
+ * @param {function} getItem - Function to get item from storage
+ * @param {function} setItem - Function to set item in storage
+ */
+function submissionLogic(formObj, getItem, setItem) {
+    let localStr = getItem('project_data');
+    if (localStr == null) {
+        localStr = initializeProjectData(formObj);
+    } else {
+        localStr = updateProjectData(formObj, localStr);
+    }
+    setItem('project_data', localStr);
+}
+
+/**
+ * Handles form submmision
+ * @param {HTMLElement} form - Form element
+ */
+function handleSubmission(form) {
+    const formData = new FormData(form);
+    const formObj = {};
+    for (const pair of formData.entries()) {
+        formObj[pair[0]] = pair[1];
+    }
+    submissionLogic(formObj, localStorage.getItem.bind(localStorage), localStorage.setItem.bind(localStorage));
+}
+
+if (typeof document !== 'undefined') {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+        // Prevent default form submission behavior
+        event.preventDefault();
+
+        // Check if the form is valid
+        if (!form.checkValidity()) {
+            form.reportValidity(); // Show validation errors
+            return;
+        }
+
+        // Handle form submission and storage
+        handleSubmission(form);
+
+        // Redirect to home page after successful submission
+        window.location.href = escape('../homePage/home_page.html');
+    });
+}
+
+if (typeof module === 'object' &amp;&amp; module.exports) {
+    module.exports = { initializeProjectData, updateProjectData, submissionLogic };
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Submission.html">Submission</a></li></ul><h3>Global</h3><ul><li><a href="global.html#cancelSubmission">cancelSubmission</a></li><li><a href="global.html#handleSubmission">handleSubmission</a></li><li><a href="global.html#initializeProjectData">initializeProjectData</a></li><li><a href="global.html#makeSubmission">makeSubmission</a></li><li><a href="global.html#submissionLogic">submissionLogic</a></li><li><a href="global.html#updateProjectData">updateProjectData</a></li><li><a href="global.html#validateForm">validateForm</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jun 09 2024 22:04:11 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
