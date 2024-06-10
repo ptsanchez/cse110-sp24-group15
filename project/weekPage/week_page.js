@@ -31,7 +31,10 @@ function calendarScript() {
 
     // gets the dates for the current week being looked at
     function getWeekDates(date) {
-        const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay() - 6));
+        const startOfWeek = new Date(date);
+        const dayOfWeek = startOfWeek.getDay();
+        const difference = startOfWeek.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+        startOfWeek.setDate(difference);
 
         const dates = [];
         for (let i = 0; i < 7; i++) {
