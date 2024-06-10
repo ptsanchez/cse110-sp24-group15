@@ -9,7 +9,7 @@ describe('Developer Journal Flow', () => {
 
     beforeAll(async () => {
         browser = await puppeteer.launch({
-            headless: true, // headless mode for Github action 
+            headless: false, // headless mode for Github action 
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
             slowMo: 10
         });
@@ -220,7 +220,7 @@ describe('Developer Journal Flow', () => {
 
         // Click current day in calendar in month page
         await page.waitForSelector('.month-calendar-title');
-        const currentDay = new Date().getUTCDate();
+        const currentDay = new Date().toLocaleString({timeZone: "America/Los_Angeles"});
         await page.waitForSelector('.dates li')
         await page.evaluate((currentDay) => {
             const dates = document.querySelectorAll('.dates li');
@@ -383,7 +383,7 @@ describe('Developer Journal Flow', () => {
         
         // Click current day in calendar in month page
         await page.waitForSelector('.month-calendar-title');
-        const currentDay = new Date().getUTCDate();
+        const currentDay = new Date().toLocaleString({timeZone: "America/Los_Angeles"});
         await page.waitForSelector('.dates li')
         await page.evaluate((currentDay) => {
             const dates = document.querySelectorAll('.dates li');
