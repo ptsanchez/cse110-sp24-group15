@@ -67,13 +67,14 @@ function calendarScript() {
         let current_logs = {};
 
         for(let log of logs){
-            let day = `${parseInt(log.day, 10)}`;
-            let month = `${parseInt(log.Month, 10)}`
+            let day = parseInt(log.day, 10).toString();
+            let month = parseInt(log.Month, 10).toString();
 
-            if (parseInt(log.day, 10) < 10){
+            // Add leading zero if day or month is a single digit
+            if (parseInt(log.day, 10) < 10) {
                 day = '0' + day;
             }
-            if (parseInt(log.Month, 10) < 10){
+            if (parseInt(log.Month, 10) < 10) {
                 month = '0' + month;
             }
 
@@ -171,7 +172,12 @@ function calendarScript() {
         column.addEventListener('click', (event) => {
             const clicked_date = event.currentTarget.dataset.date;
             let date_split = clicked_date.split("-");
-            let formattedDate = `${date_split[1]}/${date_split[2]}/${date_split[0]}`
+            let year = parseInt(date_split[0], 10);
+            let month = parseInt(date_split[1], 10) - 1;
+            let day = parseInt(date_split[2], 10);
+            let date = new Date(year, month, day);
+            date.setDate(date.getDate() - 1);
+            let formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}/${date.getFullYear()}`;
             localStorage.setItem("current_date", formattedDate);
             window.location.href = escape("../dayPage/day_page.html");
         });
@@ -185,4 +191,3 @@ function calendarScript() {
 if (typeof module === 'object' && module.exports) {
     module.exports = {switchWeekly, switchMonthly, redirectToAddLogPage};
 }
-
