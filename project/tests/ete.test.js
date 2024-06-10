@@ -11,7 +11,7 @@ describe('Developer Journal Flow', () => {
         browser = await puppeteer.launch({
             headless: true, // headless mode for Github action 
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            slowMo: 20
+            slowMo: 10
         });
         page = await browser.newPage();
 
@@ -40,6 +40,14 @@ describe('Developer Journal Flow', () => {
         return new Promise(function(resolve) {
             setTimeout(resolve, time);
         });
+    }
+
+    function getTodayDate() {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        const yyyy = today.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
     }
 
     // Test 1 
@@ -211,4 +219,309 @@ describe('Developer Journal Flow', () => {
         savedBranchLink = await page.$eval('.project-branch-link', el => el.textContent.trim());
         expect(savedBranchLink).toBe('https://newbranchlink.com');
     });
+
+    // Test 7
+    it('Add log and check in day page', async () => {
+        // Click all logs button in project home page
+        await page.waitForSelector('.all-logs-btn'); 
+        await page.click('.all-logs-btn');
+
+        // Click current day in calendar in month page
+        await page.waitForSelector('.month-calendar-title');
+        const currentDay = new Date().getDate();
+        await page.waitForSelector('.dates li')
+        await page.evaluate((currentDay) => {
+            const dates = document.querySelectorAll('.dates li');
+            dates.forEach((date) => {
+                if (date.textContent.trim() == currentDay) {
+                    date.click();
+                }
+            });
+        }, currentDay);
+
+        // Creating first log
+        // Click add log button (which is + button) in day page
+        await page.waitForSelector('.day-header-div');
+        await page.click('.add-log');
+
+        // Type title, time, contributor, description, and code snippet in add log page
+        await page.waitForSelector('.log-title');
+        await page.type('#log-title', 'Log Title1');
+        await page.evaluate(() => {
+            document.querySelector('#log-time').value = '12:00';
+        });
+        await page.type('#log-contributor', 'Log Contributor1');
+        await page.type('#log-description', 'Log Description1');
+        await page.evaluate(() => {
+            window.editor.setValue('console.log("Hello World");');
+        });
+        await page.click('.submit-btn');
+
+        // In day page, load each data of first log that we created
+        /* After creating log, the html would look like:
+           .calendar-body
+             - #day-calendar-time
+                - .time div
+                - .time div
+                ...
+             - #day-calendar-title
+                - .title div
+                - .title div
+                ...
+             - #day-calendar-description
+                - .description div
+                - .description div
+                ...
+             - #day-calendar-progress
+             - #day-calendar-snippet 
+                ...
+                - .CodeMirror-line
+                   span (that contains code snippet content)
+        */
+        await page.waitForSelector('.day-calendar-div');
+        const logTitle = await page.$eval('.calendar-body #day-calendar-title .title', el => el.textContent.trim());
+        const logTime = await page.$eval('.calendar-body #day-calendar-time .time', el => el.textContent.trim());
+        const logDescription = await page.$eval('.calendar-body #day-calendar-description .description', el => el.textContent.trim());
+        const logCodeSnippet = await page.$eval(
+            '.CodeMirror-line span', el => el.textContent.trim());
+
+        expect(logTitle).toBe('Log Title1');
+        expect(logTime).toBe('12:00');
+        expect(logDescription).toBe('Log Description1');
+        expect(logCodeSnippet).toBe('console.log("Hello World");');
+        
+        // Creating second log
+        // click add log button (which is + button) in day page
+        await page.waitForSelector('.day-header-div');
+        await page.click('.add-log');
+
+        // Type title, time, contributor, description, and code snippet in add log page
+        await page.waitForSelector('.log-title');
+        await page.type('#log-title', 'Log Title2');
+        await page.evaluate(() => {
+            document.querySelector('#log-time').value = '12:30';
+        });
+        await page.type('#log-contributor', 'Log Contributor2');
+        await page.type('#log-description', 'Log Description2');
+        await page.evaluate(() => {
+            window.editor.setValue('console.log("This is second one");');
+        });
+        await page.click('.submit-btn');
+
+        // In day page, load each data of second log that we created
+        await page.waitForSelector('.day-calendar-div');
+        const logTitle2 = await page.$eval('.calendar-body #day-calendar-title .title:nth-of-type(2)', el => el.textContent.trim());
+        const logTime2 = await page.$eval('.calendar-body #day-calendar-time .time:nth-of-type(2)', el => el.textContent.trim());
+        const logDescription2 = await page.$eval('.calendar-body #day-calendar-description .description:nth-of-type(2)', el => el.textContent.trim());
+        const logCodeSnippet2 = await page.$eval(
+            '.code-snippet:nth-of-type(2) .CodeMirror-line span ', el => el.textContent.trim());
+
+        expect(logTitle2).toBe('Log Title2');
+        expect(logTime2).toBe('12:30');
+        expect(logDescription2).toBe('Log Description2');
+        expect(logCodeSnippet2).toBe('console.log("This is second one");');
+    });
+
+    // Test 8
+    it('Check week page contains logs updated', async () => {
+        // Click week button
+        await page.waitForSelector('.day-header-div'); 
+        await page.click('#week-tab');
+
+        // Load the number of logs in current day 
+        await page.waitForSelector('.week-calendar-div');
+        const todayDate = getTodayDate();
+        const numberOfLogs = await page.$$eval(`.calendar-body .day-column[data-date='${todayDate}'] .log-title`, items => items.length);
+        expect(numberOfLogs).toBe(2);
+
+        // Load the title of first log appeared in current day in week calendar
+        const firstLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(3)`, el => el.textContent.trim());
+        expect(firstLogTitle).toBe('Log Title1');
+
+        // Load the title of second log appeared in current day in week calendar
+        const secondLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(4)`, el => el.textContent.trim());
+        expect(secondLogTitle).toBe('Log Title2');
+    });  
+    
+    // Test 9
+    it('Check if the updated logs are still maintained after revisiting day page', async () => {
+        // Click current day in week calendar
+        await page.waitForSelector('.week-calendar-div');
+        const todayDate = getTodayDate();
+        await page.click(`.calendar-body .day-column[data-date='${todayDate}']`);
+
+        // In day page, load each data of first log that we created
+        await page.waitForSelector('.day-calendar-div');
+        const logTitle = await page.$eval('.calendar-body #day-calendar-title .title', el => el.textContent.trim());
+        const logTime = await page.$eval('.calendar-body #day-calendar-time .time', el => el.textContent.trim());
+        const logDescription = await page.$eval('.calendar-body #day-calendar-description .description', el => el.textContent.trim());
+        const logCodeSnippet = await page.$eval(
+            '.CodeMirror-line span', el => el.textContent.trim());
+
+        expect(logTitle).toBe('Log Title1');
+        expect(logTime).toBe('12:00');
+        expect(logDescription).toBe('Log Description1');
+        expect(logCodeSnippet).toBe('console.log("Hello World");');
+
+        // In day page, load each data of second log that we created
+        await page.waitForSelector('.day-calendar-div');
+        const logTitle2 = await page.$eval('.calendar-body #day-calendar-title .title:nth-of-type(2)', el => el.textContent.trim());
+        const logTime2 = await page.$eval('.calendar-body #day-calendar-time .time:nth-of-type(2)', el => el.textContent.trim());
+        const logDescription2 = await page.$eval('.calendar-body #day-calendar-description .description:nth-of-type(2)', el => el.textContent.trim());
+        const logCodeSnippet2 = await page.$eval(
+            '.code-snippet:nth-of-type(2) .CodeMirror-line span ', el => el.textContent.trim());
+
+        expect(logTitle2).toBe('Log Title2');
+        expect(logTime2).toBe('12:30');
+        expect(logDescription2).toBe('Log Description2');
+        expect(logCodeSnippet2).toBe('console.log("This is second one");');
+    });
+
+    // Test 10
+    it('Add log to another project and check in day page', async () => {
+        // Navigate back to the home page (first nav button is home page button)
+        await page.waitForSelector('.header-nav');
+        await page.click('nav .nav-button:first-of-type');
+
+        // Click the second project 
+        await page.waitForSelector('.projects li'); 
+        await page.click('.projects li:nth-child(2)');
+
+        // Click all logs button in project home page
+        await page.waitForSelector('.all-logs-btn'); 
+        await page.click('.all-logs-btn');
+        
+        // Click current day in calendar in month page
+        await page.waitForSelector('.month-calendar-title');
+        const currentDay = new Date().getDate();
+        await page.waitForSelector('.dates li')
+        await page.evaluate((currentDay) => {
+            const dates = document.querySelectorAll('.dates li');
+            dates.forEach((date) => {
+                if (date.textContent.trim() == currentDay) {
+                    date.click();
+                }
+            });
+        }, currentDay);
+
+        // Creating first log
+        // Click add log button (which is + button) in day page
+        await page.waitForSelector('.day-header-div');
+        await page.click('.add-log');
+
+        // Type title, time, contributor, description, and code snippet in add log page
+        await page.waitForSelector('.log-title');
+        await page.type('#log-title', 'Log Title1 - for project 2');
+        await page.evaluate(() => {
+            document.querySelector('#log-time').value = '12:00';
+        });
+        await page.type('#log-contributor', 'Log Contributor1 - for project 2');
+        await page.type('#log-description', 'Log Description1 - for project 2');
+        await page.evaluate(() => {
+            window.editor.setValue('console.log("Hello World - for project 2");');
+        });
+        await page.click('.submit-btn');
+
+        // In day page, load each data of first log that we created
+        await page.waitForSelector('.day-calendar-div');
+        const logTitle = await page.$eval('.calendar-body #day-calendar-title .title', el => el.textContent.trim());
+        const logTime = await page.$eval('.calendar-body #day-calendar-time .time', el => el.textContent.trim());
+        const logDescription = await page.$eval('.calendar-body #day-calendar-description .description', el => el.textContent.trim());
+        const logCodeSnippet = await page.$eval(
+            '.CodeMirror-line span', el => el.textContent.trim());
+
+        expect(logTitle).toBe('Log Title1 - for project 2');
+        expect(logTime).toBe('12:00');
+        expect(logDescription).toBe('Log Description1 - for project 2');
+        expect(logCodeSnippet).toBe('console.log("Hello World - for project 2");');
+        
+        // Creating second log
+        // click add log button (which is + button) in day page
+        await page.waitForSelector('.day-header-div');
+        await page.click('.add-log');
+
+        // Type title, time, contributor, description, and code snippet in add log page
+        await page.waitForSelector('.log-title');
+        await page.type('#log-title', 'Log Title2 - for project 2');
+        await page.evaluate(() => {
+            document.querySelector('#log-time').value = '12:30';
+        });
+        await page.type('#log-contributor', 'Log Contributor2 - for project 2');
+        await page.type('#log-description', 'Log Description2 - for project 2');
+        await page.evaluate(() => {
+            window.editor.setValue('console.log("This is second one - for project 2");');
+        });
+        await page.click('.submit-btn');
+
+        // In day page, load each data of second log that we created
+        await page.waitForSelector('.day-calendar-div');
+        const logTitle2 = await page.$eval('.calendar-body #day-calendar-title .title:nth-of-type(2)', el => el.textContent.trim());
+        const logTime2 = await page.$eval('.calendar-body #day-calendar-time .time:nth-of-type(2)', el => el.textContent.trim());
+        const logDescription2 = await page.$eval('.calendar-body #day-calendar-description .description:nth-of-type(2)', el => el.textContent.trim());
+        const logCodeSnippet2 = await page.$eval(
+            '.code-snippet:nth-of-type(2) .CodeMirror-line span ', el => el.textContent.trim());
+
+        expect(logTitle2).toBe('Log Title2 - for project 2');
+        expect(logTime2).toBe('12:30');
+        expect(logDescription2).toBe('Log Description2 - for project 2');
+        expect(logCodeSnippet2).toBe('console.log("This is second one - for project 2");');
+    });
+
+    // Test 11
+    it('Check week page contains logs updated for project 2', async () => {
+        // Click week button
+        await page.waitForSelector('.day-header-div'); 
+        await page.click('#week-tab');
+
+        // Load the number of logs in current day 
+        await page.waitForSelector('.week-calendar-div');
+        const todayDate = getTodayDate();
+        const numberOfLogs = await page.$$eval(`.calendar-body .day-column[data-date='${todayDate}'] .log-title`, items => items.length);
+        expect(numberOfLogs).toBe(2);
+
+        // Load the title of first log appeared in current day in week calendar
+        const firstLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(3)`, el => el.textContent.trim());
+        expect(firstLogTitle).toBe('Log Title1 - for project 2');
+
+        // Load the title of second log appeared in current day in week calendar
+        const secondLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(4)`, el => el.textContent.trim());
+        expect(secondLogTitle).toBe('Log Title2 - for project 2');
+    });  
+
+    // Test 12
+    it('Check feedback function in feedback page', async () => {
+        // Click feedback button
+        await page.waitForSelector('.feedback-section'); 
+        await page.click('.feedback-section a');
+
+        // Fill out the feedback form
+        await page.waitForSelector('.sentiment-widget form');
+        await page.type('#name', 'Jaewon Han');
+        await page.type('#email', 'example@gmail.com');
+        await page.type('#feedback', 'This website is so cool!');
+        await page.waitForSelector('.radio-container');
+        await page.evaluate(() => {
+            let radio = document.querySelector('#satisfaction1');
+            radio.click();
+        });
+
+        // allow alert/dialog to be accepted if they pop up
+        page.on('dialog', async dialog => {
+            await dialog.accept();
+        });
+
+        // Click the submit button
+        await page.click('.submit-btn');
+        await delay(500); // Add delay for stability
+
+
+        // Go back to main home page in success page 
+        await page.waitForSelector('main');
+        await page.click('main a');
+
+        // Check local storage to see feedback submission 
+        const submissionData = await page.evaluate(() => JSON.parse(localStorage.getItem('feedback_submissions')));
+        const submissionCount = submissionData.length;
+        expect(submissionCount).toBe(1);
+    }); 
 });
