@@ -42,16 +42,6 @@ describe('Developer Journal Flow', () => {
         });
     }
 
-    function getTodayDate() {
-        function getTodayDate() {
-            const today = new Date();
-            const yyyy = today.getUTCFullYear();
-            const mm = String(today.getUTCMonth() + 1).padStart(2, '0');
-            const dd = String(today.getUTCDate()).padStart(2, '0');
-            return `${yyyy}-${mm}-${dd}`;
-        }
-    }
-
     // Test 1 
     it('Create 4 projects', async () => {
         // create 4 projects; each has name of "project n", contributor of "contributor n", and description of "description n"
@@ -332,16 +322,15 @@ describe('Developer Journal Flow', () => {
 
         // Load the number of logs in current day 
         await page.waitForSelector('.week-calendar-div');
-        const todayDate = getTodayDate();
-        const numberOfLogs = await page.$$eval(`.calendar-body .day-column[data-date='${todayDate}'] .log-title`, items => items.length);
+        const numberOfLogs = await page.$$eval('.calendar-body .current-day .log-title', items => items.length);
         expect(numberOfLogs).toBe(2);
 
         // Load the title of first log appeared in current day in week calendar
-        const firstLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(3)`, el => el.textContent.trim());
+        const firstLogTitle = await page.$eval('.calendar-body .current-day div:nth-of-type(3)', el => el.textContent.trim());
         expect(firstLogTitle).toBe('Log Title1');
 
         // Load the title of second log appeared in current day in week calendar
-        const secondLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(4)`, el => el.textContent.trim());
+        const secondLogTitle = await page.$eval('.calendar-body .current-day div:nth-of-type(4)', el => el.textContent.trim());
         expect(secondLogTitle).toBe('Log Title2');
     });  
     
@@ -349,8 +338,7 @@ describe('Developer Journal Flow', () => {
     it('Check if the updated logs are still maintained after revisiting day page', async () => {
         // Click current day in week calendar
         await page.waitForSelector('.week-calendar-div');
-        const todayDate = getTodayDate();
-        await page.click(`.calendar-body .day-column[data-date='${todayDate}']`);
+        await page.click('.calendar-body .current-day');
 
         // In day page, load each data of first log that we created
         await page.waitForSelector('.day-calendar-div');
@@ -475,18 +463,18 @@ describe('Developer Journal Flow', () => {
         await page.waitForSelector('.day-header-div'); 
         await page.click('#week-tab');
 
+
         // Load the number of logs in current day 
         await page.waitForSelector('.week-calendar-div');
-        const todayDate = getTodayDate();
-        const numberOfLogs = await page.$$eval(`.calendar-body .day-column[data-date='${todayDate}'] .log-title`, items => items.length);
+        const numberOfLogs = await page.$$eval('.calendar-body .current-day .log-title', items => items.length);
         expect(numberOfLogs).toBe(2);
 
         // Load the title of first log appeared in current day in week calendar
-        const firstLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(3)`, el => el.textContent.trim());
+        const firstLogTitle = await page.$eval('.calendar-body .current-day div:nth-of-type(3)', el => el.textContent.trim());
         expect(firstLogTitle).toBe('Log Title1 - for project 2');
 
         // Load the title of second log appeared in current day in week calendar
-        const secondLogTitle = await page.$eval(`.calendar-body .day-column[data-date='${todayDate}'] div:nth-of-type(4)`, el => el.textContent.trim());
+        const secondLogTitle = await page.$eval('.calendar-body .current-day div:nth-of-type(4)', el => el.textContent.trim());
         expect(secondLogTitle).toBe('Log Title2 - for project 2');
     });  
 
