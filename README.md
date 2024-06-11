@@ -31,9 +31,19 @@ Click here to access/use our [Developer Journal](https://cse110-sp24-group15.git
 7. Feedback page with a sentiment widget.
 
 ## Repository Structure
-1. All our mangerial documentations can be found in the `admin folder`. This includes meeting notes, sprint reviews, branding etc.
-2. In our `project` folder you find all the code for our website with the appropraite testing
-3. In the `specs` folder, you'll be able to find our user stories and initial design for the project as well the `ADRs`.
+`/admin/meeting`s: Contains our meeting notes.
+`/admin/cipipline`: Contains pipeline diagrams.
+`/admin/branding`: Continas branding information.
+`/admin/videos`: Contains progress videos.
+`/admin/misc`: Contains all the members signed rules
+`/docs/jsdoc`: Contains JSDoc information.
+`/specs/adrs`: Contains Architectural Design Records for any major decisions made in our project.
+`/specs/brainstorm`: Contains our initial brainstorming int the form of a Miro Board.
+`/specs/pitch`: Contains our intial project pitch.
+`/specs/users`: Contains our user stories
+`project/...`: Contains all our code. Each ***SubFolder*** has the `CSS, HTML and JS` for each page. It's formatted to `pageName/page_name.XX` where XX is the files extenstion
+`project/tests`: contains our unit tests and end to end tests
+`.github/workflows/`: contains the `yml` for all out actions
 
 ## Planning
 To plan this project, we first created we created [User Stores](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/specs/users/user_stories.md) and User Personas to get inspiration for this project. We used a a ***behavior driven development*** process and brainstormed different features based on the stories and personas.
