@@ -36,7 +36,7 @@ Click here to access/use our [Developer Journal](https://cse110-sp24-group15.git
 3. In the `specs` folder, you'll be able to find our user stories and initial design for the project as well the `ADRs`.
 
 ## Planning
-To plan this project, we first created we created (User Stores)[https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/specs/users/user_stories.md] and User Personas to get inspiration for this project. We used a a ***behavior driven development*** process and brainstormed different features based on the stories and personas.
+To plan this project, we first created we created [User Stores](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/specs/users/user_stories.md) and User Personas to get inspiration for this project. We used a a ***behavior driven development*** process and brainstormed different features based on the stories and personas.
 
 We then utilzed a [Miro Board](https://miro.com/welcomeonboard/R1M1QmxZVU5VOFZmY092MDJpbEtNVENmWk9ZYlhNZlJTMzFsOEVuTXRSM1F5a3JkMkpQMWMyblFRSjgxcHJGM3wzNDU4NzY0NTg3MTcwNTgyOTIyfDI=?share_link_id=179656458973) to visualize our design.
 This board contains the following information:
