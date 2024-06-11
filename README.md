@@ -31,7 +31,7 @@ Click here to access/use our [Developer Journal](https://cse110-sp24-group15.git
 7. Feedback page with a sentiment widget.
 
 ## Repository Structure
-- `/admin/meeting`s: Contains our meeting notes.
+- `/admin/meetings`: Contains our meeting notes.
 - `/admin/cipipline`: Contains pipeline diagrams.
 - `/admin/branding`: Continas branding information.
 - `/admin/videos`: Contains progress videos.
