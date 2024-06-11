@@ -4,12 +4,13 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Release](#release)
-3. [Repository Structure](#repository-structure)
-4. [Planning](#planning)
-5. [CI/CD Pipeline](#cicd-pipeline)
-6. [Testing](#testing)
-7. [Backlog](#backlog)
-8. [Documentation](#documentation)
+3. [Features](#features)
+4. [Repository Structure](#repository-structure)
+5. [Planning](#planning)
+6. [CI/CD Pipeline](#cicd-pipeline)
+7. [Testing](#testing)
+8. [Backlog](#backlog)
+9. [Documentation](#documentation)
 
 ## Introduction
 We are team Jover Cause it's all over. This repository contains uses the SSot principal for our CSE110 project. If you want to learn more about our team, check out our [team page](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/team.md) where you will find the list of all contributors. 
@@ -19,6 +20,15 @@ If you want to learn more about our [rules](https://github.com/cse110-sp24-group
 ## Release
 
 Click here to access/use our [Developer Journal](https://cse110-sp24-group15.github.io/cse110-sp24-group15/project/homePage/home_page.html)
+
+## Features
+1. Add severall different projects with unique logs.
+2. Different pages to differientiate active vs past projects
+3. Project Home page displaying a TODO list and link to an issue for the project
+4. Ability to represent `TODO's in MARKDOWN` and is editable
+5. Ability to see logs on a month calander, week calander and day calander
+6. Logs showcase title, time, and an editable progress bar and a `CODE SNIPPET` using `Code Mirror`
+7. Feedback page with a sentiment widget.
 
 ## Repository Structure
 1. All our mangerial documentations can be found in the `admin folder`. This includes meeting notes, sprint reviews, branding etc.
