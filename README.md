@@ -19,6 +19,8 @@ If you want to learn more about our [rules](https://github.com/cse110-sp24-group
 
 Our Public video can be found [here](https://youtu.be/ogitM_0DBSk)
 
+Our Private Video can be found [here](https://youtu.be/Jm3Sa1vux14)
+
 ## Release
 
 Click here to access/use our [Developer Journal](https://cse110-sp24-group15.github.io/cse110-sp24-group15/project/homePage/home_page.html)
