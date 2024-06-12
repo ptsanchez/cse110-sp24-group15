@@ -17,6 +17,8 @@ We are team Jover Cause it's all over. This repository contains uses the SSot pr
 
 If you want to learn more about our [rules](https://github.com/cse110-sp24-group15/cse110-sp24-group15/blob/main/admin/misc/rules.md), click on the link.
 
+Our Public video can be found [here](https://youtu.be/ogitM_0DBSk)
+
 ## Release
 
 Click here to access/use our [Developer Journal](https://cse110-sp24-group15.github.io/cse110-sp24-group15/project/homePage/home_page.html)
