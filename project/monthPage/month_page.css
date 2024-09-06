@@ -1,0 +1,277 @@
+@import url('../templates/template.css');
+
+/* ========= General Design ========= */
+body {
+    font-family: var(--main-font);
+    margin: 0;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--theme-color);
+    border-bottom: 2px solid #e0e0e0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+main {
+    padding: 20px;
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    width: 80%;
+    max-width: 1000px;
+    margin: 200px auto 60px; 
+    background-color: var(--background-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+}
+
+/* CSS for week/month tabs */
+.tabs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 2px solid rgb(229 229 229 / 100%); /* Fixed modern color-function notation */
+    padding: 20px;
+    position: relative;
+}
+
+.tabs .week-btn,
+.tabs .month-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.tabs .week-btn.active
+.tabs .month-btn.active {
+    color: var(--third-color);
+}
+
+.week-month-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: var(--third-color);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.calendar-text {
+    margin-right: auto;
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+}
+
+.log-btn {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-white-color);
+    background-color: var(--third-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+/* ========= Calendar Widget Design ========= */
+.month-header-div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.month-calendar-div {
+    margin-top: 20px;
+}
+
+.month-calendar-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ========= Calendar Button Design ========= */
+.month-calendar-title #prev,
+.month-calendar-title #next {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.month-calendar-title #prev {
+    left: 10px; /* Adjust the value as needed for spacing */
+}
+
+.month-calendar-title #next {
+    right: 10px; /* Adjust the value as needed for spacing */
+}
+
+.month-calendar-title #month-display {
+    margin: 0 10px; /* Adjust the value to control spacing between buttons and title */
+}
+
+#prev::before,
+#next::before {
+    content: "";
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0;
+    border-color: #6f6666;
+}
+
+#next::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#prev::before {
+    transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+#prev:hover::before,
+#next:hover::before {
+    border-color: #000;
+}
+
+.calendar-body {
+    margin: auto;
+    max-width: 1000px;
+    padding: 2rem;
+    background: var(--theme-color);
+    border-radius: 10px;
+}
+
+.calendar-body ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+}
+
+.calendar-body ul.days {
+    justify-content: space-around;
+}
+
+.calendar-body ul.dates {
+    justify-content: space-between;
+}
+
+.calendar-body ul li {
+    width: calc(100% / 7 - 10px);
+    height: 50px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Add cursor pointer to indicate interactivity */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    position: relative;
+    border-radius: 10px;
+}
+
+/* ========= Calendar Days Design ========= */
+.days {
+    font-weight: 600;
+}
+
+.dates li.today {
+    color: #fff;
+    background: var(--secondary-color);
+}
+
+.dates li.inactive {
+    color: #8E8E8E;
+}
+
+.dates li:hover {
+    background-color: var(--primary-color); /* Light gray background on hover */
+    color: #000; /* Black text color on hover */
+}
+
+.dates li.today:hover {
+    color: #fff;
+    background: var(--primary-color);
+}
+
+.dates li.inactive:hover {
+    color: #8E8E8E;
+}
+
+.dates li.current-day {
+    background-color: var(--secondary-color); 
+    color: var(--text-white-color);
+    transition: all 0.3s ease; 
+}

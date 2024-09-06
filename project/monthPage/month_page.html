@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Month Page</title>
+    <link rel="stylesheet" href="month_page.css" class="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
+    <main>
+        <!-- Calendar Header -->
+        <div class="month-header-div">
+            <div class="calendar-text">Calendar</div>
+            <div class="tabs">
+                <button class="week-btn" onclick="window.location.href='../weekPage/week_page.html'">Week</button>
+                <button class="month-btn" onclick="window.location.href='../monthPage/month_page.html'">Month</button>
+                <div class="week-month-line"></div>
+                <button class="log-btn" onclick="window.location.href='../addLogPage/add_log_page.html'">+</button>
+            </div>    
+        </div>
+
+        <!-- Calendar Widget -->
+        <div class="month-calendar-div">
+            <div class="month-calendar-title">
+                <button id="prev"></button>
+                <span id="month-display"></span>
+                <button id="next"></button>
+            </div>
+            <div class="calendar-body">
+                <ul class="days">
+                    <li>Sun</li>
+                    <li>Mon</li>
+                    <li>Tue</li>
+                    <li>Wed</li>
+                    <li>Thu</li>
+                    <li>Fri</li>
+                    <li>Sat</li>
+                </ul>
+                <ul class="dates"></ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+            <a href="../feedbackPage/feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
+    <script src="month_page.js"></script>
+</body>
+
+</html>

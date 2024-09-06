@@ -1,0 +1,266 @@
+@import url('../templates/template.css');
+
+body {
+    font-family: var(--main-font);
+    margin: 0;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--theme-color);
+    border-bottom: 2px solid #e0e0e0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+main {
+    padding: 20px;
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    width: 90%;
+    margin: 200px auto 60px; 
+    background-color: var(--background-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+}
+
+/* CSS for week/month tabs */
+.tabs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 2px solid rgb(229 229 229 / 100%); /* Fixed modern color-function notation */
+    padding: 20px;
+    position: relative;
+}
+
+.tabs .toggle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.tabs .toggle.active {
+    color: var(--third-color);
+}
+
+.week-month-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: var(--third-color);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.day-text {
+    margin-right: auto;
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+}
+
+/* CSS for calendar */
+.day-header-div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.day-calendar-div {
+    margin-top: 20px;
+}
+
+.day-calendar-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.calendar-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.day-column {
+    min-height: 400px;
+    position: relative;
+    background-color: var(--theme-color);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.day-column .column-header {
+    margin-bottom: auto;
+}
+
+.progress-red {
+    background-color: red;  
+}
+
+.progress-yellow {
+    height: 100%;
+    background-color: yellow;
+    transition: width 0.3s ease;    
+}
+
+.progress-green {
+    height: 100%;
+    background-color: green;
+    transition: width 0.3s ease;    
+}
+
+.small-column {
+    flex: 1;
+    max-width: 30%;
+    margin: 0 2.5px;
+}
+
+.large-column {
+    flex: 2;
+    max-width: 40%;
+    margin: 0 2.5px;
+}
+
+.date-display {
+    font-size: 1em;
+    color: var(--text-color);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* CSS for prev/next day buttons */
+.day-btns-div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.prev-day-btn, .next-day-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+}
+
+.add-log {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-white-color);
+    background-color: var(--third-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+  
+.progress {
+    height: 100%;
+    background-color: #4caf50;
+    transition: width 0.3s ease;    
+}
+
+#day-calendar-title, #day-calendar-time, #day-calendar-progress, #day-calendar-description, #day-calendar-snippet {
+    font-size: 20px; /* Increased font size */
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* Record Presentation */
+.title, .time , .description, .progress-bar-container { 
+    width: 100%; 
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0 0 0 / 40%);
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    align-items: center;
+    word-wrap: break-word;
+    text-align: center;     
+    overflow-wrap: break-word;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.code-snippet { 
+    width: 100%; 
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0 0 0 / 40%);
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    background-color: rgba(255 255 255 / 40%);
+    text-align: left; 
+    border-radius: 10px;
+}

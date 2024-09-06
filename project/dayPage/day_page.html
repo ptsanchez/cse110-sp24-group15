@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="day_page.css">
+    <!-- Include CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+    <!-- Include CodeMirror theme (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css" />
+</head>
+<body>
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
+    <main>
+        <script src="day_page.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/codemirror@5.61.1/lib/codemirror.js"></script>
+        <div class="day-header-div">
+            <div class="day-text">Calendar</div>
+            <div class="tabs">
+                <button class="toggle" id="week-tab" onclick="switchWeekly()">Week</button>
+                <button class="toggle" id="month-tab" onclick="switchMonthly()">Month</button>
+                <div class="week-month-line"></div>
+                <button class="add-log" id="add-log" onclick="redirectToAddLogPage()">+</button>
+            </div>
+        </div>
+        
+        <div class="day-calendar-div">
+            <div class="day-calendar-title">
+              <span id="day-display">Day</span>
+            </div>
+            <div class="calendar-body">
+                <div class="day-column small-column" id="day-calendar-time">Time</div>
+                <div class="day-column small-column" id="day-calendar-title">Title</div>
+                <div class="day-column large-column" id="day-calendar-description">Description</div>
+                <div class="day-column small-column" id="day-calendar-progress">Progress</div>
+                <div class="day-column large-column" id="day-calendar-snippet">Code Snippet</div>
+                    <!-- <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                      
+                    <input type="range" min="0" max="100" value="50" id="progressInput"> -->
+              </div>
+        </div>
+        
+        <div class="day-btns-div">
+            <button class="prev-day-btn" id="prev-day-btn">Previous Day</button>
+            <button class="next-day-btn" id="next-day-btn">Next Day</button>
+        </div>
+    </main>
+    <footer>
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+            <a href="../feedbackPage/feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
+</body>
+</html>

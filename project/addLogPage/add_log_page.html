@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Log</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="add_log_page.css" />
+  <!-- Include CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" />
+  <!-- Include CodeMirror theme (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css" />
+</head>
+
+<body>
+  <header>
+    <h1 class="header-title"> Jover 15 </h1>
+    <nav class="header-nav">
+      <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+      <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+    </nav>
+  </header>
+  <main>
+    <!-- Container for the form elements -->
+    <div class="add-log-from-div">
+      <!-- Label and input for the log title -->
+      <label for="log-title">Title:</label>
+      <input type="text" id="log-title" class="log-title" />
+      <br />
+
+      <!-- Label and input for the log time -->
+      <label for="log-time">Time:</label>
+      <input type="time" id="log-time" class="log-time" />
+      <br />
+
+      <!-- Label and input for the log contributor -->
+      <label for="log-contributor">Contributor:</label>
+      <input type="text" id="log-contributor" class="log-contributor" />
+      <br />
+
+      <!-- Label and input for the log description -->
+      <label for="log-description">Description:</label>
+      <input type="text" id="log-description" class="log-description" />
+      <br />
+
+      <!-- Label and textarea for the code snippet -->
+      <label for="log-code-snippet">Code Snippet:</label>
+      <textarea id="log-code-snippet" class="log-code-snippet"></textarea>
+      <br />
+    </div>
+
+    <!-- Container for the form buttons -->
+    <div class="log-btns-div">
+      <!-- Submit button to make the form submission -->
+      <button class="submit-btn" onclick="makeSubmission()">Submit</button>
+
+      <!-- Cancel button to cancel the form submission -->
+      <button class="cancel-btn" value="ignore" formnovalidate onclick="cancelSubmission()">
+        Cancel
+      </button>
+    </div>
+  </main>
+  <footer>
+    <div class="feedback-section">
+      <h2>Feedback</h2>
+      <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+      <a href="../feedbackPage/feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+    </div>
+    <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+  </footer>
+  <!-- Include CodeMirror JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <!-- Include CodeMirror JavaScript mode -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <!-- Include add_log_page.js -->
+  <script src="add_log_page.js"></script>
+  <!-- Initialize CodeMirror -->
+  <script>
+    window.onload = function() {
+      window.editor = CodeMirror.fromTextArea(document.getElementById("log-code-snippet"), {
+        lineNumbers: true,
+        mode: "javascript",
+        theme: "dracula",
+        tabSize: 2,
+        lineWrapping: true
+      });
+    }
+  </script>
+</body>
+
+</html>

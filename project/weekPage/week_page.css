@@ -1,0 +1,261 @@
+@import url('../templates/template.css');
+
+body {
+    font-family: var(--main-font);
+    margin: 0;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--theme-color);
+    border-bottom: 2px solid #e0e0e0;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: var(--header-font-size);
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+    margin-bottom: 1.25rem;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--button-font-size);
+    color: var(--text-white-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-button:hover, .nav-button:focus {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+main {
+    padding: 20px;
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+    border-radius: 20px;
+    width: 80%;
+    margin: 200px auto 60px; 
+    background-color: var(--background-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+}
+
+/* css for week/month tabs */
+.week-month-tabs {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 2px solid rgb(229 229 229 / 100%); /* Fixed modern color-function notation */
+    padding: 20px;
+    position: relative;
+}
+
+.week-month-tabs .toggle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.week-month-tabs .toggle.active {
+    color: var(--third-color);
+}
+
+.week-month-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: var(--third-color);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.week-text {
+    margin-right: auto;
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+}
+
+.week-header-div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* css for weekly calendar */
+.week-calendar-div {
+    margin-top: 20px;
+}
+
+.calendar-header {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.calendar-body {
+    display: flex;
+    justify-content: space-between;
+} 
+
+.day-column {
+    flex: 1;
+    border: 1px solid #ddd;
+    min-height: 400px;
+    position: relative;
+    background-color: var(--theme-color);
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 2.5px; /* Add margin to separate columns */
+    cursor: pointer;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%); 
+    transition: transform 0.3s ease;
+} 
+
+.day-column:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgb(0 0 0 / 20%); 
+}
+
+.day-column:first-child {
+    margin-left: 0; /* Remove left margin for the first column */
+}
+  
+.day-column:last-child {
+    margin-right: 0; /* Remove right margin for the last column */
+}
+
+.day-column::before {
+    content: attr(id);
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+} 
+
+.date-display {
+    position: absolute;
+    top: 30px; 
+    left: 10px;
+    font-size: .8em;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.current-day {
+    background-color: var(--secondary-color); 
+    color: var(--text-white-color);
+    transition: all 0.3s ease; 
+}
+
+.current-day .date-display {
+    color: var(--text-white-color);
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.current-day::before {
+    color: var(--text-white-color);
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+
+/* css for prev/next week buttons */
+.week-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.prev-week-btn, .next-week-btn {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+}
+
+.add-log {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-white-color);
+    background-color: var(--third-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+/* logging display */
+.space-buffer {
+    height: 2.5rem;
+}
+
+.log-title {
+    flex: 1;
+    border: 1px solid #ddd;
+    position: relative;
+    background-color: #d3d3d3;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 2.5px; /* Add margin to separate columns */
+    cursor: pointer;
+    border-radius: 1rem; 
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 40%); 
+    transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}

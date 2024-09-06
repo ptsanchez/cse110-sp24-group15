@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="week_page.css">
+    <!-- Add any additional stylesheets or meta tags here -->
+</head>
+<body>
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
+    <!-- Main -->
+    <main>
+        <script src="week_page.js"></script>
+        <!-- header for week/month view -->
+        <div class="week-header-div">
+            <div class="week-text" id="calendar-title">Calendar</div>
+
+            <!-- Making tabs for week/month view -->
+            <div class="week-month-tabs">
+                <button class="toggle" id="week-tab" active onclick="switchWeekly()">Week</button>
+                <button class="toggle" id="month-tab" onclick="switchMonthly()">Month</button>
+                <div class="week-month-line"></div>
+
+                <!-- button to add a new log -->
+                <button class="add-log" id="add-log" onclick="redirectToAddLogPage()">+</button>
+            </div>
+        </div>
+
+        <!-- calendar for week view -->
+        <div class="week-calendar-div">
+            <div class="calendar-header">
+              <span id="week-display">Week</span>
+            </div>
+            <div class="calendar-body">
+              <div class="day-column" id="mon"></div>
+              <div class="day-column" id="tue"></div>
+              <div class="day-column" id="wed"></div>
+              <div class="day-column" id="thu"></div>
+              <div class="day-column" id="fri"></div>
+              <div class="day-column" id="sat"></div>
+              <div class="day-column" id="sun"></div>
+            </div>
+        </div>
+        
+        <!-- button to toggle prev/next week -->
+        <div class="week-btns">
+            <button class="prev-week-btn" id="prev-week-btn">Previous Week</button>
+            <button class="next-week-btn" id="next-week-btn">Next Week</button>
+        </div>
+
+        
+    </main>
+    <footer>
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+            <a href="../feedbackPage/feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
+</body>
+</html>

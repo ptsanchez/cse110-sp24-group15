@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Home Page</title>
+    <!-- Boxicon -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="project_home_page.css">
+</head> 
+<body>
+    <header>
+        <h1 class="header-title"> Jover 15 </h1>
+        <nav class="header-nav">
+            <a href="../homePage/home_page.html"><button class="nav-button">Home Page</button></a>
+            <a href="https://cse110-sp24-group15.github.io/warmup-exercise/index.html" target="_blank"><button class="nav-button">Team Page</button></a>
+        </nav>
+    </header>
+    <main>
+        <div class="project-home-page-title-div">
+            <!-- Project title will be set here -->
+            <span class="project-text"></span>
+        </div>
+        <div class="project-todo-list-div">
+            <div class="todo-list-header">
+                <span class="todo-list-title">TODO LIST</span>
+                <hr class="todo-list-divider">
+            </div>
+            <!-- Todo list content will be set and edited here -->
+            <span class="project-todo-list" contenteditable="false"></span>
+            <button class="edit-btn todo-edit-btn"><i class="bx bx-edit"></i></button>
+        </div>
+        <div class="project-link-div">
+            <div class="project-link-header">
+                <span class="project-link-title">Link to Branch/Workspace</span>
+                <hr class="project-link-divider">
+            </div>
+            <!-- Branch link content will be set and edited here -->
+            <a href="#" class="project-branch-link" contenteditable="false"></a>
+            <button class="edit-btn branch-edit-btn"><i class="bx bx-edit"></i></button>
+        </div>
+        <div class="project-detail-div">
+            <div class="project-detail-header">
+                <span class="project-detail-title">Project Description</span>
+                <hr class="project-detail-divider">
+            </div>
+            <!-- Project description will be set here -->
+            <span class="project-detail-content"></span>
+        </div>
+        <div class="project-btns-div">
+            <!-- Buttons to navigate to other pages -->
+            <button class="make-log-btn" onclick="location.href='../addLogPage/add_log_page.html'">Make Log</button>
+            <button class="all-logs-btn" onclick="location.href='../monthPage/month_page.html'">All Logs</button>
+        </div>
+    </main>
+    <footer>
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <p>Give us your feedback to improve our team's performance and collaboration. Please share your thoughts with us.</p>
+            <a href="../feedbackPage/feedback_page.html"><button class="feedback-button">Give Feedback</button></a>
+        </div>
+        <p>&copy; 2024 Group 15 [Jover]. All rights reserved.</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="project_home_page.js"></script>
+</body>
+</html>
